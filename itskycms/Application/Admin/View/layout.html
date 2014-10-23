@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>后台管理</title>
+<!--[if lt IE 9]>
+<script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<css href="__PUBLIC__/bootstrap/css/bootstrap.min.css,__PUBLIC__/bootstrap/css/bootstrap-theme.min.css,__PUBLIC__/validator/jquery.validator.css,__PUBLIC__/css/admin_all.css"/>
+<js href="__PUBLIC__/js/jquery.min.js,__PUBLIC__/bootstrap/js/bootstrap.min.js,__PUBLIC__/validator/jquery.validator.js,__PUBLIC__/validator/local/zh_CN.js,__PUBLIC__/js/admin_all.js"/>
+<script type="text/javascript">
+    var ThinkPHP = {
+        'ROOT' : '__ROOT__',    //网站根目录地址
+        'APP' : '__APP__',  //当前应用（入口文件）地址
+        'SELF' : '__SELF__',    //当前URL地址
+        'PUBLIC' : '__PUBLIC__',    //项目公共目录地址
+        'MODULE' : '{$Think.MODULE_NAME}',  //当前模块名
+        'CONTROLLER' : '{$Think.CONTROLLER_NAME}',  //当前控制器名
+        'ACTION' : '{$Think.ACTION_NAME}'   //当前操作名
+    };
+</script>
+</head>
+<body id="{$Think.CONTROLLER_NAME}_{$Think.ACTION_NAME}">
+{__CONTENT__}
+</body>
+</html>
