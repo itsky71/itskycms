@@ -1,0 +1,75 @@
+<div class="col-xs-6">
+    <form class="form-horizontal" role="form">
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right">{:L('USERNAME')}:</label>
+            <div class="col-sm-9">
+                <input type="hidden" value="{$vo.id}" name="id"/>
+                <input type="text" class="col-xs-5" value="{$vo.username}" name="username"/>
+            </div>
+        </div>
+        <div class="space-4"></div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right">{:L('EMAIL')}:</label>
+            <div class="col-sm-9">
+                <input type="text" class="col-xs-10" value="{$vo.email}" name="email"/>
+            </div>
+        </div>
+        <div class="space-4"></div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right">{:L('REALNAME')}:</label>
+            <div class="col-sm-9">
+                <input type="text" class="col-xs-10" value="{$vo.realname}" name="realname"/>
+            </div>
+        </div>
+        <div class="space-4"></div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right">{:L('QUESTION')}:</label>
+            <div class="col-sm-9">
+                <input type="text" class="col-xs-10" value="{$vo.question}" name="question"/>
+            </div>
+        </div>
+        <div class="space-4"></div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right">{:L('ANSWER')}:</label>
+            <div class="col-sm-9">
+                <input type="text" class="col-xs-10" value="{$vo.answer}" name="answer"/>
+            </div>
+        </div>
+        <div class="clearfix form-actions">
+            <div class="col-md-offset-3 col-md-9">
+                <button class="btn btn-info" type="submit">
+                    <span class="glyphicon glyphicon-ok bigger-110"></span> {:L('SUBMIT')}
+                </button>
+                <button class="btn" type="reset">
+                    <span class="glyphicon glyphicon-repeat bigger-110"></span> {:L('RESET')}
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    $('#breadcrumbs .breadcrumb .active').text('{:L($Think.ACTION_NAME)}');
+    $('.page-header h1 small').text(' {:L($Think.ACTION_NAME)}');
+    $('form[role="form"]').validator({
+        rules:{
+            realname:[/^[\u0391-\uFFE5\w]+$/, "{:L('JS_INPUT_INFO')}"]
+        },
+        fields:{
+            username:'required;username;remote[{:U('Index/check')}, id]',
+            email:'required;email;remote[{:U('Index/check')}, id]',
+            realname:'realname;length[3~20]',
+            question:'length[3~30]',
+            answer:'length[~30]'
+        },
+        valid:function(form){
+            $.ajax({
+                type: 'POST',
+                url: '{:U('Index/profile')}',
+                data:$(form).serialize(),
+                success: function(data){
+                    show_msg(data);
+                }
+            });
+        }
+    });
+</script>
