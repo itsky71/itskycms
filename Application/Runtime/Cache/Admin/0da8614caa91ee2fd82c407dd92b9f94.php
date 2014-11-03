@@ -10,7 +10,7 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="/itskycms/Public/bootstrap/js/fuelux.tree.js"></script><script type="text/javascript" src="/itskycms/Public/bootstrap/js/fuelux.data.js"></script>
+<script type="text/javascript" src="/itskycms/Public/bootstrap/js/fuelux.tree.js"></script>
 <script type="text/javascript">
     var DataSourceTree = function(options) {
 	this._data 	= options.data;
@@ -37,15 +37,43 @@
     };
 
     var tree_data = {
-	'pictures' : {name: '<i class="glyphicon glyphicon-book dark"></i> Pictures', type: 'folder', 'icon-class':'glyphicon'}	,
-	'music' : {name: 'Music', type: 'folder', 'icon-class':'glyphicon orange'}	,
-	'video' : {name: 'Video', type: 'folder', 'icon-class':'glyphicon blue'}	,
-	'documents' : {name: 'Documents', type: 'folder', 'icon-class':'glyphicon green'}	,
+	'index' : {name: '<i class="glyphicon glyphicon-dashboard"></i> 控制台', type: 'folder', 'icon-class':'glyphicon'},
+	'osset' : {name: '<i class="glyphicon glyphicon-cog"></i> 系统设置', type: 'folder', 'icon-class':'glyphicon'}	,
+	'video' : {name: 'Video', type: 'folder', 'icon-class':'glyphicon'}	,
+	'documents' : {name: 'Documents', type: 'folder', 'icon-class':'glyphicon'}	,
 	'backup' : {name: 'Backup', type: 'folder','icon-class':'glyphicon'}	,
 	'readme' : {name: '<i class="glyphicon glyphicon-file grey"></i> ReadMe.txt', type: 'item'},
 	'manual' : {name: '<i class="glyphicon glyphicon-book blue"></i> Manual.html', type: 'item'}
     };
-    tree_data['music']['additionalParameters'] = {
+    tree_data['index']['additionalParameters'] = {
+        'children':{
+            'set':{name:'设置',type:'item'},
+            'profile':{name:'个人资料',type:'item'}
+        }
+    };
+    tree_data['osset']['additionalParameters'] = {
+        'children':{
+            'siteset':{name:'站点配置',type:'folder','icon-class':'glyphicon'},
+            'd':{name:'推荐位管理',type:'item'},
+            'c':{name:'数据库管理',type:'item'},
+            'a':{name:'URL规则',type:'item'},
+            'sf':{name:'DB数据源',type:'item'},
+            'dfe':{name:'多语言管理',type:'item'},
+            'dfeggg':{name:'类别管理',type:'item'},
+            'meun':{name:'后台管理菜单',type:'item'}
+        }
+    };
+    tree_data['osset']['additionalParameters']['children']['siteset']['additionalParameters'] = {
+        'children':[
+            {name:'SEO配置',type:'item'},
+            {name:'系统管理',type:'item'},
+            {name:'系统邮箱',type:'item'},
+            {name:'附件配置',type:'item'},
+            {name:'用户中心设置',type:'item'},
+            {name:'添加系统变量',type:'item'}
+        ]
+    };
+    /*tree_data['music']['additionalParameters'] = {
 	'children' : [
             {name: '<i class="glyphicon glyphicon-music blue"></i> song1.ogg', type: 'item'},
             {name: '<i class="glyphicon glyphicon-music blue"></i> song2.ogg', type: 'item'},
@@ -106,14 +134,15 @@
             {name: '<i class="glyphicon glyphicon-briefcase brown"></i> backup3.zip', type: 'item'},
             {name: '<i class="glyphicon glyphicon-briefcase brown"></i> backup4.zip', type: 'item'}
 	]
-    };
+    };*/
+//    alert(JSON.stringify(tree_data));
     var treeDataSource = new DataSourceTree({data: tree_data});
     $('#menu-tree').ace_tree({
             dataSource: treeDataSource,
             loadingHTML:'<div class="tree-loading"><i class="glyphicon glyphicon-refresh icon-spin blue"></i></div>',
             'open-icon' : 'glyphicon-chevron-down',
             'close-icon' : 'glyphicon-chevron-right',
-            'selectable' : false,
+            'selectable' : true,
             'selected-icon' : null,
             'unselected-icon' : null
     });
