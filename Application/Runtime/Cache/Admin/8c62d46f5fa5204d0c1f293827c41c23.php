@@ -10,15 +10,15 @@
 <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 
-<link rel="stylesheet" type="text/css" href="/tp/Public/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" type="text/css" href="/tp/Public/bootstrap/css/bootstrap-theme.min.css" /><link rel="stylesheet" type="text/css" href="/tp/Public/validator/jquery.validator.css" /><link rel="stylesheet" type="text/css" href="/tp/Public/css/admin_all.css" />
-<script type="text/javascript" src="/tp/Public/js/jquery.min.js"></script><script type="text/javascript" src="/tp/Public/bootstrap/js/bootstrap.min.js"></script><script type="text/javascript" src="/tp/Public/validator/jquery.validator.js"></script><script type="text/javascript" src="/tp/Public/validator/local/<?php echo (LANG_SET); ?>.js"></script><script type="text/javascript" src="/tp/Public/js/admin_all.js"></script>
+<link rel="stylesheet" type="text/css" href="/itskycms/Public/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" type="text/css" href="/itskycms/Public/bootstrap/css/bootstrap-theme.min.css" /><link rel="stylesheet" type="text/css" href="/itskycms/Public/validator/jquery.validator.css" /><link rel="stylesheet" type="text/css" href="/itskycms/Public/css/admin_all.css" />
+<script type="text/javascript" src="/itskycms/Public/js/jquery.min.js"></script><script type="text/javascript" src="/itskycms/Public/bootstrap/js/bootstrap.min.js"></script><script type="text/javascript" src="/itskycms/Public/validator/jquery.validator.js"></script><script type="text/javascript" src="/itskycms/Public/validator/local/<?php echo (LANG_SET); ?>.js"></script><script type="text/javascript" src="/itskycms/Public/js/admin_all.js"></script>
 
 <script type="text/javascript">
     var ThinkPHP = {
-        'ROOT' : '/tp',    //网站根目录地址
-        'APP' : '/tp',  //当前应用（入口文件）地址
-        'SELF' : '/tp/Admin/Public/login.html',    //当前URL地址
-        'PUBLIC' : '/tp/Public',    //项目公共目录地址
+        'ROOT' : '/itskycms',    //网站根目录地址
+        'APP' : '/itskycms',  //当前应用（入口文件）地址
+        'SELF' : '/itskycms/Admin/Public/login.html',    //当前URL地址
+        'PUBLIC' : '/itskycms/Public',    //项目公共目录地址
         'MODULE' : '<?php echo (MODULE_NAME); ?>',  //当前模块名
         'CONTROLLER' : '<?php echo (CONTROLLER_NAME); ?>',  //当前控制器名
         'ACTION' : '<?php echo (ACTION_NAME); ?>'   //当前操作名
