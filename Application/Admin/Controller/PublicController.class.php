@@ -9,12 +9,12 @@ class PublicController extends Controller {
     public function login(){
         if(IS_AJAX){
             if(check_verify(I('post.verify'),1)){
-                $User = M('Member');
-                $is_email = $User->regex(I('post.username'),'email');
+                $Member = M('Member');
+                $is_email = $Member->regex(I('post.username'),'email');
                 if($is_email){
-                    $resuser = $User->where('email=\''.I('post.username').'\'')->find();
+                    $resuser = $Member->where('email=\''.I('post.username').'\'')->find();
                 }else{
-                    $resuser = $User->where('username=\''.I('post.username').'\'')->find();
+                    $resuser = $Member->where('username=\''.I('post.username').'\'')->find();
                 }
                 if(sys_md5(I('post.password'))==$resuser['password']){
                     if(!$resuser['status']){
@@ -24,14 +24,17 @@ class PublicController extends Controller {
                         'login_ip' => get_client_ip(),
                         'last_login_time' => time()
                     );
-                    $saveres = $User->where(array('id'=>$resuser['id']))->save($data);
+                    $saveres = $Member->where(array('id'=>$resuser['id']))->save($data);
                     if($saveres){
-                        $User->where(array('id'=>$resuser['id']))->setInc('login_count');
+                        $Member->where(array('id'=>$resuser['id']))->setInc('login_count');
                     }
                     if(I('post.keep')=='on'){
                         $crypt = new \Think\Crypt();
-                        $userinfo = 'username='.$resuser['username'].'&password='.$resuser['password'];
-                        $str = $crypt->encrypt($userinfo, C('DATA_AUTH_KEY').$__SERVER["HTTP_USER_AGENT"]);
+                        $userinfo = array(
+                            'username' => $crypt->encrypt($resuser['username'], sys_md5(C('DATA_AUTH_KEY'), 'isky71'), 3600*24*15),
+                            'password' => $crypt->encrypt($resuser['password'], sys_md5(C('DATA_AUTH_KEY'), 'CMS'), 3600*24*15)
+                        );
+                        $str = $crypt->encrypt(json_encode($userinfo), C('DATA_AUTH_KEY').$__SERVER["HTTP_USER_AGENT"]);
                         cookie('member', $str,3600*24*15);
                     }
                     session(C('USER_AUTH_KEY'), $resuser['id']);
@@ -44,9 +47,27 @@ class PublicController extends Controller {
                 $this->error(L('VERIFY_ERROR'));
             }
         }else{
-            if(cookie('member') || session(C('USER_AUTH_KEY'))){
+            if(session(C('USER_AUTH_KEY'))){
                 $this->redirect('Index/index');
-            }  else {
+            }elseif(cookie('member')){
+                $crypt = new \Think\Crypt();
+                $userjson = $crypt->decrypt(cookie('member'), C('DATA_AUTH_KEY').$__SERVER["HTTP_USER_AGENT"]);
+                $userarr = json_decode($userjson, TRUE);
+                foreach ($userarr as $key => $value){
+                    if($key == 'username') $uname = $crypt->decrypt($value, sys_md5(C('DATA_AUTH_KEY'), 'isky71'));
+                    if($key == 'password') $pwd = $crypt->decrypt($value, sys_md5(C('DATA_AUTH_KEY'), 'CMS'));
+                }
+                $Member = M('Member');
+                $ures = $Member->where('username=\''.$uname.'\'')->find();
+                if($ures && $ures['password'] == $pwd){
+                    session(C('USER_AUTH_KEY'), $ures['id']);
+                    session('uname', $ures['username']);
+                    $this->redirect('Index/index');
+                }else{
+                    cookie(NULL);
+                    $this->display();
+                }
+            }else {
                 $this->display();
             }
         }

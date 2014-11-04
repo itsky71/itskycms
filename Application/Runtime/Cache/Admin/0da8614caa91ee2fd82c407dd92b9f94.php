@@ -142,7 +142,7 @@
             loadingHTML:'<div class="tree-loading"><i class="glyphicon glyphicon-refresh icon-spin blue"></i></div>',
             'open-icon' : 'glyphicon-chevron-down',
             'close-icon' : 'glyphicon-chevron-right',
-            'selectable' : true,
+            'selectable' : false,
             'selected-icon' : null,
             'unselected-icon' : null
     });
