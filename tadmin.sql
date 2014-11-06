@@ -2,8 +2,8 @@
 -- version 4.2.7.1
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: 2014-11-01 16:12:52
+-- Host: 127.0.0.1
+-- Generation Time: 2014-11-06 16:16:09
 -- 服务器版本： 5.6.20
 -- PHP Version: 5.5.15
 
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `ta_auth_group` (
 
 INSERT INTO `ta_auth_group` (`id`, `title`, `status`, `rules`) VALUES
 (1, '超级管理员', 1, ''),
-(2, '普通管理员', 1, '1'),
+(2, '普通管理员', 1, '1,2,3'),
 (3, '注册用户', 1, '1');
 
 -- --------------------------------------------------------
@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `ta_auth_rule` (
 INSERT INTO `ta_auth_rule` (`id`, `name`, `title`, `type`, `status`, `condition`) VALUES
 (1, 'Index/index', '首页', 1, 1, ''),
 (2, 'Index/profile', '个人资料', 1, 1, ''),
-(3, 'Profile/index', '查看个人信息', 1, 1, '');
+(3, 'Menu/index', '后台菜单', 1, 1, '');
 
 -- --------------------------------------------------------
 
@@ -110,8 +110,8 @@ CREATE TABLE IF NOT EXISTS `ta_member` (
 --
 
 INSERT INTO `ta_member` (`id`, `password`, `username`, `realname`, `email`, `question`, `answer`, `status`, `login_ip`, `last_login_time`, `login_count`) VALUES
-(1, '30bc103d85df152c8c703bcbbcc7fd4d', 'admin', '你买单我就来', 'itsky71@foxmail.com', '我还会回来的...', '灰太狼？呵呵。。。', 1, '192.168.137.1', 1414840752, 21),
-(2, '30bc103d85df152c8c703bcbbcc7fd4d', 'itsky', '你地盘我做主', 'zmh0515005@163.com', '你是谁?', 'abc', 1, '192.168.137.1', 1414825855, 17);
+(1, '30bc103d85df152c8c703bcbbcc7fd4d', 'admin', '你买单我就来', 'itsky71@foxmail.com', '我还会回来的...', '灰太狼？呵呵。。。', 1, '127.0.0.1', 1414918331, 23),
+(2, '30bc103d85df152c8c703bcbbcc7fd4d', 'itsky', '你地盘我做主', 'zmh0515005@163.com', '你是谁?', 'abc', 1, '127.0.0.1', 1415110484, 27);
 
 --
 -- Indexes for dumped tables
