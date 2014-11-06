@@ -5,14 +5,78 @@
         </div>
         <div class="widget-body">
             <div class="widget-main padding-8">
-                <div id="menu-tree" class="tree"></div>
+                <div id="menu-tree" class="tree">
+                    <div class="tree-folder">
+                        <div class="tree-folder-header">
+                            <i class="glyphicon glyphicon-chevron-right"></i>
+                            <div class="tree-folder-name">
+                                <i class="glyphicon glyphicon-dashboard"></i>
+                                控制台
+                            </div>
+                        </div>
+                        <div class="tree-folder-content hide">
+                            <div class="tree-item">
+                                <div class="tree-item-name">设置</div>
+                            </div>
+                            <div class="tree-item">
+                                <div class="tree-item-name">个人资料</div>
+                            </div>
+                        </div>
+                        <div class="tree-loader hide">
+                            <div class="tree-loading">
+                                <i class="glyphicon glyphicon-refresh blue"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tree-folder">
+                        <div class="tree-folder-header">
+                            <i class="glyphicon glyphicon-chevron-right"></i>
+                            <div class="tree-folder-name">
+                                <i class="glyphicon glyphicon-cog"></i>
+                                 系统设置
+                            </div>
+                        </div>
+                        <div class="tree-folder-content hide">
+                            <div class="tree-folder">
+                                <div class="tree-folder-header">
+                                    <i class="glyphicon glyphicon-chevron-right"></i>
+                                    <div class="tree-folder-name">站点设置</div>
+                                </div>
+                                <div class="tree-folder-content hide">
+                                    <div class="tree-item">
+                                        <div class="tree-item-name">SEO配置</div>
+                                    </div>
+                                    <div class="tree-item">
+                                        <div class="tree-item-name">系统管理</div>
+                                    </div>
+                                </div>
+                                <div class="tree-loader hide">
+                                    <div class="tree-loading">
+                                        <i class="glyphicon glyphicon-refresh blue"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tree-item">
+                                <div class="tree-item-name">其它</div>
+                            </div>
+                        </div>
+                        <div class="tree-loader hide">
+                            <div class="tree-loading">
+                                <i class="glyphicon glyphicon-refresh blue"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tree-item">
+                        <div class="tree-item-name">系统管理</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-<script type="text/javascript" src="/itskycms/Public/bootstrap/js/fuelux.tree.js"></script>
+<!--<script type="text/javascript" src="/itskycms/Public/bootstrap/js/fuelux.tree.js"></script>-->
 <script type="text/javascript">
-    var DataSourceTree = function(options) {
+/*    var DataSourceTree = function(options) {
 	this._data 	= options.data;
 	this._delay = options.delay;
     };
@@ -25,8 +89,7 @@
             $data = this._data;//the root tree
             callback({ data: $data });
             return;
-	}
-	else if("type" in options && options.type == "folder") {
+	}else if("type" in options && options.type == "folder") {
             if("additionalParameters" in options && "children" in options.additionalParameters)
                     $data = options.additionalParameters.children;
             else $data = {}//no data
@@ -134,17 +197,21 @@
             {name: '<i class="glyphicon glyphicon-briefcase brown"></i> backup3.zip', type: 'item'},
             {name: '<i class="glyphicon glyphicon-briefcase brown"></i> backup4.zip', type: 'item'}
 	]
-    };*/
+    };
 //    alert(JSON.stringify(tree_data));
-    var treeDataSource = new DataSourceTree({data: tree_data});
-    $('#menu-tree').ace_tree({
-            dataSource: treeDataSource,
-            loadingHTML:'<div class="tree-loading"><i class="glyphicon glyphicon-refresh icon-spin blue"></i></div>',
-            'open-icon' : 'glyphicon-chevron-down',
-            'close-icon' : 'glyphicon-chevron-right',
-            'selectable' : false,
-            'selected-icon' : null,
-            'unselected-icon' : null
+//    var treeDataSource = new DataSourceTree({data: tree_data});
+//    $('#menu-tree').ace_tree({
+//            dataSource: treeDataSource,
+//            loadingHTML:'<div class="tree-loading"><i class="glyphicon glyphicon-refresh icon-spin blue"></i></div>',
+//            'open-icon' : 'glyphicon-chevron-down',
+//            'close-icon' : 'glyphicon-chevron-right',
+//            'selectable' : false,
+//            'selected-icon' : null,
+//            'unselected-icon' : null
+//    }).find('.tree-folder-header,.tree-item').append('<div class="pull-right">aaaaa</div>');*/
+    $('#menu-tree .tree-folder-header').click(function(){
+        $(this).find(' + .tree-folder-content').toggleClass('hide');
+        $(this).find(' > .glyphicon-chevron-right').toggleClass('rota60');
     });
     var pan = '<li><a class="tarmain" href="<?php echo U(CONTROLLER_NAME.'/'.ACTION_NAME);?>"><?php echo L($Think.ACTION_NAME);?></a></li>\n\
 <li class="active"><?php echo L('SHOW');?></li>';
