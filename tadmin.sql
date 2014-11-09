@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2014-11-06 16:16:09
+-- Generation Time: 2014-11-09 15:53:09
 -- 服务器版本： 5.6.20
 -- PHP Version: 5.5.15
 
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `ta_auth_group` (
 `id` mediumint(8) unsigned NOT NULL COMMENT '用户组id',
-  `title` char(100) NOT NULL DEFAULT '' COMMENT '用户组名称',
+  `title` char(255) NOT NULL DEFAULT '' COMMENT '用户组名称',
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '用户组状态',
   `rules` char(80) NOT NULL DEFAULT '' COMMENT '用户组拥有的规则id， 多个规则","隔开'
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='用户组表' AUTO_INCREMENT=4 ;
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `ta_auth_group` (
 
 INSERT INTO `ta_auth_group` (`id`, `title`, `status`, `rules`) VALUES
 (1, '超级管理员', 1, ''),
-(2, '普通管理员', 1, '1,2,3'),
+(2, '普通管理员', 1, '1,2,3,4'),
 (3, '注册用户', 1, '1');
 
 -- --------------------------------------------------------
@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `ta_auth_rule` (
   `type` tinyint(1) NOT NULL DEFAULT '1',
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '状态：为1正常，为0禁用',
   `condition` char(100) NOT NULL DEFAULT '' COMMENT '规则表达式，为空表示存在就验证，不为空表示按照条件验证'
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='规则表' AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='规则表' AUTO_INCREMENT=5 ;
 
 --
 -- 转存表中的数据 `ta_auth_rule`
@@ -83,7 +83,8 @@ CREATE TABLE IF NOT EXISTS `ta_auth_rule` (
 INSERT INTO `ta_auth_rule` (`id`, `name`, `title`, `type`, `status`, `condition`) VALUES
 (1, 'Index/index', '首页', 1, 1, ''),
 (2, 'Index/profile', '个人资料', 1, 1, ''),
-(3, 'Menu/index', '后台菜单', 1, 1, '');
+(3, 'Menu/index', '后台菜单', 1, 1, ''),
+(4, 'Menu/add', '添加菜单', 1, 1, '');
 
 -- --------------------------------------------------------
 
@@ -112,6 +113,24 @@ CREATE TABLE IF NOT EXISTS `ta_member` (
 INSERT INTO `ta_member` (`id`, `password`, `username`, `realname`, `email`, `question`, `answer`, `status`, `login_ip`, `last_login_time`, `login_count`) VALUES
 (1, '30bc103d85df152c8c703bcbbcc7fd4d', 'admin', '你买单我就来', 'itsky71@foxmail.com', '我还会回来的...', '灰太狼？呵呵。。。', 1, '127.0.0.1', 1414918331, 23),
 (2, '30bc103d85df152c8c703bcbbcc7fd4d', 'itsky', '你地盘我做主', 'zmh0515005@163.com', '你是谁?', 'abc', 1, '127.0.0.1', 1415110484, 27);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `ta_menu`
+--
+
+CREATE TABLE IF NOT EXISTS `ta_menu` (
+`id` smallint(5) unsigned NOT NULL,
+  `pid` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '父ID',
+  `name` varchar(20) NOT NULL COMMENT '语言标识',
+  `model` varchar(20) NOT NULL COMMENT '模块',
+  `action` varchar(20) NOT NULL COMMENT '方法',
+  `data` varchar(50) NOT NULL COMMENT '参数',
+  `remark` varchar(255) NOT NULL COMMENT '备注',
+  `status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '状态',
+  `listorder` smallint(5) unsigned NOT NULL COMMENT '排序'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='后台菜单' AUTO_INCREMENT=1 ;
 
 --
 -- Indexes for dumped tables
@@ -142,6 +161,12 @@ ALTER TABLE `ta_member`
  ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `ta_menu`
+--
+ALTER TABLE `ta_menu`
+ ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -154,12 +179,17 @@ MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户组id',
 -- AUTO_INCREMENT for table `ta_auth_rule`
 --
 ALTER TABLE `ta_auth_rule`
-MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=4;
+MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `ta_member`
 --
 ALTER TABLE `ta_member`
 MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户ID',AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `ta_menu`
+--
+ALTER TABLE `ta_menu`
+MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
