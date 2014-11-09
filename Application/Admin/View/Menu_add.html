@@ -1,0 +1,31 @@
+<div class="col-xs-6">
+    <form class="form-horizontal" role="form">
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right">{:L('PARENT_ID')}:</label>
+            <div class="col-sm-9">
+                <select class="form-control" name="pid">
+                    <option value="0">一级菜单</option>
+                    <option value="AL">Alabama</option>
+                    <option value="AK">Alaska</option>
+                    <option value="AZ">Arizona</option>
+                    <option value="AR">Arkansas</option>
+                    <option value="CA">California</option>
+                    <option value="CO">Colorado</option>
+                    <option value="CT">Connecticut</option>
+                    <option value="DE">Delaware</option>
+                    <option value="FL">Florida</option>
+                    <option value="GA">Georgia</option>
+                    <option value="HI">Hawaii</option>
+                </select>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    var pan = '<li><a class="tarmain" href="{:U(CONTROLLER_NAME.'/'.ACTION_NAME)}">{:L($Think.CONTROLLER_NAME)}</a></li>\n\
+<li class="active">{:L($Think.ACTION_NAME)}</li>';
+    $('#breadcrumbs .breadcrumb li:gt(0)').remove();
+    $('#breadcrumbs .breadcrumb').append(pan);
+    $('.page-header h1').empty();
+    $('.page-header h1').append('{:L($Think.CONTROLLER_NAME)}<small class="glyphicon glyphicon-chevron-right"> {:L($Think.ACTION_NAME)}</small>');
+</script>

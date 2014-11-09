@@ -2,5 +2,6 @@
 $menu_common = array(
     'INDEX_SET'         =>  '设置',
     'INDEX_PROFILE'     =>  '个人资料',
-    'INDEX_INDEX'       =>  '控制台'
+    'INDEX_INDEX'       =>  '控制台',
+    'MENU_INDEX'        =>  '后台管理菜单'
 );

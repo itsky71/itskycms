@@ -14,7 +14,7 @@ $common = array(
     'FIXED_BREADCRUMBS'=>   '固定面包屑',
     'SET_RTL'       =>  '切换到左边',
     'SET_CONTAINER' =>  '切换窄屏',
-    'MENU_INDEX'    =>  '首页',
+    'HOME_INDEX'    =>  '首页',
     'MENU_LOOK'     =>  '查看'
 );
 return array_merge($common, $menu_common);

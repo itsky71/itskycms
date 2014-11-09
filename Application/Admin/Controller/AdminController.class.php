@@ -24,29 +24,19 @@ class AdminController extends Controller{
         if(!$auth->check($module_name, session(C('USER_AUTH_KEY')))){
             $this->error(L('_VALID_ACCESS_'));
         }
-        
-        /*if(C('USER_AUTH_ON') && !in_array(MODULE_NAME, explode(',', C('NOT_AUTH_MODULE')))){
-            if(!Rbac::AccessDecision()){
-                //检查认证识别号
-                if(!session(C('USER_AUTH_KEY'))){
-                    $this->redirect(MODULE_NAME.C('USER_AUTH_GATEWAY'));
-                }
-                //没有权限 抛出错误
-                if(C('RBAC_ERROR_PAGE')){
-                    //定义权限错误页面
-                    $this->redirect(C('RBAC_ERROR_PAGE'));
-                }  else {
-                    if(C('GUEST_AUTH_ON')){
-                        $this->assign('jumpUrl', MODULE_NAME.C('USER_AUTH_GATEWAY'));
-                    }
-                    //提示错误信息
-                    $this->error(L('_VALID_ACCESS_'));
-                }
-            }
-        }*/
     }
-    
+
+    /**
+     * 列表显示
+     */
     public function index(){
+        $this->display();
+    }
+
+    /**
+     * 添加
+     */
+    public function add(){
         $this->display();
     }
 }
