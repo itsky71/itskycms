@@ -22,7 +22,50 @@
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right">{:L('REAL_NAME')}:</label>
             <div class="col-sm-9">
-                <input class="col-xs-10" type="text" name="realname" placeholder="{$Think.cookie.think_language}"/>
+                <input class="col-xs-6" type="text" name="realname" placeholder="{$Think.cookie.think_language}"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right">{:L('MODEL')}:</label>
+            <div class="col-sm-9">
+                <input class="col-xs-6" type="text" name="model"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right">{:L('ACTION')}:</label>
+            <div class="col-sm-9">
+                <input class="col-xs-6" type="text" name="action"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right">{:L('DATA')}:</label>
+            <div class="col-sm-9">
+                <input class="col-xs-10" type="text" name="data"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right">{:L('REMARK')}:</label>
+            <div class="col-sm-9">
+                <textarea class="input-xxlarge" name="remark"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right">{:L('STATUS')}:</label>
+            <div class="col-sm-9">
+                <label>
+                    <input class="ace ace-switch ace-switch-7" type="checkbox" checked="checked" name="status"/>
+                    <span class="lbl"></span>
+                </label>
+            </div>
+        </div>
+        <div class="clearfix form-actions">
+            <div class="col-md-offset-3 col-md-9">
+                <button class="btn btn-info" type="submit">
+                    <i class="glyphicon glyphicon-ok"></i> 保存
+                </button>
+                <button class="btn" type="reset">
+                    <i class="glyphicon glyphicon-repeat"></i> 重置
+                </button>
             </div>
         </div>
     </form>
