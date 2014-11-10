@@ -2,7 +2,7 @@
 /*---------common---------*/
 .green{color:#69aa46}.red{color:#dd5a43}.white{color:#fff}.blue{color:#478fca}
 button.btn:active{position:relative;top:1px;left:1px;}
-select{cursor: pointer;}
+/*select{cursor: pointer;}*/
 /*---------Public_login---------*/
 #Public_login{
     background-color: #1d2024;

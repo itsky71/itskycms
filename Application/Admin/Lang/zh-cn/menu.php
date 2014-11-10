@@ -4,5 +4,6 @@ return array(
     'INDEX'     =>  '查看',
     'MENU_LIST' =>  '后台管理菜单列表',
     'PARENT_ID' =>  '上级',
-    'ADD'       =>  '添加菜单'
+    'ADD'       =>  '添加菜单',
+    'REAL_NAME' =>  '名称'
 );

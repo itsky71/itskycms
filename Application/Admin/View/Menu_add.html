@@ -19,13 +19,29 @@
                 </select>
             </div>
         </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right">{:L('REAL_NAME')}:</label>
+            <div class="col-sm-9">
+                <input class="col-xs-10" type="text" name="realname" placeholder="{$Think.cookie.think_language}"/>
+            </div>
+        </div>
     </form>
 </div>
 <script type="text/javascript">
-    var pan = '<li><a class="tarmain" href="{:U(CONTROLLER_NAME.'/'.ACTION_NAME)}">{:L($Think.CONTROLLER_NAME)}</a></li>\n\
+    var pan = '<li><a class="tarmain" href="{:U(CONTROLLER_NAME.'/index')}">{:L($Think.CONTROLLER_NAME)}</a></li>\n\
 <li class="active">{:L($Think.ACTION_NAME)}</li>';
     $('#breadcrumbs .breadcrumb li:gt(0)').remove();
     $('#breadcrumbs .breadcrumb').append(pan);
     $('.page-header h1').empty();
     $('.page-header h1').append('{:L($Think.CONTROLLER_NAME)}<small class="glyphicon glyphicon-chevron-right"> {:L($Think.ACTION_NAME)}</small>');
+    $('a.tarmain').click(function(e){
+        $.get( $(this).attr('href'),function(data){
+            if($.isPlainObject(data)){
+                show_msg(data);
+            }else{
+                $('#new_content').html(data);
+            }
+        });
+        e.preventDefault();
+    });
 </script>
