@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2014-11-09 15:53:09
+-- Generation Time: 2014-11-11 15:08:11
 -- 服务器版本： 5.6.20
 -- PHP Version: 5.5.15
 
@@ -111,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `ta_member` (
 --
 
 INSERT INTO `ta_member` (`id`, `password`, `username`, `realname`, `email`, `question`, `answer`, `status`, `login_ip`, `last_login_time`, `login_count`) VALUES
-(1, '30bc103d85df152c8c703bcbbcc7fd4d', 'admin', '你买单我就来', 'itsky71@foxmail.com', '我还会回来的...', '灰太狼？呵呵。。。', 1, '127.0.0.1', 1414918331, 23),
+(1, '30bc103d85df152c8c703bcbbcc7fd4d', 'admin', '你买单我就来', 'itsky71@foxmail.com', '我还会回来的...', '灰太狼？呵呵。。。', 1, '127.0.0.1', 1415634949, 24),
 (2, '30bc103d85df152c8c703bcbbcc7fd4d', 'itsky', '你地盘我做主', 'zmh0515005@163.com', '你是谁?', 'abc', 1, '127.0.0.1', 1415110484, 27);
 
 -- --------------------------------------------------------
@@ -128,7 +128,7 @@ CREATE TABLE IF NOT EXISTS `ta_menu` (
   `action` varchar(20) NOT NULL COMMENT '方法',
   `data` varchar(50) NOT NULL COMMENT '参数',
   `remark` varchar(255) NOT NULL COMMENT '备注',
-  `status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '状态',
+  `status` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '状态',
   `listorder` smallint(5) unsigned NOT NULL COMMENT '排序'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='后台菜单' AUTO_INCREMENT=1 ;
 
