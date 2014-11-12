@@ -12,7 +12,7 @@ class MenuModel extends Model{
         array('pid','number','{%PIDN}'),
         array('realname','checkRealname','{%RNAMEL}',self::EXISTS_VALIDATE,'callback'),
         array('model','3,20','{%MODELL}',self::EXISTS_VALIDATE,'length'),
-        array('action','3,20','{%ACTIONL}',self::EXISTS_VALIDATE,'length'),
+        array('action','3,20','{%ACTIONL}',self::VALUE_VALIDATE,'length'),
         array('data','3,50','{%DATAL}',self::VALUE_VALIDATE,'length'),
         array('remark','0,100','{%REMARKL}',self::EXISTS_VALIDATE,'length')
     );

@@ -5,8 +5,6 @@ return array(
     'REALNAME'  =>  '昵称',
     'QUESTION'  =>  '安全问题',
     'ANSWER'    =>  '答案',
-    'SUBMIT'    =>  '保存',
-    'RESET'     =>  '重置',
     'YZUNL'     =>  '用户名长度必须为3-20个字符！',
     'YZUNU'     =>  '用户名已被占用!',
     'YZEF'      =>  '邮箱格式不正确!',

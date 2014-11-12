@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2014-11-11 15:08:11
+-- Generation Time: 2014-11-12 16:16:06
 -- 服务器版本： 5.6.20
 -- PHP Version: 5.5.15
 
@@ -127,7 +127,7 @@ CREATE TABLE IF NOT EXISTS `ta_menu` (
   `model` varchar(20) NOT NULL COMMENT '模块',
   `action` varchar(20) NOT NULL COMMENT '方法',
   `data` varchar(50) NOT NULL COMMENT '参数',
-  `remark` varchar(255) NOT NULL COMMENT '备注',
+  `remark` varchar(100) NOT NULL COMMENT '备注',
   `status` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '状态',
   `listorder` smallint(5) unsigned NOT NULL COMMENT '排序'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='后台菜单' AUTO_INCREMENT=1 ;

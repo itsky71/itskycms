@@ -15,6 +15,9 @@ $common = array(
     'SET_RTL'       =>  '切换到左边',
     'SET_CONTAINER' =>  '切换窄屏',
     'HOME_INDEX'    =>  '首页',
-    'MENU_LOOK'     =>  '查看'
+    'MENU_LOOK'     =>  '查看',
+    'SUBMIT'    =>  '保存',
+    'RESET'     =>  '重置',
+    'DEFAULT'   =>  '默认'
 );
 return array_merge($common, $menu_common);
