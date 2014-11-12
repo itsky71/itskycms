@@ -1,4 +1,9 @@
 <?php
+/**
+ * Description of MemberModel
+ * 用户信息模型类
+ * @author itsky
+ */
 namespace Admin\Model;
 use Think\Model;
 class MemberModel extends Model{

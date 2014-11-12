@@ -1,6 +1,10 @@
 <?php
+/**
+ * Description of IndexController
+ * 后台首页控制器类
+ * @author itsky
+ */
 namespace Admin\Controller;
-//use Admin\AdminController;
 class IndexController extends AdminController {
 //    public function index(){
 //        $crypt = new \Think\Crypt();

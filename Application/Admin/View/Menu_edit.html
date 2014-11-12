@@ -1,5 +1,5 @@
 <div class="col-xs-6">
-    <form class="form-horizontal" role="form">
+    <form class="form-horizontal" role="form" method="post" action="{:U('Menu/add')}">
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right">{:L('PARENT_ID')}:</label>
             <div class="col-sm-9">
@@ -22,7 +22,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right">{:L('REAL_NAME')}:</label>
             <div class="col-sm-9">
-                <input class="col-xs-6" type="text" name="realname" placeholder="{$Think.cookie.think_language}"/>
+                <input class="col-xs-6" type="text" name="realname[{$Think.cookie.think_language}]" placeholder="{$Think.cookie.think_language}"/>
             </div>
         </div>
         <div class="form-group">
@@ -53,7 +53,7 @@
             <label class="col-sm-3 control-label no-padding-right">{:L('STATUS')}:</label>
             <div class="col-sm-9">
                 <label>
-                    <input class="ace ace-switch ace-switch-7" type="checkbox" checked="checked" name="status"/>
+                    <input class="ace ace-switch ace-switch-7" type="checkbox" value="1" checked="checked" name="status"/>
                     <span class="lbl"></span>
                 </label>
             </div>

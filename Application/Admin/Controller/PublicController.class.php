@@ -1,9 +1,11 @@
 <?php
+/**
+ * Description of PublicController
+ * 后台公共控制器
+ * @author itsky
+ */
 namespace Admin\Controller;
 use Think\Controller;
-/**
- * 后台公共控制器
- */
 class PublicController extends Controller {
     /* 登入 */
     public function login(){

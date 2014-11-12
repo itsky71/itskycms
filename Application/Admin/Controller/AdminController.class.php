@@ -1,10 +1,12 @@
 <?php
+/**
+ * Description of AdminController
+ * 后台公用控制器类
+ * @author itsky
+ */
 namespace Admin\Controller;
 use Think\Controller;
 use Think\Auth;
-/**
- * 后台首页控制器
- */
 class AdminController extends Controller{
     /**
      * 后台控制器初始化
@@ -37,6 +39,16 @@ class AdminController extends Controller{
      * 添加
      */
     public function add(){
-        $this->display();
+        if(IS_POST){
+            $name = D(CONTROLLER_NAME);
+            if($name->create()){
+                
+            }else{
+                $this->error($name->getError());
+            }
+//            print_r(I('post.'));
+        }else{
+            $this->display('edit');
+        }
     }
 }
