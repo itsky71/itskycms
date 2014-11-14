@@ -46,7 +46,6 @@ class AdminController extends Controller{
             }else{
                 $this->error($name->getError());
             }
-//            print_r(I('post.'));
         }else{
             $this->display('edit');
         }

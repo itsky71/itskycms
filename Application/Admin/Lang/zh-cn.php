@@ -18,6 +18,7 @@ $common = array(
     'MENU_LOOK'     =>  '查看',
     'SUBMIT'    =>  '保存',
     'RESET'     =>  '重置',
-    'DEFAULT'   =>  '默认'
+    'DEFAULT'   =>  '默认',
+    'SUCH'      =>  '例'
 );
 return array_merge($common, $menu_common);

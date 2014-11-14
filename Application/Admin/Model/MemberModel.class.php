@@ -18,7 +18,7 @@ class MemberModel extends Model{
         array('question','3,30','{%YZQL}',self::VALUE_VALIDATE,'length'),
         array('answer','0,30','{%YZAL}',self::VALUE_VALIDATE,'length')
     );
-    
+
     protected function checkRname(){
         $rname = I('post.realname');
         $patten = '/^[\w\d\x{4e00}-\x{9fa5}]+$/u';
