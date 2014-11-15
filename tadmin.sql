@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2014-11-12 16:16:06
+-- Generation Time: 2014-11-15 15:57:24
 -- 服务器版本： 5.6.20
 -- PHP Version: 5.5.15
 
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `ta_auth_group` (
 
 INSERT INTO `ta_auth_group` (`id`, `title`, `status`, `rules`) VALUES
 (1, '超级管理员', 1, ''),
-(2, '普通管理员', 1, '1,2,3,4'),
+(2, '普通管理员', 1, '1,2,3,4,5'),
 (3, '注册用户', 1, '1');
 
 -- --------------------------------------------------------
@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `ta_auth_rule` (
   `type` tinyint(1) NOT NULL DEFAULT '1',
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '状态：为1正常，为0禁用',
   `condition` char(100) NOT NULL DEFAULT '' COMMENT '规则表达式，为空表示存在就验证，不为空表示按照条件验证'
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='规则表' AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='规则表' AUTO_INCREMENT=6 ;
 
 --
 -- 转存表中的数据 `ta_auth_rule`
@@ -84,7 +84,8 @@ INSERT INTO `ta_auth_rule` (`id`, `name`, `title`, `type`, `status`, `condition`
 (1, 'Index/index', '首页', 1, 1, ''),
 (2, 'Index/profile', '个人资料', 1, 1, ''),
 (3, 'Menu/index', '后台菜单', 1, 1, ''),
-(4, 'Menu/add', '添加菜单', 1, 1, '');
+(4, 'Menu/add', '添加菜单', 1, 1, ''),
+(5, 'Menu/checkAction', '菜单验证', 1, 1, '');
 
 -- --------------------------------------------------------
 
@@ -129,8 +130,15 @@ CREATE TABLE IF NOT EXISTS `ta_menu` (
   `data` varchar(50) NOT NULL COMMENT '参数',
   `remark` varchar(100) NOT NULL COMMENT '备注',
   `status` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '状态',
-  `listorder` smallint(5) unsigned NOT NULL COMMENT '排序'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='后台菜单' AUTO_INCREMENT=1 ;
+  `listorder` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '排序'
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='后台菜单' AUTO_INCREMENT=2 ;
+
+--
+-- 转存表中的数据 `ta_menu`
+--
+
+INSERT INTO `ta_menu` (`id`, `pid`, `name`, `model`, `action`, `data`, `remark`, `status`, `listorder`) VALUES
+(1, 0, 'M_INDEX_INDEX', 'Index', 'index', '', '', 1, 0);
 
 --
 -- Indexes for dumped tables
@@ -179,7 +187,7 @@ MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户组id',
 -- AUTO_INCREMENT for table `ta_auth_rule`
 --
 ALTER TABLE `ta_auth_rule`
-MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=5;
+MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `ta_member`
 --
@@ -189,7 +197,7 @@ MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户ID',AUTO_INC
 -- AUTO_INCREMENT for table `ta_menu`
 --
 ALTER TABLE `ta_menu`
-MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT;
+MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
