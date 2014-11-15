@@ -22,7 +22,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right">{:L('REAL_NAME')}:</label>
             <div class="col-sm-9">
-                <input class="col-xs-6" type="text" name="realname[{$Think.cookie.think_language}]" placeholder="{$Think.cookie.think_language}"/>
+                <input class="col-xs-6" type="text" name="realname[{$Think.LANG_SET}]" placeholder="{$Think.LANG_SET}"/>
             </div>
         </div>
         <div class="form-group">
@@ -91,12 +91,27 @@
     });
     $('form[role="form"]').validator({
         rules:{
-            realname:[/^[\u0391-\uFFE5\w]+$/, "{:L('JS_INPUT_INFO')}"]
+            realname:[/^[\u0391-\uFFE5\w]+$/, "{:L('JS_INPUT_INFO')}"],
+            mremote:function(element,params){
+                var pv = $('[name="'+params+'"]').val();
+                if(pv==''){
+                    return $.ajax({
+                        type:'post',
+                        url:'{:U('Menu/checkAction')}',
+                        data:element.name+'='+element.value+'&'+params+'=index',
+                        success:function(d){
+                            window.console && console.log(d);
+                        }
+                    });
+                }
+            }
         },
         fields:{
-            'realname[{$Think.cookie.think_language}]':'required;realname;length[2~20]',
-            model:'required;letters;length[3~20]',
-            action:'letters;length[3~20]'
+            'realname[{$Think.LANG_SET}]':'required;realname;length[2~20]',
+            model:'required;letters;length[3~20];mremote[action]',
+            action:'letters;length[3~20];remote[{:U('Menu/checkAction')}, model]',
+            data:'length[~50]',
+            remark:'length[~100]'
         },
         valid:function(form){
             $.ajax({
