@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2014-11-15 15:57:24
+-- Generation Time: 2014-11-16 16:03:44
 -- 服务器版本： 5.6.20
 -- PHP Version: 5.5.15
 
@@ -112,7 +112,7 @@ CREATE TABLE IF NOT EXISTS `ta_member` (
 --
 
 INSERT INTO `ta_member` (`id`, `password`, `username`, `realname`, `email`, `question`, `answer`, `status`, `login_ip`, `last_login_time`, `login_count`) VALUES
-(1, '30bc103d85df152c8c703bcbbcc7fd4d', 'admin', '你买单我就来', 'itsky71@foxmail.com', '我还会回来的...', '灰太狼？呵呵。。。', 1, '127.0.0.1', 1415634949, 24),
+(1, '30bc103d85df152c8c703bcbbcc7fd4d', 'admin', '你买单我就来', 'itsky71@foxmail.com', '我还会回来的...', '灰太狼？呵呵。。。', 1, '172.21.176.4', 1416115115, 25),
 (2, '30bc103d85df152c8c703bcbbcc7fd4d', 'itsky', '你地盘我做主', 'zmh0515005@163.com', '你是谁?', 'abc', 1, '127.0.0.1', 1415110484, 27);
 
 -- --------------------------------------------------------
@@ -131,14 +131,16 @@ CREATE TABLE IF NOT EXISTS `ta_menu` (
   `remark` varchar(100) NOT NULL COMMENT '备注',
   `status` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '状态',
   `listorder` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '排序'
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='后台菜单' AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='后台菜单' AUTO_INCREMENT=4 ;
 
 --
 -- 转存表中的数据 `ta_menu`
 --
 
 INSERT INTO `ta_menu` (`id`, `pid`, `name`, `model`, `action`, `data`, `remark`, `status`, `listorder`) VALUES
-(1, 0, 'M_INDEX_INDEX', 'Index', 'index', '', '', 1, 0);
+(1, 0, 'M_INDEX_INDEX', 'Index', 'index', '', '', 1, 0),
+(2, 1, 'M_INDEX_SET', 'Index', 'set', '', '', 1, 0),
+(3, 1, 'M_INDEX_PROFILE', 'Index', 'profile', '', '', 1, 0);
 
 --
 -- Indexes for dumped tables
@@ -197,7 +199,7 @@ MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户ID',AUTO_INC
 -- AUTO_INCREMENT for table `ta_menu`
 --
 ALTER TABLE `ta_menu`
-MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
