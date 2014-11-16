@@ -7,8 +7,8 @@
 namespace Admin\Controller;
 class MenuController extends AdminController{
     public function add(){
+        $Menu = D('Menu');
         if(IS_POST){
-            $Menu = D('Menu');
             if($Menu->create()){
                 $data = array(
                     'pid' => I('post.pid'),
@@ -31,6 +31,9 @@ class MenuController extends AdminController{
                 $this->error($Menu->getError());
             }
         }else{
+            import('@.Util.Tree');
+            $map = $Menu->where('status=1')->select();
+            $this->assign('map', $map);
             $this->display('edit');
         }
     }
@@ -42,11 +45,11 @@ class MenuController extends AdminController{
             $Menu = D('Menu');
             $map = array(
                 'model' => ucfirst(I('post.model')),
-                'action' => strtolower(I('post.action'))
+                'action' => I('post.action') ? strtolower(I('post.action')) : 'index'
             );
             $res = $Menu->where($map)->find();
             if($res){
-                echo 'error';
+                echo json_encode(array('error'=>L('ACTIONU')));
             }
         }else{
             $this->error(L('_ERROR_ACTION_'));
@@ -63,7 +66,7 @@ class MenuController extends AdminController{
         if(!is_array($lang)){
             return FALSE;
         }
-        $path = $langpath == '' ? MODULE_PATH.'Lang/'.LANG_SET.'/menu_commonb.php' : $langpath;
+        $path = $langpath == '' ? MODULE_PATH.'Lang/'.LANG_SET.'/menu_common.php' : $langpath;
         $phpstar = '<?php'.PHP_EOL;
         $langdata = $phpstar;
         $langdata .= '$menu_common = array('.PHP_EOL;

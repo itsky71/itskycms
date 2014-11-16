@@ -1,5 +1,10 @@
 <?php
-require_once 'zh-cn/menu_common.php';
+$mpath = MODULE_PATH.'Lang/'.LANG_SET.'/menu_common.php';
+if(file_exists($mpath)){
+    require_once $mpath;
+}else{
+    $menu_common = array();
+}
 $common = array(
     'PRO_NAME'      =>  'ITskyCMS',
     'BACKER_MANAGE' =>  '后台管理',

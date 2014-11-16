@@ -5,17 +5,9 @@
             <div class="col-sm-9">
                 <select class="form-control" name="pid">
                     <option value="0">一级菜单</option>
-                    <option value="AL">Alabama</option>
-                    <option value="AK">Alaska</option>
-                    <option value="AZ">Arizona</option>
-                    <option value="AR">Arkansas</option>
-                    <option value="CA">California</option>
-                    <option value="CO">Colorado</option>
-                    <option value="CT">Connecticut</option>
-                    <option value="DE">Delaware</option>
-                    <option value="FL">Florida</option>
-                    <option value="GA">Georgia</option>
-                    <option value="HI">Hawaii</option>
+                    <foreach name="map" item="vo">
+                    <option value="{$vo.id}">{:L($vo['name'])}</option>
+                    </foreach>
                 </select>
             </div>
         </div>
