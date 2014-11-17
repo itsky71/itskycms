@@ -4,7 +4,7 @@
  * 数类
  * @author itsky
  */
-namespace Admin\Lib;
+namespace Common\Lib;
 class Tree {
     //put your code here
 }
