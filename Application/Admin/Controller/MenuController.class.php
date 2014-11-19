@@ -6,6 +6,19 @@
  */
 namespace Admin\Controller;
 class MenuController extends AdminController{
+    public function index() {
+        $Menu = D('Menu');
+        $allmenu = $Menu->select();
+        foreach ($allmenu as $item){
+            $pcount = $Menu->where('pid='.$item['id'])->count();
+            if($pcount > 0){
+                $tree .= '<div class="tree-folder">'
+            }
+        }
+        print_r($allmenu);exit;
+        $this->display();
+    }
+
     public function add(){
         $Menu = D('Menu');
         if(IS_POST){
@@ -31,9 +44,14 @@ class MenuController extends AdminController{
                 $this->error($Menu->getError());
             }
         }else{
-            import('@.Util.Tree');
             $map = $Menu->where('status=1')->select();
-            $this->assign('map', $map);
+            foreach ($map as $r){
+                $r['name'] = L($r['name']);
+                $newmap[] = $r;
+            }
+            $tree = new \Common\Lib\Tree($newmap);
+            $str  = "<option value='\$id' \$selected>\$spacer \$name</option>";
+            $this->assign('map', $tree->get_tree(0, $str));
             $this->display('edit');
         }
     }

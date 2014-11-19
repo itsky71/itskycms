@@ -5,9 +5,7 @@
             <div class="col-sm-9">
                 <select class="form-control" name="pid">
                     <option value="0">一级菜单</option>
-                    <foreach name="map" item="vo">
-                    <option value="{$vo.id}">{:L($vo['name'])}</option>
-                    </foreach>
+                    {$map}
                 </select>
             </div>
         </div>
@@ -83,7 +81,7 @@
     });
     $('form[role="form"]').validator({
         rules:{
-            realname:[/^[\u0391-\uFFE5\w]+$/, "{:L('JS_INPUT_INFO')}"],
+            realname:[/^[\u0391-\uFFE5\w ]+$/, "{:L('JS_INPUT_INFO')}"],
             mremote:function(element,params){
                 var pv = $('[name="'+params+'"]').val();
                 if(pv==''){
@@ -100,7 +98,10 @@
         },
         fields:{
             'realname[{$Think.LANG_SET}]':'required;realname;length[2~20]',
-            model:'required;letters;length[3~20];mremote[action]',
+            model:{
+                rule:'required;letters;length[3~20];mremote[action]',
+                must:true
+            },
             action:'letters;length[3~20];remote[{:U('Menu/checkAction')}, model]',
             data:'length[~50]',
             remark:'length[~100]'
