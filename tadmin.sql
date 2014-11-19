@@ -1,20 +1,10 @@
--- phpMyAdmin SQL Dump
--- version 4.2.7.1
--- http://www.phpmyadmin.net
---
 -- Host: 127.0.0.1
--- Generation Time: 2014-11-16 16:03:44
+-- Generation Time: 2014-11-19 16:01:00
 -- 服务器版本： 5.6.20
 -- PHP Version: 5.5.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `tadmin`
@@ -131,7 +121,7 @@ CREATE TABLE IF NOT EXISTS `ta_menu` (
   `remark` varchar(100) NOT NULL COMMENT '备注',
   `status` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '状态',
   `listorder` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '排序'
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='后台菜单' AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='后台菜单' AUTO_INCREMENT=8 ;
 
 --
 -- 转存表中的数据 `ta_menu`
@@ -140,7 +130,11 @@ CREATE TABLE IF NOT EXISTS `ta_menu` (
 INSERT INTO `ta_menu` (`id`, `pid`, `name`, `model`, `action`, `data`, `remark`, `status`, `listorder`) VALUES
 (1, 0, 'M_INDEX_INDEX', 'Index', 'index', '', '', 1, 0),
 (2, 1, 'M_INDEX_SET', 'Index', 'set', '', '', 1, 0),
-(3, 1, 'M_INDEX_PROFILE', 'Index', 'profile', '', '', 1, 0);
+(3, 1, 'M_INDEX_PROFILE', 'Index', 'profile', '', '', 1, 0),
+(4, 0, 'M_OSCONFIG_INDEX', 'Osconfig', 'index', '', '', 1, 0),
+(5, 4, 'M_SITECONFIG_INDEX', 'Siteconfig', 'index', '', '', 1, 0),
+(6, 4, 'M_POSID_INDEX', 'Posid', 'index', '', '', 1, 0),
+(7, 0, 'M_CONFIG_INDEX', 'Config', 'index', '', '', 1, 0);
 
 --
 -- Indexes for dumped tables
@@ -199,7 +193,7 @@ MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户ID',AUTO_INC
 -- AUTO_INCREMENT for table `ta_menu`
 --
 ALTER TABLE `ta_menu`
-MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
