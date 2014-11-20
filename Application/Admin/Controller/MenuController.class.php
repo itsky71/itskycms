@@ -8,14 +8,24 @@ namespace Admin\Controller;
 class MenuController extends AdminController{
     public function index() {
         $Menu = D('Menu');
-        $allmenu = $Menu->select();
+        $allmenu = $Menu->order('listorder')->select();
         foreach ($allmenu as $item){
             $pcount = $Menu->where('pid='.$item['id'])->count();
+            $cmenu = $Menu->where('pid='.$item['id'])->order('listorder')->select();
             if($pcount > 0){
-                $tree .= '<div class="tree-folder">'
+                $treestr .= '<div class="tree-folder"> <div class="tree-folder-header"> ';
+                $treestr .= '<i class="glyphicon glyphicon-chevron-right"></i> ';
+                $treestr .= '<div class="tree-folder-name"> ';
+                $treestr .= L($item['name']).'</div></div><div class="tree-folder-content hide">';
+                foreach ($cmenu as $val){
+                    $treestr .= '<div class="tree-item"><div class="tree-item-name">'.L($val['name']).'</div></div>';
+                }
+                $treestr .= '</div></div>';
+            }elseif($pcount == 0 && $item['pid']==0){
+                $treestr .= '<div class="tree-item"><div class="tree-item-name">'.L($item['name']).'</div></div>';
             }
         }
-        print_r($allmenu);exit;
+        $this->assign('mtree', $treestr);
         $this->display();
     }
 

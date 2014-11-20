@@ -10,20 +10,22 @@
 <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 <block name="cssjs">
-<css href="__PUBLIC__/bootstrap/css/bootstrap.min.css,__PUBLIC__/bootstrap/css/bootstrap-theme.min.css,__PUBLIC__/css/ace.min.css,__PUBLIC__/css/ace-rtl.min.css,__PUBLIC__/css/ace-skins.min.css,__PUBLIC__/validator/jquery.validator.css,__PUBLIC__/css/admin_all.css"/>
-<js href="__PUBLIC__/js/jquery.min.js,__PUBLIC__/bootstrap/js/bootstrap.min.js,__PUBLIC__/js/ace.min.js,__PUBLIC__/js/ace-elements.min.js,__PUBLIC__/js/ace-extra.min.js,__PUBLIC__/validator/jquery.validator.js,__PUBLIC__/validator/local/{$Think.LANG_SET}.js,__PUBLIC__/js/admin_all.js"/>
+<import type="css" file="bootstrap.css.bootstrap#min"/>
+<import type="css" file="bootstrap.css.bootstrap-theme#min"/>
+<import type="css" file="css.ace#min"/>
+<import type="css" file="css.ace-rtl#min"/>
+<import type="css" file="css.ace-skins#min"/>
+<import type="css" file="validator.jquery#validator"/>
+<import type="css" file="css.admin_all"/>
+<import type="js" file="js.jquery#min"/>
+<import type="js" file="bootstrap.js.bootstrap#min"/>
+<import type="js" file="js.ace#min"/>
+<import type="js" file="js.ace-elements#min"/>
+<import type="js" file="js.ace-extra#min"/>
+<import type="js" file="validator.jquery#validator"/>
+<import type="js" file="validator.local.{:LANG_SET}"/>
+<import type="js" file="js.admin_all"/>
 </block>
-<script type="text/javascript">
-    var ThinkPHP = {
-        'ROOT' : '__ROOT__',    //网站根目录地址
-        'APP' : '__APP__',  //当前应用（入口文件）地址
-        'SELF' : '__SELF__',    //当前URL地址
-        'PUBLIC' : '__PUBLIC__',    //项目公共目录地址
-        'MODULE' : '{$Think.MODULE_NAME}',  //当前模块名
-        'CONTROLLER' : '{$Think.CONTROLLER_NAME}',  //当前控制器名
-        'ACTION' : '{$Think.ACTION_NAME}'   //当前操作名
-    };
-</script>
 </head>
 <body id="{$Think.CONTROLLER_NAME}_{$Think.ACTION_NAME}">
 <block name="body">
@@ -233,12 +235,12 @@
                     <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
                         <li>
                             <a href="#">
-                                <span class="glyphicon glyphicon-cog"></span>{:L('INDEX_SET')}
+                                <span class="glyphicon glyphicon-cog"></span>{:L('M_INDEX_SET')}
                             </a>
                         </li>
                         <li>
                             <a class="tarmain" href="{:U('Index/profile')}">
-                                <span class="glyphicon glyphicon-user"></span>{:L('INDEX_PROFILE')}
+                                <span class="glyphicon glyphicon-user"></span>{:L('M_INDEX_PROFILE')}
                             </a>
                         </li>
                         <li class="divider"></li>
@@ -293,7 +295,7 @@
                 <li class="active">
                     <a class="noa" href="{:U('Index/index')}">
                         <span class="glyphicon glyphicon-dashboard"></span>
-                        <span class="menu-text">{:L('INDEX_INDEX')}</span>
+                        <span class="menu-text">{:L('M_INDEX_INDEX')}</span>
                     </a>
                 </li>
                 <li>
@@ -379,7 +381,7 @@
                         </li>
                         <li>
                             <a class="tarmain" href="{:U('Menu/index')}">
-                                <span class="glyphicon glyphicon-chevron-right"></span> {:L('MENU_INDEX')}
+                                <span class="glyphicon glyphicon-chevron-right"></span> {:L('M_MENU_INDEX')}
                             </a>
                         </li>
                     </ul>
@@ -456,7 +458,7 @@
                         <span class="glyphicon glyphicon-home"></span>
                         <a href="{:U('Index/index')}">{:L('HOME_INDEX')}</a>
                     </li>
-                    <li class="active">{:L('INDEX_INDEX')}</li>
+                    <li class="active">{:L('M_INDEX_INDEX')}</li>
                 </ul>
                 <div id="nav-search" class="nav-search">
                     <form class="form-search">
@@ -469,7 +471,7 @@
             </div>
             <div class="page-content">
                 <div class="page-header">
-                    <h1>{:L('INDEX_INDEX')}<small class="glyphicon glyphicon-chevron-right"> {:L('MENU_LOOK')}</small></h1>
+                    <h1>{:L('M_INDEX_INDEX')}<small class="glyphicon glyphicon-chevron-right"> {:L('MENU_LOOK')}</small></h1>
                 </div>
                 <div class="row">
                     <div id="new_content" class="col-xs-12">
