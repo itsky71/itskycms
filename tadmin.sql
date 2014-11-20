@@ -1,10 +1,20 @@
+-- phpMyAdmin SQL Dump
+-- version 4.2.7.1
+-- http://www.phpmyadmin.net
+--
 -- Host: 127.0.0.1
--- Generation Time: 2014-11-19 16:01:00
+-- Generation Time: 2014-11-20 16:08:27
 -- 服务器版本： 5.6.20
 -- PHP Version: 5.5.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `tadmin`
@@ -103,7 +113,7 @@ CREATE TABLE IF NOT EXISTS `ta_member` (
 
 INSERT INTO `ta_member` (`id`, `password`, `username`, `realname`, `email`, `question`, `answer`, `status`, `login_ip`, `last_login_time`, `login_count`) VALUES
 (1, '30bc103d85df152c8c703bcbbcc7fd4d', 'admin', '你买单我就来', 'itsky71@foxmail.com', '我还会回来的...', '灰太狼？呵呵。。。', 1, '172.21.176.4', 1416115115, 25),
-(2, '30bc103d85df152c8c703bcbbcc7fd4d', 'itsky', '你地盘我做主', 'zmh0515005@163.com', '你是谁?', 'abc', 1, '127.0.0.1', 1415110484, 27);
+(2, '30bc103d85df152c8c703bcbbcc7fd4d', 'itsky', '你地盘我做主', 'zmh0515005@163.com', '你是谁?', 'abc', 1, '127.0.0.1', 1416487541, 28);
 
 -- --------------------------------------------------------
 
@@ -114,6 +124,7 @@ INSERT INTO `ta_member` (`id`, `password`, `username`, `realname`, `email`, `que
 CREATE TABLE IF NOT EXISTS `ta_menu` (
 `id` smallint(5) unsigned NOT NULL,
   `pid` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '父ID',
+  `icon` varchar(15) NOT NULL DEFAULT '' COMMENT '图标',
   `name` varchar(20) NOT NULL COMMENT '语言标识',
   `model` varchar(20) NOT NULL COMMENT '模块',
   `action` varchar(20) NOT NULL COMMENT '方法',
@@ -127,14 +138,14 @@ CREATE TABLE IF NOT EXISTS `ta_menu` (
 -- 转存表中的数据 `ta_menu`
 --
 
-INSERT INTO `ta_menu` (`id`, `pid`, `name`, `model`, `action`, `data`, `remark`, `status`, `listorder`) VALUES
-(1, 0, 'M_INDEX_INDEX', 'Index', 'index', '', '', 1, 0),
-(2, 1, 'M_INDEX_SET', 'Index', 'set', '', '', 1, 0),
-(3, 1, 'M_INDEX_PROFILE', 'Index', 'profile', '', '', 1, 0),
-(4, 0, 'M_OSCONFIG_INDEX', 'Osconfig', 'index', '', '', 1, 0),
-(5, 4, 'M_SITECONFIG_INDEX', 'Siteconfig', 'index', '', '', 1, 0),
-(6, 4, 'M_POSID_INDEX', 'Posid', 'index', '', '', 1, 0),
-(7, 0, 'M_CONFIG_INDEX', 'Config', 'index', '', '', 1, 0);
+INSERT INTO `ta_menu` (`id`, `pid`, `icon`, `name`, `model`, `action`, `data`, `remark`, `status`, `listorder`) VALUES
+(1, 0, '', 'M_INDEX_INDEX', 'Index', 'index', '', '', 1, 0),
+(2, 1, '', 'M_INDEX_SET', 'Index', 'set', '', '', 1, 0),
+(3, 1, '', 'M_INDEX_PROFILE', 'Index', 'profile', '', '', 1, 0),
+(4, 0, '', 'M_OSCONFIG_INDEX', 'Osconfig', 'index', '', '', 1, 0),
+(5, 4, '', 'M_SITECONFIG_INDEX', 'Siteconfig', 'index', '', '', 1, 0),
+(6, 4, '', 'M_POSID_INDEX', 'Posid', 'index', '', '', 1, 0),
+(7, 0, '', 'M_CONFIG_INDEX', 'Config', 'index', '', '', 1, 0);
 
 --
 -- Indexes for dumped tables
