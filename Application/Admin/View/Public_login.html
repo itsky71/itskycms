@@ -1,7 +1,14 @@
 <extend name="Common/base"/>
 <block name="cssjs">
-<css href="__PUBLIC__/bootstrap/css/bootstrap.min.css,__PUBLIC__/bootstrap/css/bootstrap-theme.min.css,__PUBLIC__/validator/jquery.validator.css,__PUBLIC__/css/admin_all.css"/>
-<js href="__PUBLIC__/js/jquery.min.js,__PUBLIC__/bootstrap/js/bootstrap.min.js,__PUBLIC__/validator/jquery.validator.js,__PUBLIC__/validator/local/{$Think.LANG_SET}.js,__PUBLIC__/js/admin_all.js"/>
+<link rel="stylesheet" type="text/css" href="http://libs.useso.com/js/bootstrap/3.2.0/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="http://libs.useso.com/js/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
+<import type="css" file="validator.jquery#validator"/>
+<import type="css" file="css.admin_all"/>
+<script type="text/javascript" src="http://libs.useso.com/js/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="http://libs.useso.com/js/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<import type="js" file="validator.jquery#validator"/>
+<import type="js" file="validator.local.{:LANG_SET}"/>
+<import type="js" file="js.admin_all"/>
 </block>
 <block name="body">
 <div class="container">

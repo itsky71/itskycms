@@ -90,6 +90,7 @@ class PublicController extends Controller {
     /* 登出 */
     public function logout(){
         if(session(C('USER_AUTH_KEY'))){
+            cookie(NULL);
             session('[destroy]');
             $this->redirect('Public/login');
         }else{
