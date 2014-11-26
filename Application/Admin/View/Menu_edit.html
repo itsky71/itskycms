@@ -48,6 +48,10 @@
                     <input class="ace ace-switch ace-switch-7" type="checkbox" value="1" checked="checked" name="status"/>
                     <span class="lbl"></span>
                 </label>
+                <button id="bootbox-options" class="btn btn-danger btn-sm" type="button">
+                    <span class=""></span>
+                    选择图标
+                </button>
             </div>
         </div>
         <div class="clearfix form-actions">
@@ -62,6 +66,35 @@
         </div>
     </form>
 </div>
+<div class="icon-all hide">
+    <ul id="icon-all">
+        <li><span class="glyphicon glyphicon-asterisk"></span></li>
+        <li><span class="glyphicon glyphicon-plus"></span></li>
+        <li><span class="glyphicon glyphicon-euro"></span></li>
+        <li><span class="glyphicon glyphicon-minus"></span></li>
+        <li><span class="glyphicon glyphicon-cloud"></span></li>
+        <li><span class="glyphicon glyphicon-envelope"></span></li>
+        <li><span class="glyphicon glyphicon-pencil"></span></li>
+        <li><span class="glyphicon glyphicon-glass"></span></li>
+        <li><span class="glyphicon glyphicon-asterisk"></span></li>
+        <li><span class="glyphicon glyphicon-asterisk"></span></li>
+        <li><span class="glyphicon glyphicon-asterisk"></span></li>
+        <li><span class="glyphicon glyphicon-asterisk"></span></li>
+        <li><span class="glyphicon glyphicon-asterisk"></span></li>
+        <li><span class="glyphicon glyphicon-asterisk"></span></li>
+        <li><span class="glyphicon glyphicon-asterisk"></span></li>
+        <li><span class="glyphicon glyphicon-asterisk"></span></li>
+        <li><span class="glyphicon glyphicon-asterisk"></span></li>
+        <li><span class="glyphicon glyphicon-asterisk"></span></li>
+        <li><span class="glyphicon glyphicon-asterisk"></span></li>
+        <li><span class="glyphicon glyphicon-asterisk"></span></li>
+        <li><span class="glyphicon glyphicon-asterisk"></span></li>
+        <li><span class="glyphicon glyphicon-asterisk"></span></li>
+        <li><span class="glyphicon glyphicon-asterisk"></span></li>
+        <li><span class="glyphicon glyphicon-asterisk"></span></li>
+    </ul>
+</div>
+<import type="js" file="bootstrap.js.bootbox"/>
 <script type="text/javascript">
     var pan = '<li><a class="tarmain" href="{:U(CONTROLLER_NAME.'/index')}">{:L($Think.CONTROLLER_NAME)}</a></li>\n\
 <li class="active">{:L($Think.ACTION_NAME)}</li>';
@@ -116,5 +149,11 @@
                 }
             });
         }
+    });
+    $('#bootbox-options').on(ace.click_event,function(){
+        bootbox.setDefaults("locale", "{$Think.LANG_SET}");
+        bootbox.dialog({
+            message:$('.icon-all').html()
+        });
     });
 </script>

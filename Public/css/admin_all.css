@@ -215,3 +215,19 @@ button.btn:active{position:relative;top:1px;left:1px;}
 .add-menu{
     margin: 5px 12px 0 0;
 }
+/*  icon-all  */
+.bootbox-body #icon-all{
+    cursor: default;
+}
+.bootbox-body #icon-all li{
+    display: inline-block;
+    list-style: none;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+}
+.bootbox-body #icon-all li:hover{
+    color: blue;
+}
