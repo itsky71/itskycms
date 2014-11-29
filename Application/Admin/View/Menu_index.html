@@ -26,11 +26,16 @@
     $('.page-header h1').append('{:L($Think.CONTROLLER_NAME)}<small class="glyphicon glyphicon-chevron-right"> {:L($Think.ACTION_NAME)}</small>');
 
     $('a.tarmain').click(function(e){
-        $.get( $(this).attr('href'),function(data){
-            if($.isPlainObject(data)){
-                show_msg(data);
-            }else{
-                $('#new_content').html(data);
+        $.ajax({
+            type:'get',
+            url:$(this).attr('href'),
+            global:true,
+            success:function(data){
+                if($.isPlainObject(data)){
+                    show_msg(data);
+                }else{
+                    $('#new_content').html(data);
+                }
             }
         });
         e.preventDefault();

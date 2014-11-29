@@ -21,17 +21,34 @@ $(function(){
     });
     //ajax加载页面到主页面显示
     $('a.tarmain').click(function(e){
-        $.get( $(this).attr('href'),function(data){
-            if($.isPlainObject(data)){
-                show_msg(data);
-            }else{
-                $('#new_content').html(data);
+        $.ajax({
+            type:'get',
+            url:$(this).attr('href'),
+            global:true,
+            success:function(data){
+                if($.isPlainObject(data)){
+                    show_msg(data);
+                }else{
+                    $('#new_content').html(data);
+                }
             }
         });
         $('#sidebar .nav-list li.active').removeClass('active');
         $('#sidebar .nav-list li.open').addClass('active');
         $('#sidebar .nav-list').find(this).parent('li').addClass('active');
         e.preventDefault();
+    });
+    //ajax请求开始时显示加载中样式
+    $('#loading').ajaxStart(function(){
+        $(this).removeClass('hide');
+    });
+    //ajax请求结束时结束加载中样式
+    $('#loading').ajaxComplete(function(){
+        $(this).addClass('hide');
+    });
+    //ajax全局默认设置
+    $.ajaxSetup({
+        global:false
     });
 });
 
