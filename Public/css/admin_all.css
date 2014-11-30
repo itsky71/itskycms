@@ -209,6 +209,14 @@ button.btn:active{position:relative;top:1px;left:1px;}
 #menu-tree .glyphicon-chevron-right{
     top:2px;
 }
+#menu-tree input[name="listorder"]{
+    width: 50px;
+    height: 21px;
+    line-height: 21px;
+    float: right;
+    padding: 0 3px;
+    margin-right: 10px;
+}
 .rota60{
     transform: rotate(60deg);
 }
@@ -233,4 +241,22 @@ button.btn:active{position:relative;top:1px;left:1px;}
 .bootbox-body #icon-all li:hover{
     color: #FFF;
     background-color: blue;
+}
+/*  loading  */
+#loading .progress{
+    width: 30%;
+    margin: 15% auto 0;
+}
+#loading .progress-bar-inverse{
+    background-color: #000;
+    background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, .65) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .65) 50%, rgba(255, 255, 255, .65) 75%, transparent 75%, transparent);
+    background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, .65) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .65) 50%, rgba(255, 255, 255, .65) 75%, transparent 75%, transparent);
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, .65) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .65) 50%, rgba(255, 255, 255, .65) 75%, transparent 75%, transparent);
+    -webkit-background-size: 40px 40px;
+    background-size: 40px 40px;
+}
+#loading .progress.active .progress-bar{
+    -webkit-animation: progress-bar-stripes 0.5s linear infinite;
+    -o-animation: progress-bar-stripes 0.5s linear infinite;
+    animation: progress-bar-stripes 0.5s linear infinite;
 }

@@ -2,7 +2,7 @@
     <div class="widget-box">
         <div class="widget-header header-color-green">
             <h4 class="lighter smaller">{:L('MENU_LIST')}</h4>
-            <a class="tarmain pull-right btn btn-xs btn-primary add-menu" href="{:U('Menu/add')}">
+            <a class="pull-right btn btn-xs btn-primary add-menu" onclick="load(event,this)" href="{:U('Menu/add')}">
                 <span class="glyphicon glyphicon-plus"></span>添加菜单
             </a>
         </div>
@@ -18,26 +18,13 @@
         $(this).find(' + .tree-folder-content').toggleClass('hide');
         $(this).find(' > .glyphicon-chevron-right').toggleClass('rota60');
     });
-    var pan = '<li><a class="tarmain" href="{:U(CONTROLLER_NAME.'/'.ACTION_NAME)}">{:L($Think.CONTROLLER_NAME)}</a></li>\n\
+    var pan = '<li><a onclick="load(event,this)" href="{:U(CONTROLLER_NAME.'/'.ACTION_NAME)}">{:L('M_'.$Think.CONTROLLER_NAME.'_'.$Think.ACTION_NAME)}</a></li>\n\
 <li class="active">{:L($Think.ACTION_NAME)}</li>';
     $('#breadcrumbs .breadcrumb li:gt(0)').remove();
     $('#breadcrumbs .breadcrumb').append(pan);
     $('.page-header h1').empty();
-    $('.page-header h1').append('{:L($Think.CONTROLLER_NAME)}<small class="glyphicon glyphicon-chevron-right"> {:L($Think.ACTION_NAME)}</small>');
-
-    $('a.tarmain').click(function(e){
-        $.ajax({
-            type:'get',
-            url:$(this).attr('href'),
-            global:true,
-            success:function(data){
-                if($.isPlainObject(data)){
-                    show_msg(data);
-                }else{
-                    $('#new_content').html(data);
-                }
-            }
-        });
-        e.preventDefault();
+    $('.page-header h1').append('{:L('M_'.$Think.CONTROLLER_NAME.'_'.$Think.ACTION_NAME)}<small class="glyphicon glyphicon-chevron-right"> {:L($Think.ACTION_NAME)}</small>');
+    $('input[name="listorder"]').click(function(){
+        return false;
     });
 </script>

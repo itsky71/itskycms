@@ -8,21 +8,26 @@ namespace Admin\Controller;
 class MenuController extends AdminController{
     public function index() {
         $Menu = D('Menu');
-        $allmenu = $Menu->order('listorder')->select();
+        $allmenu = $Menu->order('listorder,id')->select();
         foreach ($allmenu as $item){
             $pcount = $Menu->where('pid='.$item['id'])->count();
-            $cmenu = $Menu->where('pid='.$item['id'])->order('listorder')->select();
+            $cmenu = $Menu->where('pid='.$item['id'])->order('listorder,id')->select();
+            $icon = $item['icon'] ? '<span class="'.$item['icon'].'"></span> ' : '';
             if($pcount > 0){
                 $treestr .= '<div class="tree-folder"> <div class="tree-folder-header"> ';
                 $treestr .= '<i class="glyphicon glyphicon-chevron-right"></i> ';
                 $treestr .= '<div class="tree-folder-name"> ';
-                $treestr .= L($item['name']).'</div></div><div class="tree-folder-content hide">';
+                $treestr .= $icon.L($item['name']).'</div><input type="text" name="listorder" value="'.$item['listorder'].'"/>';
+                $treestr .= '</div><div class="tree-folder-content hide">';
                 foreach ($cmenu as $val){
-                    $treestr .= '<div class="tree-item"><div class="tree-item-name">'.L($val['name']).'</div></div>';
+                    $cicon = $val['icon'] ? '<span class="'.$val['icon'].'"></span> ' : '';
+                    $treestr .= '<div class="tree-item"><div class="tree-item-name">'.$cicon.L($val['name']).'</div>';
+                    $treestr .= '<input type="text" name="listorder" value="'.$val['listorder'].'"/></div>';
                 }
                 $treestr .= '</div></div>';
             }elseif($pcount == 0 && $item['pid']==0){
-                $treestr .= '<div class="tree-item"><div class="tree-item-name">'.L($item['name']).'</div></div>';
+                $treestr .= '<div class="tree-item"><div class="tree-item-name">'.$icon.L($item['name']).'</div>';
+                $treestr .= '<input type="text" name="listorder" value="'.$item['listorder'].'"/></div>';
             }
         }
         $this->assign('mtree', $treestr);
@@ -36,6 +41,7 @@ class MenuController extends AdminController{
                 $data = array(
                     'pid' => I('post.pid'),
                     'name' => 'M_'.strtoupper(I('post.model')).'_'.strtoupper(I('post.action') ? I('post.action') : 'index'),
+                    'icon' => I('post.icon'),
                     'model' => ucfirst(I('post.model')),
                     'action' => I('post.action') ? strtolower(I('post.action')) : 'index',
                     'data' => I('post.data'),

@@ -70,3 +70,19 @@ function show_msg(data){
         }
     },2000);
 }
+//ajax页面加载ajax页面
+function load(e,t){
+    e.preventDefault();
+    $.ajax({
+        type:'get',
+        url:$(t).attr('href'),
+        global:true,
+        success:function(data){
+            if($.isPlainObject(data)){
+                show_msg(data);
+            }else{
+                $('#new_content').html(data);
+            }
+        }
+    });
+}

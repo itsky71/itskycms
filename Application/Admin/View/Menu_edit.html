@@ -48,6 +48,7 @@
                     <input class="ace ace-switch ace-switch-7" type="checkbox" value="1" checked="checked" name="status"/>
                     <span class="lbl"></span>
                 </label>
+                <input type="hidden" name="icon" value=""/>
                 <button id="bootbox-options" class="btn btn-danger btn-sm" type="button">
                     <span class=""></span>
                     选择图标
@@ -273,27 +274,12 @@
 <!--<import type="js" file="js.bootbox"/>-->
 <script type="text/javascript" src="http://cdn.staticfile.org/bootbox.js/4.3.0/bootbox.min.js"></script>
 <script type="text/javascript">
-    var pan = '<li><a class="tarmain" href="{:U(CONTROLLER_NAME.'/index')}">{:L($Think.CONTROLLER_NAME)}</a></li>\n\
+    var pan = '<li><a onclick="load(event,this)" href="{:U(CONTROLLER_NAME.'/index')}">{:L('M_'.$Think.CONTROLLER_NAME.'_INDEX')}</a></li>\n\
 <li class="active">{:L($Think.ACTION_NAME)}</li>';
     $('#breadcrumbs .breadcrumb li:gt(0)').remove();
     $('#breadcrumbs .breadcrumb').append(pan);
     $('.page-header h1').empty();
-    $('.page-header h1').append('{:L($Think.CONTROLLER_NAME)}<small class="glyphicon glyphicon-chevron-right"> {:L($Think.ACTION_NAME)}</small>');
-    $('a.tarmain').click(function(e){
-        $.ajax({
-            type:'get',
-            url:$(this).attr('href'),
-            global:true,
-            success:function(data){
-                if($.isPlainObject(data)){
-                    show_msg(data);
-                }else{
-                    $('#new_content').html(data);
-                }
-            }
-        });
-        e.preventDefault();
-    });
+    $('.page-header h1').append('{:L('M_'.$Think.CONTROLLER_NAME.'_INDEX')}<small class="glyphicon glyphicon-chevron-right"> {:L($Think.ACTION_NAME)}</small>');
     $('form[role="form"]').validator({
         rules:{
             realname:[/^[\u0391-\uFFE5\w ]+$/, "{:L('JS_INPUT_INFO')}"],
@@ -340,7 +326,16 @@
         $('#icon-all li').click(function(){
             var icocss = $(this).find('span').attr('class');
             $('#bootbox-options span').removeAttr('class').addClass(icocss);
-//            bootbox.setDefaults('show',false);
+            $('input[name="icon"]').val(icocss);
+            $('.bootbox').modal('hide');
+            $('#clearico').remove();
+            $('#bootbox-options').after('<button id="clearico" class="btn btn-warning btn-sm ml10" type="button">清除图标</button>');
+            $('#clearico').click(function(){
+                $('#bootbox-options span').attr('class','');
+                $('input[name="icon"]').val('');
+                $('#clearico').remove();
+            });
         });
+        
     });
 </script>
