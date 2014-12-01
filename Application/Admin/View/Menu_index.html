@@ -22,9 +22,16 @@
 <li class="active">{:L($Think.ACTION_NAME)}</li>';
     $('#breadcrumbs .breadcrumb li:gt(0)').remove();
     $('#breadcrumbs .breadcrumb').append(pan);
+    $('input[name^="listorder"]').keydown(function(e){
+        var code = parseInt(e.keyCode);
+        if(code >= 96 && code <= 105 || code >= 48 && code <= 57 || code == 8 || code == 46){
+            return true;
+        }else{
+            return false;
+        }
+    });
     $('.page-header h1').empty();
     $('.page-header h1').append('{:L('M_'.$Think.CONTROLLER_NAME.'_'.$Think.ACTION_NAME)}<small class="glyphicon glyphicon-chevron-right"> {:L($Think.ACTION_NAME)}</small>');
-    $('input[name="listorder"]').click(function(){
-        return false;
-    });
+    $('input[name^="listorder"]').click(function(){return false;});
+    $('#menu-tree button').click(function(){return false;});
 </script>

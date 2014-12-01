@@ -16,18 +16,36 @@ class MenuController extends AdminController{
             if($pcount > 0){
                 $treestr .= '<div class="tree-folder"> <div class="tree-folder-header"> ';
                 $treestr .= '<i class="glyphicon glyphicon-chevron-right"></i> ';
-                $treestr .= '<div class="tree-folder-name"> ';
-                $treestr .= $icon.L($item['name']).'</div><input type="text" name="listorder" value="'.$item['listorder'].'"/>';
+                $treestr .= '<div class="tree-folder-name"> '.$icon.L($item['name']);
+                $treestr .= '</div><button class="btn btn-danger btn-minier pull-right mr10" type="button">';
+                $treestr .= '<span class="glyphicon glyphicon-trash"></span>删除</button>';
+                $treestr .= '<button class="btn btn-success btn-minier pull-right mr10" type="button">';
+                $treestr .= '<span class="glyphicon glyphicon-edit"></span>编辑</button>';
+                $treestr .= '<button class="btn btn-primary btn-minier pull-right mr10" type="button">';
+                $treestr .= '<span class="glyphicon glyphicon-plus"></span>添加子菜单</button>';
+                $treestr .= '<input type="text" maxlength="3" name="listorder['.$item['id'].']" value="'.$item['listorder'].'"/>';
                 $treestr .= '</div><div class="tree-folder-content hide">';
                 foreach ($cmenu as $val){
                     $cicon = $val['icon'] ? '<span class="'.$val['icon'].'"></span> ' : '';
                     $treestr .= '<div class="tree-item"><div class="tree-item-name">'.$cicon.L($val['name']).'</div>';
-                    $treestr .= '<input type="text" name="listorder" value="'.$val['listorder'].'"/></div>';
+                    $treestr .= '<button class="btn btn-danger btn-minier pull-right mr10" type="button">';
+                    $treestr .= '<span class="glyphicon glyphicon-trash"></span>删除</button>';
+                    $treestr .= '<button class="btn btn-success btn-minier pull-right mr10" type="button">';
+                    $treestr .= '<span class="glyphicon glyphicon-edit"></span>编辑</button>';
+                    $treestr .= '<button class="btn btn-primary btn-minier pull-right mr10" type="button">';
+                    $treestr .= '<span class="glyphicon glyphicon-plus"></span>添加子菜单</button>';
+                    $treestr .= '<input type="text" name="listorder['.$val['id'].']" maxlength="3" value="'.$val['listorder'].'"/></div>';
                 }
                 $treestr .= '</div></div>';
             }elseif($pcount == 0 && $item['pid']==0){
                 $treestr .= '<div class="tree-item"><div class="tree-item-name">'.$icon.L($item['name']).'</div>';
-                $treestr .= '<input type="text" name="listorder" value="'.$item['listorder'].'"/></div>';
+                $treestr .= '<button class="btn btn-danger btn-minier pull-right mr10" type="button">';
+                $treestr .= '<span class="glyphicon glyphicon-trash"></span>删除</button>';
+                $treestr .= '<button class="btn btn-success btn-minier pull-right mr10" type="button">';
+                $treestr .= '<span class="glyphicon glyphicon-edit"></span>编辑</button>';
+                $treestr .= '<button class="btn btn-primary btn-minier pull-right mr10" type="button">';
+                $treestr .= '<span class="glyphicon glyphicon-plus"></span>添加子菜单</button>';
+                $treestr .= '<input type="text" name="listorder['.$item['id'].']" maxlength="3" value="'.$item['listorder'].'"/></div>';
             }
         }
         $this->assign('mtree', $treestr);
