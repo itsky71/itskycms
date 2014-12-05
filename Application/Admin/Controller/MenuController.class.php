@@ -13,11 +13,15 @@ class MenuController extends AdminController{
         foreach ($allmenu as $value){
             $value['status'] = $value['status'] ? '<span class="green">启用</span>' : '<span class="red">禁用</span>';
             $value['name'] = $value['icon'] ? '<span class="'.$value['icon'].'"></span> '.L($value['name']) : L($value['name']);
+            $value['oper'] = '<a class="btn btn-primary btn-minier" href="'.U('Menu/add',array('id'=>$value['id'])).'" onclick="load(event,this)"><span class="glyphicon glyphicon-plus"></span></a> ';
+            $value['oper'] .= '<a class="btn btn-success btn-minier" href="'.U('Menu/edit',array('id'=>$value['id'])).'" onclick="load(event,this)"><span class="glyphicon glyphicon-edit"></span></a> ';
+            $value['oper'] .= '<a class="btn btn-danger btn-minier" href="'.U('Menu/del',array('id'=>$value['id'])).'" onclick="del(event,this,\'p\')"> <span class="glyphicon glyphicon-trash"></span> </a> ';
             $narr[] = $value;
         }
         $tree = new \Common\Lib\Tree($narr);
         $str = "<tr><td class='center'><input type='text' maxlength='3' name='listorder[\$id]' value='\$listorder'/></td>";
-        $str .= "<td class='center'>\$id</td><td>\$spacer \$name</td><td>\$model</td><td>\$action</td><td>\$status</td><td>status</td></tr>";
+        $str .= "<td class='center'>\$id</td><td>\$spacer \$name</td><td>\$model</td><td>\$action</td>";
+        $str .= "<td class='center'>\$status</td><td class='center'>\$oper</td></tr>";
         $this->assign('mtree', $tree->get_tree(0, $str));
         $this->display();
     }

@@ -86,7 +86,7 @@ function load(e,t){
         }
     });
 }
-//bootbox.setDefaults("locale", "zh_CN");//{$Think.LANG_SET}
+bootbox.setDefaults("locale", "zh_CN");//{$Think.LANG_SET}
 //删除记录
 function del(e,t,a){
     if(a == 'c'){
@@ -107,7 +107,7 @@ function del(e,t,a){
             }
         });
     }else if(a == 'p'){
-        bootbox.confirm('确定要删除吗?包括该栏目及其所有子栏目都将被删除。',function(result){
+        bootbox.confirm('<span class="glyphicon glyphicon-question-sign yellow"></span> 确定要删除该栏目及其所有子栏目吗?',function(result){
             if(result){
                 $.ajax({
                     type:'get',
@@ -124,4 +124,5 @@ function del(e,t,a){
             }
         });
     }
+    $('.bootbox .modal-footer .btn').addClass('btn-sm');
 }
