@@ -97,4 +97,26 @@ class PublicController extends Controller {
             $this->error(L('ALREADY_OUT'));
         }
     }
+
+    /**
+     * 验证菜单
+     */
+    public function checkAction(){
+        if(IS_AJAX && IS_POST){
+            $Menu = D('Menu');
+            $map = array(
+                'model' => ucfirst(I('post.model')),
+                'action' => I('post.action') ? strtolower(I('post.action')) : 'index'
+            );
+            if(I('post.id')){
+                $map['id'] = array('neq',I('post.id'));
+            }
+            $res = $Menu->where($map)->find();
+            if($res){
+                echo json_encode(array('error'=>L('ACTIONU')));
+            }
+        }else{
+            $this->error(L('_ERROR_ACTION_'));
+        }
+    }
 }

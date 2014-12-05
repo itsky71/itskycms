@@ -13,5 +13,6 @@ return array(
     'JUMP_INFO'     =>  '正在跳转，请稍后...',
     'CHECK_INFO'    =>  '请填写用户名或者邮箱',
     'USER_STOP'     =>  '用户被禁用',
-    'ALREADY_OUT'   =>  '已经登出'
+    'ALREADY_OUT'   =>  '已经登出',
+    'ACTIONU'       =>  '该模块下方法已存在！'
 );

@@ -2,8 +2,9 @@
 /*---------common---------*/
 .green{color:#69aa46}.red{color:#dd5a43}.white{color:#fff}.blue{color:#478fca}
 button.btn:active{position:relative;top:1px;left:1px;}
-.ml10{margin-left: 10px;}.pt10{padding-top: 10px;}.pt5{padding-top: 5px}.dib{display: inline-block}
-.mr10{margin-right: 10px;}
+.mb0{margin-bottom: 0}.ml10{margin-left: 10px;}.pl0{padding-left: 0}.pl10{padding-left: 10px}.pt10{padding-top: 10px;}
+.pt5{padding-top: 5px}.dib{display: inline-block}.mr10{margin-right: 10px;}.w60{width: 60px}.w180{width: 180px}.w225{width: 225px}
+.blblue{border-left:1px solid #9acfea}.f14{font-size: 14px}
 /*select{cursor: pointer;}*/
 /*---------Public_login---------*/
 #Public_login{
@@ -203,30 +204,13 @@ button.btn:active{position:relative;top:1px;left:1px;}
 .n-red .n-tip .n-icon{display:none}
 
 /*  menu_tree  */
-#menu-tree{
-    background: url(../img/tree_bg.gif) repeat;
-    font-size: 120%;
-}
-#menu-tree .glyphicon-chevron-right{
-    top:2px;
-}
 #menu-tree input[name^="listorder"]{
     width: 50px;
     height: 21px;
     line-height: 21px;
-    float: right;
     padding: 0 3px;
-    margin-right: 10px;
 }
-#menu-tree.tree .tree-folder .tree-folder-header:hover,#menu-tree.tree .tree-item:hover{
-    background-color: #DDD;
-}
-.rota60{
-    transform: rotate(60deg);
-}
-.add-menu{
-    margin: 5px 12px 0 0;
-}
+
 /*  icon-all  */
 .bootbox-body #icon-all{
     cursor: default;

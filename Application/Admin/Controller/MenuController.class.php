@@ -7,52 +7,23 @@
 namespace Admin\Controller;
 class MenuController extends AdminController{
     public function index() {
+        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
         $Menu = D('Menu');
         $allmenu = $Menu->order('listorder,id')->select();
-        foreach ($allmenu as $item){
-            $pcount = $Menu->where('pid='.$item['id'])->count();
-            $cmenu = $Menu->where('pid='.$item['id'])->order('listorder,id')->select();
-            $icon = $item['icon'] ? '<span class="'.$item['icon'].'"></span> ' : '';
-            if($pcount > 0){
-                $treestr .= '<div class="tree-folder"> <div class="tree-folder-header"> ';
-                $treestr .= '<i class="glyphicon glyphicon-chevron-right"></i> ';
-                $treestr .= '<div class="tree-folder-name"> '.$icon.L($item['name']);
-                $treestr .= '</div><button class="btn btn-danger btn-minier pull-right mr10" type="button">';
-                $treestr .= '<span class="glyphicon glyphicon-trash"></span>删除</button>';
-                $treestr .= '<button class="btn btn-success btn-minier pull-right mr10" type="button">';
-                $treestr .= '<span class="glyphicon glyphicon-edit"></span>编辑</button>';
-                $treestr .= '<button class="btn btn-primary btn-minier pull-right mr10" type="button">';
-                $treestr .= '<span class="glyphicon glyphicon-plus"></span>添加子菜单</button>';
-                $treestr .= '<input type="text" maxlength="3" name="listorder['.$item['id'].']" value="'.$item['listorder'].'"/>';
-                $treestr .= '</div><div class="tree-folder-content hide">';
-                foreach ($cmenu as $val){
-                    $cicon = $val['icon'] ? '<span class="'.$val['icon'].'"></span> ' : '';
-                    $treestr .= '<div class="tree-item"><div class="tree-item-name">'.$cicon.L($val['name']).'</div>';
-                    $treestr .= '<button class="btn btn-danger btn-minier pull-right mr10" type="button">';
-                    $treestr .= '<span class="glyphicon glyphicon-trash"></span>删除</button>';
-                    $treestr .= '<button class="btn btn-success btn-minier pull-right mr10" type="button">';
-                    $treestr .= '<span class="glyphicon glyphicon-edit"></span>编辑</button>';
-                    $treestr .= '<button class="btn btn-primary btn-minier pull-right mr10" type="button">';
-                    $treestr .= '<span class="glyphicon glyphicon-plus"></span>添加子菜单</button>';
-                    $treestr .= '<input type="text" name="listorder['.$val['id'].']" maxlength="3" value="'.$val['listorder'].'"/></div>';
-                }
-                $treestr .= '</div></div>';
-            }elseif($pcount == 0 && $item['pid']==0){
-                $treestr .= '<div class="tree-item"><div class="tree-item-name">'.$icon.L($item['name']).'</div>';
-                $treestr .= '<button class="btn btn-danger btn-minier pull-right mr10" type="button">';
-                $treestr .= '<span class="glyphicon glyphicon-trash"></span>删除</button>';
-                $treestr .= '<button class="btn btn-success btn-minier pull-right mr10" type="button">';
-                $treestr .= '<span class="glyphicon glyphicon-edit"></span>编辑</button>';
-                $treestr .= '<button class="btn btn-primary btn-minier pull-right mr10" type="button">';
-                $treestr .= '<span class="glyphicon glyphicon-plus"></span>添加子菜单</button>';
-                $treestr .= '<input type="text" name="listorder['.$item['id'].']" maxlength="3" value="'.$item['listorder'].'"/></div>';
-            }
+        foreach ($allmenu as $value){
+            $value['status'] = $value['status'] ? '<span class="green">启用</span>' : '<span class="red">禁用</span>';
+            $value['name'] = $value['icon'] ? '<span class="'.$value['icon'].'"></span> '.L($value['name']) : L($value['name']);
+            $narr[] = $value;
         }
-        $this->assign('mtree', $treestr);
+        $tree = new \Common\Lib\Tree($narr);
+        $str = "<tr><td class='center'><input type='text' maxlength='3' name='listorder[\$id]' value='\$listorder'/></td>";
+        $str .= "<td class='center'>\$id</td><td>\$spacer \$name</td><td>\$model</td><td>\$action</td><td>\$status</td><td>status</td></tr>";
+        $this->assign('mtree', $tree->get_tree(0, $str));
         $this->display();
     }
 
     public function add(){
+        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
         $Menu = D('Menu');
         if(IS_POST){
             if($Menu->create()){
@@ -78,30 +49,71 @@ class MenuController extends AdminController{
                 $this->error($Menu->getError());
             }
         }else{
+            $map = $Menu->where('status=1')->order('listorder,id')->select();
+            foreach ($map as $r){
+                $r['name'] = L($r['name']);
+                $newmap[] = $r;
+            }
+            $tree = new \Common\Lib\Tree($newmap);
+            $str  = "<option value='\$id' \$selected>\$spacer\$name</option>";
+            $this->assign('map', $tree->get_tree(0, $str));
+            $this->display('edit');
+        }
+    }
+
+    public function edit(){
+        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        $Menu = D('Menu');
+        if(IS_GET){
+            $vo = $Menu->where('id='.I('get.id'))->find();
             $map = $Menu->where('status=1')->select();
             foreach ($map as $r){
                 $r['name'] = L($r['name']);
                 $newmap[] = $r;
             }
             $tree = new \Common\Lib\Tree($newmap);
-            $str  = "<option value='\$id' \$selected>\$spacer \$name</option>";
-            $this->assign('map', $tree->get_tree(0, $str));
-            $this->display('edit');
+            $str  = "<option value='\$id' \$selected>\$spacer\$name</option>";
+            $this->assign('map', $tree->get_tree(0, $str, $vo['pid']));
+            $this->assign('vo', $vo);
+            $this->display();
+        }elseif(IS_POST){
+            if($Menu->create()){
+                $data = array(
+                    'pid' => I('post.pid'),
+                    'name' => 'M_'.strtoupper(I('post.model')).'_'.strtoupper(I('post.action') ? I('post.action') : 'index'),
+                    'icon' => I('post.icon'),
+                    'model' => ucfirst(I('post.model')),
+                    'action' => I('post.action') ? strtolower(I('post.action')) : 'index',
+                    'data' => I('post.data'),
+                    'remark' => I('post.remark'),
+                    'status' => I('post.status') ? 1 : 0,
+                    'listorder' => 0
+                );
+                $result = $Menu->where('id='.I('post.id'))->save($data);
+                if($result !== FALSE){
+                    $rname = I('post.realname');
+                    $this->_write_lang(array($data['name']=>$rname[LANG_SET]));
+                    $this->success(L('SAVE_OK'),U('Menu/index'));
+                }else{
+                    $this->error(L('SAVE_ERROR'));
+                }
+            }else{
+                $this->error($Menu->getError());
+            }
         }
     }
-    /**
-     * 验证菜单
-     */
-    public function checkAction(){
-        if(IS_POST){
+
+    public function del(){
+        if(IS_AJAX && IS_GET){
             $Menu = D('Menu');
-            $map = array(
-                'model' => ucfirst(I('post.model')),
-                'action' => I('post.action') ? strtolower(I('post.action')) : 'index'
-            );
-            $res = $Menu->where($map)->find();
-            if($res){
-                echo json_encode(array('error'=>L('ACTIONU')));
+            $alldata = $Menu->order('listorder,id')->select();
+            $allmenu = new \Common\Lib\Tree($alldata);
+            print_r($allmenu->get_all_childids(I('get.id')));exit;
+            $result = $Menu->where('id='.I('get.id'))->delete();
+            if($result !== FALSE){
+                $this->success(L('DEL_OK'),U('Menu/index'));
+            }else{
+                $this->error(L('DEL_ERROR'));
             }
         }else{
             $this->error(L('_ERROR_ACTION_'));

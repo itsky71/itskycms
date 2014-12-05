@@ -40,7 +40,7 @@ class AdminController extends Controller{
      */
     public function add(){
         if(IS_POST){
-            $name = D(CONTROLLER_NAME);
+            $name = M(CONTROLLER_NAME);
             if($name->create()){
                 
             }else{
@@ -48,6 +48,22 @@ class AdminController extends Controller{
             }
         }else{
             $this->display('edit');
+        }
+    }
+    /**
+     * 删除
+     */
+    public function del(){
+        if(IS_AJAX && IS_GET){
+            $name = M(CONTROLLER_NAME);
+            $result = $name->where('id='.I('get.id'))->delete();
+            if($result !== FALSE){
+                $this->success(L('DEL_OK'),U(CONTROLLER_NAME.'/index'));
+            }else{
+                $this->error(L('DEL_ERROR'));
+            }
+        }else{
+            $this->error(L('_ERROR_ACTION_'));
         }
     }
 }

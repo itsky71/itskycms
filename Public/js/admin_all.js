@@ -86,3 +86,42 @@ function load(e,t){
         }
     });
 }
+//bootbox.setDefaults("locale", "zh_CN");//{$Think.LANG_SET}
+//删除记录
+function del(e,t,a){
+    if(a == 'c'){
+        bootbox.confirm('确定要删除吗?',function(result){
+            if(result){
+                $.ajax({
+                    type:'get',
+                    url:$(t).attr('href'),
+                    global:true,
+                    success:function(data){
+                        if($.isPlainObject(data)){
+                            show_msg(data);
+                        }else{
+                            $('#new_content').html(data);
+                        }
+                    }
+                });
+            }
+        });
+    }else if(a == 'p'){
+        bootbox.confirm('确定要删除吗?包括该栏目及其所有子栏目都将被删除。',function(result){
+            if(result){
+                $.ajax({
+                    type:'get',
+                    url:$(t).attr('href'),
+                    global:true,
+                    success:function(data){
+                        if($.isPlainObject(data)){
+                            show_msg(data);
+                        }else{
+                            $('#new_content').html(data);
+                        }
+                    }
+                });
+            }
+        });
+    }
+}

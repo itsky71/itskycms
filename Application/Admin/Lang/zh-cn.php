@@ -21,9 +21,14 @@ $common = array(
     'SET_CONTAINER' =>  '切换窄屏',
     'HOME_INDEX'    =>  '首页',
     'MENU_LOOK'     =>  '查看',
-    'SUBMIT'    =>  '保存',
-    'RESET'     =>  '重置',
-    'DEFAULT'   =>  '默认',
-    'SUCH'      =>  '例'
+    'SUBMIT'        =>  '保存',
+    'RESET'         =>  '重置',
+    'DEFAULT'       =>  '默认',
+    'SUCH'          =>  '例',
+    'INDEX'         =>  '查看',
+    'EDIT'          =>  '编辑',
+    'DELETE'        =>  '删除',
+    'DEL_OK'        =>  '删除成功！',
+    'DEL_ERROR'     =>  '删除失败！'
 );
 return array_merge($common, $menu_common);

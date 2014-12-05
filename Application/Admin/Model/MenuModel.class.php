@@ -33,6 +33,9 @@ class MenuModel extends Model{
             'model' => ucfirst(I('post.model')),
             'action' => I('post.action') ? strtolower(I('post.action')) : 'index'
         );
+        if(I('post.id')){
+            $map['id'] = array('neq',I('post.id'));
+        }
         $result = $this->where($map)->find();
         return $result ? FALSE : TRUE;
     }
