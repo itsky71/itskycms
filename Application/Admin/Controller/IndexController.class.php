@@ -6,12 +6,21 @@
  */
 namespace Admin\Controller;
 class IndexController extends AdminController {
-//    public function index(){
-//        $crypt = new \Think\Crypt();
-//        echo $crypt->decrypt(cookie('user'),C('DATA_AUTH_KEY')).'<br/>';
-//        echo session('username');
-//        $this->display();
-//    }
+    public function index(){
+        $Menu = M('Menu');
+        $indexchild = $Menu->where('pid=1')->order('listorder,id')->select();
+        $index = $Menu->where('id=1')->find();
+        $list = $Menu->where('id<>1 AND pid<>1')->order('listorder,id')->select();
+        foreach ($list as $item){
+            $item['name'] = L($item['name']);
+            $newarr[] = $item;
+        }
+        $tree = new \Common\Lib\Tree($newarr);
+        $this->assign('indexchild', $indexchild);
+        $this->assign('index', $index);
+        $this->assign('list', $tree->get_treeview(0));
+        $this->display();
+    }
     //个人信息
     public function profile(){
         if(IS_POST){

@@ -54,12 +54,14 @@ $(function(){
 
 //弹出提示信息
 function show_msg(data){
-    if(data.status===0){
-        $('#msg_modal .alert').addClass('alert-warning');
-        $('#msg_modal .glyphicon').addClass('glyphicon-warning-sign');
-    }else if(data.status===1){
+    $('#msg_modal .alert').removeClass('alert-warning').removeClass('alert-success');
+    $('#msg_modal .glyphicon').removeClass('glyphicon-warning-sign').removeClass('glyphicon-ok');
+    if(data.status == 1){
         $('#msg_modal .alert').addClass('alert-success');
         $('#msg_modal .glyphicon').addClass('glyphicon-ok');
+    }else if(data.status == 0){
+        $('#msg_modal .alert').addClass('alert-warning');
+        $('#msg_modal .glyphicon').addClass('glyphicon-warning-sign');
     }
     $('#msg_modal .info').text(data.info);
     $('#msg_modal').modal('show');
@@ -86,9 +88,9 @@ function load(e,t){
         }
     });
 }
-bootbox.setDefaults("locale", "zh_CN");//{$Think.LANG_SET}
 //删除记录
 function del(e,t,a){
+    e.preventDefault();
     if(a == 'c'){
         bootbox.confirm('确定要删除吗?',function(result){
             if(result){
@@ -125,4 +127,5 @@ function del(e,t,a){
         });
     }
     $('.bootbox .modal-footer .btn').addClass('btn-sm');
+    $('.bootbox .modal-dialog').addClass('modal-sm');
 }

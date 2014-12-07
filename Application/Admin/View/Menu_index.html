@@ -1,46 +1,36 @@
 <div class="col-sm-12">
+    <a class="btn btn-primary btn-xs ml10 mb10" href="{:U('Menu/add')}" onclick="load(event,this)">
+        <span class="glyphicon glyphicon-plus"></span>添加菜单
+    </a>
     <div class="table-responsive">
-        <table id="menu-tree" class="table table-striped table-hover">
-            <thead>
-                <tr>
-                    <th class="center w60">排序</th>
-                    <th class="center w60">编号</th>
-                    <th>菜单名称</th>
-                    <th>模块</th>
-                    <th>方法</th>
-                    <th class="center">状态</th>
-                    <th class="center">操作</th>
-                </tr>
-            </thead>
-            <tbody>{$mtree}</tbody>
-        </table>
+        <form autocomplete="off" role="form">
+            <table id="menu-tree" class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th class="center w60">排序</th>
+                        <th class="center w60">编号</th>
+                        <th>菜单名称</th>
+                        <th>模块</th>
+                        <th>方法</th>
+                        <th class="center">状态</th>
+                        <th class="center">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {$mtree}
+                    <tr>
+                        <td class="center">
+                            <button class="btn btn-primary btn-xs" type="submit">排序</button>
+                        </td>
+                        <td colspan="6">&ensp;</td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
     </div>
-<!--    <div class="widget-box">
-        <div class="widget-header header-color-green">
-            <h4 class="lighter smaller">{:L('MENU_LIST')}</h4>
-            <a class="pull-right btn btn-xs btn-primary add-menu" onclick="load(event,this)" href="{:U('Menu/add')}">
-                <span class="glyphicon glyphicon-plus"></span>添加菜单
-            </a>
-        </div>
-        <div class="widget-body">
-            <div class="widget-main padding-8">
-                <div class="alert alert-info menu-top">
-                    <div class="menu-name">菜单名称</div>
-                    <div class="pull-right text-center w225 blblue">操作</div>
-                    <div class="pull-right text-center w60 blblue">排序</div>
-                    <div class="pull-right w180 blblue pl10">方法</div>
-                    <div class="pull-right w180 blblue pl10">模块</div>
-                </div>
-                <div id="menu-tree" class="tree">{$mtree}</div>
-            </div>
-        </div>-->
     </div>
 </div>
 <script type="text/javascript">
-    $('#menu-tree .tree-folder-header').click(function(){
-        $(this).find(' + .tree-folder-content').toggleClass('hide');
-        $(this).find(' > .glyphicon-chevron-right').toggleClass('rota60');
-    });
     var pan = '<li><a onclick="load(event,this)" href="{:U(CONTROLLER_NAME.'/'.ACTION_NAME)}">{:L('M_'.$Think.CONTROLLER_NAME.'_'.$Think.ACTION_NAME)}</a></li>\n\
 <li class="active">{:L($Think.ACTION_NAME)}</li>';
     $('#breadcrumbs .breadcrumb li:gt(0)').remove();
@@ -55,7 +45,17 @@
     });
     $('.page-header h1').empty();
     $('.page-header h1').append('{:L('M_'.$Think.CONTROLLER_NAME.'_'.$Think.ACTION_NAME)}<small class="glyphicon glyphicon-chevron-right"> {:L($Think.ACTION_NAME)}</small>');
-    $('input[name^="listorder"]').click(function(){return false;});
-    $('#menu-tree button').click(function(){return false;});
-    $('#menu-tree a').click(function(){return false;});
+    $('input[name^="listorder"]').click(function(){$(this).select();});
+    $('form[role="form"]').validator({
+        valid:function(form){
+            $.ajax({
+                type: 'POST',
+                url:'{:U('Menu/order')}',
+                data:$(form).serialize(),
+                success:function(data){
+                    show_msg(data);
+                }
+            });
+        }
+    });
 </script>

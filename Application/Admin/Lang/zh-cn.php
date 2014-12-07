@@ -29,6 +29,8 @@ $common = array(
     'EDIT'          =>  '编辑',
     'DELETE'        =>  '删除',
     'DEL_OK'        =>  '删除成功！',
-    'DEL_ERROR'     =>  '删除失败！'
+    'DEL_ERROR'     =>  '删除失败！',
+    'ORDER_OK'      =>  '排序成功！',
+    'STATUS_ERROR'  =>  '状态设置失败！'
 );
 return array_merge($common, $menu_common);

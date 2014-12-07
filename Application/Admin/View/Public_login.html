@@ -1,11 +1,11 @@
 <extend name="Common/base"/>
 <block name="cssjs">
-<link rel="stylesheet" type="text/css" href="http://libs.useso.com/js/bootstrap/3.2.0/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="http://libs.useso.com/js/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
+<link rel="stylesheet" type="text/css" href="http://cdn.staticfile.org/twitter-bootstrap/3.2.0/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="http://cdn.staticfile.org/twitter-bootstrap/3.2.0/css/bootstrap-theme.min.css" />
 <import type="css" file="validator.jquery#validator"/>
 <import type="css" file="css.admin_all"/>
-<script type="text/javascript" src="http://libs.useso.com/js/jquery/1.8.3/jquery.min.js"></script>
-<script type="text/javascript" src="http://libs.useso.com/js/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://cdn.staticfile.org/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="http://cdn.staticfile.org/twitter-bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <import type="js" file="validator.jquery#validator"/>
 <import type="js" file="validator.local.{:LANG_SET}"/>
 <import type="js" file="js.admin_all"/>
@@ -27,7 +27,7 @@
                     <span class="glyphicon glyphicon-road green"></span>
                     {:L('INPUT_INFO')}
                 </h4>
-                <form id="admin_login">
+                <form id="admin_login" autocomplete="off">
                     <label class="login_input">
                         <input type="text" name="username" placeholder="{:L('LOGIN_ACCOUNT')}"/>
                         <span class="glyphicon glyphicon-user"></span>

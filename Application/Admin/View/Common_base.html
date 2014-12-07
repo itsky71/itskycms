@@ -27,6 +27,10 @@
 <import type="js" file="validator.jquery#validator"/>
 <import type="js" file="validator.local.{:LANG_SET}"/>
 <import type="js" file="js.admin_all"/>
+<script type="text/javascript">
+    var lang = '{$Think.cookie.think_language|lang}';
+    bootbox.setDefaults("locale", lang);
+</script>
 </block>
 </head>
 <body id="{$Think.CONTROLLER_NAME}_{$Think.ACTION_NAME}">
@@ -235,16 +239,13 @@
                         <span class="glyphicon glyphicon-chevron-down"></span>
                     </a>
                     <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                        <foreach name="indexchild" item="vo">
                         <li>
-                            <a href="#">
-                                <span class="glyphicon glyphicon-cog"></span>{:L('M_INDEX_SET')}
+                            <a class="tarmain" href="{:U($vo['model'].'/'.$vo['action'])}">
+                                <span class="{$vo.icon}"></span>{:L($vo['name'])}
                             </a>
                         </li>
-                        <li>
-                            <a class="tarmain" href="{:U('Index/profile')}">
-                                <span class="glyphicon glyphicon-user"></span>{:L('M_INDEX_PROFILE')}
-                            </a>
-                        </li>
+                        </foreach>
                         <li class="divider"></li>
                         <li>
                             <a href="{:U('Public/logout')}">
@@ -296,8 +297,8 @@
                 <block name="nav">
                 <li class="active">
                     <a class="noa" href="{:U('Index/index')}">
-                        <span class="glyphicon glyphicon-dashboard"></span>
-                        <span class="menu-text">{:L('M_INDEX_INDEX')}</span>
+                        <span class="{$index.icon}"></span>
+                        <span class="menu-text">{:L($index['name'])}</span>
                     </a>
                 </li>
                 <li>
@@ -443,6 +444,7 @@
                 </li>
                 </block>
             </ul>
+            {$list}
             <div id="sidebar-collapse" class="sidebar-collapse">
                 <span class="glyphicon glyphicon-backward" data-icon2="glyphicon glyphicon-forward" data-icon1="glyphicon glyphicon-backward"></span>
             </div>

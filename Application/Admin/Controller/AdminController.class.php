@@ -66,4 +66,36 @@ class AdminController extends Controller{
             $this->error(L('_ERROR_ACTION_'));
         }
     }
+    /**
+     * 排序
+     */
+    public function order(){
+        if(IS_AJAX && IS_POST){
+            $name = M(CONTROLLER_NAME);
+            foreach (I('post.listorder') as $key => $value){
+                $data['listorder'] = $value;
+                $name->where('id='.$key)->save($data);
+            }
+            $this->success(L('ORDER_OK'), U(CONTROLLER_NAME.'/index'));
+        }else{
+            $this->error(L('_ERROR_ACTION_'));
+        }
+    }
+    /**
+     * 状态
+     */
+    public function status(){
+        if(IS_AJAX && IS_GET){
+            $name = M(CONTROLLER_NAME);
+            $data['status'] = I('get.status') ? 0 : 1;
+            $result = $name->where('id='.I('get.id'))->save($data);
+            if($result !== FALSE){
+                $this->redirect(CONTROLLER_NAME.'/index');
+            }else{
+                $this->error(L('STATUS_ERROR'));
+            }
+        }else{
+            $this->error(L('_ERROR_ACTION_'));
+        }
+    }
 }

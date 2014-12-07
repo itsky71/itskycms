@@ -60,3 +60,17 @@ function read_file($file){
     fclose($fp);
     return $data;
 }
+/**
+ * 转换语言标识符
+ * @param string $lang 系统语言标识符
+ * @return string
+ */
+function lang($lang){
+    $larr = explode('-', $lang);
+    if(count($larr) == 2){
+        $lstr = $larr[0].'_'.strtoupper($larr[1]);
+    }else{
+        $lstr = $lang;
+    }
+    return $lstr;
+}

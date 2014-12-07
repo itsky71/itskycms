@@ -22,5 +22,6 @@ return array(
     'SEL_ICON'      =>  '选择图标',
     'CLE_ICON'      =>  '清除图标',
     'SAVE_OK'       =>  '保存成功！',
-    'SAVE_ERROR'    =>  '保存失败！'
+    'SAVE_ERROR'    =>  '保存失败！',
+    'ISOS_ERROR'    =>  '该栏目或其子栏目包含系统栏目，无法删除！'
 );

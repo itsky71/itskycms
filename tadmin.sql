@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2014-11-20 16:08:27
+-- Generation Time: 2014-12-07 11:08:40
 -- 服务器版本： 5.6.20
 -- PHP Version: 5.5.15
 
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `ta_auth_group` (
 
 INSERT INTO `ta_auth_group` (`id`, `title`, `status`, `rules`) VALUES
 (1, '超级管理员', 1, ''),
-(2, '普通管理员', 1, '1,2,3,4,5'),
+(2, '普通管理员', 1, '1,2,3,4,5,6,7,8'),
 (3, '注册用户', 1, '1');
 
 -- --------------------------------------------------------
@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `ta_auth_rule` (
   `type` tinyint(1) NOT NULL DEFAULT '1',
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '状态：为1正常，为0禁用',
   `condition` char(100) NOT NULL DEFAULT '' COMMENT '规则表达式，为空表示存在就验证，不为空表示按照条件验证'
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='规则表' AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='规则表' AUTO_INCREMENT=9 ;
 
 --
 -- 转存表中的数据 `ta_auth_rule`
@@ -85,7 +85,10 @@ INSERT INTO `ta_auth_rule` (`id`, `name`, `title`, `type`, `status`, `condition`
 (2, 'Index/profile', '个人资料', 1, 1, ''),
 (3, 'Menu/index', '后台菜单', 1, 1, ''),
 (4, 'Menu/add', '添加菜单', 1, 1, ''),
-(5, 'Menu/checkAction', '菜单验证', 1, 1, '');
+(5, 'Menu/edit', '编辑菜单', 1, 1, ''),
+(6, 'Menu/del', '删除菜单', 1, 1, ''),
+(7, 'Menu/order', '菜单排序', 1, 1, ''),
+(8, 'Menu/status', '菜单状态', 1, 1, '');
 
 -- --------------------------------------------------------
 
@@ -112,8 +115,8 @@ CREATE TABLE IF NOT EXISTS `ta_member` (
 --
 
 INSERT INTO `ta_member` (`id`, `password`, `username`, `realname`, `email`, `question`, `answer`, `status`, `login_ip`, `last_login_time`, `login_count`) VALUES
-(1, '30bc103d85df152c8c703bcbbcc7fd4d', 'admin', '你买单我就来', 'itsky71@foxmail.com', '我还会回来的...', '灰太狼？呵呵。。。', 1, '172.21.176.4', 1416115115, 25),
-(2, '30bc103d85df152c8c703bcbbcc7fd4d', 'itsky', '你地盘我做主', 'zmh0515005@163.com', '你是谁?', 'abc', 1, '127.0.0.1', 1416487541, 28);
+(1, '30bc103d85df152c8c703bcbbcc7fd4d', 'admin', '你买单我就来', 'itsky71@foxmail.com', '我还会回来的...', '灰太狼？呵呵。。。', 1, '127.0.0.1', 1417265786, 26),
+(2, '30bc103d85df152c8c703bcbbcc7fd4d', 'itsky', '你地盘我做主', 'zmh0515005@163.com', '你是谁?', 'abc111', 1, '127.0.0.1', 1417920816, 38);
 
 -- --------------------------------------------------------
 
@@ -124,28 +127,39 @@ INSERT INTO `ta_member` (`id`, `password`, `username`, `realname`, `email`, `que
 CREATE TABLE IF NOT EXISTS `ta_menu` (
 `id` smallint(5) unsigned NOT NULL,
   `pid` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '父ID',
-  `icon` varchar(15) NOT NULL DEFAULT '' COMMENT '图标',
+  `icon` varchar(50) NOT NULL DEFAULT '' COMMENT '图标',
   `name` varchar(20) NOT NULL COMMENT '语言标识',
   `model` varchar(20) NOT NULL COMMENT '模块',
   `action` varchar(20) NOT NULL COMMENT '方法',
   `data` varchar(50) NOT NULL COMMENT '参数',
   `remark` varchar(100) NOT NULL COMMENT '备注',
+  `isos` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否为系统菜单',
   `status` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '状态',
-  `listorder` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '排序'
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='后台菜单' AUTO_INCREMENT=8 ;
+  `listorder` smallint(5) unsigned NOT NULL DEFAULT '99' COMMENT '排序'
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='后台菜单' AUTO_INCREMENT=18 ;
 
 --
 -- 转存表中的数据 `ta_menu`
 --
 
-INSERT INTO `ta_menu` (`id`, `pid`, `icon`, `name`, `model`, `action`, `data`, `remark`, `status`, `listorder`) VALUES
-(1, 0, '', 'M_INDEX_INDEX', 'Index', 'index', '', '', 1, 0),
-(2, 1, '', 'M_INDEX_SET', 'Index', 'set', '', '', 1, 0),
-(3, 1, '', 'M_INDEX_PROFILE', 'Index', 'profile', '', '', 1, 0),
-(4, 0, '', 'M_OSCONFIG_INDEX', 'Osconfig', 'index', '', '', 1, 0),
-(5, 4, '', 'M_SITECONFIG_INDEX', 'Siteconfig', 'index', '', '', 1, 0),
-(6, 4, '', 'M_POSID_INDEX', 'Posid', 'index', '', '', 1, 0),
-(7, 0, '', 'M_CONFIG_INDEX', 'Config', 'index', '', '', 1, 0);
+INSERT INTO `ta_menu` (`id`, `pid`, `icon`, `name`, `model`, `action`, `data`, `remark`, `isos`, `status`, `listorder`) VALUES
+(1, 0, 'glyphicon glyphicon-dashboard', 'M_INDEX_INDEX', 'Index', 'index', '', '', 1, 1, 0),
+(3, 1, 'glyphicon glyphicon-user', 'M_INDEX_PROFILE', 'Index', 'profile', '', '', 1, 1, 0),
+(2, 1, 'glyphicon glyphicon-cog', 'M_INDEX_SET', 'Index', 'set', '', '', 1, 1, 0),
+(4, 0, 'glyphicon glyphicon-cog', 'M_OSSET_INDEX', 'Osset', 'index', '', '', 1, 1, 0),
+(5, 4, '', 'M_SITESET_INDEX', 'Siteset', 'index', '', '', 1, 1, 0),
+(6, 5, 'glyphicon glyphicon-eye-open', 'M_SITESET_SEO', 'Siteset', 'seo', '', '', 1, 1, 0),
+(7, 5, 'glyphicon glyphicon-hdd', 'M_SITESET_OSPRO', 'Siteset', 'ospro', '', '', 1, 1, 0),
+(8, 5, 'glyphicon glyphicon-envelope', 'M_SITESET_OSEMAIL', 'Siteset', 'osemail', '', '', 1, 1, 0),
+(9, 5, 'glyphicon glyphicon-floppy-disk', 'M_SITESET_ATTACH', 'Siteset', 'attach', '', '', 1, 1, 0),
+(10, 5, 'glyphicon glyphicon-user', 'M_SITESET_MEMBER', 'Siteset', 'member', '', '', 1, 1, 0),
+(11, 5, 'glyphicon glyphicon-plus-sign', 'M_SITESET_ADDVAR', 'Siteset', 'addvar', '', '', 1, 1, 0),
+(12, 4, '', 'M_POSID_INDEX', 'Posid', 'index', '', '', 1, 1, 0),
+(13, 4, '', 'M_URLRULE_INDEX', 'Urlrule', 'index', '', '', 1, 1, 0),
+(14, 4, '', 'M_DBSOURCE_INDEX', 'Dbsource', 'index', '', '', 1, 1, 0),
+(15, 4, '', 'M_LANG_INDEX', 'Lang', 'index', '', '', 1, 1, 0),
+(16, 4, '', 'M_TYPE_INDEX', 'Type', 'index', '', '', 1, 1, 0),
+(17, 4, '', 'M_MENU_INDEX', 'Menu', 'index', '', '', 1, 1, 0);
 
 --
 -- Indexes for dumped tables
@@ -194,7 +208,7 @@ MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户组id',
 -- AUTO_INCREMENT for table `ta_auth_rule`
 --
 ALTER TABLE `ta_auth_rule`
-MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=6;
+MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `ta_member`
 --
@@ -204,7 +218,7 @@ MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户ID',AUTO_INC
 -- AUTO_INCREMENT for table `ta_menu`
 --
 ALTER TABLE `ta_menu`
-MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

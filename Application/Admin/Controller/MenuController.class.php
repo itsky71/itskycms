@@ -11,7 +11,10 @@ class MenuController extends AdminController{
         $Menu = D('Menu');
         $allmenu = $Menu->order('listorder,id')->select();
         foreach ($allmenu as $value){
-            $value['status'] = $value['status'] ? '<span class="green">启用</span>' : '<span class="red">禁用</span>';
+            $staop = array('id'=>$value['id'],'status'=>$value['status']);
+            $allow = '<a class="btn btn-success btn-minier" href="'.U('Menu/status',$staop).'" onclick="load(event,this)"><span class="glyphicon glyphicon-ok"></span></a>';
+            $ban = '<a class="btn btn-danger btn-minier" href="'.U('Menu/status',$staop).'" onclick="load(event,this)"><span class="glyphicon glyphicon-ban-circle"></span></a>';
+            $value['status'] = $value['status'] ? $allow : $ban;
             $value['name'] = $value['icon'] ? '<span class="'.$value['icon'].'"></span> '.L($value['name']) : L($value['name']);
             $value['oper'] = '<a class="btn btn-primary btn-minier" href="'.U('Menu/add',array('id'=>$value['id'])).'" onclick="load(event,this)"><span class="glyphicon glyphicon-plus"></span></a> ';
             $value['oper'] .= '<a class="btn btn-success btn-minier" href="'.U('Menu/edit',array('id'=>$value['id'])).'" onclick="load(event,this)"><span class="glyphicon glyphicon-edit"></span></a> ';
@@ -19,7 +22,7 @@ class MenuController extends AdminController{
             $narr[] = $value;
         }
         $tree = new \Common\Lib\Tree($narr);
-        $str = "<tr><td class='center'><input type='text' maxlength='3' name='listorder[\$id]' value='\$listorder'/></td>";
+        $str = "<tr><td class='center'><input type='text' maxlength='3' name='listorder[\$id]' value='\$listorder' data-rule='integer[+0]'/></td>";
         $str .= "<td class='center'>\$id</td><td>\$spacer \$name</td><td>\$model</td><td>\$action</td>";
         $str .= "<td class='center'>\$status</td><td class='center'>\$oper</td></tr>";
         $this->assign('mtree', $tree->get_tree(0, $str));
@@ -40,7 +43,7 @@ class MenuController extends AdminController{
                     'data' => I('post.data'),
                     'remark' => I('post.remark'),
                     'status' => I('post.status') ? 1 : 0,
-                    'listorder' => 0
+                    'listorder' => 99
                 );
                 if($Menu->add($data)){
                     $rname = I('post.realname');
@@ -60,7 +63,8 @@ class MenuController extends AdminController{
             }
             $tree = new \Common\Lib\Tree($newmap);
             $str  = "<option value='\$id' \$selected>\$spacer\$name</option>";
-            $this->assign('map', $tree->get_tree(0, $str));
+            $pid = I('get.id') ? I('get.id') : 0;
+            $this->assign('map', $tree->get_tree(0, $str,$pid));
             $this->display('edit');
         }
     }
@@ -112,8 +116,17 @@ class MenuController extends AdminController{
             $Menu = D('Menu');
             $alldata = $Menu->order('listorder,id')->select();
             $allmenu = new \Common\Lib\Tree($alldata);
-            print_r($allmenu->get_all_childids(I('get.id')));exit;
-            $result = $Menu->where('id='.I('get.id'))->delete();
+            $cids = $allmenu->get_all_childids(I('get.id'));
+            if($cids){
+                $ids = I('get.id').','.implode(',', $cids);
+            }else{
+                $ids = I('get.id');
+            }
+            $isos = $Menu->where('id IN ('.$ids.') AND isos=1')->select();
+            if($isos){
+                $this->error(L('ISOS_ERROR'));
+            }
+            $result = $Menu->where('id IN ('.$ids.')')->delete();
             if($result !== FALSE){
                 $this->success(L('DEL_OK'),U('Menu/index'));
             }else{
