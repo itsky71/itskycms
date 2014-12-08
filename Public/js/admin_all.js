@@ -50,6 +50,9 @@ $(function(){
     $.ajaxSetup({
         global:false
     });
+    //侧栏导航style
+    $('.nav-list li:first').addClass('active');
+    $('.nav-list ul').addClass('submenu');
 });
 
 //弹出提示信息

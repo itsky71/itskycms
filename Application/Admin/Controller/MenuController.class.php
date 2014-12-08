@@ -95,7 +95,7 @@ class MenuController extends AdminController{
                     'data' => I('post.data'),
                     'remark' => I('post.remark'),
                     'status' => I('post.status') ? 1 : 0,
-                    'listorder' => 0
+                    'listorder' => I('post.listorder')
                 );
                 $result = $Menu->where('id='.I('post.id'))->save($data);
                 if($result !== FALSE){

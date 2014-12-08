@@ -25,6 +25,7 @@ class Tree {
      * @access private
      */
     public $ret = '';
+    public $level = 0;
 
     /**
      * 构造函数，初始化类
@@ -237,7 +238,7 @@ class Tree {
      */
     function get_treeview($myid, $effected_id = 'example', $str = "<span class='file'>\$name</span>", $str2 = "<span class='folder'>\$name</span>", $showlevel = 0, $style = 'filetree ', $currentlevel = 1, $recursion = FALSE) {
         $child = $this->get_child($myid);
-        if (!defined('EFFECTED_INIT')) {
+        if (!defined('EFFECTED_INIT') && $effected_id) {
             $effected = ' id="' . $effected_id . '"';
             define('EFFECTED_INIT', 1);
         } else {
@@ -245,14 +246,13 @@ class Tree {
         }
         $placeholder = '<ul><li><span class="placeholder"></span></li></ul>';
         if (!$recursion)
-            $this->str .='<ul' . $effected . '  class="' . $style . '">';
+            $this->str .='<ul' . $effected . ' class="' . $style . '">';
         foreach ($child as $id => $a) {
-
             @extract($a);
             if ($showlevel > 0 && $showlevel == $currentlevel && $this->get_child($id))
                 $folder = 'hasChildren'; //如设置显示层级模式@2011.07.01
             $floder_status = isset($folder) ? ' class="' . $folder . '"' : '';
-            $this->str .= $recursion ? '<ul><li' . $floder_status . ' id=\'' . $id . '\'>' : '<li' . $floder_status . ' id=\'' . $id . '\'>';
+            $this->str .= $recursion ? '<ul><li' . $floder_status . '>' : '<li' . $floder_status . '>';
             $recursion = FALSE;
             if ($this->get_child($id)) {
                 eval("\$nstr = \"$str2\";");
@@ -271,6 +271,45 @@ class Tree {
         if (!$recursion)
             $this->str .='</ul>';
         return $this->str;
+    }
+    /**
+     * 后台导航
+     * @param number $myid 表示获得这个ID下的所有子级
+     * @param string $effected_id id属性值
+     * @param string $style class属性值
+     * @param array $li 显示数组
+     * @param number $maxlevel 显示最大层级数
+     * @param string $childstyle 子级 class属性
+     * @param boolean $recursion 递归使用 外部调用时为FALSE
+     * @param number $level 当前层级
+     * @return string
+     */
+    function get_backnav($myid,$effected_id='navlist',$style='filetree',$li=array(),$maxlevel=0,$childstyle='submenu',$recursion=FALSE,$level=1){
+        $effected = $effected_id ? ' id="'.$effected_id.'"' : '';
+        $class = $style ? ' class="'.$style.'"' : '';
+        $childclass = $childstyle ? ' class="'.$childstyle.'"' : '';
+        $child = $this->get_child($myid);
+        if(!$recursion) $this->ret .= '<ul'.$effected.$class.'>';
+        foreach ($child as $id => $a){
+            @extract($a);
+            $this->ret .= $recursion ? '<ul'.$childclass.'><li>' : '<li>';
+            $recursion = FALSE;
+            $ischild = $this->get_child($id);
+            $end = end($li);
+            if($ischild && ($level < $maxlevel || !$maxlevel)){
+                $folder = $li[$level-1]['folder'] ? $li[$level-1]['folder'] : $end['folder'];
+                eval("\$mstr = \"$folder\";");
+                $this->ret .= $mstr;
+                $this->get_backnav($id, $effected_id, $style, $li, $maxlevel, $childstyle, TRUE, $level+1);
+            }else{
+                $file = $li[$level-1]['file'] ? $li[$level-1]['file'] : $end['file'];
+                eval("\$nstr = \"$file\";");
+                $this->ret .= $nstr;
+            }
+            $this->ret .= $recursion ? '</li></ul>' : '</li>';
+        }
+        if(!$recursion) $this->ret .= '</ul>';
+        return $this->ret;
     }
 
     /**
