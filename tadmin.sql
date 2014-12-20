@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2014-12-08 09:27:47
+-- Generation Time: 2014-12-20 11:00:25
 -- 服务器版本： 5.6.20
 -- PHP Version: 5.5.15
 
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `ta_auth_group` (
 
 INSERT INTO `ta_auth_group` (`id`, `title`, `status`, `rules`) VALUES
 (1, '超级管理员', 1, ''),
-(2, '普通管理员', 1, '1,2,3,4,5,6,7,8'),
+(2, '普通管理员', 1, '1,2,3,4,5,6,7,8,9,10,11,12'),
 (3, '注册用户', 1, '1');
 
 -- --------------------------------------------------------
@@ -73,22 +73,27 @@ CREATE TABLE IF NOT EXISTS `ta_auth_rule` (
   `title` char(20) NOT NULL DEFAULT '' COMMENT '规则中文名称',
   `type` tinyint(1) NOT NULL DEFAULT '1',
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '状态：为1正常，为0禁用',
+  `listorder` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
   `condition` char(100) NOT NULL DEFAULT '' COMMENT '规则表达式，为空表示存在就验证，不为空表示按照条件验证'
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='规则表' AUTO_INCREMENT=9 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='规则表' AUTO_INCREMENT=13 ;
 
 --
 -- 转存表中的数据 `ta_auth_rule`
 --
 
-INSERT INTO `ta_auth_rule` (`id`, `name`, `title`, `type`, `status`, `condition`) VALUES
-(1, 'Index/index', '首页', 1, 1, ''),
-(2, 'Index/profile', '个人资料', 1, 1, ''),
-(3, 'Menu/index', '后台菜单', 1, 1, ''),
-(4, 'Menu/add', '添加菜单', 1, 1, ''),
-(5, 'Menu/edit', '编辑菜单', 1, 1, ''),
-(6, 'Menu/del', '删除菜单', 1, 1, ''),
-(7, 'Menu/order', '菜单排序', 1, 1, ''),
-(8, 'Menu/status', '菜单状态', 1, 1, '');
+INSERT INTO `ta_auth_rule` (`id`, `name`, `title`, `type`, `status`, `listorder`, `condition`) VALUES
+(1, 'Index/index', '控制台', 1, 1, 0, ''),
+(2, 'Index/profile', '个人资料', 1, 1, 0, ''),
+(3, 'Menu/index', '后台菜单', 1, 1, 0, ''),
+(4, 'Menu/add', '添加菜单', 1, 1, 2, ''),
+(5, 'Menu/edit', '编辑菜单', 1, 1, 3, ''),
+(6, 'Menu/del', '删除菜单', 1, 1, 4, ''),
+(7, 'Menu/order', '菜单排序', 1, 1, 0, ''),
+(8, 'Menu/status', '菜单状态', 1, 1, 1, ''),
+(9, 'Rule/index', '权限节点管理', 1, 1, 0, ''),
+(10, 'Rule/order', '权限节点排序', 1, 1, 0, ''),
+(11, 'Rule/status', '权限节点状态', 1, 1, 0, ''),
+(12, 'Rule/add', '添加权限节点', 1, 1, 0, '');
 
 -- --------------------------------------------------------
 
@@ -115,8 +120,8 @@ CREATE TABLE IF NOT EXISTS `ta_member` (
 --
 
 INSERT INTO `ta_member` (`id`, `password`, `username`, `realname`, `email`, `question`, `answer`, `status`, `login_ip`, `last_login_time`, `login_count`) VALUES
-(1, '30bc103d85df152c8c703bcbbcc7fd4d', 'admin', '你买单我就来', 'itsky71@foxmail.com', '我还会回来的...', '灰太狼？呵呵。。。', 1, '127.0.0.1', 1417265786, 26),
-(2, '30bc103d85df152c8c703bcbbcc7fd4d', 'itsky', '你地盘我做主', 'zmh0515005@163.com', '你是谁?', 'abc111', 1, '127.0.0.1', 1418025011, 40);
+(1, '30bc103d85df152c8c703bcbbcc7fd4d', 'admin', '你买单我就来', 'itsky71@foxmail.com', '我还会回来的...', '灰太狼？呵呵。。。', 1, '127.0.0.1', 1419068912, 27),
+(2, '30bc103d85df152c8c703bcbbcc7fd4d', 'itsky', '你地盘我做主', 'zmh0515005@163.com', '你是谁?', 'abc111', 1, '127.0.0.1', 1419061908, 42);
 
 -- --------------------------------------------------------
 
@@ -135,8 +140,8 @@ CREATE TABLE IF NOT EXISTS `ta_menu` (
   `remark` varchar(100) NOT NULL COMMENT '备注',
   `isos` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否为系统菜单',
   `status` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '状态',
-  `listorder` smallint(5) unsigned NOT NULL DEFAULT '99' COMMENT '排序'
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='后台菜单' AUTO_INCREMENT=37 ;
+  `listorder` tinyint(3) unsigned NOT NULL DEFAULT '99' COMMENT '排序'
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='后台菜单' AUTO_INCREMENT=43 ;
 
 --
 -- 转存表中的数据 `ta_menu`
@@ -176,7 +181,15 @@ INSERT INTO `ta_menu` (`id`, `pid`, `icon`, `name`, `model`, `action`, `data`, `
 (31, 25, '', 'M_PAY_INDEX', 'Pay', 'index', '', '', 1, 1, 0),
 (32, 25, '', 'M_FEEDBACK_INDEX', 'Feedback', 'index', '', '', 1, 1, 0),
 (33, 25, '', 'M_GUESTBOOK_INDEX', 'Guestbook', 'index', '', '', 1, 1, 0),
-(34, 0, 'glyphicon glyphicon-user', 'M_USER_INDEX', 'User', 'index', '', '', 0, 1, 0);
+(34, 0, 'glyphicon glyphicon-user', 'M_USER_INDEX', 'User', 'index', '', '', 1, 1, 0),
+(35, 34, '', 'M_MEMBER_INDEX', 'Member', 'index', '', '', 1, 1, 99),
+(36, 34, '', 'M_GROUP_INDEX', 'Group', 'index', '', '', 1, 1, 99),
+(37, 34, '', 'M_RULE_INDEX', 'Rule', 'index', '', '', 1, 1, 99),
+(38, 0, 'glyphicon glyphicon-refresh', 'M_UPDATE_INDEX', 'Update', 'index', '', '', 1, 1, 99),
+(39, 0, 'glyphicon glyphicon-file', 'M_TPL_INDEX', 'Tpl', 'index', '', '', 1, 1, 99),
+(40, 39, '', 'M_TEMPLET_INDEX', 'Templet', 'index', '', '', 1, 1, 99),
+(41, 39, '', 'M_BLOCK_INDEX', 'Block', 'index', '', '', 1, 1, 99),
+(42, 39, '', 'M_SLIDE_INDEX', 'Slide', 'index', '', '', 1, 1, 99);
 
 --
 -- Indexes for dumped tables
@@ -225,7 +238,7 @@ MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户组id',
 -- AUTO_INCREMENT for table `ta_auth_rule`
 --
 ALTER TABLE `ta_auth_rule`
-MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=9;
+MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `ta_member`
 --
@@ -235,7 +248,7 @@ MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户ID',AUTO_INC
 -- AUTO_INCREMENT for table `ta_menu`
 --
 ALTER TABLE `ta_menu`
-MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=37;
+MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=43;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
