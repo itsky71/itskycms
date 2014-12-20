@@ -35,6 +35,10 @@
 <li class="active">{:L($Think.ACTION_NAME)}</li>';
     $('#breadcrumbs .breadcrumb li:gt(0)').remove();
     $('#breadcrumbs .breadcrumb').append(pan);
+    $('#sidebar .nav-list li.active').removeClass('active');
+    $('#sidebar .nav-list li.open .submenu').hide();
+    $('#sidebar .nav-list li.open').removeClass('open');
+    $('a[href="{:U(CONTROLLER_NAME.'/'.ACTION_NAME)}"]').parent().addClass('active').parent().show().parent().addClass('open active');
     $('input[name^="listorder"]').keydown(function(e){
         var code = parseInt(e.keyCode);
         if(code >= 96 && code <= 105 || code >= 48 && code <= 57 || code == 8 || code == 46){

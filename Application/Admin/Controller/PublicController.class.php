@@ -1,11 +1,20 @@
 <?php
+// +----------------------------------------------------------------------
+// | ITskyCMS
+// +----------------------------------------------------------------------
+// | Copyright (c) 2015 http://www.itsky.me All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author: itsky <itsky71@foxmail.com>
+// +----------------------------------------------------------------------
+namespace Admin\Controller;
+use Think\Controller;
 /**
  * Description of PublicController
  * 后台公共控制器
  * @author itsky
  */
-namespace Admin\Controller;
-use Think\Controller;
 class PublicController extends Controller {
     /* 登入 */
     public function login(){

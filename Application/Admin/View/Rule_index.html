@@ -1,0 +1,101 @@
+<div class="col-sm-12">
+    <a class="btn btn-primary btn-xs ml10 mb10" href="{:U('Rule/add')}" onclick="load(event,this)">
+        <span class="glyphicon glyphicon-plus"></span>添加权限节点
+    </a>
+    <div class="table-responsive">
+        <form autocomplete="off" role="form">
+            <table id="menu-tree" class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th class="center w60">排序</th>
+                        <th>节点标题</th>
+                        <th>节点名称</th>
+                        <th>状态</th>
+                        <th class="center">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <foreach name="rulesg" item="vo">
+                    <tr>
+                        <td class="center">
+                            <input type="text" value="{$vo.listorder}" name="listorder[{$vo.id}]" maxlength="3" notimely="true"/>
+                        </td>
+                        <td>{$vo.title}</td>
+                        <td>{$vo.name}</td>
+                        <td>{$vo.status}</td>
+                        <td class="center">
+                            <a class="btn btn-success btn-minier" onclick="load(event,this)" href="{:U('Rule/edit',array('id'=>$vo['id']))}">
+                                <span class="glyphicon glyphicon-edit"></span> 修改
+                            </a>
+                            <a class="btn btn-danger btn-minier" onclick="del(event,this,'c')" href="{:U('Rule/del',array('id'=>$vo['id']))}">
+                                <span class="glyphicon glyphicon-trash"></span> 删除
+                            </a>
+                        </td>
+                    </tr>
+                    <foreach name="rulesc" item="v">
+                    <if condition="$vo['m'] eq $v['m']">
+                    <tr class="child_{$vo.id}">
+                        <td class="center">
+                            <input type="text" value="{$v.listorder}" name="listorder[{$v.id}]" maxlength="3" notimely="true"/>
+                        </td>
+                        <td>{$v.title}</td>
+                        <td>{$v.name}</td>
+                        <td>{$v.status}</td>
+                        <td class="center">
+                            <a class="btn btn-success btn-minier" onclick="load(event,this)" href="{:U('Rule/edit',array('id'=>$v['id']))}">
+                                <span class="glyphicon glyphicon-edit"></span> 修改
+                            </a>
+                            <a class="btn btn-danger btn-minier" onclick="del(event,this,'c')" href="{:U('Rule/del',array('id'=>$v['id']))}">
+                                <span class="glyphicon glyphicon-trash"></span> 删除
+                            </a>
+                        </td>
+                    </tr>
+                    </if>
+                    </foreach>
+                </foreach>
+                    <tr>
+                        <td class="center">
+                            <button class="btn btn-primary btn-xs" type="submit">排序</button>
+                        </td>
+                        <td colspan="4">&ensp;</td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var pan = '<li><a onclick="load(event,this)" href="{:U(CONTROLLER_NAME.'/'.ACTION_NAME)}">{:L('M_'.$Think.CONTROLLER_NAME.'_'.$Think.ACTION_NAME)}</a></li>\n\
+<li class="active">{:L($Think.ACTION_NAME)}</li>';
+    $('#breadcrumbs .breadcrumb li:gt(0)').remove();
+    $('#breadcrumbs .breadcrumb').append(pan);
+    $('#sidebar .nav-list li.active').removeClass('active');
+    $('#sidebar .nav-list li.open .submenu').hide();
+    $('#sidebar .nav-list li.open').removeClass('open');
+    $('a[href="{:U(CONTROLLER_NAME.'/'.ACTION_NAME)}"]').parent().addClass('active').parent().show().parent().addClass('open active');
+//    $('.child .rico:last').text('└─');
+    $('input[name^="listorder"]').keydown(function(e){
+        var code = parseInt(e.keyCode);
+        if(code >= 96 && code <= 105 || code >= 48 && code <= 57 || code == 8 || code == 46){
+            return true;
+        }else{
+            return false;
+        }
+    });
+    $('.page-header h1').empty();
+    $('.page-header h1').append('{:L('M_'.$Think.CONTROLLER_NAME.'_'.$Think.ACTION_NAME)}<small class="glyphicon glyphicon-chevron-right"> {:L($Think.ACTION_NAME)}</small>');
+    $('input[name^="listorder"]').click(function(){$(this).select();});
+    $('form[role="form"]').validator({
+        valid:function(form){
+            $.ajax({
+                type: 'POST',
+                url:'{:U('Rule/order')}',
+                data:$(form).serialize(),
+                success:function(data){
+                    show_msg(data);
+                }
+            });
+        }
+    });
+</script>
