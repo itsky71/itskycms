@@ -79,15 +79,15 @@ class Auth{
     );
 
     public function __construct() {
+        if (C('AUTH_CONFIG')) {
+            //可设置配置项 AUTH_CONFIG, 此配置项为数组。
+            $this->_config = array_merge($this->_config, C('AUTH_CONFIG'));
+        }
         $prefix = C('DB_PREFIX');
         $this->_config['AUTH_GROUP'] = $prefix.$this->_config['AUTH_GROUP'];
         $this->_config['AUTH_RULE'] = $prefix.$this->_config['AUTH_RULE'];
         $this->_config['AUTH_USER'] = $prefix.$this->_config['AUTH_USER'];
         $this->_config['AUTH_GROUP_ACCESS'] = $prefix.$this->_config['AUTH_GROUP_ACCESS'];
-        if (C('AUTH_CONFIG')) {
-            //可设置配置项 AUTH_CONFIG, 此配置项为数组。
-            $this->_config = array_merge($this->_config, C('AUTH_CONFIG'));
-        }
     }
 
     /**
