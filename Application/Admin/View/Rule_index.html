@@ -74,7 +74,11 @@
     $('#sidebar .nav-list li.open .submenu').hide();
     $('#sidebar .nav-list li.open').removeClass('open');
     $('a[href="{:U(CONTROLLER_NAME.'/'.ACTION_NAME)}"]').parent().addClass('active').parent().show().parent().addClass('open active');
-//    $('.child .rico:last').text('└─');
+    var childobj = $('#menu-tree tr[class^="child_"]').map(function(){return $(this).attr('class');});
+    var childarr = $.unique($.makeArray(childobj));
+    $.each(childarr,function(i,n){
+        $('tr.'+n+' .rico:last').text('└─');
+    });
     $('input[name^="listorder"]').keydown(function(e){
         var code = parseInt(e.keyCode);
         if(code >= 96 && code <= 105 || code >= 48 && code <= 57 || code == 8 || code == 46){

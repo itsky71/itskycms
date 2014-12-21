@@ -8,7 +8,6 @@ return array(
     'ACTION'        =>  '方法',
     'DATA'          =>  '参数',
     'REMARK'        =>  '备注',
-    'STATUS'        =>  '状态',
     'PIDN'          =>  '上级必须为数字！',
     'RNAMEL'        =>  '名称长度必须为2-20个字符！',
     'MODELL'        =>  '模块长度必须为3-20个字符！',

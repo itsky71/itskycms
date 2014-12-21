@@ -48,6 +48,7 @@ class AdminController extends Controller{
      * 添加
      */
     public function add(){
+        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
         if(IS_POST){
             $name = M(CONTROLLER_NAME);
             if($name->create()){

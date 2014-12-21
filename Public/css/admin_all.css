@@ -249,3 +249,5 @@ button.btn:active{position:relative;top:1px;left:1px;}
     -o-animation: progress-bar-stripes 0.5s linear infinite;
     animation: progress-bar-stripes 0.5s linear infinite;
 }
+/*-- rule tooltip --*/
+#ruleform .rti .tooltip .tooltip-inner{width: 150px;}

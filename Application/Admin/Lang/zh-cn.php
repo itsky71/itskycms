@@ -31,6 +31,9 @@ $common = array(
     'DEL_OK'        =>  '删除成功！',
     'DEL_ERROR'     =>  '删除失败！',
     'ORDER_OK'      =>  '排序成功！',
-    'STATUS_ERROR'  =>  '状态设置失败！'
+    'STATUS_ERROR'  =>  '状态设置失败！',
+    'ADD'           =>  '添加',
+    'EDIT'          =>  '编辑',
+    'STATUS'        =>  '状态'
 );
 return array_merge($common, $menu_common);

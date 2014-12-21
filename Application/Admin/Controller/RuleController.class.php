@@ -39,6 +39,20 @@ class RuleController extends AdminController{
         $this->display();
     }
 
+    public function add(){
+        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        $Rule = D('AuthRule');
+        if(IS_POST){
+            if($Rule->create()){
+                print_r(I('post.'));
+            }else{
+                $this->error($Rule->getError());
+            }
+        }else{
+            $this->display('edit');
+        }
+    }
+
     public function order(){
         if(IS_AJAX && IS_POST){
             $Rule = D('AuthRule');
