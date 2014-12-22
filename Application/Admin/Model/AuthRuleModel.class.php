@@ -21,12 +21,22 @@ class AuthRuleModel extends Model{
         array('name','7,50','{%NAMEL}',self::EXISTS_VALIDATE,'length'),
         array('name','checkName','{%NAMEC}',self::EXISTS_VALIDATE,'callback')
     );
+    //自动完成
+    protected $_auto = array(
+        array('name','changeName',self::MODEL_BOTH,'callback')
+    );
     //名称验证
     protected function checkName(){
         $name = I('post.name');
         $maarr = explode('/', $name);
         if(count($maarr) != 2) return FALSE;
-        if(strlen($maarr[0]) < 3 || preg_match('/^[A-Za-z]+$/',$maarr[0])) return FALSE;
+        if(strlen($maarr[0]) < 3 || !preg_match('/^[A-Za-z]+$/',$maarr[0])) return FALSE;
+        if(strlen($maarr[1]) < 3 || !preg_match('/^[A-Za-z]+$/',$maarr[1])) return FALSE;
         return TRUE;
+    }
+    //转换名称
+    protected function changeName($str){
+        $maarr = explode('/', $str);
+        return ucwords($maarr[0]).'/'.$maarr[1];
     }
 }
