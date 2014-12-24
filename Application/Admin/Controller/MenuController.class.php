@@ -152,10 +152,8 @@ class MenuController extends AdminController{
      * @param string $langpath 语言文件路径
      * @return boolean
      */
-    private function _write_lang($lang,$del = FALSE,$langpath = ''){
-        if(!is_array($lang)){
-            return FALSE;
-        }
+    private function _write_lang($lang,$langpath = ''){
+        if(!is_array($lang)) return FALSE;
         $path = $langpath == '' ? MODULE_PATH.'Lang/'.LANG_SET.'/menu_common.php' : $langpath;
         $phpstar = '<?php'.PHP_EOL;
         $langdata = $phpstar;
