@@ -1,17 +1,6 @@
 <div class="col-xs-6">
     <form id="ruleform" class="form-horizontal" role="form">
         <div class="form-group">
-            <label class="col-sm-3 control-label no-padding-right">{:L('GROUP')}:</label>
-            <div class="col-sm-4">
-                <select class="form-control" name="group">
-                    <option value="">请选择</option>
-                    <foreach name="group" item="vo">
-                    <option value="{$vo.name|substr=###,0,-6}">{:L($vo['title'])}</option>
-                    </foreach>
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right">{:L('NAME')}:</label>
             <div class="col-sm-9">
                 <input class="col-xs-6" type="text" name="name" value=""/>
