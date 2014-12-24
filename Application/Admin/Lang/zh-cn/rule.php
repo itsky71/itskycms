@@ -19,6 +19,8 @@ $rule = array(
     'TITLEL'        =>  '标题长度必须为2-20个字符！',
     'CONDITIONL'    =>  '规则表达式长度必须小于100个字符！',
     'ADD_ERROR'     =>  '权限节点添加失败！',
-    'ADD_SUCCESS'   =>  '权限节点添加成功！'
+    'ADD_SUCCESS'   =>  '权限节点添加成功！',
+    'DEL_ERROR'     =>  '权限节点删除失败！',
+    'DEL_OK'        =>  '权限节点删除成功！'
 );
 return array_merge($rule, $rule_title);

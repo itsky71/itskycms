@@ -94,41 +94,27 @@ function load(e,t){
 //删除记录
 function del(e,t,a){
     e.preventDefault();
-    if(a == 'c'){
-        bootbox.confirm('确定要删除吗?',function(result){
-            if(result){
-                $.ajax({
-                    type:'get',
-                    url:$(t).attr('href'),
-                    global:true,
-                    success:function(data){
-                        if($.isPlainObject(data)){
-                            show_msg(data);
-                        }else{
-                            $('#new_content').html(data);
-                        }
-                    }
-                });
-            }
-        });
-    }else if(a == 'p'){
-        bootbox.confirm('<span class="glyphicon glyphicon-question-sign yellow"></span> 确定要删除该栏目及其所有子栏目吗?',function(result){
-            if(result){
-                $.ajax({
-                    type:'get',
-                    url:$(t).attr('href'),
-                    global:true,
-                    success:function(data){
-                        if($.isPlainObject(data)){
-                            show_msg(data);
-                        }else{
-                            $('#new_content').html(data);
-                        }
-                    }
-                });
-            }
-        });
+    if(a=='c'){
+        var msg = ' 确定要删除吗?';
+    }else if(a=='p'){
+        var msg = ' 确定要删除该栏目及其所有子栏目吗?';
     }
+    bootbox.confirm('<span class="glyphicon glyphicon-question-sign yellow"></span>'+msg,function(result){
+        if(result){
+            $.ajax({
+                type:'get',
+                url:$(t).attr('href'),
+                global:true,
+                success:function(data){
+                    if($.isPlainObject(data)){
+                        show_msg(data);
+                    }else{
+                        $('#new_content').html(data);
+                    }
+                }
+            });
+        }
+    });
     $('.bootbox .modal-footer .btn').addClass('btn-sm');
     $('.bootbox .modal-dialog').addClass('modal-sm');
 }

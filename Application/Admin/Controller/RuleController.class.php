@@ -68,6 +68,26 @@ class RuleController extends AdminController{
         }
     }
 
+    public function del() {
+        if(IS_AJAX && IS_GET){
+            $Rule = D('AuthRule');
+            $name = $Rule->getFieldById(I('get.id'),'name');
+            if(substr($name, -6)=='/index'){
+                $map['name'] = array('like',substr($name, 0, -6).'%');
+                $result = $Rule->where($map)->delete();
+            }else{
+                $result = $Rule->where('id='.I('get.id'))->delete();
+            }
+            if($result !== FALSE){
+                $this->success(L('DEL_OK'),U('Rule/index'));
+            }else{
+                $this->error(L('DEL_ERROR'));
+            }
+        }else{
+            $this->error(L('_ERROR_ACTION_'));
+        }
+    }
+
     public function order(){
         if(IS_AJAX && IS_POST){
             $Rule = D('AuthRule');
