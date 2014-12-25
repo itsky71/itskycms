@@ -16,4 +16,5 @@ $rule_title = array(
     'R_RULE_DEL' => '删除',
     'R_RULE_SDFDD' => 'dfdg',
     'R_RULE_DFD' => '修改',
+    'R_MEMBER_INDEX' => '会员管理',
 );
