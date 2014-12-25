@@ -14,5 +14,6 @@ return array(
     'CHECK_INFO'    =>  '请填写用户名或者邮箱',
     'USER_STOP'     =>  '用户被禁用',
     'ALREADY_OUT'   =>  '已经登出',
-    'ACTIONU'       =>  '该模块下方法已存在！'
+    'ACTIONU'       =>  '该模块下方法已存在！',
+    'NAMEU'         =>  '该名称已存在！'
 );

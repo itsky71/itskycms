@@ -48,7 +48,7 @@ class RuleController extends AdminController{
                 $data = array(
                     'name' => I('post.group').'/'.I('post.name'),
                     'title' => 'R_'.  strtoupper(I('post.group').'_'.I('post.name')),
-                    'condition' => I('post.condition'),
+                    'condition' => $_POST['condition'],
                     'status' => I('post.status') ? 1 : 0
                 );
                 if($Rule->add($data)){
@@ -65,6 +65,40 @@ class RuleController extends AdminController{
             $group = $Rule->where($map)->select();
             $this->assign('group', $group);
             $this->display('edit');
+        }
+    }
+
+    public function edit(){
+        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        $Rule = D('AuthRule');
+        if(IS_GET){
+            $map['name'] = array('like','%/index');
+            $group = $Rule->where($map)->select();
+            $v = $Rule->where('id='.I('get.id'))->find();
+            $groupname = explode('/', $v['name']);
+            $v['group'] = $groupname[0];
+            $v['name'] = $groupname[1];
+            $this->assign('group', $group);
+            $this->assign('v', $v);
+            $this->display('edit');
+        }elseif(IS_POST){
+            if($Rule->create()){
+                $data = array(
+                    'name' => I('post.group').'/'.I('post.name'),
+                    'title' => 'R_'.  strtoupper(I('post.group').'_'.I('post.name')),
+                    'condition' => $_POST['condition'],
+                    'status' => I('post.status') ? 1 : 0
+                );
+                $result = $Rule->where('id='.I('post.id'))->save($data);
+                if($result !== FALSE){
+                    $this->_write_lang(array($data['title']=>I('post.title')));
+                    $this->success(L('SAVE_OK'),U('Rule/index'));
+                }else{
+                    $this->error(L('SAVE_ERROR'));
+                }
+            }else{
+                $this->error($Rule->getError());
+            }
         }
     }
 

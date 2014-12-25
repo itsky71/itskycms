@@ -50,4 +50,5 @@ $menu_common = array(
     'M_TEMPLET_INDEX' => '模板管理',
     'M_BLOCK_INDEX' => '碎片管理',
     'M_SLIDE_INDEX' => '幻灯片管理',
+    'M_SLIDE_INDEXF' => '幻灯片管理',
 );

@@ -108,7 +108,7 @@ class PublicController extends Controller {
     }
 
     /**
-     * 验证菜单
+     * 验证菜单名称
      */
     public function checkAction(){
         if(IS_AJAX && IS_POST){
@@ -124,6 +124,21 @@ class PublicController extends Controller {
             if($res){
                 echo json_encode(array('error'=>L('ACTIONU')));
             }
+        }else{
+            $this->error(L('_ERROR_ACTION_'));
+        }
+    }
+
+    /**
+     * 验证权限节点名称
+     */
+    public function checkName(){
+        if(IS_AJAX && IS_POST){
+            $Rule = D('AuthRule');
+            $map['name'] = I('post.group').'/'.I('post.name');
+            if(I('post.id')) $map['id'] = array('neq',I('post.id'));
+            $res = $Rule->where($map)->find();
+            if($res) echo json_encode(array('error'=>L('NAMEU')));
         }else{
             $this->error(L('_ERROR_ACTION_'));
         }

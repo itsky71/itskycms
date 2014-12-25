@@ -21,6 +21,8 @@ $rule = array(
     'ADD_ERROR'     =>  '权限节点添加失败！',
     'ADD_SUCCESS'   =>  '权限节点添加成功！',
     'DEL_ERROR'     =>  '权限节点删除失败！',
-    'DEL_OK'        =>  '权限节点删除成功！'
+    'DEL_OK'        =>  '权限节点删除成功！',
+    'SAVE_ERROR'    =>  '权限节点修改失败！',
+    'SAVE_OK'       =>  '权限节点修改成功！'
 );
 return array_merge($rule, $rule_title);

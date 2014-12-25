@@ -21,8 +21,16 @@ class AuthRuleModel extends Model{
         array('group','require','{%GROUPR}'),
         array('name','3,20','{%NAMEL}',self::EXISTS_VALIDATE,'length'),
         array('name','english','{%NAMEC}'),
-        array('name','','{%NAMEU}',self::EXISTS_VALIDATE,'unique'),
+        array('name','checkName','{%NAMEU}',self::EXISTS_VALIDATE,'callback'),
         array('title','2,20','{%TITLEL}',self::EXISTS_VALIDATE,'length'),
         array('condition','0,100','{%CONDITIONL}',self::EXISTS_VALIDATE,'length')
     );
+
+    //验证名称唯一
+    protected function checkName(){
+        $map['name'] = I('post.group').'/'.I('post.name');
+        if(I('post.id')) $map['id'] = array('neq',I('post.id'));
+        $result = $this->where($map)->find();
+        return $result ? FALSE : TRUE;
+    }
 }
