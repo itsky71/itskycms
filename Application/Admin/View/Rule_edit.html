@@ -5,7 +5,7 @@
             <label class="col-sm-3 control-label no-padding-right">{:L('GROUP')}:</label>
             <div class="col-sm-4">
                 <select class="form-control" name="group">
-                    <option value="">请选择</option>
+                    <option value="">{:L('SELECT')}</option>
                     <foreach name="group" item="vo">
                         <option value="{$vo.name|substr=###,0,-6}"<if condition="substr($vo['name'],0,-6) eq $v['group']"> selected="selected"</if>>{:L($vo['title'])}</option>
                     </foreach>

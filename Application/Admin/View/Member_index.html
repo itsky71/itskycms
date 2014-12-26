@@ -9,61 +9,40 @@
                             <span class="lbl"></span>
                         </label>
                     </th>
-                    <th class="center">编号</th>
-                    <th>用户名</th>
-                    <th>用户组</th>
-                    <th>邮箱</th>
-                    <th>注册时间</th>
-                    <th>状态</th>
-                    <th>管理操作</th>
+                    <th class="center">{:L('NUMBER')}</th>
+                    <th>{:L('USERNAME')}</th>
+                    <th>{:L('USERGROUP')}</th>
+                    <th>{:L('EMAIL')}</th>
+                    <th>{:L('REGTIME')}</th>
+                    <th class="center">{:L('STATUS')}</th>
+                    <th class="center">{:L('MANOPE')}</th>
                 </tr>
             </thead>
             <tbody>
+            <foreach name="list" item="vo">
                 <tr>
                     <td class="center">
                         <label>
-                            <input type="checkbox" class="ace"/>
+                            <input type="checkbox" class="ace" name="id" value="{$vo.id}"/>
                             <span class="lbl"></span>
                         </label>
                     </td>
-                    <td class="center">1</td>
-                    <td>admin</td>
-                    <td>超级管理员</td>
-                    <td>itsky@163.com</td>
-                    <td>2014-12-22</td>
-                    <td>启用</td>
-                    <td>&ensp;</td>
-                </tr>
-                <tr>
+                    <td class="center">{$vo.id}</td>
+                    <td>{$vo.username}</td>
+                    <td>{$vo.group}</td>
+                    <td>{$vo.email}</td>
+                    <td>{$vo.regtime|date='Y-m-d',###}</td>
+                    <td class="center">{$vo.status}</td>
                     <td class="center">
-                        <label>
-                            <input type="checkbox" class="ace"/>
-                            <span class="lbl"></span>
-                        </label>
+                        <a class="btn btn-success btn-minier" href="{:U('Member/edit',array('id'=>$vo['id']))}" onclick="load(event,this)">
+                            <span class="glyphicon glyphicon-edit"></span> {:L('EDIT')}
+                        </a>
+                        <a class="btn btn-danger btn-minier" href="{:U('Member/del',array('id'=>$vo['id']))}" onclick="del(event,this,'c')">
+                            <span class="glyphicon glyphicon-trash"></span> {:L('DELETE')}
+                        </a>
                     </td>
-                    <td class="center">2</td>
-                    <td>itsky</td>
-                    <td>超级管理员</td>
-                    <td>itsky@163.com</td>
-                    <td>2014-12-22</td>
-                    <td>启用</td>
-                    <td>&ensp;</td>
                 </tr>
-                <tr>
-                    <td class="center">
-                        <label>
-                            <input type="checkbox" class="ace"/>
-                            <span class="lbl"></span>
-                        </label>
-                    </td>
-                    <td class="center">3</td>
-                    <td>admin</td>
-                    <td>超级管理员</td>
-                    <td>itsky@163.com</td>
-                    <td>2014-12-22</td>
-                    <td>启用</td>
-                    <td>&ensp;</td>
-                </tr>
+            </foreach>
             </tbody>
         </table>
     </div>
@@ -83,12 +62,12 @@
     $('#sample-table').dataTable({
         'aoColumns':[{'bSortable':false},null,null,null,null,null,null,{'bSortable':false}],
         'language':{
-            'lengthMenu':'每页 _MENU_ 条记录',
-            'zeroRecords':'没有找到记录',
-            'info':'第 _PAGE_ 页 ( 总共 _PAGES_ 页 )',
-            'infoEmpty':'无记录',
-            'infoFiltered':'(从 _MAX_ 条记录过滤)',
-            'search':'搜索：'
+            'lengthMenu':'{:L('LENGTHMENU')}',
+            'zeroRecords':'{:L('ZEROREC')}',
+            'info':'{:L('INFO')}',
+            'infoEmpty':'{:L('INFOEMPTY')}',
+            'infoFiltered':'{:L('INFOFILT')}',
+            'search':'{:L('SEARCH')}: '
         }
     });
     $('#sample-table th:first').removeClass('sorting_asc');

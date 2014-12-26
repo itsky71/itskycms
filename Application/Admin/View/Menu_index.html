@@ -1,26 +1,26 @@
 <div class="col-sm-12">
     <a class="btn btn-primary btn-xs ml10 mb10" href="{:U('Menu/add')}" onclick="load(event,this)">
-        <span class="glyphicon glyphicon-plus"></span>添加菜单
+        <span class="glyphicon glyphicon-plus"></span>{:L('ADD')}
     </a>
     <div class="table-responsive">
         <form autocomplete="off" role="form">
             <table id="menu-tree" class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th class="center w60">排序</th>
-                        <th class="center w60">编号</th>
-                        <th>菜单名称</th>
-                        <th>模块</th>
-                        <th>方法</th>
-                        <th class="center">状态</th>
-                        <th class="center">操作</th>
+                        <th class="center w60">{:L('ORDER')}</th>
+                        <th class="center w60">{:L('NUMBER')}</th>
+                        <th>{:L('REAL_NAME')}</th>
+                        <th>{:L('MODEL')}</th>
+                        <th>{:L('ACTION')}</th>
+                        <th class="center">{:L('STATUS')}</th>
+                        <th class="center">{:L('MANOPE')}</th>
                     </tr>
                 </thead>
                 <tbody>
                     {$mtree}
                     <tr>
                         <td class="center">
-                            <button class="btn btn-primary btn-xs" type="submit">排序</button>
+                            <button class="btn btn-primary btn-xs" type="submit">{:L('ORDER')}</button>
                         </td>
                         <td colspan="6">&ensp;</td>
                     </tr>
