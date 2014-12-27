@@ -78,4 +78,8 @@
             $(this).closest('tr').toggleClass('selected');
         });
     });
+    var addbc = '<span class="glyphicon glyphicon-plus"></span>{:L('ADD_USER')}';
+    $('.adduser').append('<a class="btn btn-primary btn-xs" href="{:U('Member/add')}" onclick="load(event,this)">'+addbc+'</a>');
+    var delbc = '<span class="glyphicon glyphicon-trash"></span>{:L('DEL_USERS')}';
+    $('.deluser').append('<a class="btn btn-danger btn-xs" href="{:U('Member/del')}" onclick="delcheck()">'+delbc+'</a>');
 </script>

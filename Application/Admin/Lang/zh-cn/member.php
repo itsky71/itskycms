@@ -11,5 +11,12 @@ return array(
     'USERGROUP'     =>  '用户组',
     'EMAIL'         =>  '邮箱',
     'REGTIME'       =>  '注册时间',
-    'MANOPE'        =>  '管理操作'
+    'MANOPE'        =>  '管理操作',
+    'ADD_USER'      =>  '添加会员',
+    'DEL_USERS'     =>  '删除所选',
+    'USERNAME'      =>  '用户名',
+    'PASSWORD'      =>  '密码',
+    'REALNAME'      =>  '昵称',
+    'QUESTION'      =>  '安全问题',
+    'ANSWER'        =>  '答案',
 );

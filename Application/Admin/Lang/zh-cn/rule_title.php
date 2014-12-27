@@ -17,4 +17,5 @@ $rule_title = array(
     'R_RULE_SDFDD' => 'dfdg',
     'R_RULE_DFD' => '修改',
     'R_MEMBER_INDEX' => '会员管理',
+    'R_MEMBER_ADD' => '添加',
 );

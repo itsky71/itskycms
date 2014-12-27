@@ -1,6 +1,6 @@
 //http://datatables.net/plug-ins/pagination#bootstrap
 $.extend( true, $.fn.dataTable.defaults, {
-	"sDom": "<'row'<'col-sm-6'l><'col-sm-6'f>r>t<'row'<'col-sm-6'i><'col-sm-6'p>>",
+	"sDom": "<'row'<'col-sm-1 adduser'><'col-sm-5'l><'col-sm-6'f>r>t<'row'<'col-sm-1 deluser'><'col-sm-5'i><'col-sm-6'p>>",
 	"sPaginationType": "bootstrap",
 	"oLanguage": {
 		"sLengthMenu": "Display _MENU_ records"
