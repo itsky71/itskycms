@@ -20,10 +20,13 @@ class MemberModel extends Model{
     protected $_validate = array(
         array('username','3,20','{%YZUNL}',self::EXISTS_VALIDATE,'length'),
         array('username','','{%YZUNU}',self::EXISTS_VALIDATE,'unique'),
+        array('password','6,20','{%PWDL}',self::EXISTS_VALIDATE,'length',self::MODEL_INSERT),
+        array('password','6,20','{%PWDL}',self::VALUE_VALIDATE,'length',self::MODEL_UPDATE),
         array('email','email','{%YZEF}'),
         array('email','','{%YZEU}',self::EXISTS_VALIDATE,'unique'),
-        array('realname','3,20','{%YZRNL}',self::VALUE_VALIDATE,'length'),
+        array('realname','2,20','{%YZRNL}',self::VALUE_VALIDATE,'length'),
         array('realname','checkRname','{%YZRNI}',self::VALUE_VALIDATE,'callback'),
+        array('group','require','{%GROUPR}'),
         array('question','3,30','{%YZQL}',self::VALUE_VALIDATE,'length'),
         array('answer','0,30','{%YZAL}',self::VALUE_VALIDATE,'length')
     );

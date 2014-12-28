@@ -37,8 +37,10 @@
             <label class="col-sm-3 control-label no-padding-right">{:L('USERGROUP')}:</label>
             <div class="col-sm-5">
                 <select class="form-control" name="group">
-                    <option value="0">请选择</option>
-                    <option value="1">超级管理员</option>
+                    <option value="">{:L('SELECT')}</option>
+                    <foreach name="glist" item="vo">
+                    <option value="{$vo.id}">{$vo.title}</option>
+                    </foreach>
                 </select>
             </div>
         </div>
@@ -73,4 +75,16 @@
     $('#breadcrumbs .breadcrumb').append(pan);
     $('.page-header h1').empty();
     $('.page-header h1').append('{:L('M_'.$Think.CONTROLLER_NAME.'_INDEX')}<small class="glyphicon glyphicon-chevron-right"> {:L($Think.ACTION_NAME)}</small>');
+    $('form[role="form"]').validator({
+        valid:function(form){
+            $.ajax({
+                type: 'POST',
+                url: '{:U('Member/'.ACTION_NAME)}',
+                data:$(form).serialize(),
+                success: function(data){
+                    show_msg(data);
+                }
+            });
+        }
+    });
 </script>
