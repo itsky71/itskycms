@@ -64,16 +64,18 @@ class AdminController extends Controller{
      * 删除
      */
     public function del(){
-        if(IS_AJAX && IS_GET){
-            $name = M(CONTROLLER_NAME);
+        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        $name = M(CONTROLLER_NAME);
+        if(IS_GET){
             $result = $name->where('id='.I('get.id'))->delete();
-            if($result !== FALSE){
-                $this->success(L('DEL_OK'),U(CONTROLLER_NAME.'/index'));
-            }else{
-                $this->error(L('DEL_ERROR'));
-            }
+        }elseif(IS_POST){
+            $map['id'] = array('in',I('post.ids'));
+            $result = $name->where($map)->delete();
+        }
+        if($result !== FALSE){
+            $this->success(L('DEL_OK'),U(CONTROLLER_NAME.'/index'));
         }else{
-            $this->error(L('_ERROR_ACTION_'));
+            $this->error(L('DEL_ERROR'));
         }
     }
     /**

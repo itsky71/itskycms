@@ -118,3 +118,29 @@ function del(e,t,a){
     $('.bootbox .modal-footer .btn').addClass('btn-sm');
     $('.bootbox .modal-dialog').addClass('modal-sm');
 }
+
+//删除所选
+function delcheck(e,t){
+    e.preventDefault();
+    var vid = new Array();
+    $('input[name="id"]:checked').each(function(i){
+        vid[i] = $(this).val();
+    });
+    if(vid == ''){
+        show_msg($.parseJSON('{"info":"请选择至少一项！","status":"0"}'));
+        return false;
+    }else{
+        $.ajax({
+            type:'post',
+            url:$(t).attr('href'),
+            data:'ids='+vid.join(','),
+            success:function(data){
+                if($.isPlainObject(data)){
+                    show_msg(data);
+                }else{
+                    $('#new_content').html(data);
+                }
+            }
+        });
+    }
+}

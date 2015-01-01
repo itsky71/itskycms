@@ -23,7 +23,7 @@
                 <tr>
                     <td class="center">
                         <label>
-                            <input type="checkbox" class="ace" name="id" value="{$vo.id}"/>
+                            <input type="checkbox" class="ace"<if condition="($vo['username'] eq C('ADMIN_AUTH_KEY')) OR ($vo['id'] eq session(C('USER_AUTH_KEY')))"> disabled="disabled"<else/> name="id" value="{$vo.id}"</if>/>
                             <span class="lbl"></span>
                         </label>
                     </td>
@@ -34,10 +34,10 @@
                     <td>{$vo.regtime|date='Y-m-d',###}</td>
                     <td class="center">{$vo.status}</td>
                     <td class="center">
-                        <a class="btn btn-success btn-minier" href="{:U('Member/edit',array('id'=>$vo['id']))}" onclick="load(event,this)">
+                        <a class="btn btn-success btn-minier" href="{:U('Member/edit',array('id'=>$vo['id']))}" onclick="load(event,this)" <if condition="($vo['username'] eq C('ADMIN_AUTH_KEY')) OR ($vo['id'] eq session(C('USER_AUTH_KEY')))"> disabled="disabled"</if>>
                             <span class="glyphicon glyphicon-edit"></span> {:L('EDIT')}
                         </a>
-                        <a class="btn btn-danger btn-minier" href="{:U('Member/del',array('id'=>$vo['id']))}" onclick="del(event,this,'c')">
+                        <a class="btn btn-danger btn-minier" href="{:U('Member/del',array('id'=>$vo['id']))}" onclick="del(event,this,'c')" <if condition="($vo['username'] eq C('ADMIN_AUTH_KEY')) OR ($vo['id'] eq session(C('USER_AUTH_KEY')))"> disabled="disabled"</if>>
                             <span class="glyphicon glyphicon-trash"></span> {:L('DELETE')}
                         </a>
                     </td>
@@ -81,5 +81,5 @@
     var addbc = '<span class="glyphicon glyphicon-plus"></span>{:L('ADD_USER')}';
     $('.adduser').append('<a class="btn btn-primary btn-xs" href="{:U('Member/add')}" onclick="load(event,this)">'+addbc+'</a>');
     var delbc = '<span class="glyphicon glyphicon-trash"></span>{:L('DEL_USERS')}';
-    $('.deluser').append('<a class="btn btn-danger btn-xs" href="{:U('Member/del')}" onclick="delcheck()">'+delbc+'</a>');
+    $('.deluser').append('<a class="btn btn-danger btn-xs" href="{:U('Member/del')}" onclick="delcheck(event,this)">'+delbc+'</a>');
 </script>

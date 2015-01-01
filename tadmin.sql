@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2014-12-28 08:59:17
+-- Generation Time: 2015-01-01 06:53:32
 -- 服务器版本： 5.6.20
 -- PHP Version: 5.5.15
 
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `ta_auth_group` (
 
 INSERT INTO `ta_auth_group` (`id`, `title`, `status`, `rules`) VALUES
 (1, '超级管理员', 1, ''),
-(2, '普通管理员', 1, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16'),
+(2, '普通管理员', 1, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19'),
 (3, '注册用户', 1, '1');
 
 -- --------------------------------------------------------
@@ -59,9 +59,7 @@ CREATE TABLE IF NOT EXISTS `ta_auth_group_access` (
 
 INSERT INTO `ta_auth_group_access` (`uid`, `group_id`) VALUES
 (1, 1),
-(2, 2),
-(3, 3),
-(4, 2);
+(2, 2);
 
 -- --------------------------------------------------------
 
@@ -77,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `ta_auth_rule` (
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '状态：为1正常，为0禁用',
   `listorder` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
   `condition` char(100) NOT NULL DEFAULT '' COMMENT '规则表达式，为空表示存在就验证，不为空表示按照条件验证'
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='规则表' AUTO_INCREMENT=17 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='规则表' AUTO_INCREMENT=20 ;
 
 --
 -- 转存表中的数据 `ta_auth_rule`
@@ -99,7 +97,10 @@ INSERT INTO `ta_auth_rule` (`id`, `name`, `title`, `type`, `status`, `listorder`
 (13, 'Rule/edit', 'R_RULE_EDIT', 1, 1, 0, ''),
 (14, 'Rule/del', 'R_RULE_DEL', 1, 1, 0, ''),
 (15, 'Member/index', 'R_MEMBER_INDEX', 1, 1, 0, ''),
-(16, 'Member/add', 'R_MEMBER_ADD', 1, 1, 0, '');
+(17, 'Member/add', 'R_MEMBER_ADD', 1, 1, 0, ''),
+(16, 'Member/status', 'R_MEMBER_STATUS', 1, 1, 0, ''),
+(18, 'Member/edit', 'R_MEMBER_EDIT', 1, 1, 0, ''),
+(19, 'Member/del', 'R_MEMBER_DEL', 1, 1, 0, '');
 
 -- --------------------------------------------------------
 
@@ -120,7 +121,7 @@ CREATE TABLE IF NOT EXISTS `ta_member` (
   `login_ip` char(15) NOT NULL COMMENT '登入IP',
   `last_login_time` int(10) unsigned NOT NULL COMMENT '最后登入时间戳',
   `login_count` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '登入次数'
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='用户信息表' AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='用户信息表' AUTO_INCREMENT=3 ;
 
 --
 -- 转存表中的数据 `ta_member`
@@ -128,9 +129,7 @@ CREATE TABLE IF NOT EXISTS `ta_member` (
 
 INSERT INTO `ta_member` (`id`, `password`, `username`, `realname`, `email`, `question`, `answer`, `status`, `regtime`, `login_ip`, `last_login_time`, `login_count`) VALUES
 (1, '30bc103d85df152c8c703bcbbcc7fd4d', 'admin', '你买单我就来', 'itsky71@foxmail.com', '我还会回来的...', '灰太狼？呵呵。。。', 1, 1419068912, '127.0.0.1', 1419068912, 27),
-(2, '30bc103d85df152c8c703bcbbcc7fd4d', 'itsky', '你地盘我做主', 'zmh0515005@163.com', '你是谁?', 'abc111', 1, 1419587881, '127.0.0.1', 1419744654, 63),
-(3, '30bc103d85df152c8c703bcbbcc7fd4d', 'yourphp', '呵呵', 'zmh0515005@163.me', '安全问题', '答案', 1, 1419753002, '127.0.0.1', 1419753501, 1),
-(4, '86b166ecd4c46693b3930cdb8415dd73', 'adminDD', '哈哈', 'zmh0515005@163.dd', 'dfdf', 'gyrerh', 1, 1419753115, '127.0.0.1', 1419753335, 1);
+(2, '30bc103d85df152c8c703bcbbcc7fd4d', 'itsky', '你地盘我做主', 'zmh0515005@163.com', '你是谁?', 'abc111', 1, 1419587881, '127.0.0.1', 1419744654, 63);
 
 -- --------------------------------------------------------
 
@@ -247,12 +246,12 @@ MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户组id',
 -- AUTO_INCREMENT for table `ta_auth_rule`
 --
 ALTER TABLE `ta_auth_rule`
-MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=17;
+MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT for table `ta_member`
 --
 ALTER TABLE `ta_member`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户ID',AUTO_INCREMENT=5;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户ID',AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `ta_menu`
 --

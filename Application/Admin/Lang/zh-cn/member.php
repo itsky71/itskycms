@@ -31,5 +31,7 @@ return array(
     'YZAL'          =>  '答案长度不能超过30个字符！',
     'GROUPR'        =>  '用户组必须选择！',
     'ADD_ERROR'     =>  '会员添加失败！',
-    'ADD_SUCCESS'   =>  '会员添加成功！'
+    'ADD_SUCCESS'   =>  '会员添加成功！',
+    'SAVE_ERROR'    =>  '会员修改失败！',
+    'SAVE_OK'       =>  '会员修改成功！'
 );

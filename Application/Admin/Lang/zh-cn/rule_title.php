@@ -18,4 +18,7 @@ $rule_title = array(
     'R_RULE_DFD' => '修改',
     'R_MEMBER_INDEX' => '会员管理',
     'R_MEMBER_ADD' => '添加',
+    'R_MEMBER_STATUS' => '状态',
+    'R_MEMBER_EDIT' => '修改',
+    'R_MEMBER_DEL' => '删除',
 );

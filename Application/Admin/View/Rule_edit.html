@@ -34,7 +34,7 @@
             <label class="col-sm-3 control-label no-padding-right">{:L('STATUS')}:</label>
             <div class="col-sm-9">
                 <label>
-                    <input class="ace ace-switch ace-switch-7" type="checkbox" checked="checked" value="1" name="status"/>
+                    <input class="ace ace-switch ace-switch-7" type="checkbox"{:ACTION_NAME=='add'?' checked="checked"':($v['status']?' checked="checked"':'')} value="1" name="status"/>
                     <span class="lbl"></span>
                 </label>
             </div>

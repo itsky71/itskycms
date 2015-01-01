@@ -51,4 +51,5 @@ $menu_common = array(
     'M_BLOCK_INDEX' => '碎片管理',
     'M_SLIDE_INDEX' => '幻灯片管理',
     'M_SLIDE_INDEXF' => '幻灯片管理',
+    'M_GGHF_INDEX' => '个人',
 );

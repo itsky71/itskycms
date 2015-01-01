@@ -36,7 +36,7 @@ class MemberModel extends Model{
         $patten = '/^[\w\d\x{4e00}-\x{9fa5}]+$/u';
         return preg_match($patten, $rname) === 1;
     }
-    
+
     public function checkFiledOne($data) {
         foreach ($data as $filed => $value){
             if($filed!=$this->getPk()){
