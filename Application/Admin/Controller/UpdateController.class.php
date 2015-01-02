@@ -18,4 +18,7 @@ class UpdateController extends AdminController{
     public function index() {
         $this->display();
     }
+
+    //更新缓存
+    
 }

@@ -10,7 +10,7 @@
                         <th class="center w60">{:L('ORDER')}</th>
                         <th>{:L('TITLE')}</th>
                         <th>{:L('NAME')}</th>
-                        <th>{:L('STATUS')}</th>
+                        <th class="center">{:L('STATUS')}</th>
                         <th class="center">{:L('MANOPE')}</th>
                     </tr>
                 </thead>
@@ -22,7 +22,7 @@
                         </td>
                         <td>{$vo.title}</td>
                         <td>{$vo.name}</td>
-                        <td>{$vo.status}</td>
+                        <td class="center">{$vo.status}</td>
                         <td class="center">
                             <a class="btn btn-success btn-minier" onclick="load(event,this)" href="{:U('Rule/edit',array('id'=>$vo['id']))}">
                                 <span class="glyphicon glyphicon-edit"></span> {:L('EDIT')}
@@ -40,7 +40,7 @@
                         </td>
                         <td>{$v.title}</td>
                         <td>{$v.name}</td>
-                        <td>{$v.status}</td>
+                        <td class="center">{$v.status}</td>
                         <td class="center">
                             <a class="btn btn-success btn-minier" onclick="load(event,this)" href="{:U('Rule/edit',array('id'=>$v['id']))}">
                                 <span class="glyphicon glyphicon-edit"></span> {:L('EDIT')}

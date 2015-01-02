@@ -11,7 +11,7 @@
 namespace Admin\Controller;
 /**
  * Description of MemberController
- * 
+ * 会员资料管理控制器
  * @author itsky
  */
 class MemberController extends AdminController{

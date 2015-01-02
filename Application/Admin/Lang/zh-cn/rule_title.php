@@ -21,4 +21,7 @@ $rule_title = array(
     'R_MEMBER_STATUS' => '状态',
     'R_MEMBER_EDIT' => '修改',
     'R_MEMBER_DEL' => '删除',
+    'R_UPDATE_INDEX' => '网站更新',
+    'R_GROUP_INDEX' => '会员组管理',
+    'R_GROUP_ADD' => '添加',
 );

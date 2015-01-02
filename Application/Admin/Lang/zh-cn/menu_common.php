@@ -52,4 +52,6 @@ $menu_common = array(
     'M_SLIDE_INDEX' => '幻灯片管理',
     'M_SLIDE_INDEXF' => '幻灯片管理',
     'M_GGHF_INDEX' => '个人',
+    'M_UPDATE_CACHE' => '更新缓存',
+    'M_UPDATES_INDEX' => '网站更新',
 );
