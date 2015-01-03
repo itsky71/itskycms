@@ -2,7 +2,7 @@
 // +----------------------------------------------------------------------
 // | ITskyCMS
 // +----------------------------------------------------------------------
-// | Copyright (c) 2015 http://www.itsky.me All rights reserved.
+// | Copyright (c) 2015 http://www.itsky71.net All rights reserved.
 // +----------------------------------------------------------------------
 // | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
 // +----------------------------------------------------------------------
@@ -35,16 +35,5 @@ class MemberModel extends Model{
         $rname = I('post.realname');
         $patten = '/^[\w\d\x{4e00}-\x{9fa5}]+$/u';
         return preg_match($patten, $rname) === 1;
-    }
-
-    public function checkFiledOne($data) {
-        foreach ($data as $filed => $value){
-            if($filed!=$this->getPk()){
-                $vfiled = $filed;
-            }
-        }
-        $data['res'] = $this->_validationFieldItem($data, array($vfiled,'','',self::EXISTS_VALIDATE,'unique'));
-        $data['vfiled'] = $vfiled;
-        return $data;
     }
 }

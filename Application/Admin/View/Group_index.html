@@ -22,10 +22,16 @@
                     <td class="center">{$vo.status}</td>
                     <td class="center">
                         <a class="btn btn-success btn-minier" onclick="load(event,this)" href="{:U('Group/edit',array('id'=>$vo['id']))}">
-                            <span class="glyphicon glyphicon-edit"></span> {:L('EDIT')}
+                            <span class="glyphicon glyphicon-edit"></span>{:L('EDIT')}
                         </a>
                         <a class="btn btn-danger btn-minier" onclick="del(event,this,'c')" href="{:U('Group/del',array('id'=>$vo['id']))}">
-                            <span class="glyphicon glyphicon-trash"></span> {:L('DELETE')}
+                            <span class="glyphicon glyphicon-trash"></span>{:L('DELETE')}
+                        </a>
+                        <a class="btn btn-purple btn-minier" onclick="load(event,this)" href="{:U('Group/access',array('id'=>$vo['id']))}">
+                            <span class="glyphicon glyphicon-flag"></span>{:L('ACCESS')}
+                        </a>
+                        <a class="btn btn-info btn-minier" onclick="load(event,this)" href="{:U('Member/index',array('groupid'=>$vo['id']))}">
+                            <span class="glyphicon glyphicon-list"></span>{:L('USERLIST')}
                         </a>
                     </td>
                 </tr>

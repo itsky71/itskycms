@@ -77,6 +77,15 @@
     $('.page-header h1').empty();
     $('.page-header h1').append('{:L('M_'.$Think.CONTROLLER_NAME.'_INDEX')}<small class="glyphicon glyphicon-chevron-right"> {:L($Think.ACTION_NAME)}</small>');
     $('form[role="form"]').validator({
+        fields:{
+            username:'required;username;remote[{:U('Public/checkUserName')}, id]',
+            password:'{:ACTION_NAME=='add'?'required;':''}password',
+            realname:'realname;length[2~20]',
+            email:'required;email;remote[{:U('Public/checkEmail')}, id]',
+            group:'required',
+            question:'length[3~30]',
+            answer:'length[3~30]'
+        },
         valid:function(form){
             $.ajax({
                 type: 'POST',

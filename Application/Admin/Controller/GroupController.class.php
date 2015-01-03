@@ -2,7 +2,7 @@
 // +----------------------------------------------------------------------
 // | ITskyCMS
 // +----------------------------------------------------------------------
-// | Copyright (c) 2015 http://www.itsky.me All rights reserved.
+// | Copyright (c) 2015 http://www.itsky71.net All rights reserved.
 // +----------------------------------------------------------------------
 // | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
 // +----------------------------------------------------------------------
@@ -28,5 +28,19 @@ class GroupController extends AdminController{
         }
         $this->assign('list', $list);
         $this->display();
+    }
+
+    public function add(){
+        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        if(IS_POST){
+            $Group = D('AuthGroup');
+            if($Group->create()){
+                print_r(I('post.'));
+            }else{
+                $this->error($Group->getError());
+            }
+        }else{
+            $this->display('edit');
+        }
     }
 }

@@ -2,7 +2,7 @@
 // +----------------------------------------------------------------------
 // | ITskyCMS
 // +----------------------------------------------------------------------
-// | Copyright (c) 2015 http://www.itsky.me All rights reserved.
+// | Copyright (c) 2015 http://www.itsky71.net All rights reserved.
 // +----------------------------------------------------------------------
 // | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
 // +----------------------------------------------------------------------
@@ -107,9 +107,7 @@ class PublicController extends Controller {
         }
     }
 
-    /**
-     * 验证菜单名称
-     */
+    /** 验证菜单名称 */
     public function checkAction(){
         if(IS_AJAX && IS_POST){
             $Menu = D('Menu');
@@ -129,9 +127,7 @@ class PublicController extends Controller {
         }
     }
 
-    /**
-     * 验证权限节点名称
-     */
+    /** 验证权限节点名称 */
     public function checkName(){
         if(IS_AJAX && IS_POST){
             $Rule = D('AuthRule');
@@ -139,6 +135,32 @@ class PublicController extends Controller {
             if(I('post.id')) $map['id'] = array('neq',I('post.id'));
             $res = $Rule->where($map)->find();
             if($res) echo json_encode(array('error'=>L('NAMEU')));
+        }else{
+            $this->error(L('_ERROR_ACTION_'));
+        }
+    }
+
+    /** 验证用户名 */
+    public function checkUserName(){
+        if(IS_AJAX && IS_POST){
+            $Member = D('Member');
+            $map['username'] = I('post.username');
+            if(I('post.id')) $map['id'] = array('neq',I('post.id'));
+            $res = $Member->where($map)->find();
+            if($res) echo json_encode(array('error'=>L('USERNAMEU')));
+        }else{
+            $this->error(L('_ERROR_ACTION_'));
+        }
+    }
+
+    /** 验证邮箱 */
+    public function checkEmail(){
+        if(IS_AJAX && IS_POST){
+            $Member = D('Member');
+            $map['email'] = I('post.email');
+            if(I('post.id')) $map['id'] = array('neq',I('post.id'));
+            $res = $Member->where($map)->find();
+            if($res) echo json_encode(array('error'=>L('EMAILU')));
         }else{
             $this->error(L('_ERROR_ACTION_'));
         }

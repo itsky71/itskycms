@@ -2,7 +2,7 @@
 // +----------------------------------------------------------------------
 // | ITskyCMS
 // +----------------------------------------------------------------------
-// | Copyright (c) 2015 http://www.itsky.me All rights reserved.
+// | Copyright (c) 2015 http://www.itsky71.net All rights reserved.
 // +----------------------------------------------------------------------
 // | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
 // +----------------------------------------------------------------------
@@ -62,15 +62,6 @@ class IndexController extends AdminController {
             $vo = $Member->getById(session(C('USER_AUTH_KEY')));
             $this->assign('vo', $vo);
             $this->display();
-        }
-    }
-    //验证用户名和邮箱的唯一性
-    public function check(){
-        $Member = D('Member');
-        $res = $Member->checkFiledOne(I('post.'));
-        if(!$res['res']){
-            $data = array('error'=>L($res['vfiled']).'已被占用！');
-            $this->ajaxReturn($data);
         }
     }
 }
