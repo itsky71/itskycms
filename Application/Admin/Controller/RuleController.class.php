@@ -62,7 +62,7 @@ class RuleController extends AdminController{
             }
         }else{
             $map['name'] = array('like','%/index');
-            $group = $Rule->where($map)->select();
+            $group = $Rule->where($map)->order('listorder,id')->select();
             $this->assign('group', $group);
             $this->display('edit');
         }

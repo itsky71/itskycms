@@ -17,5 +17,8 @@ use Think\Model;
  */
 class AuthGroupModel extends Model{
     //表单验证
-    protected $_validate = array();
+    protected $_validate = array(
+        array('title','2,20','{%TITLEL}',self::EXISTS_VALIDATE,'length'),
+        array('remark','0,100','{%REMARKL}',self::EXISTS_VALIDATE,'length')
+    );
 }

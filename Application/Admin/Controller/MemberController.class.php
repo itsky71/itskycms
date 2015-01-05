@@ -19,7 +19,11 @@ class MemberController extends AdminController{
         if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
         $Member = D('Member');
         $Group = D('AuthGroup');
-        $data = $Member->join('__AUTH_GROUP_ACCESS__ ON __MEMBER__.id = __AUTH_GROUP_ACCESS__.uid')->order('id desc')->select();
+        if(I('get.groupid')){
+            $data = $Member->join('__AUTH_GROUP_ACCESS__ ON __MEMBER__.id = __AUTH_GROUP_ACCESS__.uid')->where('group_id='.I('get.groupid'))->order('id desc')->select();
+        }else{
+            $data = $Member->join('__AUTH_GROUP_ACCESS__ ON __MEMBER__.id = __AUTH_GROUP_ACCESS__.uid')->order('id desc')->select();
+        }
         foreach ($data as $item){
             if($item['username'] == C('ADMIN_AUTH_KEY') || $item['id'] == session(C('USER_AUTH_KEY'))){
                 $disabled = ' disabled="disabled"';
@@ -30,7 +34,8 @@ class MemberController extends AdminController{
             $allow = '<a class="btn btn-success btn-minier" href="'.U('Member/status',$staop).'" onclick="load(event,this)"'.$disabled.'><span class="glyphicon glyphicon-ok"></span></a>';
             $ban = '<a class="btn btn-danger btn-minier" href="'.U('Member/status',$staop).'" onclick="load(event,this)"'.$disabled.'><span class="glyphicon glyphicon-ban-circle"></span></a>';
             $item['status'] = $item['status'] ? $allow.'<i class="hide">1</i>' : $ban.'<i class="hide">0</i>';
-            $item['group'] = $Group->getFieldById($item['group_id'],'title');
+            $title = $Group->getFieldById($item['group_id'],'title');
+            $item['group'] = L($title);
             $list[] = $item;
         }
         $this->assign('list', $list);

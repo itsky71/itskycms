@@ -1,5 +1,11 @@
 <?php
-return array(
+$gpath = MODULE_PATH.'Lang/'.LANG_SET.'/group_title.php';
+if(file_exists($gpath)){
+    require_once $gpath;
+}else{
+    $group_title = array();
+}
+$member = array(
     'LENGTHMENU'    =>  '每页 _MENU_ 条记录',
     'ZEROREC'       =>  '没有找到记录',
     'INFO'          =>  '第 _PAGE_/_PAGES_ 页 ( 共 _TOTAL_ 条记录 )',
@@ -35,3 +41,4 @@ return array(
     'SAVE_ERROR'    =>  '会员修改失败！',
     'SAVE_OK'       =>  '会员修改成功！'
 );
+return array_merge($member, $group_title);

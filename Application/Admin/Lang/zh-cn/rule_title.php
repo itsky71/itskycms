@@ -24,4 +24,8 @@ $rule_title = array(
     'R_UPDATE_INDEX' => '网站更新',
     'R_GROUP_INDEX' => '会员组管理',
     'R_GROUP_ADD' => '添加',
+    'R_GROUP_STATUS' => '状态',
+    'R_GROUP_EDIT' => '编辑',
+    'R_GROUP_DEL' => '删除',
+    'R_GROUP_ACCESS' => '授权',
 );

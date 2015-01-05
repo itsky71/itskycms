@@ -17,8 +17,8 @@
             <foreach name="list" item="vo">
                 <tr>
                     <td class="center">{$vo.id}</td>
-                    <td>{$vo.title}</td>
-                    <td>{$vo.remark}</td>
+                    <td>{:L($vo['title'])}</td>
+                    <td>{:L($vo['remark'])}</td>
                     <td class="center">{$vo.status}</td>
                     <td class="center">
                         <a class="btn btn-success btn-minier" onclick="load(event,this)" href="{:U('Group/edit',array('id'=>$vo['id']))}">

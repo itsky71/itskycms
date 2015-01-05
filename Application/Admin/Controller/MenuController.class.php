@@ -152,7 +152,7 @@ class MenuController extends AdminController{
      * @param string $langpath 语言文件路径
      * @return boolean
      */
-    private function _write_lang($lang,$del = FALSE,$langpath = ''){
+    private function _write_lang($lang,$langpath = ''){
         if(!is_array($lang)){
             return FALSE;
         }
