@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2015-01-03 10:37:43
+-- Generation Time: 2015-01-07 09:31:22
 -- 服务器版本： 5.6.20
 -- PHP Version: 5.5.15
 
@@ -32,16 +32,16 @@ CREATE TABLE IF NOT EXISTS `ta_auth_group` (
   `remark` varchar(100) NOT NULL COMMENT '描述',
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '用户组状态',
   `rules` char(80) NOT NULL DEFAULT '' COMMENT '用户组拥有的规则id， 多个规则","隔开'
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='用户组表' AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='用户组表' AUTO_INCREMENT=6 ;
 
 --
 -- 转存表中的数据 `ta_auth_group`
 --
 
 INSERT INTO `ta_auth_group` (`id`, `title`, `remark`, `status`, `rules`) VALUES
-(1, '超级管理员', '超级管理员', 1, ''),
-(2, '普通管理员', '普通管理员', 1, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22'),
-(3, '注册用户', '注册用户', 1, '1');
+(1, 'A_G_T_1', 'A_G_R_1', 1, ''),
+(2, 'A_G_T_2', 'A_G_R_2', 1, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26'),
+(3, 'A_G_T_3', 'A_G_R_3', 1, '1');
 
 -- --------------------------------------------------------
 
@@ -71,41 +71,46 @@ INSERT INTO `ta_auth_group_access` (`uid`, `group_id`) VALUES
 
 CREATE TABLE IF NOT EXISTS `ta_auth_rule` (
 `id` mediumint(8) unsigned NOT NULL COMMENT '主键',
+  `tid` tinyint(2) unsigned NOT NULL COMMENT '分类编号',
   `name` char(80) NOT NULL DEFAULT '' COMMENT '规则唯一标识',
   `title` varchar(50) NOT NULL DEFAULT '' COMMENT '规则中文名称',
-  `type` tinyint(1) NOT NULL DEFAULT '1',
+  `type` tinyint(1) NOT NULL DEFAULT '1' COMMENT '如果为1， condition字段就可以定义规则表达式',
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '状态：为1正常，为0禁用',
   `listorder` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
   `condition` char(100) NOT NULL DEFAULT '' COMMENT '规则表达式，为空表示存在就验证，不为空表示按照条件验证'
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='规则表' AUTO_INCREMENT=23 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='规则表' AUTO_INCREMENT=27 ;
 
 --
 -- 转存表中的数据 `ta_auth_rule`
 --
 
-INSERT INTO `ta_auth_rule` (`id`, `name`, `title`, `type`, `status`, `listorder`, `condition`) VALUES
-(1, 'Index/index', 'R_INDEX_INDEX', 1, 1, 0, ''),
-(2, 'Index/profile', 'R_INDEX_PROFILE', 1, 1, 0, ''),
-(3, 'Menu/index', 'R_MENU_INDEX', 1, 1, 0, ''),
-(4, 'Menu/add', 'R_MENU_ADD', 1, 1, 2, ''),
-(5, 'Menu/edit', 'R_MENU_EDIT', 1, 1, 3, ''),
-(6, 'Menu/del', 'R_MENU_DEL', 1, 1, 4, ''),
-(7, 'Menu/order', 'R_MENU_ORDER', 1, 1, 0, ''),
-(8, 'Menu/status', 'R_MENU_STATUS', 1, 1, 1, ''),
-(9, 'Rule/index', 'R_RULE_INDEX', 1, 1, 0, ''),
-(10, 'Rule/order', 'R_RULE_ORDER', 1, 1, 0, ''),
-(11, 'Rule/status', 'R_RULE_STATUS', 1, 1, 0, ''),
-(12, 'Rule/add', 'R_RULE_ADD', 1, 1, 0, ''),
-(13, 'Rule/edit', 'R_RULE_EDIT', 1, 1, 0, ''),
-(14, 'Rule/del', 'R_RULE_DEL', 1, 1, 0, ''),
-(15, 'Member/index', 'R_MEMBER_INDEX', 1, 1, 0, ''),
-(17, 'Member/add', 'R_MEMBER_ADD', 1, 1, 0, ''),
-(16, 'Member/status', 'R_MEMBER_STATUS', 1, 1, 0, ''),
-(18, 'Member/edit', 'R_MEMBER_EDIT', 1, 1, 0, ''),
-(19, 'Member/del', 'R_MEMBER_DEL', 1, 1, 0, ''),
-(21, 'Update/index', 'R_UPDATE_INDEX', 1, 1, 0, ''),
-(20, 'Group/index', 'R_GROUP_INDEX', 1, 1, 0, ''),
-(22, 'Group/add', 'R_GROUP_ADD', 1, 1, 0, '');
+INSERT INTO `ta_auth_rule` (`id`, `tid`, `name`, `title`, `type`, `status`, `listorder`, `condition`) VALUES
+(1, 1, 'Index/index', 'R_INDEX_INDEX', 1, 1, 0, ''),
+(2, 1, 'Index/profile', 'R_INDEX_PROFILE', 1, 1, 0, ''),
+(3, 2, 'Menu/index', 'R_MENU_INDEX', 1, 1, 0, ''),
+(4, 2, 'Menu/add', 'R_MENU_ADD', 1, 1, 2, ''),
+(5, 2, 'Menu/edit', 'R_MENU_EDIT', 1, 1, 3, ''),
+(6, 2, 'Menu/del', 'R_MENU_DEL', 1, 1, 4, ''),
+(7, 2, 'Menu/order', 'R_MENU_ORDER', 1, 1, 0, ''),
+(8, 2, 'Menu/status', 'R_MENU_STATUS', 1, 1, 1, ''),
+(9, 5, 'Rule/index', 'R_RULE_INDEX', 1, 1, 0, ''),
+(10, 5, 'Rule/order', 'R_RULE_ORDER', 1, 1, 0, ''),
+(11, 5, 'Rule/status', 'R_RULE_STATUS', 1, 1, 0, ''),
+(12, 5, 'Rule/add', 'R_RULE_ADD', 1, 1, 0, ''),
+(13, 5, 'Rule/edit', 'R_RULE_EDIT', 1, 1, 0, ''),
+(14, 5, 'Rule/del', 'R_RULE_DEL', 1, 1, 0, ''),
+(15, 5, 'Member/index', 'R_MEMBER_INDEX', 1, 1, 0, ''),
+(17, 5, 'Member/add', 'R_MEMBER_ADD', 1, 1, 0, ''),
+(16, 5, 'Member/status', 'R_MEMBER_STATUS', 1, 1, 0, ''),
+(18, 5, 'Member/edit', 'R_MEMBER_EDIT', 1, 1, 0, ''),
+(19, 5, 'Member/del', 'R_MEMBER_DEL', 1, 1, 0, ''),
+(21, 6, 'Update/index', 'R_UPDATE_INDEX', 1, 1, 0, ''),
+(20, 5, 'Group/index', 'R_GROUP_INDEX', 1, 1, 0, ''),
+(22, 5, 'Group/add', 'R_GROUP_ADD', 1, 1, 1, ''),
+(23, 5, 'Group/status', 'R_GROUP_STATUS', 1, 1, 0, ''),
+(24, 5, 'Group/edit', 'R_GROUP_EDIT', 1, 1, 1, ''),
+(25, 5, 'Group/del', 'R_GROUP_DEL', 1, 1, 1, ''),
+(26, 5, 'Group/access', 'R_GROUP_ACCESS', 1, 1, 1, '');
 
 -- --------------------------------------------------------
 
@@ -134,7 +139,7 @@ CREATE TABLE IF NOT EXISTS `ta_member` (
 
 INSERT INTO `ta_member` (`id`, `password`, `username`, `realname`, `email`, `question`, `answer`, `status`, `regtime`, `login_ip`, `last_login_time`, `login_count`) VALUES
 (1, '30bc103d85df152c8c703bcbbcc7fd4d', 'admin', '你买单我就来', 'itsky71@foxmail.com', '我还会回来的...', '灰太狼？呵呵。。。', 1, 1419068912, '127.0.0.1', 1419068912, 27),
-(2, '30bc103d85df152c8c703bcbbcc7fd4d', 'itsky', '你地盘我做主', 'zmh0515005@163.com', '你是谁?', 'abc111', 1, 1419587881, '127.0.0.1', 1420254408, 67),
+(2, '30bc103d85df152c8c703bcbbcc7fd4d', 'itsky', '你地盘我做主', 'zmh0515005@163.com', '你是谁?', 'abc111', 1, 1419587881, '127.0.0.1', 1420596467, 71),
 (3, 'f706576d209e2e3e77d31e4d2eec6ad8', 'yourphp', '', 'zmw0515s05@163.me', '44rhr', 'ygrnrn', 1, 1420275161, '', 0, 0);
 
 -- --------------------------------------------------------
@@ -248,12 +253,12 @@ ALTER TABLE `ta_menu`
 -- AUTO_INCREMENT for table `ta_auth_group`
 --
 ALTER TABLE `ta_auth_group`
-MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户组id',AUTO_INCREMENT=4;
+MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户组id',AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `ta_auth_rule`
 --
 ALTER TABLE `ta_auth_rule`
-MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=23;
+MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=27;
 --
 -- AUTO_INCREMENT for table `ta_member`
 --

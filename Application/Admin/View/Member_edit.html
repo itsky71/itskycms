@@ -40,7 +40,7 @@
                 <select class="form-control" name="group">
                     <option value="">{:L('SELECT')}</option>
                     <foreach name="glist" item="vo">
-                    <option value="{$vo.id}"{$gid==$vo['id']?' selected="selected"':''}>{$vo.title}</option>
+                    <option value="{$vo.id}"{$gid==$vo['id']?' selected="selected"':''}>{:L($vo['title'])}</option>
                     </foreach>
                 </select>
             </div>

@@ -119,9 +119,20 @@ class GroupController extends AdminController{
 
     public function access(){
         if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        $Group = D('AuthGroup');
         if(IS_POST){
             
         }else{
+            $v = $Group->where('id='.I('get.id'))->find();
+            $rules = explode(',', $v['rules']);
+            $Menu = D('Menu');
+            $top = $Menu->where('pid=0')->field('name')->select();
+            $Rule = D('AuthRule');
+            $rlist = $Rule->where('status=1')->order('listorder,id')->select();
+            $this->assign('v', $v);
+            $this->assign('rules', $rules);
+            $this->assign('top', $top);
+            $this->assign('rlist', $rlist);
             $this->display();
         }
     }
