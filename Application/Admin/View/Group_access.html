@@ -1,36 +1,39 @@
 <div id="access" class="col-xs-12">
     <div class="panel panel-info">
         <div class="panel-heading">
-            <label><input class="ace" type="checkbox"/><span class="lbl"> {:L('ALL_SELECT')}</span></label>
+            <label><input class="ace" type="checkbox" data-key="0"/><span class="lbl"> {:L('ALL_SELECT')}</span></label>
             <strong class="pull-right f14">{:L('GROUPNAME')}: {:L($v['title'])}</strong>
         </div>
-        <table class="table table-striped">
-            <foreach name="top" item="t" key="n">
-            <tr><td><label><span class="badge badge-grey">{$n+1}</span> <input class="ace" type="checkbox"/><span class="lbl"> {:L($t['name'])}</span></label></td></tr>
-            <tr>
-                <td>
-                    <foreach name="rlist" item="vo">
-                    <if condition="$vo['tid'] eq $n+1">
-                    <php>$name = explode('/',$vo['name']);</php>
-                    <if condition="$name[1] eq 'index'">
-                        <div class="line-height-1 mtb4"></div>
-                        <label class="mr10">
-                            <input class="ace" type="checkbox"{:in_array($vo['id'],$rules)?' checked="checked"':''} name="id[{$vo.id}]" value="{$vo.id}"/><span class="lbl"> {:L($vo['title'])}</span>
-                            <span class="text-muted f12">({$vo.name})</span>
-                        </label>
-                    <else/>
-                        <label class="mr10">
-                            <input class="ace" type="checkbox"{:in_array($vo['id'],$rules)?' checked="checked"':''} name="id[{$vo.id}]" value="{$vo.id}"/><span class="lbl"> {:L($vo['title'])}</span>
-                            <span class="text-muted f12">({$vo.name})</span>
-                        </label>
-                    </if>
-                    </if>
-                    </foreach>
-                </td>
-            </tr>
-            </foreach>
-            <tr><td><button type="submit" class="btn btn-primary btn-sm">{:L('SAVE')}</button></td></tr>
-        </table>
+        <form role="form">
+            <input type="hidden" name="gid" value="{$v.id}"/>
+            <table class="table table-striped">
+                <foreach name="top" item="t" key="n">
+                <tr><td><label><span class="badge badge-grey">{$n+1}</span> <input class="ace" type="checkbox" data-key="{$n+1}"/><span class="lbl"> {:L($t['name'])}</span></label></td></tr>
+                <tr>
+                    <td>
+                        <foreach name="rlist" item="vo">
+                        <if condition="$vo['tid'] eq $n+1">
+                        <php>$name = explode('/',$vo['name']);</php>
+                        <if condition="$name[1] eq 'index'">
+                            <div class="line-height-1 mtb4"></div>
+                            <label class="mr10">
+                                <input class="ace" type="checkbox"{:in_array($vo['id'],$rules)?' checked="checked"':''} name="id[{$vo.id}]" value="{$vo.id}" data-var="{$n+1}"/><span class="lbl"> {:L($vo['title'])}</span>
+                                <span class="text-muted f12">({$vo.name})</span>
+                            </label>
+                        <else/>
+                            <label class="mr10">
+                                <input class="ace" type="checkbox"{:in_array($vo['id'],$rules)?' checked="checked"':''} name="id[{$vo.id}]" value="{$vo.id}" data-var="{$n+1}"/><span class="lbl"> {:L($vo['title'])}</span>
+                                <span class="text-muted f12">({$vo.name})</span>
+                            </label>
+                        </if>
+                        </if>
+                        </foreach>
+                    </td>
+                </tr>
+                </foreach>
+                <tr><td><button type="submit" class="btn btn-primary btn-sm">{:L('SAVE')}</button></td></tr>
+            </table>
+        </form>
     </div>
 </div>
 <script type="text/javascript">
@@ -42,5 +45,47 @@
     $('.page-header h1').append('{:L('M_'.$Think.CONTROLLER_NAME.'_INDEX')}<small class="glyphicon glyphicon-chevron-right"> {:L($Think.ACTION_NAME)}</small>');
     $('#access .table td').each(function(){
         $(this).find('.line-height-1:first').hide();
+        var checkbox = $(this).find('input[type="checkbox"]');
+        if(checkbox.attr('checked')){
+            $('input[type="checkbox"][data-key="'+checkbox.attr('data-var')+'"]').attr('checked',true);
+        }
+    });
+    if($('#access .table input[type="checkbox"]').attr('checked')){
+        $('input[type="checkbox"][data-key="0"]').attr('checked',true);
+    }
+    $('#access input:checkbox').click(function(){
+        var top = $('input[data-key="0"]:checkbox');
+        if($(this).attr('data-key') == 0){
+            if($(this).attr('checked')){
+                $('#access .table input:checkbox').attr('checked',true);
+            }else{
+                $('#access .table input:checkbox').attr('checked',false);
+            }
+        }
+        if($(this).attr('data-key')>0){
+            if($(this).attr('checked')){
+                $('#access .table input[data-var="'+$(this).attr('data-key')+'"]:checkbox').attr('checked',true);
+                if(!top.attr('checked')) top.attr('checked',true);
+            }else{
+                $('#access .table input[data-var="'+$(this).attr('data-key')+'"]:checkbox').attr('checked',false);
+            }
+        }
+        if($(this).attr('data-var')>0 && $(this).attr('checked')){
+            var par = $('#access .table input[data-key="'+$(this).attr('data-var')+'"]:checkbox');
+            if(!par.attr('checked')) par.attr('checked',true);
+            if(!top.attr('checked')) top.attr('checked',true);
+        }
+    });
+    $('form[role="form"]').validator({
+        valid:function(form){
+            $.ajax({
+                type: 'POST',
+                url: '{:U('Group/access')}',
+                data:$(form).serialize(),
+                success: function(data){
+                    show_msg(data);
+                }
+            });
+        }
     });
 </script>

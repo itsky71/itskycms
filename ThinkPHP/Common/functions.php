@@ -297,7 +297,7 @@ function I($name,$default='',$filter=null,$datas=null) {
             $input  =   array();
             if(!empty($_SERVER['PATH_INFO'])){
                 $depr   =   C('URL_PATHINFO_DEPR');
-                $input  =   explode($depr,trim($_SERVER['PATH_INFO'],$depr));            
+                $input  =   explode($depr,trim($_SERVER['PATH_INFO'],$depr));
             }
             break;
         case 'request' :   $input =& $_REQUEST;   break;

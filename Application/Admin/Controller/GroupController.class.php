@@ -45,7 +45,7 @@ class GroupController extends AdminController{
                 );
                 if($Group->add($data)){
                     $info[$data['title']] = I('post.title');
-                    $info[$data['remark']] = I('post.remark');
+                    $info[$data['remark']] = addcslashes(I('post.remark','',NULL),'\'\\');
                     $this->_write_lang($info);
                     $this->success(L('ADD_SUCCESS'),U('Group/index'));
                 }else{
@@ -72,7 +72,7 @@ class GroupController extends AdminController{
                 $result = $Group->where('id='.I('post.id'))->save($data);
                 if($result !== FALSE){
                     $info[$data['title']] = I('post.title');
-                    $info[$data['remark']] = I('post.remark');
+                    $info[$data['remark']] = addcslashes(I('post.remark','',NULL),'\'\\');
                     $this->_write_lang($info);
                     $this->success(L('SAVE_OK'),U('Group/index'));
                 }else{
@@ -121,7 +121,15 @@ class GroupController extends AdminController{
         if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
         $Group = D('AuthGroup');
         if(IS_POST){
-            
+            $rules = I('post.id') ? I('post.id') : array();
+            sort($rules,SORT_NUMERIC);
+            $data['rules'] = implode(',', $rules);
+            $result = $Group->where('id='.I('post.gid'))->save($data);
+            if($result !== FALSE){
+                $this->success(L('ACCESS_OK'),U('Group/index'));
+            }else{
+                $this->error(L('ACCESS_ERROR'));
+            }
         }else{
             $v = $Group->where('id='.I('get.id'))->find();
             $rules = explode(',', $v['rules']);
@@ -155,7 +163,7 @@ class GroupController extends AdminController{
         eval(str_replace($phpstar,'', read_file($path)));
         $arrdata = array_merge($group_title, $lang);
         foreach ($arrdata as $key => $value){
-            $langdata .= "    '$key' => '$value',".PHP_EOL;
+            $langdata .= "    '$key' => '".addcslashes(stripslashes($value),'\'\\')."',".PHP_EOL;
         }
         $langdata .= ');';
         return write_file($path,$langdata);

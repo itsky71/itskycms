@@ -27,6 +27,9 @@ $group = array(
     'SAVE_ERROR'    =>  '会员组修改失败！',
     'SAVE_OK'       =>  '会员组修改成功！',
     'ALL_SELECT'    =>  '全选',
-    'SAVE'          =>  '保存'
+    'SAVE'          =>  '保存',
+    'ACCESS_OK'     =>  '授权成功！',
+    'ACCESS_ERROR'  =>  '授权失败！',
+    'JS_INPUT_INFO' =>  '请输入中文、字母、数字、下划线、空格'
 );
 return array_merge($group, $group_title, $rule_title);
