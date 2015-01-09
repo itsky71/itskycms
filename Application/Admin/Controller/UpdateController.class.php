@@ -16,7 +16,30 @@ namespace Admin\Controller;
  */
 class UpdateController extends AdminController{
     public function index() {
-        $this->display();
+        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        if(IS_POST){
+            if(I('showmod')){
+                $hf = explode('.', I('htmlfile'));
+                $this->buildHtml('index.html','./','Home@'.$hf[0]);
+                $this->success(L('UPDATE_OK'));
+            }else{
+                if(is_file('./index.html')){
+                    $isdel = unlink('./index.html');
+                if($isdel){
+                    $this->success(L('UPDATE_OK'));
+                }else{
+                    $this->error(L('UPDATE_ERROR'));
+                }
+                }else{
+                    $this->success(L('UPDATE_OK'));
+                }
+            }
+        }elseif(I('get.preview')){
+            $hf = explode('.', I('get.preview'));
+            echo U('Home/'.str_replace('_', '/', $hf[0]));
+        }else{
+            $this->display();
+        }
     }
 
     //更新缓存

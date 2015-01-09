@@ -45,7 +45,7 @@ $menu_common = array(
     'M_FHHJ_INDEX' => '的勾当',
     'M_GROUP_INDEX' => '会员组管理',
     'M_RULE_INDEX' => '权限节点管理',
-    'M_UPDATE_INDEX' => '网站更新',
+    'M_UPDATE_INDEX' => '主页静态化',
     'M_TPL_INDEX' => '模板管理',
     'M_TEMPLET_INDEX' => '模板管理',
     'M_BLOCK_INDEX' => '碎片管理',
@@ -54,4 +54,7 @@ $menu_common = array(
     'M_GGHF_INDEX' => '个人',
     'M_UPDATE_CACHE' => '更新缓存',
     'M_UPDATES_INDEX' => '网站更新',
+    'M_UPDATE_LANG' => '更新语言',
+    'M_UPDATE_COLHTML' => '栏目静态化',
+    'M_UPDATE_CONHTML' => '内容静态化',
 );

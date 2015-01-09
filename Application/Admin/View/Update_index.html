@@ -1,0 +1,73 @@
+<div class="col-xs-12">
+    <div class="panel panel-default">
+        <div class="panel-heading"><strong>{:L('HOME_PAGE_GUIDE')}:</strong></div>
+        <form class="form-horizontal" role="form">
+            <ul class="list-group no-margin">
+                <li class="list-group-item">
+                    <div class="form-group no-margin">
+                        <label class="col-sm-2 control-label no-padding-right">{:L('HOME_PAGE_TPL')}:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="col-xs-3" name="htmlfile" value="Index_index.html"/>
+                            <a class="btn btn-success btn-xs ml10 mt2">{:L('BROWSE')}</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="form-group no-margin">
+                        <label class="col-sm-2 control-label no-padding-right">{:L('HOME_PAGE_MOD')}:</label>
+                        <div class="col-sm-10">
+                            <label>
+                                <input class="ace" type="radio" name="showmod" value="0"/>
+                                <span class="lbl"> {:L('ACTION_BROWSE')}</span>
+                            </label>
+                            <label>
+                                <input class="ace" type="radio" name="showmod" value="1" checked="checked"/>
+                                <span class="lbl"> {:L('STATIC_BROWSE')}</span>
+                            </label>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="form-group no-margin">
+                        <label class="col-sm-2 control-label no-padding">
+                            <button id="preview" class="btn btn-xs btn-primary" type="button">{:L('PREVIEW_PAGE')}</button>
+                        </label>
+                        <div class="col-sm-10">
+                            <button type="submit" class="btn btn-xs btn-primary">{:L('UPDATE_PAGE')}</button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    var pan = '<li><a onclick="load(event,this)" href="{:U(CONTROLLER_NAME.'/index')}">{:L('M_'.$Think.CONTROLLER_NAME.'_INDEX')}</a></li>\n\
+<li class="active">{:L($Think.ACTION_NAME)}</li>';
+    $('#breadcrumbs .breadcrumb li:gt(0)').remove();
+    $('#breadcrumbs .breadcrumb').append(pan);
+    $('#sidebar .nav-list li.active').removeClass('active');
+    $('#sidebar .nav-list li.open .submenu').hide();
+    $('#sidebar .nav-list li.open').removeClass('open');
+    $('a[href="{:U(CONTROLLER_NAME.'/'.ACTION_NAME)}"]').parent().addClass('active').parent().show().parent().addClass('open active');
+    $('.page-header h1').empty();
+    $('.page-header h1').append('{:L('M_'.$Think.CONTROLLER_NAME.'_INDEX')}<small class="glyphicon glyphicon-chevron-right"> {:L($Think.ACTION_NAME)}</small>');
+    $('#preview').click(function(){
+        var newWindow = window.open();
+        $.get('{:U('Update/index')}',{preview:$('input[name="htmlfile"]').val()},function(url){
+            newWindow.location.href = url;
+        })
+    });
+    $('form[role="form"]').validator({
+        valid:function(form){
+            $.ajax({
+                type: 'POST',
+                url: '{:U('Update/index')}',
+                data:$(form).serialize(),
+                success: function(data){
+                    show_msg(data);
+                }
+            });
+        }
+    });
+</script>

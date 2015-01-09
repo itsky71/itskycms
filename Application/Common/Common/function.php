@@ -74,3 +74,42 @@ function lang($lang){
     }
     return $lstr;
 }
+/**
+ * 删除文件
+ *
+ * 删除所有提供在目录路径的包含的文件。
+ * 要被删除的文件必须是当前系统用于所有或者是当前用户对之具有写权限。
+ * 如果第二个参数设为 true，则所有在 path 下的文件夹也会被删除掉。
+ *
+ * @access  public
+ * @param   string  $path       文件路径
+ * @param   boolean    $del_dir    是否删除子文件夹
+ * @param   number  $level      控制递归的深度（0 = 递归全部，1 = 当前目录，等）
+ * @return  boolean
+ */
+function delete_files($path, $del_dir = FALSE, $level = 0){
+    // Trim the trailing slash
+    $path = rtrim($path, DIRECTORY_SEPARATOR);
+ 
+    if ( ! $current_dir = @opendir($path)){
+        return FALSE;
+    }
+ 
+    while (FALSE !== ($filename = @readdir($current_dir))){
+        if ($filename != "." and $filename != ".."){
+            if (is_dir($path.DIRECTORY_SEPARATOR.$filename)){
+                // 忽略空文件夹
+                if (substr($filename, 0, 1) != '.'){
+                    delete_files($path.DIRECTORY_SEPARATOR.$filename, $del_dir, $level + 1);
+                }
+            }else{
+                unlink($path.DIRECTORY_SEPARATOR.$filename);
+            }
+        }
+    }
+    @closedir($current_dir);
+    if ($del_dir == TRUE AND $level > 0){
+        return @rmdir($path);
+    }
+    return TRUE;
+}
