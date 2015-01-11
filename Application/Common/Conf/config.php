@@ -6,6 +6,7 @@ return array(
 //    'URL_MODULE_MAP'    => array('test'=>'admin'), //模块映射
 //    'MODULE_DENY_LIST'  => array('ThinkPHP'),
     'DEFAULT_MODULE' => 'Home', // 默认模块
+    'TAGLIB_PRE_LOAD'   =>  'Common\Lib\Sky',
     'LANG_SWITCH_ON' => true,   // 开启语言包功能
     'LANG_AUTO_DETECT' => true, // 自动侦测语言 开启多语言功能后有效
     'LANG_LIST'        => 'zh-cn,zh-tw,en-us', // 允许切换的语言列表 用逗号分隔
@@ -15,11 +16,12 @@ return array(
     'DATA_AUTH_KEY' => '1(EX=hyCHfVIE*;xMQZI2VW^Ec4>sz^F', //默认数据加密KEY
     'COOKIE_PREFIX' => 'itsky_',   //cookie 前缀
     /* 数据库配置 */
-    'DB_TYPE'   => 'mysqli', // 数据库类型
+    'DB_TYPE'   => 'mysql', // 数据库类型
     'DB_HOST'   => 'localhost', // 服务器地址
     'DB_NAME'   => 'tadmin', // 数据库名
     'DB_USER'   => 'root', // 用户名
     'DB_PWD'    => '',  // 密码
     'DB_PORT'   => '3306', // 端口
     'DB_PREFIX' => 'ta_', // 数据库表前缀
+    'DB_CHARSET'=>  'utf8' //数据库编码
 );

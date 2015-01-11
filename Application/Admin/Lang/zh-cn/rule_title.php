@@ -28,4 +28,6 @@ $rule_title = array(
     'R_GROUP_EDIT' => '编辑',
     'R_GROUP_DEL' => '删除',
     'R_GROUP_ACCESS' => '授权',
+    'R_SITESET_INDEX' => 'SEO 配置',
+    'R_SITESET_OSPRO' => '系统参数',
 );

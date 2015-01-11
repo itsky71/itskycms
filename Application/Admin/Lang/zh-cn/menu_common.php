@@ -9,7 +9,7 @@ $menu_common = array(
     'M_VSVV_INDEX' => 'svs',
     'M_INDEX_PROFILE' => '个人资料',
     'M_OSSET_INDEX' => '系统设置',
-    'M_SITESET_INDEX' => '站点配置',
+    'M_SITESET_INDEX' => 'SEO配置',
     'M_SITESET_SEO' => 'SEO配置',
     'M_SITESET_OSPRO' => '系统参数',
     'M_SITESET_OSEMAIL' => '系统邮箱',
@@ -57,4 +57,5 @@ $menu_common = array(
     'M_UPDATE_LANG' => '更新语言',
     'M_UPDATE_COLHTML' => '栏目静态化',
     'M_UPDATE_CONHTML' => '内容静态化',
+    'M_SITECONFIG_INDEX' => '站点配置',
 );
