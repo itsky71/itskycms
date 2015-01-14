@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2015-01-11 12:47:49
+-- Generation Time: 2015-01-14 15:35:30
 -- 服务器版本： 5.6.20
 -- PHP Version: 5.5.15
 
@@ -140,7 +140,7 @@ CREATE TABLE IF NOT EXISTS `ta_member` (
 
 INSERT INTO `ta_member` (`id`, `password`, `username`, `realname`, `email`, `question`, `answer`, `status`, `regtime`, `login_ip`, `last_login_time`, `login_count`) VALUES
 (1, '30bc103d85df152c8c703bcbbcc7fd4d', 'admin', '你买单我就来', 'itsky71@foxmail.com', '我还会回来的...', '灰太狼？呵呵。。。', 1, 1419068912, '127.0.0.1', 1420700102, 28),
-(2, '30bc103d85df152c8c703bcbbcc7fd4d', 'itsky', '你地盘我做主', 'zmh0515005@163.com', '你是谁?', '呵呵...', 1, 1419587881, '127.0.0.1', 1420960724, 78);
+(2, '30bc103d85df152c8c703bcbbcc7fd4d', 'itsky', '你地盘我做主', 'zmh0515005@163.com', '你是谁?', '呵呵...', 1, 1419587881, '127.0.0.1', 1421201526, 80);
 
 -- --------------------------------------------------------
 
@@ -215,6 +215,19 @@ INSERT INTO `ta_menu` (`id`, `pid`, `icon`, `name`, `model`, `action`, `data`, `
 (46, 38, '', 'M_UPDATE_COLHTML', 'Update', 'colhtml', '', '', 0, 1, 99),
 (47, 38, '', 'M_UPDATE_CONHTML', 'Update', 'conhtml', '', '', 0, 1, 99);
 
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `ta_siteset`
+--
+
+CREATE TABLE IF NOT EXISTS `ta_siteset` (
+  `varname` varchar(20) NOT NULL DEFAULT '' COMMENT '变量名',
+  `info` varchar(100) NOT NULL DEFAULT '' COMMENT '说明',
+  `groupid` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '分组ID',
+  `value` text NOT NULL COMMENT '变量值'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
 --
 -- Indexes for dumped tables
 --
@@ -248,6 +261,12 @@ ALTER TABLE `ta_member`
 --
 ALTER TABLE `ta_menu`
  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ta_siteset`
+--
+ALTER TABLE `ta_siteset`
+ ADD UNIQUE KEY `varname` (`varname`);
 
 --
 -- AUTO_INCREMENT for dumped tables

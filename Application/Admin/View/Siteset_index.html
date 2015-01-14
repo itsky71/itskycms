@@ -1,1 +1,79 @@
-<sky:hehe name="sfdfsdf"/>
+<div id="siteset" class="col-xs-12 form-horizontal">
+    <div class="form-group">
+        <label class="col-sm-3 control-label no-padding-right">网站标题:</label>
+        <div class="col-sm-9 p5-19">
+            <span class="editable-click text-info" data-num="0">ITskyCMS00</span>
+            <span class="editable-inline hide" data-num="0">
+                <input class="col-xs-6 editable-input" type="text" name="username" value="ITskyCMS00"/>
+                <span class="editable-clear-x"></span>
+                <button class="btn btn-info btn-xs editable-submit" type="button"><span class="glyphicon glyphicon-ok"></span></button>
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label no-padding-right">网站标题:</label>
+        <div class="col-sm-9 p5-19">
+            <span class="editable-click text-info" data-num="1">ITskyCMS11</span>
+            <span class="editable-inline hide" data-num="1">
+                <input class="col-xs-6 editable-input" type="text" name="username" value="ITskyCMS11"/>
+                <span class="editable-clear-x"></span>
+                <button class="btn btn-info btn-xs editable-submit" type="button"><span class="glyphicon glyphicon-ok"></span></button>
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label no-padding-right">网站标题:</label>
+        <div class="col-sm-9 p5-19">
+            <span class="editable-click text-info" data-num="2">ITskyCMS22</span>
+            <span class="editable-inline hide" data-num="2">
+                <input class="col-xs-6 editable-input" type="text" name="username" value="ITskyCMS22"/>
+                <span class="editable-clear-x"></span>
+                <button class="btn btn-info btn-xs editable-submit" type="button"><span class="glyphicon glyphicon-ok"></span></button>
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label no-padding-right">网站标题:</label>
+        <div class="col-sm-9">
+            <input class="col-xs-6" type="text" name="username" value="ITskyCMS"/>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var pan = '<li><a onclick="load(event,this)" href="{:U(CONTROLLER_NAME.'/'.ACTION_NAME)}">{:L('M_SITECONFIG_INDEX')}</a></li>\n\
+<li class="active">{:L('M_'.$Think.CONTROLLER_NAME.'_'.$Think.ACTION_NAME)}</li>';
+    $('#breadcrumbs .breadcrumb li:gt(0)').remove();
+    $('#breadcrumbs .breadcrumb').append(pan);
+    $('#sidebar .nav-list li.active').removeClass('active');
+    $('#sidebar .nav-list li.open .submenu').hide();
+    $('#sidebar .nav-list li.open').removeClass('open');
+    $('a[href="{:U(CONTROLLER_NAME.'/'.ACTION_NAME)}"]').parent().addClass('active').parent().show().parent().addClass('open active').parent().show().parent().addClass('open active');
+    $('.page-header h1').empty();
+    $('.page-header h1').append('{:L('M_SITECONFIG_INDEX')}<small class="glyphicon glyphicon-chevron-right"> {:L('M_'.$Think.CONTROLLER_NAME.'_'.$Think.ACTION_NAME)}</small>');
+    $(document).click(function(e){
+        var target = e.target;
+        var num = $(target).attr('data-num');
+        if($.isNumeric(parseInt(num))){
+            editable(target,parseInt(num));
+        }else{
+            var lastnum = $('.editable-inline:visible').last().attr('data-num');
+            if($.isNumeric(parseInt(lastnum))) editable(target,parseInt(lastnum));
+        }
+    });
+    function editable(tar,num){
+        var drag = $('.editable-inline');
+        var dragel = $('.editable-inline')[num];
+        var text = $('.editable-click');
+        var textel = $('.editable-click')[num];
+        if(tar === textel || $.contains(textel,tar)){
+            $(tar).addClass('hide');
+            var nextdoc = $(tar).next('span');
+            var vo = nextdoc.find('.editable-input').val();
+            nextdoc.removeClass('hide').find('.editable-input').val('').focus().val(vo);
+            $(tar).parent().removeClass('p5-19');
+        }else if(!(dragel == tar || $.contains(dragel, tar)) && $('.editable-inline').eq(num).is(':visible')){
+            $('.editable-click').eq(num).removeClass('hide').parent().addClass('p5-19');
+            $('.editable-inline').eq(num).addClass('hide');
+        }
+    }
+</script>
