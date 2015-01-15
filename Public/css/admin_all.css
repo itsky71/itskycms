@@ -3,7 +3,7 @@
 .green{color:#69aa46}.red{color:#dd5a43}.white{color:#fff}.blue{color:#478fca}.yellow{color: #f89406}
 button.btn:active{position:relative;top:1px;left:1px;}.mt2{margin-top: 2px}
 .mb0{margin-bottom: 0}.mb10{margin-bottom: 10px}.ml10{margin-left: 10px;}.mr10{margin-right: 10px;}.mtb4{margin: 4px 0}
-.pl10{padding-left: 10px}.pt10{padding-top: 10px;}.pt5{padding-top: 5px}.p5-19{padding:5px 19px}.dib{display: inline-block}
+.pl10{padding-left: 10px}.pt10{padding-top: 10px;}.pt5{padding-top: 5px}.p1-8{padding:1px 8px !important}.dib{display: inline-block}
 .w60{width: 60px}.w180{width: 180px}.w225{width: 225px}.blblue{border-left:1px solid #9acfea}.f14{font-size: 14px}.f12{font-size: 12px}
 .bootbox-body{font-size: 14px}select option[value=""],select.form-control option[value=""]{padding: 3px 4px;color: #999}
 input.ace[type="checkbox"] + .lbl:before, input.ace[type="radio"] + .lbl:before{margin-top: -3px}
@@ -12,195 +12,55 @@ input.ace[type="radio"] + .lbl:before{line-height: 17px}
 .badge{padding-top: 2px;padding-bottom: 2px;}.text-muted{color: #aaa}
 /*select{cursor: pointer;}*/
 /*---------Public_login---------*/
-#Public_login{
-    background-color: #1d2024;
-    padding-top: 10px;
-}
-#Public_login .login_logo{
-    margin: 0 auto;
-    width: 375px;
-    text-align: center;
-}
-#Public_login .login_box{
-    width: 375px;
-    margin: 15px auto 0;
-    border: 5px solid #394557;
-    border-radius: 8px;
-}
-#Public_login .login_body{
-    width: 100%;
-    height: 100%;
-    background-color: #F7F7F7;
-}
-#Public_login .login_main{
-    padding: 16px 36px;
-}
-#Public_login .login_main h4{
-    border-bottom: 1px solid #d5e3ef;
-    text-align: center;
-    letter-spacing: 8px;
-    line-height: 28px;
-}
-#Public_login .login_input{
-    margin-bottom: 15px;
-    position: relative;
-}
-#Public_login .login_input input{
-    border: 1px solid #d5d5d5;
-    background-color: #fff;
-    width: 300px;
-    height: 35px;
-    line-height: 21px;
-    padding: 3px 30px 3px 8px;
-}
-#Public_login .login_input input:focus{
-    border: 1px solid #f59942;
-    outline:none
-}
-#Public_login .login_input input:focus + .glyphicon{
-    color: #579;
-}
-#Public_login .login_input .glyphicon{
-    position: absolute;
-    top: 10px;
-    right: 0;
-    color: #909090;
-}
-#Public_login .chb{
-    font-weight: normal;
-}
-#Public_login .login_send input[type="checkbox"]{
-    width: 15px;
-    height: 15px;
-    opacity: 0;
-    filter:alpha(opacity=0)
-}
-#Public_login .login_send input[type="checkbox"] + .chb:before{
-    content: ' ';
-    border: 1px solid #c8c8c8;
-    width: 15px;
-    height: 15px;
-    display: inline-block;
-    background-color: #fff;
-    vertical-align: middle;
-    margin-right: 5px;
-    color: #c8c8c8;
-}
-#Public_login .login_send input[type="checkbox"]:checked + .chb:before{
-    content: '\e013';
-    font-family: 'Glyphicons Halflings';
-    color: #32a3ce;
-    font-size: 10px;
-}
-#Public_login .login_floot{
-    width: 100%;
-    height: 45px;
-    line-height: 40px;
-    padding: 0 15px;
-    background-color: #5090c1;
-    border-top: 2px solid #597597;
-}
-#Public_login .forgot_pwd{
-    float: left;
-    color: #fe9;
-}
-#Public_login .want_reg{
-    float: right;
-    color: #cf7;
-}
-#Public_login input[name="verify"]{
-    padding-right: 136px;
-}
-#Public_login .verifyimg{
-    position: absolute;
-    top: 1px;
-    right: -5px;
-    cursor: pointer;
-}
-#Public_login .alert,#msg_modal .alert{
-    margin-bottom: 0;
-}
+#Public_login{background-color: #1d2024;padding-top: 10px;}
+#Public_login .login_logo{margin: 0 auto;width: 375px;text-align: center;}
+#Public_login .login_box{width: 375px;margin: 15px auto 0;border: 5px solid #394557;border-radius: 8px;}
+#Public_login .login_body{width: 100%;height: 100%;background-color: #F7F7F7;}
+#Public_login .login_main{padding: 16px 36px;}
+#Public_login .login_main h4{border-bottom: 1px solid #d5e3ef;text-align: center;letter-spacing: 8px;line-height: 28px;}
+#Public_login .login_input{margin-bottom: 15px;position: relative;}
+#Public_login .login_input input{border: 1px solid #d5d5d5;background-color: #fff;width: 300px;height: 35px;line-height: 21px;padding: 3px 30px 3px 8px;}
+#Public_login .login_input input:focus{border: 1px solid #f59942;outline:none}
+#Public_login .login_input input:focus + .glyphicon{color: #579;}
+#Public_login .login_input .glyphicon{position: absolute;top: 10px;right: 0;color: #909090;}
+#Public_login .chb{font-weight: normal;}
+#Public_login .login_send input[type="checkbox"]{width: 15px;height: 15px;opacity: 0;filter:alpha(opacity=0)}
+#Public_login .login_send input[type="checkbox"] + .chb:before{content: ' ';border: 1px solid #c8c8c8;width: 15px;height: 15px;
+display: inline-block;background-color: #fff;vertical-align: middle;margin-right: 5px;color: #c8c8c8;}
+#Public_login .login_send input[type="checkbox"]:checked + .chb:before{content: '\e013';font-family: 'Glyphicons Halflings';color: #32a3ce;font-size: 10px;}
+#Public_login .login_floot{width: 100%;height: 45px;line-height: 40px;padding: 0 15px;background-color: #5090c1;border-top: 2px solid #597597;}
+#Public_login .forgot_pwd{float: left;color: #fe9;}
+#Public_login .want_reg{float: right;color: #cf7;}
+#Public_login input[name="verify"]{padding-right: 136px;}
+#Public_login .verifyimg{position: absolute;top: 1px;right: -5px;cursor: pointer;}
+#Public_login .alert,#msg_modal .alert{margin-bottom: 0;}
 
 /* public top  */
-.navbar-brand{
-    height: auto;
-}
-#navbar .glyphicon-chevron-down{
-    font-size: 10px;
-}
-#btn-scroll-up{
-    position: fixed;
-}
-.nav-list>li>.submenu a>.arrow,.nav-list>li a>.arrow{
-    font-size: 10px;
-}
-.breadcrumb>li+li:before{
-    font-size: 9px;
-}
-#sidebar-collapse .glyphicon{
-    font-size: 10px;
-}
+.navbar-brand{height: auto;}
+#navbar .glyphicon-chevron-down{font-size: 10px;}
+#btn-scroll-up{position: fixed;}
+.nav-list>li>.submenu a>.arrow,.nav-list>li a>.arrow{font-size: 10px;}
+.breadcrumb>li+li:before{font-size: 9px;}
+#sidebar-collapse .glyphicon{font-size: 10px;}
 @media(min-width:1200px){.container{max-width:1170px}}
-.menu-min .sidebar-shortcuts-large{
-    width: 200px;
-}
+.menu-min .sidebar-shortcuts-large{width: 200px;}
 
 /* common slide */
-.nav-list > li > .submenu li > .submenu li > a .glyphicon{
-    font-size: 11px !important;
-}
+.nav-list > li > .submenu li > .submenu li > a .glyphicon{font-size: 11px !important;}
 
 /* js验证表单样式 */
-.n-invalid{
-    border-color: red !important;
-}
-.n-red .msg-wrap{
-    position:absolute;
-    z-index:1;
-    padding:4px 6px;
-    font-size:12px;
-    border:1px solid transparent;
-    /*box-shadow:0 1px 3px #ccc;*/
-    border-radius:2px;
-    font-weight: normal;
-    color:#fff;
-}
-.n-red .msg-wrap.n-error{
-    background-color:#c94d32;
-    border-color:#d15b47;
-}
-.n-red .msg-wrap.n-ok{
-    background-color: #629b58;
-    border-color: #87b87f;
-}
+.n-invalid{border-color: red !important;}
+.n-red .msg-wrap{position:absolute;z-index:1;padding:4px 6px;font-size:12px;border:1px solid transparent;border-radius:2px;font-weight: normal;color:#fff;}
+.n-red .msg-wrap.n-error{background-color:#c94d32;border-color:#d15b47;}
+.n-red .msg-wrap.n-ok{background-color: #629b58;border-color: #87b87f;}
 .n-red .msg-wrap.n-error .n-arrow b{color:#d15b47;/*text-shadow:0 0 2px #ccc*/}
 .n-red .msg-wrap.n-error .n-arrow i{color:#c94d32}
 .n-red .msg-wrap.n-ok .n-arrow b{color:#87b87f;/*text-shadow:0 0 2px #ccc*/}
 .n-red .msg-wrap.n-ok .n-arrow i{color:#629b58}
-.n-red .msg-wrap .n-icon{
-    font-family: 'Glyphicons Halflings';
-    font-weight: normal;
-    font-style: normal;
-    width: 16px;
-    text-align: center;
-    height: 16px;
-    line-height: normal;
-    vertical-align: baseline;
-    background-image: none;
-    margin-top: 0;
-}
-.n-red .msg-wrap.n-error .n-icon:before{
-    content: '\e014';
-    text-decoration: inherit;
-    display: inline-block;
-    speak: none;
-}
-.n-red .msg-wrap.n-ok .n-icon:before{
-    content: '\e013';
-    text-decoration: inherit;
-    display: inline-block;
-    speak: none;
-}
+.n-red .msg-wrap .n-icon{font-family: 'Glyphicons Halflings';font-weight: normal;font-style: normal;width: 16px;text-align: center;
+height: 16px;line-height: normal;vertical-align: baseline;background-image: none;margin-top: 0;}
+.n-red .msg-wrap.n-error .n-icon:before{content: '\e014';text-decoration: inherit;display: inline-block;speak: none;}
+.n-red .msg-wrap.n-ok .n-icon:before{content: '\e013';text-decoration: inherit;display: inline-block;speak: none;}
 .n-red .n-top .msg-wrap{bottom:100%}
 .n-red .n-bottom .msg-wrap{top:100%}
 .n-red .n-tip,.n-red .n-loading{background-color:#f8fdff;border-color:#ddd;color:#333;}
@@ -209,56 +69,17 @@ input.ace[type="radio"] + .lbl:before{line-height: 17px}
 .n-red .n-tip .n-icon{display:none}
 
 /*  menu_tree  */
-#menu-tree input[name^="listorder"]{
-    width: 50px;
-    height: 21px;
-    line-height: 21px;
-    padding: 0 3px;
-}
+#menu-tree input[name^="listorder"]{width: 50px;height: 21px;line-height: 21px;padding: 0 3px;}
 
 /*  icon-all  */
-.bootbox-body #icon-all{
-    cursor: default;
-    margin: 0;
-    padding: 0;
-}
-.bootbox-body #icon-all li{
-    display: inline-block;
-    list-style: none;
-    cursor: pointer;
-    width: 25px;
-    height: 25px;
-    line-height: 25px;
-    text-align: center;
-}
-.bootbox-body #icon-all li:hover{
-    color: #FFF;
-    background-color: blue;
-}
+.bootbox-body #icon-all{cursor: default;margin: 0;padding: 0;}
+.bootbox-body #icon-all li{display: inline-block;list-style: none;cursor: pointer;width: 25px;height: 25px;line-height: 25px;text-align: center;}
+.bootbox-body #icon-all li:hover{color: #FFF;background-color: blue;}
 /*  loading  */
-#loadimg{
-    width: 301px;
-    height: 300px;
-    z-index: 99;
-    position: fixed;
-    top: 45%;
-    left: 50%;
-    margin-left: -150px;
-    margin-top: -150px;
-    opacity: 0.5
-}
+#loadimg{width: 301px;height: 300px;z-index: 99;position: fixed;top: 45%;left: 50%;margin-left: -150px;margin-top: -150px;opacity: 0.5}
 /*-- rule tooltip --*/
 #ruleform .rti .tooltip .tooltip-inner{width: 150px;}
 /*-- group access --*/
 #access .table .line-height-1{border-bottom: 1px solid #eee;width: 100%;height: 0;}
-/*--  editable --*/
-#siteset .editable-clear-x:before{
-    margin-top: 0;
-    right: 20px;
-    position: relative;
-}
-#siteset .editable-submit{
-    top: -5px;
-    left: -20px;
-    position: relative;
-}
+/*--  siteset --*/
+#siteset .table tr td{vertical-align:middle}

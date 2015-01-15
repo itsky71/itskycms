@@ -15,7 +15,13 @@ namespace Admin\Controller;
  * @author itsky
  */
 class SitesetController extends AdminController{
+    //SEO 配置
     public function index(){
+        $Siteset = M('Siteset');
+        $list = $Siteset->where('groupid=1')->select();
+        $orther = $Siteset->where('groupid>6')->select();
+        $this->assign('list', $list);
+        $this->assign('orther', $orther);
         $this->display();
     }
 }

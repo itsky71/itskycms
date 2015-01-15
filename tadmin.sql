@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2015-01-14 15:35:30
+-- Generation Time: 2015-01-15 13:03:34
 -- 服务器版本： 5.6.20
 -- PHP Version: 5.5.15
 
@@ -140,7 +140,7 @@ CREATE TABLE IF NOT EXISTS `ta_member` (
 
 INSERT INTO `ta_member` (`id`, `password`, `username`, `realname`, `email`, `question`, `answer`, `status`, `regtime`, `login_ip`, `last_login_time`, `login_count`) VALUES
 (1, '30bc103d85df152c8c703bcbbcc7fd4d', 'admin', '你买单我就来', 'itsky71@foxmail.com', '我还会回来的...', '灰太狼？呵呵。。。', 1, 1419068912, '127.0.0.1', 1420700102, 28),
-(2, '30bc103d85df152c8c703bcbbcc7fd4d', 'itsky', '你地盘我做主', 'zmh0515005@163.com', '你是谁?', '呵呵...', 1, 1419587881, '127.0.0.1', 1421201526, 80);
+(2, '30bc103d85df152c8c703bcbbcc7fd4d', 'itsky', '你地盘我做主', 'zmh0515005@163.com', '你是谁?', '呵呵...', 1, 1419587881, '127.0.0.1', 1421307702, 82);
 
 -- --------------------------------------------------------
 
@@ -225,8 +225,18 @@ CREATE TABLE IF NOT EXISTS `ta_siteset` (
   `varname` varchar(20) NOT NULL DEFAULT '' COMMENT '变量名',
   `info` varchar(100) NOT NULL DEFAULT '' COMMENT '说明',
   `groupid` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '分组ID',
+  `type` varchar(10) NOT NULL DEFAULT 'string' COMMENT '类型',
   `value` text NOT NULL COMMENT '变量值'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `ta_siteset`
+--
+
+INSERT INTO `ta_siteset` (`varname`, `info`, `groupid`, `type`, `value`) VALUES
+('webname', '网站名称', 1, 'string', 'ITskyCMS内容管理系统'),
+('weburl', '站点根网址', 1, 'string', 'http://www.itsky71.net'),
+('powerby', '网站版权信息', 1, 'text', 'Copyright &copy; 2014-2015 ITskyCMS. itsky71 版权所有');
 
 --
 -- Indexes for dumped tables
