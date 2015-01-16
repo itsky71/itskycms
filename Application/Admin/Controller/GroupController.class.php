@@ -46,7 +46,7 @@ class GroupController extends AdminController{
                 if($Group->add($data)){
                     $info[$data['title']] = I('post.title');
                     $info[$data['remark']] = addcslashes(I('post.remark','',NULL),'\'\\');
-                    $this->_write_lang($info);
+                    write_lang($info,'group_title');
                     $this->success(L('ADD_SUCCESS'),U('Group/index'));
                 }else{
                     $this->error(L('ADD_ERROR'));
@@ -73,7 +73,7 @@ class GroupController extends AdminController{
                 if($result !== FALSE){
                     $info[$data['title']] = I('post.title');
                     $info[$data['remark']] = addcslashes(I('post.remark','',NULL),'\'\\');
-                    $this->_write_lang($info);
+                    write_lang($info,'group_title');
                     $this->success(L('SAVE_OK'),U('Group/index'));
                 }else{
                     $this->error(L('SAVE_ERROR'));
@@ -143,29 +143,5 @@ class GroupController extends AdminController{
             $this->assign('rlist', $rlist);
             $this->display();
         }
-    }
-
-    /**
-     * 编写语言文件
-     * @param array $lang 语言数组
-     * @param string $langpath 语言文件路径
-     * @return boolean
-     */
-    private function _write_lang($lang,$langpath = ''){
-        if(!is_array($lang)){
-            return FALSE;
-        }
-        $path = $langpath == '' ? MODULE_PATH.'Lang/'.LANG_SET.'/group_title.php' : $langpath;
-        $phpstar = '<?php'.PHP_EOL;
-        $langdata = $phpstar;
-        $langdata .= '$group_title = array('.PHP_EOL;
-        $group_title = array();
-        eval(str_replace($phpstar,'', read_file($path)));
-        $arrdata = array_merge($group_title, $lang);
-        foreach ($arrdata as $key => $value){
-            $langdata .= "    '$key' => '".addcslashes(stripslashes($value),'\'\\')."',".PHP_EOL;
-        }
-        $langdata .= ');';
-        return write_file($path,$langdata);
     }
 }

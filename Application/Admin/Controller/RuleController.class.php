@@ -52,7 +52,7 @@ class RuleController extends AdminController{
                     'status' => I('post.status') ? 1 : 0
                 );
                 if($Rule->add($data)){
-                    $this->_write_lang(array($data['title']=>I('post.title')));
+                    write_lang(array($data['title']=>I('post.title')),'rule_title');
                     $this->success(L('ADD_SUCCESS'),U('Rule/index'));
                 }else{
                     $this->error(L('ADD_ERROR'));
@@ -91,7 +91,7 @@ class RuleController extends AdminController{
                 );
                 $result = $Rule->where('id='.I('post.id'))->save($data);
                 if($result !== FALSE){
-                    $this->_write_lang(array($data['title']=>I('post.title')));
+                    write_lang(array($data['title']=>I('post.title')),'rule_title');
                     $this->success(L('SAVE_OK'),U('Rule/index'));
                 }else{
                     $this->error(L('SAVE_ERROR'));
@@ -148,27 +148,5 @@ class RuleController extends AdminController{
         }else{
             $this->error(L('_ERROR_ACTION_'));
         }
-    }
-
-    /**
-     * 编写语言文件
-     * @param array $lang 语言数组
-     * @param string $langpath 语言文件路径
-     * @return boolean
-     */
-    private function _write_lang($lang,$langpath = ''){
-        if(!is_array($lang)) return FALSE;
-        $path = $langpath == '' ? MODULE_PATH.'Lang/'.LANG_SET.'/rule_title.php' : $langpath;
-        $phpstar = '<?php'.PHP_EOL;
-        $langdata = $phpstar;
-        $langdata .= '$rule_title = array('.PHP_EOL;
-        $rule_title = array();
-        eval(str_replace($phpstar,'', read_file($path)));
-        $arrdata = array_merge($rule_title, $lang);
-        foreach ($arrdata as $key => $value){
-            $langdata .= "    '$key' => '$value',".PHP_EOL;
-        }
-        $langdata .= ');';
-        return write_file($path,$langdata);
     }
 }

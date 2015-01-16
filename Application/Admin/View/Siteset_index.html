@@ -32,7 +32,7 @@
     </table>
 </div>
 <script type="text/javascript">
-    var pan = '<li><a onclick="load(event,this)" href="{:U(CONTROLLER_NAME.'/'.ACTION_NAME)}">{:L('M_SITECONFIG_INDEX')}</a></li>\n\
+    var pan = '<li><a onclick="load(event,this)" href="{:U(CONTROLLER_NAME.'/index')}">{:L('M_SITECONFIG_INDEX')}</a></li>\n\
 <li class="active">{:L('M_'.$Think.CONTROLLER_NAME.'_'.$Think.ACTION_NAME)}</li>';
     $('#breadcrumbs .breadcrumb li:gt(0)').remove();
     $('#breadcrumbs .breadcrumb').append(pan);

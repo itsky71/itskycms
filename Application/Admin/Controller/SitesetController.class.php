@@ -19,9 +19,11 @@ class SitesetController extends AdminController{
     public function index(){
         $Siteset = M('Siteset');
         $list = $Siteset->where('groupid=1')->select();
-        $orther = $Siteset->where('groupid>6')->select();
         $this->assign('list', $list);
-        $this->assign('orther', $orther);
+        $this->display();
+    }
+    //添加系统变量
+    public function addvar(){
         $this->display();
     }
 }

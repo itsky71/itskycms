@@ -28,6 +28,10 @@ $rule_title = array(
     'R_GROUP_EDIT' => '编辑',
     'R_GROUP_DEL' => '删除',
     'R_GROUP_ACCESS' => '授权',
-    'R_SITESET_INDEX' => 'SEO 配置',
-    'R_SITESET_OSPRO' => '系统参数',
+    'R_SITESET_INDEX' => '站点设置',
+    'R_SITESET_OSPRO' => '核心设置',
+    'R_SITESET_OSEMAIL' => '系统邮箱',
+    'R_SITESET_ATTACH' => '附件配置',
+    'R_SITESET_MEMBER' => '用户中心设置',
+    'R_SITESET_ADDVAR' => '添加系统变量',
 );

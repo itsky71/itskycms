@@ -113,3 +113,26 @@ function delete_files($path, $del_dir = FALSE, $level = 0){
     }
     return TRUE;
 }
+/**
+ * 编写语言文件
+ * @param array $lang 语言数组
+ * @param string $file 语言文件名
+ * @return boolean
+ */
+function write_lang($lang,$file){
+    if(!is_array($lang)){
+        return FALSE;
+    }
+    $path = MODULE_PATH.'Lang/'.LANG_SET.'/'.$file.'.php';
+    $phpstar = '<?php'.PHP_EOL;
+    $langdata = $phpstar;
+    $langdata .= '$'.$file.' = array('.PHP_EOL;
+    $$file = array();
+    eval(str_replace($phpstar,'', read_file($path)));
+    $arrdata = array_merge($$file, $lang);
+    foreach ($arrdata as $key => $value){
+        $langdata .= "    '$key' => '".addcslashes(stripslashes($value),'\'\\')."',".PHP_EOL;
+    }
+    $langdata .= ');';
+    return write_file($path,$langdata);
+}
