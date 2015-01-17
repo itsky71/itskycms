@@ -71,9 +71,10 @@ class MenuController extends AdminController{
                 $newmap[] = $r;
             }
             $tree = new \Common\Lib\Tree($newmap);
-            $str  = "<option value='\$id' \$selected>\$spacer\$name</option>";
+            $str  = "<li data-val='\$id'>\$spacer\$name</li>";
             $pid = I('get.id') ? I('get.id') : 0;
-            $this->assign('map', $tree->get_tree(0, $str,$pid));
+            $this->assign('pid', $pid);
+            $this->assign('map', $tree->get_tree(0, $str));
             $this->display('edit');
         }
     }
@@ -89,8 +90,9 @@ class MenuController extends AdminController{
                 $newmap[] = $r;
             }
             $tree = new \Common\Lib\Tree($newmap);
-            $str  = "<option value='\$id' \$selected>\$spacer\$name</option>";
-            $this->assign('map', $tree->get_tree(0, $str, $vo['pid']));
+            $str  = "<li data-val='\$id'>\$spacer\$name</li>";
+            $this->assign('pid', $vo['pid']);
+            $this->assign('map', $tree->get_tree(0, $str));
             $this->assign('vo', $vo);
             $this->display();
         }elseif(IS_POST){

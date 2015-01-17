@@ -59,4 +59,5 @@ $menu_common = array(
     'M_UPDATE_CONHTML' => '内容静态化',
     'M_SITECONFIG_INDEX' => '系统参数',
     'M_EGEG_EGEGE' => '二哥',
+    'M_JDIPE_INDEX' => '肯德基',
 );

@@ -42,50 +42,26 @@
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right">所属组:</label>
             <div class="col-sm-9">
-                <div class="input-group col-xs-9" onclick="showul(this)">
-                    <input class="form-control select-input cude" type="text" onfocus="groupid.blur()" name="groupid" placeholder="请选择一项..."/>
+                <div class="input-group col-xs-9 select-click">
+                    <input type="hidden" name="groupid" value=""/>
+                    <div class="form-control select-input cude"></div>
                     <span class="input-group-addon cude">
                         <i class="glyphicon glyphicon-chevron-down"></i>
                     </span>
                 </div>
                 <div class="col-xs-9">
-                    <ul class="list-unstyled select-option" data-name="groupid">
-                        <li data-val="1">电影</li>
-                        <li data-val="2">游戏</li>
-                        <li data-val="3">阅读</li>
-                        <li data-val="4">KTV</li>
-                        <li data-val="5">旅游</li>
-                        <li data-val="6">运动</li>
-                        <li data-val="7">宅</li>
-                        <li data-val="1">电影</li>
-                        <li data-val="2">游戏</li>
-                        <li data-val="3">阅读</li>
-                        <li data-val="4">KTV</li>
-                        <li data-val="5">旅游</li>
-                        <li data-val="6">运动</li>
-                        <li data-val="7">宅</li>
-                        <li data-val="1">电影</li>
-                        <li data-val="2">游戏</li>
-                        <li data-val="3">阅读</li>
-                        <li data-val="4">KTV</li>
-                        <li data-val="5">旅游</li>
-                        <li data-val="6">运动</li>
-                        <li data-val="7">宅</li>
-                        <li data-val="1">电影</li>
-                        <li data-val="2">游戏</li>
-                        <li data-val="3">阅读</li>
-                        <li data-val="4">KTV</li>
-                        <li data-val="5">旅游</li>
-                        <li data-val="6">运动</li>
-                        <li data-val="7">宅</li>
-                        <li data-val="1">电影</li>
-                        <li data-val="2">游戏</li>
-                        <li data-val="3">阅读</li>
-                        <li data-val="4">KTV</li>
-                        <li data-val="5">旅游</li>
-                        <li data-val="6">运动</li>
-                        <li data-val="7">宅</li>
-                    </ul>
+                    <div class="select-choices">
+                        <ul class="list-unstyled select-option" data-name="groupid">
+                            <li data-val="">请选择一项...</li>
+                            <li data-val="1">电影</li>
+                            <li data-val="2">游戏</li>
+                            <li data-val="3">阅读</li>
+                            <li data-val="4">KTV</li>
+                            <li data-val="5">旅游</li>
+                            <li data-val="6">运动</li>
+                            <li data-val="7">宅</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -109,3 +85,4 @@
     $('.page-header h1').empty();
     $('.page-header h1').append('{:L('M_SITECONFIG_INDEX')}<small class="glyphicon glyphicon-chevron-right"> {:L('M_'.$Think.CONTROLLER_NAME.'_'.$Think.ACTION_NAME)}</small>');
 </script>
+<import type="js" file="js.select"/>

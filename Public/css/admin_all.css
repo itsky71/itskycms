@@ -10,22 +10,36 @@ input.ace[type="checkbox"] + .lbl:before, input.ace[type="radio"] + .lbl:before{
 input.ace-switch[type="checkbox"] + .lbl:before{margin-top: 0}
 input.ace[type="radio"] + .lbl:before{line-height: 17px}
 .badge{padding-top: 2px;padding-bottom: 2px;}.text-muted{color: #aaa}.cude{cursor: default}
+label{cursor: default}
 /*-------select-input-------*/
-.select-option{
+.select-input,.select-option{
+    -moz-user-select:none;
+    -webkit-user-select: none;
+    -o-user-select:none;
+    -khtml-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}
+.select-choices{
     position: absolute;
     left: 0;
     top:0;
-    width: 100%;
     border:1px solid #CCC;
+    width: 100%;
     background-color: #fff;
     z-index: 999;
-    padding: 0;
-    max-height: 300px;
-    overflow-y: scroll !important;
+    max-height: 425px;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
     display: none;
 }
-.select-option li{line-height: 30px;cursor: default;padding-left: 10px;font-size: 14px}
-.select-option li:hover{background-color: #39f;color: #fff}
+.select-option{
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+.select-option li{cursor: default;padding-left: 10px;font-size: 14px}
+.select-active{background-color: #39f;color: #fff}
 .no-border-right-color{
     border-top-color:#f59942 !important;
     border-left-color:#f59942 !important;

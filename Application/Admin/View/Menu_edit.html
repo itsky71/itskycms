@@ -5,10 +5,20 @@
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right">{:L('PARENT_ID')}:</label>
             <div class="col-sm-9">
-                <select class="form-control" name="pid">
-                    <option value="0">{:L('TOP_MENU')}</option>
-                    {$map}
-                </select>
+                <div class="input-group col-xs-12 select-click">
+                    <input type="hidden" name="pid" value="{$pid}"/>
+                    <div class="form-control select-input cude"></div>
+                    <span class="input-group-addon cude">
+                        <i class="glyphicon glyphicon-chevron-down"></i>
+                    </span>
+                </div>
+                <div class="col-xs-12">
+                    <div class="select-choices">
+                        <ul class="list-unstyled select-option" data-name="pid">
+                            <li data-val="0">{:L('TOP_MENU')}</li>{$map}
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="form-group">
@@ -342,3 +352,4 @@
         $('#clearico').remove();
     });
 </script>
+<import type="js" file="js.select"/>

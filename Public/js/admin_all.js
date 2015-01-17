@@ -146,13 +146,3 @@ function delcheck(e,t){
         });
     }
 }
-//显示select选项
-function showul(t){
-    $(t).children('input').addClass('no-border-right-color').next().addClass('no-border-left-color');
-    var ul = $('.select-option[data-name="'+$(t).children('input').attr('name')+'"]');
-    if(ul.is(':hidden')){
-        ul.slideDown(100);
-    }else{
-        ul.slideUp(100);
-    }
-}

@@ -58,9 +58,7 @@
         $(this).parent().prev('.editable-input').val('');
     });
     function editable(tar,num){
-        var drag = $('.editable-inline');
         var dragel = $('.editable-inline')[num];
-        var text = $('.editable-click');
         var textel = $('.editable-click')[num];
         if(tar === textel || $.contains(textel,tar)){
             $(tar).addClass('hide');
