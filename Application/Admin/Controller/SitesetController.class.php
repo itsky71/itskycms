@@ -17,13 +17,27 @@ namespace Admin\Controller;
 class SitesetController extends AdminController{
     //SEO 配置
     public function index(){
-        $Siteset = M('Siteset');
+        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        $Siteset = D('Siteset');
         $list = $Siteset->where('groupid=1')->select();
         $this->assign('list', $list);
         $this->display();
     }
     //添加系统变量
     public function addvar(){
-        $this->display();
+        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        if(IS_POST){
+            $Siteset = D('Siteset');
+            if($Siteset->create()){
+                print_r(I('post.'));
+            }else{
+                $this->error($Siteset->getError());
+            }
+        }else{
+            $Menu = D('Menu');
+            $group = $Menu->where('pid=5 and id<>11')->order('listorder,id')->select();
+            $this->assign('group', $group);
+            $this->display();
+        }
     }
 }

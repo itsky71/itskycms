@@ -3,7 +3,7 @@
  */
 $('.select-click input').each(function(){
     var text = $('.select-option[data-name="'+$(this).attr('name')+'"] li[data-val="'+$(this).val()+'"]').text();
-    $(this).next('.select-input').text(text);
+    $(this).parent('.select-click').find('.select-input').text(text);
 });
 //点击显示选项
 $('.select-click').click(function(e){
@@ -34,7 +34,7 @@ $('.select-option li').click(function(e){
     var name = $(this).parent().attr('data-name');
     var value = $(this).attr('data-val');
     var text = $(this).text();
-    $('input[name="'+name+'"]').val(value).next('.select-input').html(text);
+    $('input[name="'+name+'"]').val(value).parent('.select-click').find('.select-input').html(text);
     $(this).parent('ul').parent('.select-choices').scrollTop(0).hide();
     e.stopPropagation();
 });
@@ -42,4 +42,15 @@ $('.select-option li').click(function(e){
 $(document).click(function(){
     $('.select-choices:visible').hide();
     $('.select-input').removeClass('no-border-right-color').next().removeClass('no-border-left-color');
+});
+//重置
+$('[type="reset"]').click(function(e){
+    $(this).parents('form[role="form"]')[0].reset();
+    $(this).parents('form[role="form"]').find('.select-click input').each(function(){
+        var res = $(this).val();
+        var name = $(this).attr('name');
+        var text = $('.select-option[data-name="'+name+'"] li[data-val="'+res+'"]').text();
+        $(this).nextAll('.select-input').text(text);
+    });
+    e.stopPropagation();
 });

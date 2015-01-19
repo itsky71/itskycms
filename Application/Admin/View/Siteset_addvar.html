@@ -1,49 +1,49 @@
 <div class="col-xs-6">
     <form class="form-horizontal" role="form">
         <div class="form-group">
-            <label class="col-sm-3 control-label no-padding-right">变量名称:</label>
+            <label class="col-sm-3 control-label no-padding-right">{:L('VARNAME')}:</label>
             <div class="col-sm-9">
                 <input class="col-xs-9" type="text" name="varname"/>
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label no-padding-right">变量值:</label>
+            <label class="col-sm-3 control-label no-padding-right">{:L('VARVAL')}:</label>
             <div class="col-sm-9">
-                <input class="col-xs-9" type="text" name="value" placeholder="{$Think.LANG_SET}"/>
+                <input class="col-xs-9" type="text" name="value"/>
             </div>
         </div>
          <div class="form-group">
-            <label class="col-sm-3 control-label no-padding-right">变量类型:</label>
+            <label class="col-sm-3 control-label no-padding-right">{:L('VARTYPE')}:</label>
             <div class="col-sm-9">
                 <label>
                     <input class="ace" type="radio" name="type" value="string" checked="checked"/>
-                    <span class="lbl">字符串</span>
+                    <span class="lbl">{:L('STRING')}</span>
                 </label>
                 <label>
                     <input class="ace" type="radio" name="type" value="number"/>
-                    <span class="lbl">数字</span>
+                    <span class="lbl">{:L('NUMBER')}</span>
                 </label>
                 <label>
                     <input class="ace" type="radio" name="type" value="bool"/>
-                    <span class="lbl">布尔(Y/N)</span>
+                    <span class="lbl">{:L('BOOL')}</span>
                 </label>
                 <label>
                     <input class="ace" type="radio" name="type" value="text"/>
-                    <span class="lbl">多行文本</span>
+                    <span class="lbl">{:L('TEXT')}</span>
                 </label>
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label no-padding-right">参数说明:</label>
+            <label class="col-sm-3 control-label no-padding-right">{:L('VARINFO')}:</label>
             <div class="col-sm-9">
-                <input class="col-xs-9" type="text" name="info"/>
+                <input class="col-xs-9" type="text" name="info" placeholder="{$Think.LANG_SET}"/>
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label no-padding-right">所属组:</label>
+            <label class="col-sm-3 control-label no-padding-right">{:L('GROUP')}:</label>
             <div class="col-sm-9">
                 <div class="input-group col-xs-9 select-click">
-                    <input type="hidden" name="groupid" value=""/>
+                    <input class="hide" type="text" name="groupid" value=""/>
                     <div class="form-control select-input cude"></div>
                     <span class="input-group-addon cude">
                         <i class="glyphicon glyphicon-chevron-down"></i>
@@ -52,14 +52,10 @@
                 <div class="col-xs-9">
                     <div class="select-choices">
                         <ul class="list-unstyled select-option" data-name="groupid">
-                            <li data-val="">请选择一项...</li>
-                            <li data-val="1">电影</li>
-                            <li data-val="2">游戏</li>
-                            <li data-val="3">阅读</li>
-                            <li data-val="4">KTV</li>
-                            <li data-val="5">旅游</li>
-                            <li data-val="6">运动</li>
-                            <li data-val="7">宅</li>
+                            <li data-val="" class="text-muted">{:L('SELECT_INFO')}</li>
+                            <foreach name="group" item="vo" key="k">
+                            <li data-val="{$k+1}">{:L($vo['name'])}</li>
+                            </foreach>
                         </ul>
                     </div>
                 </div>
@@ -67,8 +63,8 @@
         </div>
         <div class="clearfix form-actions">
             <div class="col-md-offset-3 col-md-9">
-                <button class="btn btn-info" type="submit"><i class="glyphicon glyphicon-ok"></i>保存</button>
-                <button class="btn" type="reset"><i class="glyphicon glyphicon-repeat"></i>重置</button>
+                <button class="btn btn-info" type="submit"><i class="glyphicon glyphicon-ok"></i>{:L('SUBMIT')}</button>
+                <button class="btn" type="reset"><i class="glyphicon glyphicon-repeat"></i>{:L('RESET')}</button>
             </div>
         </div>
     </form>
@@ -84,5 +80,24 @@
     $('a[href="{:U(CONTROLLER_NAME.'/'.ACTION_NAME)}"]').parent().addClass('active').parent().show().parent().addClass('open active').parent().show().parent().addClass('open active');
     $('.page-header h1').empty();
     $('.page-header h1').append('{:L('M_SITECONFIG_INDEX')}<small class="glyphicon glyphicon-chevron-right"> {:L('M_'.$Think.CONTROLLER_NAME.'_'.$Think.ACTION_NAME)}</small>');
+    $('form[role="form"]').validator({
+        fields:{
+            groupid:{
+                rule:'required',
+                msgStyle:'position:relative;left:40px;'
+            }
+        },
+        valid:function(form){
+            alert('a');
+            $.ajax({
+                type: 'POST',
+                url: '{:U('Siteset/addvar')}',
+                data:$(form).serialize(),
+                success: function(data){
+                    show_msg(data);
+                }
+            });
+        }
+    });
 </script>
 <import type="js" file="js.select"/>
