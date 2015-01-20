@@ -29,7 +29,19 @@ class SitesetController extends AdminController{
         if(IS_POST){
             $Siteset = D('Siteset');
             if($Siteset->create()){
-                print_r(I('post.'));
+                $data = array(
+                    'varname' => I('post.varname'),
+                    'info' => 'S_'.strtoupper(I('post.varname')),
+                    'groupid' => I('post.groupid'),
+                    'type' => I('post.type'),
+                    'value' => I('post.value')
+                );
+                if($Siteset->add($data)){
+                    write_lang(array($data['info']=>I('post.info')),'siteset_info');
+                    $this->success(L('ADD_SUCCESS'),U('Siteset/addvar'));
+                }else{
+                    $this->error(L('ADD_ERROR'));
+                }
             }else{
                 $this->error($Siteset->getError());
             }
@@ -39,5 +51,9 @@ class SitesetController extends AdminController{
             $this->assign('group', $group);
             $this->display();
         }
+    }
+    
+    public function ospro(){
+        print_r(session());
     }
 }

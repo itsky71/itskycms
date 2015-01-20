@@ -136,3 +136,12 @@ function write_lang($lang,$file){
     $langdata .= ');';
     return write_file($path,$langdata);
 }
+/**
+ * URL处理
+ * @param string $add 添加参数
+ * @return string
+ */
+function urlh($add){
+    parse_str($add,$arrget);
+    return U(MODULE_NAME.'/'.CONTROLLER_NAME.'/'.ACTION_NAME,array_merge($_GET,$arrget));
+}

@@ -10,7 +10,7 @@
         <tbody>
             <foreach name="list" item="vo" key="k">
             <tr>
-                <td class="center">{$vo.info}:</td>
+                <td class="center">{:L($vo['info'])}:</td>
                 <td>
                     <span class="editable-click text-info" data-num="{$k}">{$vo.value}</span>
                     <span class="editable-inline hide" data-num="{$k}">
