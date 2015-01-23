@@ -34,4 +34,6 @@ $rule_title = array(
     'R_SITESET_ATTACH' => '附件配置',
     'R_SITESET_MEMBER' => '用户中心设置',
     'R_SITESET_ADDVAR' => '添加系统变量',
+    'R_LANG_INDEX' => '多语言管理',
+    'R_LANG_ADD' => '添加',
 );

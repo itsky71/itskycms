@@ -55,6 +55,10 @@ $(function(){
     //侧栏导航style
     $('.nav-list li:first').addClass('active');
     $('.nav-list ul').addClass('submenu');
+    //语言切换
+    $('#navbar-container .btn-group .dropdown-menu li a').click(function(){
+        $(this).parents('ul.dropdown-menu').prev('button.dropdown-toggle').children('.lang-qie').text($(this).text());
+    });
 });
 
 //弹出提示信息
