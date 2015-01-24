@@ -15,5 +15,6 @@ return array(
     'YZAL'          =>  '答案长度不能超过30个字符！',
     'JS_INPUT_INFO' =>  '请输入中文、字母、数字、下划线',
     'EDIT'          =>  '修改',
-    'RESET'         =>  '取消'
+    'RESET'         =>  '取消',
+    'CHANGE_LANG'   =>  '切换语言'
 );

@@ -1,23 +1,28 @@
 <div class="col-xs-6">
     <form class="form-horizontal" role="form">
+        <input type="hidden" name="id" value="{$vo.id}"/>
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right">{:L('LANG_NAME')}:</label>
             <div class="col-sm-9">
-                <input class="col-sm-9" type="text" name="name"/>
+                <input class="col-sm-9" type="text" name="name" value="{$vo.name}"/>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right">{:L('LANG_VALUE')}:</label>
             <div class="col-sm-9">
-                <input class="col-sm-9" type="text" name="value"/>
+                <input class="col-sm-9" type="text" name="value" value="{$vo.value}"/>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right">{:L('LANG_FLAG')}:</label>
             <div class="col-sm-9">
-                <input type="hidden" name="flag"/>
-                <div class="btn btn-sm btn-white mt2">
+                <input type="hidden" name="flag" value="{$vo.flag}"/>
+                <div id="flagx" class="btn btn-sm btn-white mt2 flags" title="{:L('CLICK_CLEAR')}" data-rel="tooltip" data-placement="top">
+                    <if condition="ACTION_NAME eq 'add'">
                     <span class="glyphicon glyphicon-picture"></span>
+                    <else/>
+                    <span class="flag" style="background-position: {$vo.flag}"></span>
+                    </if>
                 </div>
                 <button id="flag" class="btn btn-xs btn-pink mt2" type="button">{:L('CHOICE_FLAG')}</button>
             </div>
@@ -72,10 +77,20 @@
     $('#breadcrumbs .breadcrumb').append(pan);
     $('.page-header h1').empty();
     $('.page-header h1').append('{:L('M_'.$Think.CONTROLLER_NAME.'_INDEX')}<small class="glyphicon glyphicon-chevron-right"> {:L($Think.ACTION_NAME)}</small>');
+    $('[data-rel=tooltip]').tooltip();
     $('#flag').on(ace.click_event,function(){
         bootbox.dialog({
             message:$('#flags').html()
         });
+        $('.flags button').click(function(){
+            $('#flagx').html($(this).html());
+            $('input[name="flag"]').val($(this).find('.flag').css('background-position'));
+            $('.bootbox').modal('hide');
+        });
+    });
+    $('#flagx').click(function(){
+        $(this).html('<span class="glyphicon glyphicon-picture"></span>');
+        $('input[name="flag"]').val('');
     });
     $('form[role="form"]').validator({
         valid:function(form){

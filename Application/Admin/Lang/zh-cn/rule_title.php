@@ -36,4 +36,7 @@ $rule_title = array(
     'R_SITESET_ADDVAR' => '添加系统变量',
     'R_LANG_INDEX' => '多语言管理',
     'R_LANG_ADD' => '添加',
+    'R_LANG_STATUS' => '状态',
+    'R_LANG_EDIT' => '编辑',
+    'R_LANG_DEL' => '删除',
 );

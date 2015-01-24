@@ -9,5 +9,11 @@ return array(
     'FLAGL'             =>  '语言图标长度必须小于100个字符！',
     'ADD_ERROR'         =>  '语言添加失败！',
     'ADD_OK'            =>  '语言添加成功！',
-    'CHOICE_FLAG'       =>  '选择图标'
+    'CHOICE_FLAG'       =>  '选择图标',
+    'CLICK_CLEAR'       =>  '点击清除',
+    'ORDER'             =>  '排序',
+    'NUMBER'            =>  '编号',
+    'MANOPE'            =>  '管理操作',
+    'SAVE_ERROR'        =>  '语言修改失败！',
+    'SAVE_OK'           =>  '语言修改成功！'
 );

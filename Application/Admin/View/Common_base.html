@@ -260,13 +260,12 @@
         </div>
         <div class="btn-group pull-right mr10">
             <button class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
-                切换语言：<span class="lang-qie">简体</span> <span class="glyphicon glyphicon-chevron-down"></span>
+                {:L('CHANGE_LANG')}:<span class="lang-qie">{$tlang.name}</span> <span class="glyphicon glyphicon-chevron-down"></span>
             </button>
             <ul class="dropdown-menu dropdown-success">
-                <li><a href="{:urlh('l=zh-cn')}">简体</a></li>
-                <li><a href="{:urlh('l=zh-tw')}">繁體</a></li>
-                <li><a href="{:urlh('l=en')}">English</a></li>
-                <li><a href="{:urlh('l=jp')}">日本語</a></li>
+                <foreach name="langs" item="vo">
+                <li><a href="{:urlh('l='.$vo['value'])}">{$vo.name}</a></li>
+                </foreach>
             </ul>
         </div>
     </div>
@@ -326,11 +325,10 @@
                     </li>
                     <li class="active">{:L('M_INDEX_INDEX')}</li>
                 </ul>
-                <div class="pull-right mr10">
-                    <a class="btn btn-xs btn-primary" href="#">简体</a>
-                    <a class="btn btn-xs btn-light" href="#">繁體</a>
-                    <a class="btn btn-xs btn-light" href="#">English</a>
-                    <a class="btn btn-xs btn-light" href="#">日本語</a>
+                <div id="lang" class="pull-right mr10 hide">
+                    <foreach name="langs" item="v">
+                    <a class="btn btn-xs {$v['value']==LANG_SET?'btn-primary':'btn-light'} mr10" href="{:urlh('lang='.$v['value'])}">{$v.name}</a>
+                    </foreach>
                 </div>
             </div>
             <div class="page-content">

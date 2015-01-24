@@ -34,6 +34,8 @@ $common = array(
     'STATUS_ERROR'  =>  '状态设置失败！',
     'ADD'           =>  '添加',
     'EDIT'          =>  '编辑',
-    'STATUS'        =>  '状态'
+    'STATUS'        =>  '状态',
+    'SAVE_ERROR'    =>  '保存失败！',
+    'SAVE_OK'       =>  '保存成功！'
 );
 return array_merge($common, $menu_common);

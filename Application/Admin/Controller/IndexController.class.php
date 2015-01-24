@@ -42,6 +42,11 @@ class IndexController extends AdminController {
             )
         );
         $tree = new \Common\Lib\Tree($newarr);
+        $Lang = D('Lang');
+        $langs = $Lang->where('status=1')->order('listorder,id')->select();
+        $tlang = $Lang->where('value=\''.LANG_SET.'\'')->find();
+        $this->assign('tlang', $tlang);
+        $this->assign('langs', $langs);
         $this->assign('indexchild', $indexchild);
         $this->assign('index', $index);
         $this->assign('list', $tree->get_backnav(0,'','nav nav-list',$li));

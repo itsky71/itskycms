@@ -41,6 +41,7 @@ class AdminController extends Controller{
      * 列表显示
      */
     public function index(){
+        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
         $this->display();
     }
 
@@ -60,6 +61,30 @@ class AdminController extends Controller{
             $this->display('edit');
         }
     }
+    /**
+     * 编辑
+     */
+    public function edit(){
+        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        $name = D(CONTROLLER_NAME);
+        if(IS_POST){
+            if($name->create()){
+                $result = $name->where('id='.I('post.id'))->save(I('post.'));
+                if($result !== FALSE){
+                    $this->success(L('SAVE_OK'),U(CONTROLLER_NAME.'/index'));
+                }else{
+                    $this->error(L('SAVE_ERROR'));
+                }
+            }else{
+                $this->error($name->getError());
+            }
+        }else{
+            $vo = $name->where('id='.I('get.id'))->find();
+            $this->assign('vo', $vo);
+            $this->display();
+        }
+    }
+
     /**
      * 删除
      */
