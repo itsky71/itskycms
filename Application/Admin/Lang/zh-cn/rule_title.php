@@ -39,4 +39,6 @@ $rule_title = array(
     'R_LANG_STATUS' => '状态',
     'R_LANG_EDIT' => '编辑',
     'R_LANG_DEL' => '删除',
+    'R_LANG_ORDER' => '排序',
+    'R_LANG_SET' => '设置语言包',
 );

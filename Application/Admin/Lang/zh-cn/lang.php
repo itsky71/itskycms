@@ -15,5 +15,9 @@ return array(
     'NUMBER'            =>  '编号',
     'MANOPE'            =>  '管理操作',
     'SAVE_ERROR'        =>  '语言修改失败！',
-    'SAVE_OK'           =>  '语言修改成功！'
+    'SAVE_OK'           =>  '语言修改成功！',
+    'SET_LANG'          =>  '设置语言包',
+    'NAMEU'             =>  '语言名称已存在！',
+    'VALUEU'            =>  '语言标识已存在！',
+    'LANGVAL'           =>  '请输入正确的格式，例如：zh-cn或jp'
 );

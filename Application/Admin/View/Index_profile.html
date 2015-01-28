@@ -82,8 +82,8 @@
             realname:[/^[\u0391-\uFFE5\w]+$/, "{:L('JS_INPUT_INFO')}"]
         },
         fields:{
-            username:'required;username;remote[{:U('Public/checkUserName')}, id]',
-            email:'required;email;remote[{:U('Public/checkEmail')}, id]',
+            username:'required;username;remote[{:U('Check/username')}, id]',
+            email:'required;email;remote[{:U('Check/email')}, id]',
             realname:'realname;length[2~20]',
             question:'length[3~30]',
             answer:'length[~30]'

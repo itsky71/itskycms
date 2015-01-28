@@ -93,6 +93,13 @@
         $('input[name="flag"]').val('');
     });
     $('form[role="form"]').validator({
+        rules:{
+            langv:[/^[a-zA-Z]{2}(-[a-zA-Z]{2})?$/, '{:L('LANGVAL')}']
+        },
+        fields:{
+            name:'required;length[2~20];unchar;remote[{:U('Check/langname')}, id]',
+            value:'required;length[2~5];langv;remote[{:U('Check/langval')}, id]'
+        },
         valid:function(form){
             $.ajax({
                 type: 'POST',

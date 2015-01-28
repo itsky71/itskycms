@@ -40,7 +40,11 @@
             ,username: [/^\w{3,20}$/, "请输入3-20位数字、字母、下划线"]
             ,password: [/^[0-9a-zA-Z]{6,20}$/, "密码由6-20位数字、字母组成"]
             ,verify: [/^[0-9a-zA-Z]{4}$/, "验证码由4位数字、字母组成"]
-            //,unchar:[/^['"]+$/,"包含非法字符"]
+            ,unchar:function(element){
+                if(/[`~!@#$%^&*()_+<>?:"{},.\/;'[\]]+/g.test(element.value)){
+                    return '包含非法字符';
+                }
+            }
             ,accept: function (element, params){
                 if (!params) return true;
                 var ext = params[0];

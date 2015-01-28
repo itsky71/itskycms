@@ -2,6 +2,9 @@
     <a class="btn btn-primary btn-xs ml10 mb10" onclick="load(event,this)" href="{:U('Lang/add')}">
         <span class="glyphicon glyphicon-plus"></span> {:L('ADD_LANG')}
     </a>
+    <a class="btn btn-primary btn-xs ml10 mb10" onclick="load(event,this)" href="{:U('Lang/set')}">
+        <span class="glyphicon glyphicon-briefcase"></span> {:L('SET_LANG')}
+    </a>
     <div class="table-responsive">
         <form autocomplete="off" role="form">
             <table id="menu-tree" class="table table-striped table-hover">
@@ -68,4 +71,16 @@
         }
     });
     $('input[name^="listorder"]').click(function(){$(this).select();});
+    $('form[role="form"]').validator({
+        valid:function(form){
+            $.ajax({
+                type: 'POST',
+                url:'{:U('Lang/order')}',
+                data:$(form).serialize(),
+                success:function(data){
+                    show_msg(data);
+                }
+            });
+        }
+    });
 </script>

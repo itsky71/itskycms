@@ -63,7 +63,7 @@
         fields:{
             group:'required',
             name:{
-                rule:'required;letters;length[3~20];remote[{:U('Public/checkName')}, group, id]',
+                rule:'required;letters;length[3~20];remote[{:U('Check/name')}, group, id]',
                 must:true
             },
             title:'required;length[2~20]',

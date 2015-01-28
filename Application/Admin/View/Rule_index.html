@@ -4,19 +4,19 @@
     </a>
     <div class="table-responsive">
         <form autocomplete="off" role="form">
-            <table id="menu-tree" class="table table-striped table-hover">
+            <table id="menu-tree" class="table table-hover">
                 <thead>
                     <tr>
                         <th class="center w60">{:L('ORDER')}</th>
                         <th>{:L('TITLE')}</th>
-                        <th>{:L('NAME')}</th>
-                        <th class="center">{:L('STATUS')}</th>
-                        <th class="center">{:L('MANOPE')}</th>
+                        <th class="col-sm-3">{:L('NAME')}</th>
+                        <th class="center w80">{:L('STATUS')}</th>
+                        <th class="center w180">{:L('MANOPE')}</th>
                     </tr>
                 </thead>
                 <tbody>
                 <foreach name="rulesg" item="vo">
-                    <tr>
+                    <tr class="tr-top" data-css="child_{$vo.id}">
                         <td class="center">
                             <input type="text" value="{$vo.listorder}" name="listorder[{$vo.id}]" maxlength="3" notimely="true"/>
                         </td>
@@ -34,7 +34,7 @@
                     </tr>
                     <foreach name="rulesc" item="v">
                     <if condition="$vo['m'] eq $v['m']">
-                    <tr class="child_{$vo.id}">
+                    <tr class="child_{$vo.id} hide">
                         <td class="center">
                             <input type="text" value="{$v.listorder}" name="listorder[{$v.id}]" maxlength="3" notimely="true"/>
                         </td>
@@ -74,10 +74,15 @@
     $('#sidebar .nav-list li.open .submenu').hide();
     $('#sidebar .nav-list li.open').removeClass('open');
     $('a[href="{:U(CONTROLLER_NAME.'/'.ACTION_NAME)}"]').parent().addClass('active').parent().show().parent().addClass('open active');
-    var childobj = $('#menu-tree tr[class^="child_"]').map(function(){return $(this).attr('class');});
-    var childarr = $.unique($.makeArray(childobj));
-    $.each(childarr,function(i,n){
-        $('tr.'+n+' .rico:last').text('└─');
+    $('#menu-tree tr:visible:odd').css('background-color','#f9f9f9');
+    $('#menu-tree .tr-top').click(function(e){
+        if(!($(e.target).isChildAndSelfOf('a') || $(e.target).isChildAndSelfOf('input') || $(e.target).isChildAndSelfOf('button'))){
+            var css = $(this).attr('data-css');
+            $('tr.'+css).toggleClass('hide');
+            $('#menu-tree tr:visible').css('background-color','#fff');
+            $('#menu-tree tr:visible:odd').css('background-color','#f9f9f9');
+            $('tr.'+css+' .rico:last').text('└─');
+        }
     });
     $('input[name^="listorder"]').keydown(function(e){
         var code = parseInt(e.keyCode);

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2015-01-23 12:27:48
+-- Generation Time: 2015-01-28 09:36:44
 -- 服务器版本： 5.6.20
 -- PHP Version: 5.5.15
 
@@ -39,8 +39,8 @@ CREATE TABLE IF NOT EXISTS `ta_auth_group` (
 --
 
 INSERT INTO `ta_auth_group` (`id`, `title`, `remark`, `status`, `rules`) VALUES
-(1, 'A_G_T_1', 'A_G_R_1', 1, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34'),
-(2, 'A_G_T_2', 'A_G_R_2', 1, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34'),
+(1, 'A_G_T_1', 'A_G_R_1', 1, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35'),
+(2, 'A_G_T_2', 'A_G_R_2', 1, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39'),
 (3, 'A_G_T_3', 'A_G_R_3', 1, '');
 
 -- --------------------------------------------------------
@@ -77,7 +77,7 @@ CREATE TABLE IF NOT EXISTS `ta_auth_rule` (
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '状态：为1正常，为0禁用',
   `listorder` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
   `condition` char(100) NOT NULL DEFAULT '' COMMENT '规则表达式，为空表示存在就验证，不为空表示按照条件验证'
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='规则表' AUTO_INCREMENT=35 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='规则表' AUTO_INCREMENT=40 ;
 
 --
 -- 转存表中的数据 `ta_auth_rule`
@@ -117,7 +117,12 @@ INSERT INTO `ta_auth_rule` (`id`, `tid`, `name`, `title`, `type`, `status`, `lis
 (31, 2, 'Siteset/member', 'R_SITESET_MEMBER', 1, 1, 0, ''),
 (32, 2, 'Siteset/addvar', 'R_SITESET_ADDVAR', 1, 1, 0, ''),
 (33, 2, 'Lang/index', 'R_LANG_INDEX', 1, 1, 0, ''),
-(34, 2, 'Lang/add', 'R_LANG_ADD', 1, 1, 0, '');
+(34, 2, 'Lang/add', 'R_LANG_ADD', 1, 1, 0, ''),
+(35, 2, 'Lang/status', 'R_LANG_STATUS', 1, 1, 0, ''),
+(36, 2, 'Lang/edit', 'R_LANG_EDIT', 1, 1, 0, ''),
+(37, 2, 'Lang/del', 'R_LANG_DEL', 1, 1, 0, ''),
+(38, 2, 'Lang/order', 'R_LANG_ORDER', 1, 1, 0, ''),
+(39, 2, 'Lang/set', 'R_LANG_SET', 1, 1, 0, '');
 
 -- --------------------------------------------------------
 
@@ -132,14 +137,16 @@ CREATE TABLE IF NOT EXISTS `ta_lang` (
   `flag` varchar(30) NOT NULL DEFAULT '' COMMENT '国旗',
   `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '状态',
   `listorder` smallint(5) NOT NULL DEFAULT '0' COMMENT '排序'
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='多语言' AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='多语言' AUTO_INCREMENT=4 ;
 
 --
 -- 转存表中的数据 `ta_lang`
 --
 
 INSERT INTO `ta_lang` (`id`, `name`, `value`, `flag`, `status`, `listorder`) VALUES
-(1, '简体中文', 'zh-cn', '0,0', 1, 0);
+(1, '简体中文', 'zh-cn', '0px 0px', 1, 0),
+(2, '繁體中文', 'zh-tw', '0px -12px', 1, 0),
+(3, 'English', 'en-us', '0px -24px', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -168,7 +175,7 @@ CREATE TABLE IF NOT EXISTS `ta_member` (
 
 INSERT INTO `ta_member` (`id`, `password`, `username`, `realname`, `email`, `question`, `answer`, `status`, `regtime`, `login_ip`, `last_login_time`, `login_count`) VALUES
 (1, '30bc103d85df152c8c703bcbbcc7fd4d', 'admin', '你买单我就来', 'itsky71@foxmail.com', '我还会回来的...', '灰太狼？呵呵。。。', 1, 1419068912, '127.0.0.1', 1421732415, 30),
-(2, '30bc103d85df152c8c703bcbbcc7fd4d', 'itsky', '你地盘我做主', 'zmh0515005@163.com', '你是谁?', '呵呵...', 1, 1419587881, '127.0.0.1', 1421977597, 98);
+(2, '30bc103d85df152c8c703bcbbcc7fd4d', 'itsky', '你地盘我做主', 'zmh0515005@163.com', '你是谁?', '呵呵...', 1, 1419587881, '127.0.0.1', 1422409852, 101);
 
 -- --------------------------------------------------------
 
@@ -330,12 +337,12 @@ MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户组id',
 -- AUTO_INCREMENT for table `ta_auth_rule`
 --
 ALTER TABLE `ta_auth_rule`
-MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=35;
+MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=40;
 --
 -- AUTO_INCREMENT for table `ta_lang`
 --
 ALTER TABLE `ta_lang`
-MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=2;
+MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `ta_member`
 --

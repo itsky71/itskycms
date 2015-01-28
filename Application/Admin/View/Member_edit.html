@@ -78,10 +78,10 @@
     $('.page-header h1').append('{:L('M_'.$Think.CONTROLLER_NAME.'_INDEX')}<small class="glyphicon glyphicon-chevron-right"> {:L($Think.ACTION_NAME)}</small>');
     $('form[role="form"]').validator({
         fields:{
-            username:'required;username;remote[{:U('Public/checkUserName')}, id]',
+            username:'required;username;remote[{:U('Check/username')}, id]',
             password:'{:ACTION_NAME=='add'?'required;':''}password',
             realname:'realname;length[2~20]',
-            email:'required;email;remote[{:U('Public/checkEmail')}, id]',
+            email:'required;email;remote[{:U('Check/email')}, id]',
             group:'required',
             question:'length[3~30]',
             answer:'length[3~30]'
