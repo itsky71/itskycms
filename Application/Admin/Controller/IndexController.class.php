@@ -23,7 +23,7 @@ class IndexController extends AdminController {
         foreach ($list as $item){
             $item['name'] = L($item['name']);
             $item['icon'] = $item['icon'] ? '<span class="'.$item['icon'].'"></span>':'';
-            $item['url'] = U($item['model'].'/'.$item['action']);
+            $item['url'] = U($item['model'].'/'.$item['action'],$this->vl);
             $item['tar'] = $item['id'] == 1 ? 'noa' : 'tarmain';
             $newarr[] = $item;
         }
@@ -59,7 +59,7 @@ class IndexController extends AdminController {
             $Member = D('Member');
             if($Member->create()){
                 $Member->save();
-                $this->success('修改成功！',U('Index/profile'));
+                $this->success(L('EDIT_OK'),U('Index/profile',  $this->vl));
             }else{
                 $this->error($Member->getError());
             }

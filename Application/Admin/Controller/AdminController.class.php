@@ -17,6 +17,7 @@ use Think\Auth;
  * @author itsky
  */
 class AdminController extends Controller{
+    protected $vl;
     /**
      * 后台控制器初始化
      */
@@ -35,6 +36,8 @@ class AdminController extends Controller{
         if(!$auth->check($module_name, session(C('USER_AUTH_KEY')))){
             $this->error(L('_VALID_ACCESS_'));
         }
+        $this->vl = $vl = LANG_SET == accept_lang() ? '' : C('VAR_LANGUAGE').'='.LANG_SET;
+        $this->assign('vl', $vl);
     }
 
     /**
@@ -71,7 +74,7 @@ class AdminController extends Controller{
             if($name->create()){
                 $result = $name->where('id='.I('post.id'))->save(I('post.'));
                 if($result !== FALSE){
-                    $this->success(L('SAVE_OK'),U(CONTROLLER_NAME.'/index'));
+                    $this->success(L('SAVE_OK'),U(CONTROLLER_NAME.'/index',$this->vl));
                 }else{
                     $this->error(L('SAVE_ERROR'));
                 }
@@ -98,7 +101,7 @@ class AdminController extends Controller{
             $result = $name->where($map)->delete();
         }
         if($result !== FALSE){
-            $this->success(L('DEL_OK'),U(CONTROLLER_NAME.'/index'));
+            $this->success(L('DEL_OK'),U(CONTROLLER_NAME.'/index',$this->vl));
         }else{
             $this->error(L('DEL_ERROR'));
         }
@@ -113,7 +116,7 @@ class AdminController extends Controller{
                 $data['listorder'] = $value;
                 $name->where('id='.$key)->save($data);
             }
-            $this->success(L('ORDER_OK'), U(CONTROLLER_NAME.'/index'));
+            $this->success(L('ORDER_OK'), U(CONTROLLER_NAME.'/index',$this->vl));
         }else{
             $this->error(L('_ERROR_ACTION_'));
         }
@@ -127,7 +130,7 @@ class AdminController extends Controller{
             $data['status'] = I('get.status') ? 0 : 1;
             $result = $name->where('id='.I('get.id'))->save($data);
             if($result !== FALSE){
-                $this->redirect(CONTROLLER_NAME.'/index');
+                $this->redirect(CONTROLLER_NAME.'/index',$this->vl);
             }else{
                 $this->error(L('STATUS_ERROR'));
             }

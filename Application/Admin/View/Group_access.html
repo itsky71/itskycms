@@ -34,7 +34,7 @@
     </div>
 </div>
 <script type="text/javascript">
-    var pan = '<li><a onclick="load(event,this)" href="{:U(CONTROLLER_NAME.'/index')}">{:L('M_'.$Think.CONTROLLER_NAME.'_INDEX')}</a></li>\n\
+    var pan = '<li><a onclick="load(event,this)" href="{:U(CONTROLLER_NAME.'/index',$vl)}">{:L('M_'.$Think.CONTROLLER_NAME.'_INDEX')}</a></li>\n\
 <li class="active">{:L($Think.ACTION_NAME)}</li>';
     $('#breadcrumbs .breadcrumb li:gt(0)').remove();
     $('#breadcrumbs .breadcrumb').append(pan);
@@ -77,7 +77,7 @@
         valid:function(form){
             $.ajax({
                 type: 'POST',
-                url: '{:U('Group/access')}',
+                url: '{:U('Group/access',$vl)}',
                 data:$(form).serialize(),
                 success: function(data){
                     show_msg(data);

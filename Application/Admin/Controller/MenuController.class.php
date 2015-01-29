@@ -20,14 +20,14 @@ class MenuController extends AdminController{
         $Menu = D('Menu');
         $allmenu = $Menu->order('listorder,id')->select();
         foreach ($allmenu as $value){
-            $staop = array('id'=>$value['id'],'status'=>$value['status']);
+            $staop = $this->vl.'&status='.$value['status'].'&id='.$value['id'];
             $allow = '<a class="btn btn-success btn-minier" href="'.U('Menu/status',$staop).'" onclick="load(event,this)"><span class="glyphicon glyphicon-ok"></span></a>';
             $ban = '<a class="btn btn-danger btn-minier" href="'.U('Menu/status',$staop).'" onclick="load(event,this)"><span class="glyphicon glyphicon-ban-circle"></span></a>';
             $value['status'] = $value['status'] ? $allow : $ban;
             $value['name'] = $value['icon'] ? '<span class="'.$value['icon'].'"></span> '.L($value['name']) : L($value['name']);
-            $value['oper'] = '<a class="btn btn-primary btn-minier" href="'.U('Menu/add',array('id'=>$value['id'])).'" onclick="load(event,this)"><span class="glyphicon glyphicon-plus"></span></a> ';
-            $value['oper'] .= '<a class="btn btn-success btn-minier" href="'.U('Menu/edit',array('id'=>$value['id'])).'" onclick="load(event,this)"><span class="glyphicon glyphicon-edit"></span></a> ';
-            $value['oper'] .= '<a class="btn btn-danger btn-minier" href="'.U('Menu/del',array('id'=>$value['id'])).'" onclick="del(event,this,\'p\')"> <span class="glyphicon glyphicon-trash"></span> </a> ';
+            $value['oper'] = '<a class="btn btn-primary btn-minier" href="'.U('Menu/add',$this->vl.'&id='.$value['id']).'" onclick="load(event,this)"><span class="glyphicon glyphicon-plus"></span></a> ';
+            $value['oper'] .= '<a class="btn btn-success btn-minier" href="'.U('Menu/edit',$this->vl.'&id='.$value['id']).'" onclick="load(event,this)"><span class="glyphicon glyphicon-edit"></span></a> ';
+            $value['oper'] .= '<a class="btn btn-danger btn-minier" href="'.U('Menu/del',$this->vl.'&id='.$value['id']).'" onclick="del(event,this,\'p\')"> <span class="glyphicon glyphicon-trash"></span> </a> ';
             $narr[] = $value;
         }
         $tree = new \Common\Lib\Tree($narr);
@@ -57,7 +57,7 @@ class MenuController extends AdminController{
                 if($Menu->add($data)){
                     $rname = I('post.realname');
                     write_lang(array($data['name']=>$rname[LANG_SET]),'menu_common');
-                    $this->success(L('ADD_SUCCESS'),U('Menu/index'));
+                    $this->success(L('ADD_SUCCESS'),U('Menu/index',$this->vl));
                 }else{
                     $this->error(L('ADD_ERROR'));
                 }
@@ -112,7 +112,7 @@ class MenuController extends AdminController{
                 if($result !== FALSE){
                     $rname = I('post.realname');
                     write_lang(array($data['name']=>$rname[LANG_SET]),'menu_common');
-                    $this->success(L('SAVE_OK'),U('Menu/index'));
+                    $this->success(L('SAVE_OK'),U('Menu/index',$this->vl));
                 }else{
                     $this->error(L('SAVE_ERROR'));
                 }
@@ -139,7 +139,7 @@ class MenuController extends AdminController{
             }
             $result = $Menu->where('id IN ('.$ids.')')->delete();
             if($result !== FALSE){
-                $this->success(L('DEL_OK'),U('Menu/index'));
+                $this->success(L('DEL_OK'),U('Menu/index',$this->vl));
             }else{
                 $this->error(L('DEL_ERROR'));
             }

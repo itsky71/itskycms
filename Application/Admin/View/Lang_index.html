@@ -1,8 +1,8 @@
 <div class="col-sm-12">
-    <a class="btn btn-primary btn-xs ml10 mb10" onclick="load(event,this)" href="{:U('Lang/add')}">
+    <a class="btn btn-primary btn-xs ml10 mb10" onclick="load(event,this)" href="{:U('Lang/add',$vl)}">
         <span class="glyphicon glyphicon-plus"></span> {:L('ADD_LANG')}
     </a>
-    <a class="btn btn-primary btn-xs ml10 mb10" onclick="load(event,this)" href="{:U('Lang/set')}">
+    <a class="btn btn-primary btn-xs ml10 mb10" onclick="load(event,this)" href="{:U('Lang/set',$vl)}">
         <span class="glyphicon glyphicon-briefcase"></span> {:L('SET_LANG')}
     </a>
     <div class="table-responsive">
@@ -31,10 +31,10 @@
                         <td class="vam"><span class="flag-ico mtb0a" style="background-position:{$vo.flag}"></span></td>
                         <td class="center">{$vo.status}</td>
                         <td class="center">
-                            <a class="btn btn-success btn-minier" onclick="load(event,this)" href="{:U('Lang/edit',array('id'=>$vo['id']))}">
+                            <a class="btn btn-success btn-minier" onclick="load(event,this)" href="{:U('Lang/edit',$vl.'&id='.$vo['id'])}">
                                 <span class="glyphicon glyphicon-edit"></span> {:L('EDIT')}
                             </a>
-                            <a class="btn btn-danger btn-minier" onclick="del(event,this,'c')" href="{:U('Lang/del',array('id'=>$vo['id']))}">
+                            <a class="btn btn-danger btn-minier" onclick="del(event,this,'c')" href="{:U('Lang/del',$vl.'&id='.$vo['id'])}">
                                 <span class="glyphicon glyphicon-trash"></span> {:L('DELETE')}
                             </a>
                         </td>
@@ -52,14 +52,14 @@
     </div>
 </div>
 <script type="text/javascript">
-    var pan = '<li><a onclick="load(event,this)" href="{:U(CONTROLLER_NAME.'/'.ACTION_NAME)}">{:L('M_'.$Think.CONTROLLER_NAME.'_'.$Think.ACTION_NAME)}</a></li>\n\
+    var pan = '<li><a onclick="load(event,this)" href="{:U(CONTROLLER_NAME.'/'.ACTION_NAME,$vl)}">{:L('M_'.$Think.CONTROLLER_NAME.'_'.$Think.ACTION_NAME)}</a></li>\n\
 <li class="active">{:L($Think.ACTION_NAME)}</li>';
     $('#breadcrumbs .breadcrumb li:gt(0)').remove();
     $('#breadcrumbs .breadcrumb').append(pan);
     $('#sidebar .nav-list li.active').removeClass('active');
     $('#sidebar .nav-list li.open .submenu').hide();
     $('#sidebar .nav-list li.open').removeClass('open');
-    $('a[href="{:U(CONTROLLER_NAME.'/'.ACTION_NAME)}"]').parent().addClass('active').parent().show().parent().addClass('open active');
+    $('a[href="{:U(CONTROLLER_NAME.'/'.ACTION_NAME,$vl)}"]').parent().addClass('active').parent().show().parent().addClass('open active');
     $('.page-header h1').empty();
     $('.page-header h1').append('{:L('M_'.$Think.CONTROLLER_NAME.'_'.$Think.ACTION_NAME)}<small class="glyphicon glyphicon-chevron-right"> {:L($Think.ACTION_NAME)}</small>');
     $('input[name^="listorder"]').keydown(function(e){
@@ -75,7 +75,7 @@
         valid:function(form){
             $.ajax({
                 type: 'POST',
-                url:'{:U('Lang/order')}',
+                url:'{:U('Lang/order',$vl)}',
                 data:$(form).serialize(),
                 success:function(data){
                     show_msg(data);

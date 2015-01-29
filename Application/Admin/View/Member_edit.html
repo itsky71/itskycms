@@ -70,7 +70,7 @@
     </form>
 </div>
 <script type="text/javascript">
-    var pan = '<li><a onclick="load(event,this)" href="{:U(CONTROLLER_NAME.'/index')}">{:L('M_'.$Think.CONTROLLER_NAME.'_INDEX')}</a></li>\n\
+    var pan = '<li><a onclick="load(event,this)" href="{:U(CONTROLLER_NAME.'/index',$vl)}">{:L('M_'.$Think.CONTROLLER_NAME.'_INDEX')}</a></li>\n\
 <li class="active">{:L($Think.ACTION_NAME)}</li>';
     $('#breadcrumbs .breadcrumb li:gt(0)').remove();
     $('#breadcrumbs .breadcrumb').append(pan);
@@ -78,10 +78,10 @@
     $('.page-header h1').append('{:L('M_'.$Think.CONTROLLER_NAME.'_INDEX')}<small class="glyphicon glyphicon-chevron-right"> {:L($Think.ACTION_NAME)}</small>');
     $('form[role="form"]').validator({
         fields:{
-            username:'required;username;remote[{:U('Check/username')}, id]',
+            username:'required;username;remote[{:U('Check/username',$vl)}, id]',
             password:'{:ACTION_NAME=='add'?'required;':''}password',
             realname:'realname;length[2~20]',
-            email:'required;email;remote[{:U('Check/email')}, id]',
+            email:'required;email;remote[{:U('Check/email',$vl)}, id]',
             group:'required',
             question:'length[3~30]',
             answer:'length[3~30]'
@@ -89,7 +89,7 @@
         valid:function(form){
             $.ajax({
                 type: 'POST',
-                url: '{:U('Member/'.ACTION_NAME)}',
+                url: '{:U('Member/'.ACTION_NAME,$vl)}',
                 data:$(form).serialize(),
                 success: function(data){
                     show_msg(data);

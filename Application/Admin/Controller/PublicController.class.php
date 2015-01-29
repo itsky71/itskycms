@@ -16,6 +16,11 @@ use Think\Controller;
  * @author itsky
  */
 class PublicController extends Controller {
+    protected $vl;
+    public function _initialize(){
+        $this->vl = $vl = LANG_SET == accept_lang() ? '' : C('VAR_LANGUAGE').'='.LANG_SET;
+        $this->assign('vl', $vl);
+    }
     /* 登入 */
     public function login(){
         if(IS_AJAX){
@@ -50,7 +55,7 @@ class PublicController extends Controller {
                     }
                     session(C('USER_AUTH_KEY'), $resuser['id']);
                     session('uname', $resuser['username']);
-                    $this->success(L('LOGIN_SUCCESS'), U('Index/index'));
+                    $this->success(L('LOGIN_SUCCESS'), U('Index/index',$this->vl));
                 }  else {
                     $this->error(L('LOGIN_ERROR'));
                 }

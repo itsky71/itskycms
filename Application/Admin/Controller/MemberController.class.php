@@ -30,7 +30,7 @@ class MemberController extends AdminController{
             }else{
                 $disabled = '';
             }
-            $staop = array('id'=>$item['id'],'status'=>$item['status']);
+            $staop = $this->vl.'&status='.$item['status'].'&id='.$item['id'];
             $allow = '<a class="btn btn-success btn-minier" href="'.U('Member/status',$staop).'" onclick="load(event,this)"'.$disabled.'><span class="glyphicon glyphicon-ok"></span></a>';
             $ban = '<a class="btn btn-danger btn-minier" href="'.U('Member/status',$staop).'" onclick="load(event,this)"'.$disabled.'><span class="glyphicon glyphicon-ban-circle"></span></a>';
             $item['status'] = $item['status'] ? $allow.'<i class="hide">1</i>' : $ban.'<i class="hide">0</i>';
@@ -61,7 +61,7 @@ class MemberController extends AdminController{
                 if($insertId){
                     $aga = array('uid'=>$insertId,'group_id'=>I('post.group'));
                     M('AuthGroupAccess')->add($aga);
-                    $this->success(L('ADD_SUCCESS'),U('Member/index'));
+                    $this->success(L('ADD_SUCCESS'),U('Member/index',$this->vl));
                 }else{
                     $this->error(L('ADD_ERROR'));
                 }
@@ -94,7 +94,7 @@ class MemberController extends AdminController{
                 if($result !== FALSE){
                     $aga = array('group_id'=>I('post.group'));
                     M('AuthGroupAccess')->where('uid='.I('post.id'))->save($aga);
-                    $this->success(L('SAVE_OK'),U('Member/index'));
+                    $this->success(L('SAVE_OK'),U('Member/index',$this->vl));
                 }else{
                     $this->error(L('SAVE_ERROR'));
                 }
@@ -126,7 +126,7 @@ class MemberController extends AdminController{
             $AuthGroupAccess->where($map2)->delete();
         }
         if($result !== FALSE){
-            $this->success(L('DEL_OK'),U('Member/index'));
+            $this->success(L('DEL_OK'),U('Member/index',$this->vl));
         }else{
             $this->error(L('DEL_ERROR'));
         }

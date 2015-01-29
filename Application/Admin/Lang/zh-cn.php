@@ -33,7 +33,6 @@ $common = array(
     'ORDER_OK'          =>  '排序成功！',
     'STATUS_ERROR'      =>  '状态设置失败！',
     'ADD'               =>  '添加',
-    'EDIT'              =>  '编辑',
     'STATUS'            =>  '状态',
     'SAVE_ERROR'        =>  '保存失败！',
     'SAVE_OK'           =>  '保存成功！'

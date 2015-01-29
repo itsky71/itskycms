@@ -47,7 +47,7 @@ class CheckLangBehavior {
                 $langSet = $matches[1];
                 cookie('think_language',$langSet,3600);
             }
-            if(false === stripos($langList,$langSet)) { // 非法语言参数
+            if(false === in_array($langSet, explode(',', $langList))) { // 非法语言参数
                 $langSet = C('DEFAULT_LANG');
             }
         }

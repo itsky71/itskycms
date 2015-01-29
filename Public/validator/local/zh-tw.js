@@ -18,9 +18,10 @@
      */
     $.validator.config({
         //stopOnError: false,
-        theme: 'yellow_right_effect',
+        theme: 'red_right_effect',
         defaultMsg: "{0}格式不正確",
         loadingMsg: "正在驗證...",
+        timely:0,
         
         // Custom rules
         rules: {
@@ -121,6 +122,43 @@
             msgClass: 'n-right',
             msgArrow: TPL_ARROW,
             msgStyle: 'position:absolute;top:0;right:0',
+            msgShow: function($msgbox, type){
+                var $el = $msgbox.children();
+                if ($el.is(':animated')) return;
+                if (type === 'error') {
+                    $el.css({
+                        left: '20px',
+                        opacity: 0
+                    }).delay(100).show().stop().animate({
+                        left: '-4px',
+                        opacity: 1
+                    }, 150).animate({
+                        left: '3px'
+                    }, 80).animate({
+                        left: 0
+                    }, 80);
+                } else {
+                    $el.css({
+                        left: 0,
+                        opacity: 1
+                    }).fadeIn(200);
+                }
+            },
+            msgHide: function($msgbox, type){
+                var $el = $msgbox.children();
+                $el.stop().delay(100).show().animate({
+                    left: '20px',
+                    opacity: 0
+                }, 300, function(){
+                    $msgbox.hide();
+                });
+            }
+        },
+        'red_right_effect': {
+            formClass: 'n-red',
+            msgClass: 'n-right',
+            msgArrow: TPL_ARROW,
+            msgStyle: 'position:absolute;',
             msgShow: function($msgbox, type){
                 var $el = $msgbox.children();
                 if ($el.is(':animated')) return;

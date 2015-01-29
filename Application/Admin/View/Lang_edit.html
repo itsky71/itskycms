@@ -71,7 +71,7 @@
     </div>
 </div>
 <script type="text/javascript">
-    var pan = '<li><a onclick="load(event,this)" href="{:U(CONTROLLER_NAME.'/index')}">{:L('M_'.$Think.CONTROLLER_NAME.'_INDEX')}</a></li>\n\
+    var pan = '<li><a onclick="load(event,this)" href="{:U(CONTROLLER_NAME.'/index',$vl)}">{:L('M_'.$Think.CONTROLLER_NAME.'_INDEX')}</a></li>\n\
 <li class="active">{:L($Think.ACTION_NAME)}</li>';
     $('#breadcrumbs .breadcrumb li:gt(0)').remove();
     $('#breadcrumbs .breadcrumb').append(pan);
@@ -97,13 +97,13 @@
             langv:[/^[a-zA-Z]{2}(-[a-zA-Z]{2})?$/, '{:L('LANGVAL')}']
         },
         fields:{
-            name:'required;length[2~20];unchar;remote[{:U('Check/langname')}, id]',
-            value:'required;length[2~5];langv;remote[{:U('Check/langval')}, id]'
+            name:'required;length[2~20];unchar;remote[{:U('Check/langname',$vl)}, id]',
+            value:'required;length[2~5];langv;remote[{:U('Check/langval',$vl)}, id]'
         },
         valid:function(form){
             $.ajax({
                 type: 'POST',
-                url: '{:U('Lang/'.ACTION_NAME)}',
+                url: '{:U('Lang/'.ACTION_NAME,$vl)}',
                 data:$(form).serialize(),
                 success: function(data){
                     show_msg(data);

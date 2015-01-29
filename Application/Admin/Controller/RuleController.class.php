@@ -20,7 +20,7 @@ class RuleController extends AdminController{
         $Rule = D('AuthRule');
         $rules = $Rule->order('listorder,id')->select();
         foreach ($rules as $value){
-            $staop = array('id'=>$value['id'],'status'=>$value['status']);
+            $staop = $this->vl.'&status='.$value['status'].'&id='.$value['id'];
             $allow = '<a class="btn btn-success btn-minier" href="'.U('Rule/status',$staop).'" onclick="load(event,this)"><span class="glyphicon glyphicon-ok"></span></a>';
             $ban = '<a class="btn btn-danger btn-minier" href="'.U('Rule/status',$staop).'" onclick="load(event,this)"><span class="glyphicon glyphicon-ban-circle"></span></a>';
             $value['status'] = $value['status'] ? $allow : $ban;
@@ -53,7 +53,7 @@ class RuleController extends AdminController{
                 );
                 if($Rule->add($data)){
                     write_lang(array($data['title']=>I('post.title')),'rule_title');
-                    $this->success(L('ADD_SUCCESS'),U('Rule/index'));
+                    $this->success(L('ADD_SUCCESS'),U('Rule/index',$this->vl));
                 }else{
                     $this->error(L('ADD_ERROR'));
                 }
@@ -92,7 +92,7 @@ class RuleController extends AdminController{
                 $result = $Rule->where('id='.I('post.id'))->save($data);
                 if($result !== FALSE){
                     write_lang(array($data['title']=>I('post.title')),'rule_title');
-                    $this->success(L('SAVE_OK'),U('Rule/index'));
+                    $this->success(L('SAVE_OK'),U('Rule/index',$this->vl));
                 }else{
                     $this->error(L('SAVE_ERROR'));
                 }
@@ -113,7 +113,7 @@ class RuleController extends AdminController{
                 $result = $Rule->where('id='.I('get.id'))->delete();
             }
             if($result !== FALSE){
-                $this->success(L('DEL_OK'),U('Rule/index'));
+                $this->success(L('DEL_OK'),U('Rule/index',$this->vl));
             }else{
                 $this->error(L('DEL_ERROR'));
             }
@@ -129,7 +129,7 @@ class RuleController extends AdminController{
                 $data['listorder'] = $value;
                 $Rule->where('id='.$key)->save($data);
             }
-            $this->success(L('ORDER_OK'), U('Rule/index'));
+            $this->success(L('ORDER_OK'), U('Rule/index',$this->vl));
         }else{
             $this->error(L('_ERROR_ACTION_'));
         }

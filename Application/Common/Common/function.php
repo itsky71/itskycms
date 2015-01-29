@@ -145,3 +145,13 @@ function urlh($add){
     parse_str($add,$arrget);
     return U(MODULE_NAME.'/'.CONTROLLER_NAME.'/'.ACTION_NAME,array_merge($_GET,$arrget));
 }
+/**
+ * 自动侦测浏览器语言
+ * @return string
+ */
+function accept_lang(){
+    if(isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])){
+        preg_match('/^([a-z\d\-]+)/i', $_SERVER['HTTP_ACCEPT_LANGUAGE'], $matches);
+        return $matches[1];
+    }
+}

@@ -19,7 +19,11 @@ class SitesetController extends AdminController{
     public function index(){
         if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
         $Siteset = D('Siteset');
-        $list = $Siteset->where('groupid=1')->select();
+        if(I('get.lang')){
+            $list = $Siteset->where('groupid=1 and lang=\''.I('get.lang').'\'')->select();
+        }else{
+            $list = $Siteset->where('groupid=1 and lang=\''.LANG_SET.'\'')->select();
+        }
         $this->assign('list', $list);
         $this->display();
     }
@@ -34,11 +38,12 @@ class SitesetController extends AdminController{
                     'info' => 'S_'.strtoupper(I('post.varname')),
                     'groupid' => I('post.groupid'),
                     'type' => I('post.type'),
+                    'lang' => I('post.lang'),
                     'value' => I('post.value')
                 );
                 if($Siteset->add($data)){
                     write_lang(array($data['info']=>I('post.info')),'siteset_info');
-                    $this->success(L('ADD_SUCCESS'),U('Siteset/addvar'));
+                    $this->success(L('ADD_SUCCESS'),U('Siteset/addvar',$this->vl));
                 }else{
                     $this->error(L('ADD_ERROR'));
                 }

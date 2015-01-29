@@ -42,19 +42,19 @@
     </div>
 </div>
 <script type="text/javascript">
-    var pan = '<li><a onclick="load(event,this)" href="{:U(CONTROLLER_NAME.'/index')}">{:L('M_'.$Think.CONTROLLER_NAME.'_INDEX')}</a></li>\n\
+    var pan = '<li><a onclick="load(event,this)" href="{:U(CONTROLLER_NAME.'/index',$vl)}">{:L('M_'.$Think.CONTROLLER_NAME.'_INDEX')}</a></li>\n\
 <li class="active">{:L($Think.ACTION_NAME)}</li>';
     $('#breadcrumbs .breadcrumb li:gt(0)').remove();
     $('#breadcrumbs .breadcrumb').append(pan);
     $('#sidebar .nav-list li.active').removeClass('active');
     $('#sidebar .nav-list li.open .submenu').hide();
     $('#sidebar .nav-list li.open').removeClass('open');
-    $('a[href="{:U(CONTROLLER_NAME.'/'.ACTION_NAME)}"]').parent().addClass('active').parent().show().parent().addClass('open active');
+    $('a[href="{:U(CONTROLLER_NAME.'/'.ACTION_NAME,$vl)}"]').parent().addClass('active').parent().show().parent().addClass('open active');
     $('.page-header h1').empty();
     $('.page-header h1').append('{:L('M_'.$Think.CONTROLLER_NAME.'_INDEX')}<small class="glyphicon glyphicon-chevron-right"> {:L($Think.ACTION_NAME)}</small>');
     $('#preview').click(function(){
         var newWindow = window.open();
-        $.get('{:U('Update/index')}',{preview:$('input[name="htmlfile"]').val()},function(url){
+        $.get('{:U('Update/index',$vl)}',{preview:$('input[name="htmlfile"]').val()},function(url){
             newWindow.location.href = url;
         })
     });

@@ -19,7 +19,7 @@ class SitesetModel extends Model{
     //表单验证
     protected $_validate = array(
         array('varname','3,20','{%VNL}',self::EXISTS_VALIDATE,'length'),
-        array('varname','','{%VNU}',self::EXISTS_VALIDATE,'unique',self::MODEL_INSERT),
+        array('varname,lang','','{%VNU}',self::MUST_VALIDATE,'unique',self::MODEL_INSERT),
         array('info','2,50','{%INFOL}',self::EXISTS_VALIDATE,'length'),
         array('groupid','require','{%GROUPIDR}')
     );

@@ -1,0 +1,11 @@
+1、/ThinkPHP/Library/Behavior/CheckLangBehavior.class.php
+line 50
+edit befor : if(false === stripos($langList,$langSet)) { // 非法语言参数
+edit after : if(false === in_array($langSet, explode(',', $langList))) { // 非法语言参数
+
+2、/ThinkPHP/Library/Think/Auth.class.php
+line 87 to 82
+if (C('AUTH_CONFIG')) {
+    //可设置配置项 AUTH_CONFIG, 此配置项为数组。
+    $this->_config = array_merge($this->_config, C('AUTH_CONFIG'));
+}

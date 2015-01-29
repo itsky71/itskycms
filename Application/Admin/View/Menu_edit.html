@@ -284,7 +284,7 @@
     </ul>
 </div>
 <script type="text/javascript">
-    var pan = '<li><a onclick="load(event,this)" href="{:U(CONTROLLER_NAME.'/index')}">{:L('M_'.$Think.CONTROLLER_NAME.'_INDEX')}</a></li>\n\
+    var pan = '<li><a onclick="load(event,this)" href="{:U(CONTROLLER_NAME.'/index',$vl)}">{:L('M_'.$Think.CONTROLLER_NAME.'_INDEX')}</a></li>\n\
 <li class="active">{:L($Think.ACTION_NAME)}</li>';
     $('#breadcrumbs .breadcrumb li:gt(0)').remove();
     $('#breadcrumbs .breadcrumb').append(pan);
@@ -298,7 +298,7 @@
                 if(pv==''){
                     return $.ajax({
                         type:'post',
-                        url:'{:U('Check/action')}',
+                        url:'{:U('Check/action',$vl)}',
                         data:element.name+'='+element.value+'&'+params+'=index',
                         success:function(d){
                             window.console && console.log(d);
@@ -313,14 +313,14 @@
                 rule:'required;letters;length[3~20];mremote[action]',
                 must:true
             },
-            action:'letters;length[3~20];remote[{:U('Check/action')}, model, id]',
+            action:'letters;length[3~20];remote[{:U('Check/action',$vl)}, model, id]',
             data:'length[~50]',
             remark:'length[~100]'
         },
         valid:function(form){
             $.ajax({
                 type: 'POST',
-                url: '{:U('Menu/'.ACTION_NAME)}',
+                url: '{:U('Menu/'.ACTION_NAME,$vl)}',
                 data:$(form).serialize(),
                 success: function(data){
                     show_msg(data);

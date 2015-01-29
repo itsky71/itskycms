@@ -38,7 +38,7 @@
                     </label>
                     <label class="login_input">
                         <input type="text" name="verify" placeholder="{:L('LOGIN_VERIFY')}"/>
-                        <img class="verifyimg" src="{:U('Public/verify')}" alt="{:L('LOGIN_VERIFY')}"/>
+                        <img class="verifyimg" src="{:U('Public/verify',$vl)}" alt="{:L('LOGIN_VERIFY')}"/>
                     </label>
                     <div class="login_send">
                         <label class="inline">
@@ -107,7 +107,7 @@ $('#admin_login').validator({
     valid : function(form){
         var me = this;
         me.holdSubmit();
-        $.post('{:U('Public/login')}',$(form).serialize(),success,'json');
+        $.post('{:U('Public/login',$vl)}',$(form).serialize(),success,'json');
         function success(data){
             if(data.status){
                 $('#login_modal .alert').removeClass('alert-warning').addClass('alert-success');

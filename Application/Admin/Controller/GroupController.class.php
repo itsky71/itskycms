@@ -20,7 +20,7 @@ class GroupController extends AdminController{
         $Group = D('AuthGroup');
         $groups = $Group->select();
         foreach ($groups as $value){
-            $staop = array('id'=>$value['id'],'status'=>$value['status']);
+            $staop = $this->vl.'&status='.$value['status'].'&id='.$value['id'];
             $allow = '<a class="btn btn-success btn-minier" href="'.U('Group/status',$staop).'" onclick="load(event,this)"><span class="glyphicon glyphicon-ok"></span></a>';
             $ban = '<a class="btn btn-danger btn-minier" href="'.U('Group/status',$staop).'" onclick="load(event,this)"><span class="glyphicon glyphicon-ban-circle"></span></a>';
             $value['status'] = $value['status'] ? $allow : $ban;
@@ -47,7 +47,7 @@ class GroupController extends AdminController{
                     $info[$data['title']] = I('post.title');
                     $info[$data['remark']] = addcslashes(I('post.remark','',NULL),'\'\\');
                     write_lang($info,'group_title');
-                    $this->success(L('ADD_SUCCESS'),U('Group/index'));
+                    $this->success(L('ADD_SUCCESS'),U('Group/index', $this->vl));
                 }else{
                     $this->error(L('ADD_ERROR'));
                 }
@@ -74,7 +74,7 @@ class GroupController extends AdminController{
                     $info[$data['title']] = I('post.title');
                     $info[$data['remark']] = addcslashes(I('post.remark','',NULL),'\'\\');
                     write_lang($info,'group_title');
-                    $this->success(L('SAVE_OK'),U('Group/index'));
+                    $this->success(L('SAVE_OK'),U('Group/index', $this->vl));
                 }else{
                     $this->error(L('SAVE_ERROR'));
                 }
@@ -93,7 +93,7 @@ class GroupController extends AdminController{
            $Group = D('AuthGroup');
            $result = $Group->where('id='.I('get.id'))->delete();
            if($result !== FALSE){
-                $this->success(L('DEL_OK'),U('Group/index'));
+                $this->success(L('DEL_OK'),U('Group/index', $this->vl));
             }else{
                 $this->error(L('DEL_ERROR'));
             }
@@ -126,7 +126,7 @@ class GroupController extends AdminController{
             $data['rules'] = implode(',', $rules);
             $result = $Group->where('id='.I('post.gid'))->save($data);
             if($result !== FALSE){
-                $this->success(L('ACCESS_OK'),U('Group/index'));
+                $this->success(L('ACCESS_OK'),U('Group/index', $this->vl));
             }else{
                 $this->error(L('ACCESS_ERROR'));
             }

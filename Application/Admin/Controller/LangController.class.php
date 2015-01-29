@@ -20,7 +20,7 @@ class LangController extends AdminController{
         $Lang = D('Lang');
         $lists = $Lang->order('listorder,id')->select();
         foreach ($lists as $value){
-            $staop = array('id'=>$value['id'],'status'=>$value['status']);
+            $staop = $this->vl.'&status='.$value['status'].'&id='.$value['id'];
             $allow = '<a class="btn btn-success btn-minier" href="'.U('Lang/status',$staop).'" onclick="load(event,this)"><span class="glyphicon glyphicon-ok"></span></a>';
             $ban = '<a class="btn btn-danger btn-minier" href="'.U('Lang/status',$staop).'" onclick="load(event,this)"><span class="glyphicon glyphicon-ban-circle"></span></a>';
             $value['status'] = $value['status'] ? $allow : $ban;
@@ -36,7 +36,7 @@ class LangController extends AdminController{
         if(IS_POST){
             if($Lang->create()){
                 if($Lang->add(I('post.'))){
-                    $this->success(L('ADD_OK'),U('Lang/index'));
+                    $this->success(L('ADD_OK'),U('Lang/index',$this->vl));
                 }else{
                     $this->error(L('ADD_ERROR'));
                 }
@@ -61,7 +61,7 @@ class LangController extends AdminController{
                 );
                 $result = $Lang->where('id='.I('post.id'))->save($data);
                 if($result !== FALSE){
-                    $this->success(L('SAVE_OK'),U('Lang/index'));
+                    $this->success(L('SAVE_OK'),U('Lang/index',$this->vl));
                 }else{
                     $this->error(L('SAVE_ERROR'));
                 }
