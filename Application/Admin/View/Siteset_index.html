@@ -10,13 +10,14 @@
         <tbody>
             <foreach name="list" item="vo" key="k">
             <tr>
-                <td class="center">{:L($vo['info'])}:</td>
+                <td class="center">{$vo.info}:</td>
                 <td>
-                    <span class="editable-click text-info" data-num="{$k}">{$vo.value}</span>
+                    <div class="editable-val hide" data-num="{$k}">{$vo.value}</div>
+                    <span class="editable-click text-info" data-num="{$k}">{$vo.value|default='NULL'|htmlspecialchars}</span>
                     <span class="editable-inline hide" data-num="{$k}">
                         <switch name="vo.type">
                         <case value="string"><input class="col-xs-10 editable-input" type="text" name="{$vo.varname}" value="{$vo.value}"/></case>
-                        <case value="text"><textarea class="editable-input col-xs-10" name="{$vo.varname}">{$vo.value}</textarea></case>
+                        <case value="text"><textarea class="editable-input col-xs-10 pl5 minh80" name="{$vo.varname}">{$vo.value}</textarea></case>
                         <default />
                         </switch>
                         <div class="btn-group">
@@ -31,6 +32,7 @@
         </tbody>
     </table>
 </div>
+{$langs}
 <script type="text/javascript">
     var pan = '<li><a onclick="load(event,this)" href="{:U(CONTROLLER_NAME.'/index',$vl)}">{:L('M_SITECONFIG_INDEX')}</a></li>\n\
 <li class="active">{:L('M_'.$Think.CONTROLLER_NAME.'_'.$Think.ACTION_NAME)}</li>';
@@ -69,7 +71,7 @@
         }else if(!(dragel == tar || $.contains(dragel, tar)) && $('.editable-inline').eq(num).is(':visible')){
             $('.editable-click').eq(num).removeClass('hide').parent().removeClass('p1-8');
             $('.editable-inline').eq(num).addClass('hide');
-            $('.editable-input').eq(num).val($('.editable-click[data-num="'+num+'"]').html());
+            $('.editable-input').eq(num).val($('.editable-val[data-num="'+num+'"]').html());
         }
     }
 </script>

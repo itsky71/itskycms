@@ -143,7 +143,8 @@ function write_lang($lang,$file){
  */
 function urlh($add){
     parse_str($add,$arrget);
-    return U(MODULE_NAME.'/'.CONTROLLER_NAME.'/'.ACTION_NAME,array_merge($_GET,$arrget));
+    $res = array_merge($_GET,$arrget);
+    return U(MODULE_NAME.'/'.CONTROLLER_NAME.'/'.ACTION_NAME,$res);
 }
 /**
  * 自动侦测浏览器语言

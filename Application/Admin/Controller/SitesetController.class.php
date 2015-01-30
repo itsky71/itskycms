@@ -21,6 +21,8 @@ class SitesetController extends AdminController{
         $Siteset = D('Siteset');
         if(I('get.lang')){
             $list = $Siteset->where('groupid=1 and lang=\''.I('get.lang').'\'')->select();
+        }elseif($this->clang){
+            $list = $Siteset->where('groupid=1 and lang=\''.$this->clang.'\'')->select();
         }else{
             $list = $Siteset->where('groupid=1 and lang=\''.LANG_SET.'\'')->select();
         }
@@ -35,14 +37,13 @@ class SitesetController extends AdminController{
             if($Siteset->create()){
                 $data = array(
                     'varname' => I('post.varname'),
-                    'info' => 'S_'.strtoupper(I('post.varname')),
+                    'info' => I('post.info'),
                     'groupid' => I('post.groupid'),
                     'type' => I('post.type'),
                     'lang' => I('post.lang'),
                     'value' => I('post.value')
                 );
                 if($Siteset->add($data)){
-                    write_lang(array($data['info']=>I('post.info')),'siteset_info');
                     $this->success(L('ADD_SUCCESS'),U('Siteset/addvar',$this->vl));
                 }else{
                     $this->error(L('ADD_ERROR'));
@@ -59,6 +60,6 @@ class SitesetController extends AdminController{
     }
     
     public function ospro(){
-        print_r(session());
+        print_r(S('langs'));
     }
 }

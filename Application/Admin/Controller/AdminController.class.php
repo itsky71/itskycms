@@ -17,7 +17,7 @@ use Think\Auth;
  * @author itsky
  */
 class AdminController extends Controller{
-    protected $vl;
+    protected $vl,$clang;
     /**
      * 后台控制器初始化
      */
@@ -36,8 +36,32 @@ class AdminController extends Controller{
         if(!$auth->check($module_name, session(C('USER_AUTH_KEY')))){
             $this->error(L('_VALID_ACCESS_'));
         }
+        // url 语言参数
         $this->vl = $vl = LANG_SET == accept_lang() ? '' : C('VAR_LANGUAGE').'='.LANG_SET;
         $this->assign('vl', $vl);
+        //多语言操作html
+        $this->clang = $clang = cookie('lang');
+        $langs = '<div id="lang"><div class="btn btn-app btn-xs btn-purple ace-settings-btn">';
+        $langs .= '<span class="glyphicon glyphicon-globe"></span></div><div class="lang-list">';
+        foreach (S('langs') as $value){
+            if(I('get.lang')){
+                $btncolor = I('get.lang') == $value['value'] ? 'btn-primary' : 'btn-light';
+            }else{
+                if($clang){
+                    $btncolor = $value['value'] == $clang ? 'btn-primary' : 'btn-light';
+                }else{
+                    $btncolor = $value['value'] == LANG_SET ? 'btn-primary' : 'btn-light';
+                }
+            }
+            $langs .= '<a class="btn btn-xs '.$btncolor.' mr5 mb5" href="'.urlh($vl.'&lang='.$value['value']).'" onclick="load(event,this)">'.$value['name'].'</a>';
+        }
+        $langs .= '</div></div>';
+        $this->assign('langs', S('langs')?$langs:'');
+        //多语言操作cookie
+        if(array_key_exists('lang', I('get.'))){
+            cookie('lang', I('get.lang'));
+        }
+        $this->assign('clang', $clang);
     }
 
     /**

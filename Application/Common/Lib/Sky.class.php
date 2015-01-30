@@ -19,12 +19,12 @@ class Sky extends TagLib{
     // 标签定义
     protected $tags = array(
         // 标签定义： attr 属性列表 close 是否闭合（0 或者1 默认1） alias 标签别名 level 嵌套层次
-        'db'      =>  array('attr'=>'table,where,order,limit,item,page,sql,field,key,mod,debug','level'=>3)
+        'db'    =>  array('attr'=>'table,where,order,limit,item,page,sql,field,key,mod,debug','level'=>3)
     );
     /**
-     * 
-     * @param type $tag
-     * @param type $content
+     * 模板调用数据库的数据
+     * @param string $tag
+     * @param string $content
      * @return string
      */
     public function _db($tag,$content){

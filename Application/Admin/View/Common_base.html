@@ -76,16 +76,18 @@
                 </li>
             </ul>
         </div>
+        <if condition="$mlang">
         <div class="btn-group pull-right mr10">
             <button class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
                 {:L('CHANGE_LANG')}:<span class="lang-qie">{$tlang.name}</span> <span class="glyphicon glyphicon-chevron-down"></span>
             </button>
             <ul class="dropdown-menu dropdown-success">
-                <foreach name="langs" item="vo">
+                <foreach name="mlang" item="vo">
                 <li><a href="{:urlh(C('VAR_LANGUAGE').'='.$vo['value'])}">{$vo.name}</a></li>
                 </foreach>
             </ul>
         </div>
+        </if>
     </div>
 </div>
 </block>
@@ -143,11 +145,6 @@
                     </li>
                     <li class="active">{:L('M_INDEX_INDEX')}</li>
                 </ul>
-                <div id="lang" class="pull-right mr10">
-                    <foreach name="langs" item="v">
-                    <a class="tarmain btn btn-xs {$v['value']==LANG_SET?'btn-primary':'btn-light'} mr10" href="{:U('Siteset/index',$vl.'&lang='.$v['value'])}">{$v.name}</a>
-                    </foreach>
-                </div>
             </div>
             <div class="page-content">
                 <div class="page-header">
