@@ -12,8 +12,8 @@
             <tr>
                 <td class="center">{$vo.info}:</td>
                 <td>
-                    <div class="editable-val hide" data-num="{$k}">{$vo.value}</div>
-                    <span class="editable-click text-info" data-num="{$k}">{$vo.value|default='NULL'|htmlspecialchars}</span>
+                    <div class="editable-val hide" data-num="{$k}">{$vo.value|formrows=$vo['type'],1}</div>
+                    <span class="editable-click text-info" data-num="{$k}">{$vo.value|default='NULL'|htmlspecialchars|formrows=$vo['type'],2}</span>
                     <span class="editable-inline hide" data-num="{$k}">
                         <switch name="vo.type">
                         <case value="string"><input class="col-xs-10 editable-input" type="text" name="{$vo.varname}" value="{$vo.value}"/></case>

@@ -1,0 +1,102 @@
+<div id="siteset" class="col-xs-12">
+<!--    <form class="form-horizontal" role="form">-->
+        <table class="table table-striped table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th class="center col-xs-3">{:L('VARINFO')}</th>
+                    <th class="center col-xs-6">{:L('VARVAL')}</th>
+                    <th class="center">{:L('VARNAME')}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <foreach name="list" item="vo" key="k">
+                <tr>
+                    <td class="center">{$vo.info}:</td>
+                    <td>
+                        <div class="editable-val hide" data-num="{$k}">{$vo.value|formrows=$vo['type'],1}</div>
+                        <span class="editable-click text-info" data-num="{$k}">{$vo.value|default='NULL'|htmlspecialchars|formrows=$vo['type'],2}</span>
+                        <span class="editable-inline hide" data-num="{$k}">
+                            <switch name="vo.type">
+                            <case value="string"><input class="col-xs-10 editable-input" type="text" name="{$vo.varname}" value="{$vo.value}"/></case>
+                            <case value="text"><textarea class="editable-input col-xs-10 pl5 minh80" name="{$vo.varname}">{$vo.value}</textarea></case>
+                            <case value="number"><input class="col-xs-5 editable-input" type="text" name="{$vo.varname}" value="{$vo.value}"/></case>
+                            <case value="select">
+                                <div class="col-sm-9 no-padding">
+                                    <div class="input-group col-xs-12 select-click">
+                                        <input class="hide" type="text" name="{$vo.varname}" value="0"/>
+                                        <div class="form-control select-input cude pt5 h30"></div>
+                                        <span class="input-group-addon cude">
+                                            <i class="glyphicon glyphicon-chevron-down"></i>
+                                        </span>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="select-choices">
+                                            <ul class="list-unstyled select-option" data-name="{$vo.varname}">
+                                                <sky:assign name="selects" value="$vo.value|formrows=$vo['type']"/>
+                                                <foreach name="selects" item="vv" key="kk">
+                                                <li data-val="{$kk}">{$vv}</li>
+                                                </foreach>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </case>
+                            <default /><input class="col-xs-10 editable-input" type="text" name="{$vo.varname}" value="{$vo.value}"/>
+                            </switch>
+                            <div class="btn-group">
+                                <button class="btn btn-sm no-margin-right editable-clear" type="button"><span class="glyphicon glyphicon-remove"></span></button>
+                                <button class="btn btn-sm btn-info editable-submit" type="button"><span class="glyphicon glyphicon-ok"></span></button>
+                            </div>
+                        </span>
+                    </td>
+                    <td class="center">{$vo.varname}</td>
+                </tr>
+                </foreach>
+            </tbody>
+        </table>
+    <!--</form>-->
+</div>
+{$langs}
+<script type="text/javascript">
+    var pan = '<li><a onclick="load(event,this)" href="{:U(CONTROLLER_NAME.'/index',$vl)}">{:L('M_SITECONFIG_INDEX')}</a></li>\n\
+<li class="active">{:L('M_'.$Think.CONTROLLER_NAME.'_'.$Think.ACTION_NAME)}</li>';
+    $('#breadcrumbs .breadcrumb li:gt(0)').remove();
+    $('#breadcrumbs .breadcrumb').append(pan);
+    $('#sidebar .nav-list li.active').removeClass('active');
+    $('#sidebar .nav-list li.open .submenu').hide();
+    $('#sidebar .nav-list li.open').removeClass('open');
+    $('a[href="{:U(CONTROLLER_NAME.'/'.ACTION_NAME,$vl)}"]').parent().addClass('active').parent().show().parent().addClass('open active').parent().show().parent().addClass('open active');
+    $('.page-header h1').empty();
+    $('.page-header h1').append('{:L('M_SITECONFIG_INDEX')}<small class="glyphicon glyphicon-chevron-right"> {:L('M_'.$Think.CONTROLLER_NAME.'_'.$Think.ACTION_NAME)}</small>');
+    $(document).click(function(e){
+        var target = e.target;
+        var num = $(target).attr('data-num');
+        if($.isNumeric(parseInt(num))){
+            var lastnum = $('.editable-inline:visible').last().attr('data-num');
+            if($.isNumeric(parseInt(lastnum))) editable(target,parseInt(lastnum));
+            editable(target,parseInt(num));
+        }else{
+            var lastnum = $('.editable-inline:visible').last().attr('data-num');
+            if($.isNumeric(parseInt(lastnum))) editable(target,parseInt(lastnum));
+        }
+    });
+    $('.editable-clear').click(function(){
+        $(this).parent().prev('.editable-input').val('');
+    });
+    function editable(tar,num){
+        var dragel = $('.editable-inline')[num];
+        var textel = $('.editable-click')[num];
+        if(tar === textel || $.contains(textel,tar)){
+            $(tar).addClass('hide');
+            var nextdoc = $(tar).next('span');
+            var vo = nextdoc.find('.editable-input').val();
+            nextdoc.removeClass('hide').find('.editable-input').val('').focus().val(vo);
+            $(tar).parent().addClass('p1-8');
+        }else if(!(dragel == tar || $.contains(dragel, tar)) && $('.editable-inline').eq(num).is(':visible')){
+            $('.editable-click').eq(num).removeClass('hide').parent().removeClass('p1-8');
+            $('.editable-inline').eq(num).addClass('hide');
+            $('.editable-input').eq(num).val($('.editable-val[data-num="'+num+'"]').html());
+        }
+    }
+</script>
+<import type="js" file="js.select"/>

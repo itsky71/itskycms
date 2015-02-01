@@ -9,7 +9,7 @@
         </div>
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right">{:L('VARVAL')}:</label>
-            <div class="col-sm-9">
+            <div class="col-sm-9 omrow">
                 <input class="col-xs-9" type="text" name="value"/>
             </div>
         </div>
@@ -29,8 +29,21 @@
                     <span class="lbl">{:L('BOOL')}</span>
                 </label>
                 <label>
-                    <input class="ace" type="radio" name="type" value="text"/>
+                    <input class="ace mrow" type="radio" name="type" value="text"/>
                     <span class="lbl">{:L('TEXT')}</span>
+                </label>
+                <br/>
+                <label>
+                    <input class="ace mrow" type="radio" name="type" value="select"/>
+                    <span class="lbl">{:L('SELECT')}</span>
+                </label>
+                <label>
+                    <input class="ace mrow" type="radio" name="type" value="radio"/>
+                    <span class="lbl">{:L('RADIO')}</span>
+                </label>
+                <label>
+                    <input class="ace mrow" type="radio" name="type" value="checkbox"/>
+                    <span class="lbl">{:L('CHECKBOX')}</span>
                 </label>
             </div>
         </div>
@@ -82,6 +95,13 @@
     $('a[href="{:U(CONTROLLER_NAME.'/'.ACTION_NAME,$vl)}"]').parent().addClass('active').parent().show().parent().addClass('open active').parent().show().parent().addClass('open active');
     $('.page-header h1').empty();
     $('.page-header h1').append('{:L('M_SITECONFIG_INDEX')}<small class="glyphicon glyphicon-chevron-right"> {:L('M_'.$Think.CONTROLLER_NAME.'_'.$Think.ACTION_NAME)}</small>');
+    $('input[name="type"]').click(function(){
+        if($(this).hasClass('mrow')){
+            $('.omrow').html('<textarea class="col-xs-9" name="value"></textarea>');
+        }else{
+            $('.omrow').html('<input class="col-xs-9" type="text" name="varname"/>');
+        }
+    });
     $('form[role="form"]').validator({
         fields:{
             varname:'required;username',

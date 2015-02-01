@@ -15,16 +15,30 @@ namespace Admin\Controller;
  * @author itsky
  */
 class SitesetController extends AdminController{
-    //SEO 配置
+    //站点设置
     public function index(){
         if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
         $Siteset = D('Siteset');
         if(I('get.lang')){
-            $list = $Siteset->where('groupid=1 and lang=\''.I('get.lang').'\'')->select();
+            $list = $Siteset->where('groupid=1 and lang=\''.I('get.lang').'\'')->order(id)->select();
         }elseif($this->clang){
-            $list = $Siteset->where('groupid=1 and lang=\''.$this->clang.'\'')->select();
+            $list = $Siteset->where('groupid=1 and lang=\''.$this->clang.'\'')->order(id)->select();
         }else{
-            $list = $Siteset->where('groupid=1 and lang=\''.LANG_SET.'\'')->select();
+            $list = $Siteset->where('groupid=1 and lang=\''.LANG_SET.'\'')->order(id)->select();
+        }
+        $this->assign('list', $list);
+        $this->display();
+    }
+    //核心设置
+    public function ospro(){
+        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        $Siteset = D('Siteset');
+        if(I('get.lang')){
+            $list = $Siteset->where('groupid=2 and lang=\''.I('get.lang').'\'')->order(id)->select();
+        }elseif($this->clang){
+            $list = $Siteset->where('groupid=2 and lang=\''.$this->clang.'\'')->order(id)->select();
+        }else{
+            $list = $Siteset->where('groupid=2 and lang=\''.LANG_SET.'\'')->order(id)->select();
         }
         $this->assign('list', $list);
         $this->display();
@@ -57,9 +71,5 @@ class SitesetController extends AdminController{
             $this->assign('group', $group);
             $this->display();
         }
-    }
-    
-    public function ospro(){
-        print_r(S('langs'));
     }
 }

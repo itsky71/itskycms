@@ -156,3 +156,31 @@ function accept_lang(){
         return $matches[1];
     }
 }
+/**
+ * 表单多行值处理
+ * @param string $str 内容值
+ * @param string $type 类型
+ * @param number $res 结果类型（0 返回 所有键值数组 1 返回默认键 2 返回默认值）
+ * @return string|array
+ */
+function formrows($str,$type,$res=0){
+    $typearr = array('select','radio','checkbox');
+    if(!in_array($type, $typearr)) return $str;
+    $rows = explode(PHP_EOL, $str);
+    foreach ($rows as $item){
+        $kv = explode('|', $item);
+        $kvarr[$kv[1]] = $kv[0];
+        if($kv[2] == 'default'){
+            $defaultarr[$kv[1]] = $kv[0];
+        }
+    }
+    if($res == 0){
+        return $kvarr;
+    }elseif($res == 1){
+        return implode('|', array_keys($defaultarr));
+    }elseif($res == 2){
+        return implode(' ; ', $defaultarr);
+    }else{
+        return;
+    }
+}
