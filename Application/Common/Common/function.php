@@ -156,6 +156,9 @@ function accept_lang(){
         return $matches[1];
     }
 }
+function auto_lang(){
+    return cookie('think_language') ? strtolower(cookie('think_language')) : strtolower(accept_lang());
+}
 /**
  * 表单多行值处理
  * @param string $str 内容值

@@ -19,12 +19,18 @@ class UpdateController extends AdminController{
         if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
         if(IS_POST){
             if(I('showmod')){
+                $module = C('DEFAULT_MODULE');
+                $conpath = APP_PATH.$module.'/Conf/config'.CONF_EXT;
+                if(is_file($conpath)){
+                    $config = include_once $conpath;
+                    C($config);
+                }
                 $hf = explode('.', I('htmlfile'));
-                $this->buildHtml('index.html','./','Home@'.$hf[0]);
+                $this->buildHtml('index','./',$module.'@'.$hf[0]);
                 $this->success(L('UPDATE_OK'));
             }else{
-                if(is_file('./index.html')){
-                    $isdel = unlink('./index.html');
+                if(is_file('./index')){
+                    $isdel = unlink('./index');
                 if($isdel){
                     $this->success(L('UPDATE_OK'));
                 }else{

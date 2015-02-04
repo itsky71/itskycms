@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html lang="{:LANG_SET}">
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,9 +18,19 @@
         'ACTION' : '{$Think.ACTION_NAME}'   //当前操作名
     };
 </script>
+<style type="text/css">
+/*<![CDATA[*/
+ :visited { color: #666666 }
+ div.c4 {text-align: center;}
+ p.c3 {font-weight: bold; text-align: center}
+ p.c2 {text-align: center;padding: 5px 0;}
+ div.c1 {font-weight: bold; text-align: center}
+/*]]>*/
+</style>
 </head>
 <body id="{$Think.CONTROLLER_NAME}_{$Think.ACTION_NAME}">
     <a href="{$home}">首页</a>
-    <div>Home</div>
+    <div>{:LANG_SET}</div><br/>
+    {:I('get.id')}<br/>{:I('get.l')}
 </body>
 </html>

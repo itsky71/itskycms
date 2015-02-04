@@ -60,8 +60,8 @@ return  array(
     'DB_PWD'                =>  '',          // 密码
     'DB_PORT'               =>  '',        // 端口
     'DB_PREFIX'             =>  '',    // 数据库表前缀
-    'DB_PARAMS'             =>  array(), // 数据库连接参数    
-    'DB_DEBUG'              =>  TRUE, // 数据库调试模式 开启后可以记录SQL日志
+    'DB_PARAMS'          	=>  array(), // 数据库连接参数    
+    'DB_DEBUG'  			=>  TRUE, // 数据库调试模式 开启后可以记录SQL日志
     'DB_FIELDS_CACHE'       =>  true,        // 启用字段缓存
     'DB_CHARSET'            =>  'utf8',      // 数据库编码默认采用utf8
     'DB_DEPLOY_TYPE'        =>  0, // 数据库部署方式:0 集中式(单一服务器),1 分布式(主从服务器)
@@ -157,7 +157,7 @@ return  array(
     'VAR_JSONP_HANDLER'     =>  'callback',
     'VAR_PATHINFO'          =>  's',    // 兼容模式PATHINFO获取变量例如 ?s=/module/action/id/1 后面的参数取决于URL_PATHINFO_DEPR
     'VAR_TEMPLATE'          =>  't',    // 默认模板切换变量
-    'VAR_AUTO_STRING'       =>	false,	// 输入变量是否自动强制转换为字符串 如果开启则数组变量需要手动传入变量修饰符获取变量
+    'VAR_AUTO_STRING'		=>	false,	// 输入变量是否自动强制转换为字符串 如果开启则数组变量需要手动传入变量修饰符获取变量
 
     'HTTP_CACHE_CONTROL'    =>  'private',  // 网页缓存控制
     'CHECK_APP_DIR'         =>  true,       // 是否检查应用目录是否创建

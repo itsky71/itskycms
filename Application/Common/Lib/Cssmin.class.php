@@ -22,6 +22,7 @@
  * @license 	http://opensource.org/licenses/mit-license.php MIT License
  * @version 	1.0 (2008-01-31)
  */
+namespace Common\Lib;
 class cssmin
 	{
 	/**
