@@ -167,6 +167,9 @@ function auto_lang(){
  * @return string|array
  */
 function formrows($str,$type,$res=0){
+    if($type == 'bool'){
+        return $str ? 'ON' : 'OFF';
+    }
     $typearr = array('select','radio','checkbox');
     if(!in_array($type, $typearr)) return $str;
     $rows = explode(PHP_EOL, $str);
@@ -180,10 +183,19 @@ function formrows($str,$type,$res=0){
     if($res == 0){
         return $kvarr;
     }elseif($res == 1){
-        return implode('|', array_keys($defaultarr));
+        return implode(',', array_keys($defaultarr));
     }elseif($res == 2){
-        return implode(' ; ', $defaultarr);
+        return implode(' / ', $defaultarr);
     }else{
         return;
     }
+}
+/**
+ * 默认值
+ * @param string $var 变量
+ * @param string $acq 默认值
+ * @return string 若 $var 为空，则返回 $acq ,否则返回 $var
+ */
+function acq($var,$acq){
+    return $var === '' ? $acq : $var;
 }

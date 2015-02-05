@@ -41,7 +41,7 @@ class SitesetController extends AdminController{
             $list = $Siteset->where('groupid=2 and lang=\''.LANG_SET.'\'')->order(id)->select();
         }
         $this->assign('list', $list);
-        $this->display();
+        $this->display('index');
     }
     //添加系统变量
     public function addvar(){

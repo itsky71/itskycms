@@ -1,36 +1,89 @@
 <div id="siteset" class="col-xs-12">
-    <table class="table table-striped table-hover table-bordered">
-        <thead>
-            <tr>
-                <th class="center col-xs-3">{:L('VARINFO')}</th>
-                <th class="center col-xs-6">{:L('VARVAL')}</th>
-                <th class="center">{:L('VARNAME')}</th>
-            </tr>
-        </thead>
-        <tbody>
-            <foreach name="list" item="vo" key="k">
-            <tr>
-                <td class="center">{$vo.info}:</td>
-                <td>
-                    <div class="editable-val hide" data-num="{$k}">{$vo.value|formrows=$vo['type'],1}</div>
-                    <span class="editable-click text-info" data-num="{$k}">{$vo.value|default='NULL'|htmlspecialchars|formrows=$vo['type'],2}</span>
-                    <span class="editable-inline hide" data-num="{$k}">
-                        <switch name="vo.type">
-                        <case value="string"><input class="col-xs-10 editable-input" type="text" name="{$vo.varname}" value="{$vo.value}"/></case>
-                        <case value="text"><textarea class="editable-input col-xs-10 pl5 minh80" name="{$vo.varname}">{$vo.value}</textarea></case>
-                        <default />
-                        </switch>
-                        <div class="btn-group">
-                            <button class="btn btn-sm no-margin-right editable-clear" type="button"><span class="glyphicon glyphicon-remove"></span></button>
-                            <button class="btn btn-sm btn-info editable-submit" type="button"><span class="glyphicon glyphicon-ok"></span></button>
-                        </div>
-                    </span>
-                </td>
-                <td class="center">{$vo.varname}</td>
-            </tr>
-            </foreach>
-        </tbody>
-    </table>
+    <form class="form-horizontal" role="form">
+        <table class="table table-striped table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th class="center col-xs-3">{:L('VARINFO')}</th>
+                    <th class="center col-xs-6">{:L('VARVAL')}</th>
+                    <th class="center">{:L('VARNAME')}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <foreach name="list" item="vo" key="k">
+                <tr>
+                    <td class="center">{$vo.info}:</td>
+                    <td>
+                        <div class="editable-val hide" data-num="{$k}">{$vo.value|formrows=$vo['type'],1}</div>
+                        <span class="editable-click text-info" data-num="{$k}">{$vo.value|htmlspecialchars|formrows=$vo['type'],2|acq='NULL'}</span>
+                        <span class="editable-inline hide" data-num="{$k}">
+                            <switch name="vo.type">
+                            <case value="string"><input class="col-xs-10 editable-input" type="text" name="{$vo.varname}" value="{$vo.value}"/></case>
+                            <case value="text"><textarea class="editable-input col-xs-10 pl5 minh80" name="{$vo.varname}">{$vo.value}</textarea></case>
+                            <case value="number"><input class="col-xs-5 editable-input" type="text" name="{$vo.varname}" value="{$vo.value}"/></case>
+                            <case value="bool">
+                            <label>
+                                <input class="ace ace-switch ace-switch-7" type="checkbox" name="{$vo.varname}" value="1"{$vo['value']?' checked="checked"':''}/>
+                                <span class="lbl no-margin-left mt4"></span>
+                            </label>
+                            </case>
+                            <case value="select">
+                                <div class="col-sm-9 no-padding">
+                                    <div class="input-group col-xs-12 select-click">
+                                        <input class="editable-input hide" type="text" name="{$vo.varname}" value="0"/>
+                                        <div class="form-control select-input cude pt5 h30"></div>
+                                        <span class="input-group-addon cude">
+                                            <i class="glyphicon glyphicon-chevron-down"></i>
+                                        </span>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="select-choices">
+                                            <ul class="list-unstyled select-option" data-name="{$vo.varname}">
+                                                <sky:assign name="selects" value="$vo.value|formrows=$vo['type']"/>
+                                                <foreach name="selects" item="vv" key="kk">
+                                                <li data-val="{$kk}">{$vv}</li>
+                                                </foreach>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </case>
+                            <case value="radio">
+                            <div class="col-xs-10 no-padding">
+                                <sky:assign name="radios" value="$vo.value|formrows=$vo['type']"/>
+                                <foreach name="radios" item="vv" key="kk">
+                                <label class="mr5">
+                                    <input class="ace" type="radio" value="{$kk}" <if condition="formrows($vo['value'],$vo['type'],1) eq $kk">checked="checked"</if> name="{$vo.varname}"/>
+                                    <span class="lbl">{$vv}</span>
+                                </label>
+                                </foreach>
+                            </div>
+                            </case>
+                            <case value="checkbox">
+                            <div class="col-xs-10 no-padding">
+                                <sky:assign name="checkboxs" value="$vo.value|formrows=$vo['type']"/>
+                                <foreach name="checkboxs" item="vv" key="kk">
+                                    <label class="mr5">
+                                        <sky:assign name="box" value="$vo.value|formrows=$vo['type'],1"/>
+                                        <input class="ace" type="checkbox" value="{$kk}" name="{$vo.varname}[]" <in name="kk" value="$box">checked="checked"</in>/>
+                                        <span class="lbl">{$vv}</span>
+                                    </label>
+                                </foreach>
+                            </div>
+                            </case>
+                            <default /><input class="col-xs-10 editable-input" type="text" name="{$vo.varname}" value="{$vo.value}"/>
+                            </switch>
+                            <div class="btn-group">
+                                <button class="btn btn-sm no-margin-right editable-clear" type="button"><span class="glyphicon glyphicon-remove"></span></button>
+                                <button class="btn btn-sm btn-info editable-submit" type="button"><span class="glyphicon glyphicon-ok"></span></button>
+                            </div>
+                        </span>
+                    </td>
+                    <td class="center">{$vo.varname}</td>
+                </tr>
+                </foreach>
+            </tbody>
+        </table>
+    </form>
 </div>
 {$langs}
 <script type="text/javascript">
@@ -71,7 +124,16 @@
         }else if(!(dragel == tar || $.contains(dragel, tar)) && $('.editable-inline').eq(num).is(':visible')){
             $('.editable-click').eq(num).removeClass('hide').parent().removeClass('p1-8');
             $('.editable-inline').eq(num).addClass('hide');
-            $('.editable-input').eq(num).val($('.editable-val[data-num="'+num+'"]').html());
+            var inputs = $('.editable-input').eq(num);
+            $('form[role="form"]')[0].reset();
+            if(inputs.parent('div').has('select-click')){
+                inputs.attr('value',$('.editable-val[data-num="'+num+'"]').html());
+                var text = $('.select-option[data-name="'+inputs.attr('name')+'"] li[data-val="'+inputs.val()+'"]').text();
+                inputs.nextAll('.select-input').text(text);
+            }else{
+                $('.editable-input').eq(num).val($('.editable-val[data-num="'+num+'"]').html());
+            }
         }
     }
 </script>
+<import type="js" file="js.select"/>
