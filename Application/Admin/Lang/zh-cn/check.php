@@ -6,5 +6,6 @@ return array(
     'EMAILU'        =>  '该邮箱已存在！',
     'LANG_NAMEU'    =>  '该语言名称已存在！',
     'LANG_VALUEU'   =>  '该语言标识已存在！',
-    'UNIQUE'        =>  '该字段值已存在！'
+    'UNIQUE'        =>  '该字段值已存在！',
+    'VARNAMEU'      =>  '该变量名已存在！'
 );

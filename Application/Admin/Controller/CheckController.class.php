@@ -95,7 +95,16 @@ class CheckController extends Controller{
             $this->error(L('_ERROR_ACTION_'));
         }
     }
-
+    /** 验证系统参数变量名唯一 */
+    public function varname(){
+        if(IS_AJAX && IS_POST){
+            $Siteset = D('Siteset');
+            $res = $Siteset->where(I('post.'))->find();
+            if($res) echo json_encode(array('error'=>L('VARNAMEU')));
+        }else{
+            $this->error(L('_ERROR_ACTION_'));
+        }
+    }
     /** 通用验证唯一 */
     public function unique(){
         if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));

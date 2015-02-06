@@ -111,4 +111,8 @@ class PublicController extends Controller {
             $this->error(L('ALREADY_OUT'));
         }
     }
+    /** js语言 **/
+    public function langjs(){
+        $this->display();
+    }
 }

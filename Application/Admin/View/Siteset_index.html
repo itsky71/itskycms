@@ -13,12 +13,12 @@
                 <tr>
                     <td class="center">{$vo.info}:</td>
                     <td>
-                        <div class="editable-val hide" data-num="{$k}">{$vo.value|formrows=$vo['type'],1}</div>
-                        <span class="editable-click text-info" data-num="{$k}">{$vo.value|htmlspecialchars|formrows=$vo['type'],2|acq='NULL'}</span>
+                        <div class="editable-val hide" data-num="{$k}">{$vo.value|formrows=$vo['type'],1|htmlspecialchars_decode}</div>
+                        <span class="editable-click text-info" data-num="{$k}">{$vo.value|formrows=$vo['type'],2|acq='NULL'}</span>
                         <span class="editable-inline hide" data-num="{$k}">
                             <switch name="vo.type">
                             <case value="string"><input class="col-xs-10 editable-input" type="text" name="{$vo.varname}" value="{$vo.value}"/></case>
-                            <case value="text"><textarea class="editable-input col-xs-10 pl5 minh80" name="{$vo.varname}">{$vo.value}</textarea></case>
+                            <case value="text"><textarea class="editable-input col-xs-10 pl5 minh80" name="{$vo.varname}">{$vo.value|htmlspecialchars_decode}</textarea></case>
                             <case value="number"><input class="col-xs-5 editable-input" type="text" name="{$vo.varname}" value="{$vo.value}"/></case>
                             <case value="bool">
                             <label>
@@ -64,7 +64,7 @@
                                 <foreach name="checkboxs" item="vv" key="kk">
                                     <label class="mr5">
                                         <sky:assign name="box" value="$vo.value|formrows=$vo['type'],1"/>
-                                        <input class="ace" type="checkbox" value="{$kk}" name="{$vo.varname}[]" <in name="kk" value="$box">checked="checked"</in>/>
+                                        <input class="ace" type="checkbox" value="{$kk}" name="value[{$vo.varname}][]" <in name="kk" value="$box">checked="checked"</in>/>
                                         <span class="lbl">{$vv}</span>
                                     </label>
                                 </foreach>
@@ -74,7 +74,7 @@
                             </switch>
                             <div class="btn-group">
                                 <button class="btn btn-sm no-margin-right editable-clear" type="button"><span class="glyphicon glyphicon-remove"></span></button>
-                                <button class="btn btn-sm btn-info editable-submit" type="button"><span class="glyphicon glyphicon-ok"></span></button>
+                                <button class="btn btn-sm btn-info editable-submit" data-var="{$vo.varname}" data-type="{$vo.type}" type="button"><span class="glyphicon glyphicon-ok"></span></button>
                             </div>
                         </span>
                     </td>
@@ -135,5 +135,28 @@
             }
         }
     }
+    $('button.editable-submit').click(function(){
+        var type = $(this).attr('data-type');
+        var varname = $(this).attr('data-var');
+        if(type == 'radio'){
+            var val = 'value='+$('[name="'+varname+'"]:checked').val();
+        }else if(type == 'checkbox'){
+            var val = $('[name="value['+varname+'][]"]').serialize();
+        }else{
+            var val = 'value='+$('[name="'+varname+'"]').val();
+        }
+        $.ajax({
+            type:'post',
+            url:'{:U('Siteset/index',$vl.'&action='.ACTION_NAME)}',
+            data:'varname='+varname+'&type='+type+'&'+val,
+            success:function(data){
+                if($.isPlainObject(data)){
+                    show_msg(data);
+                }else{
+                    $('#new_content').html(data);
+                }
+            }
+        });
+    });
 </script>
 <import type="js" file="js.select"/>

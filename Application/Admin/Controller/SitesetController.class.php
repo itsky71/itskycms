@@ -19,15 +19,42 @@ class SitesetController extends AdminController{
     public function index(){
         if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
         $Siteset = D('Siteset');
-        if(I('get.lang')){
-            $list = $Siteset->where('groupid=1 and lang=\''.I('get.lang').'\'')->order(id)->select();
-        }elseif($this->clang){
-            $list = $Siteset->where('groupid=1 and lang=\''.$this->clang.'\'')->order(id)->select();
+        if(IS_POST){
+            $post = I('post.');
+            $typearr = array('select','radio','checkbox');
+            if(in_array($post['type'], $typearr)){
+                $find = $Siteset->where('varname=\''.$post['varname'].'\'')->find();
+                $rows = explode(PHP_EOL, $find['value']);
+                foreach ($rows as $value){
+                    $kv = explode('|', $value);
+                    if($post['type'] == 'checkbox'){
+                        $default = in_array($kv[1], $post['value'][$post['varname']])?'|default':'';
+                    }else{
+                        $default = $post['value'] == $kv[1] ? '|default' : '';
+                    }
+                    $kvarr[] = $kv[0].'|'.$kv[1].$default;
+                }
+                $data['value'] = implode(PHP_EOL, $kvarr);
+            }else{
+                $data['value'] = $post['value'];
+            }
+            $result = $Siteset->where('varname=\''.$post['varname'].'\'')->save($data);
+            if($result !== FALSE){
+                $this->success(L('SAVE_OK'),U('Siteset/'.I('get.action'),$this->vl));
+            }else{
+                $this->error(L('SAVE_ERROR'));
+            }
         }else{
-            $list = $Siteset->where('groupid=1 and lang=\''.LANG_SET.'\'')->order(id)->select();
+            if(I('get.lang')){
+                $list = $Siteset->where('groupid=1 and lang=\''.I('get.lang').'\'')->order(id)->select();
+            }elseif($this->clang){
+                $list = $Siteset->where('groupid=1 and lang=\''.$this->clang.'\'')->order(id)->select();
+            }else{
+                $list = $Siteset->where('groupid=1 and lang=\''.LANG_SET.'\'')->order(id)->select();
+            }
+            $this->assign('list', $list);
+            $this->display();
         }
-        $this->assign('list', $list);
-        $this->display();
     }
     //核心设置
     public function ospro(){

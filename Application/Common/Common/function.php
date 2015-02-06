@@ -183,9 +183,9 @@ function formrows($str,$type,$res=0){
     if($res == 0){
         return $kvarr;
     }elseif($res == 1){
-        return implode(',', array_keys($defaultarr));
+        return implode(',', array_keys($defaultarr)) ? implode(',', array_keys($defaultarr)) : array();
     }elseif($res == 2){
-        return implode(' / ', $defaultarr);
+        return implode(' / ', $defaultarr) ? implode(' / ', $defaultarr) : 'NULL';
     }else{
         return;
     }

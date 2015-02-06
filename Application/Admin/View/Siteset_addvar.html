@@ -104,7 +104,7 @@
     });
     $('form[role="form"]').validator({
         fields:{
-            varname:'required;username',
+            varname:'required;username;remote[{:U('Check/varname',$vl)}, lang]',
             info:'required;length[2~30]',
             groupid:{
                 rule:'required',
