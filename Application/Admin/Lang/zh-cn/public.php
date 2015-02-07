@@ -13,5 +13,9 @@ return array(
     'JUMP_INFO'     =>  '正在跳转，请稍后...',
     'CHECK_INFO'    =>  '请填写用户名或者邮箱',
     'USER_STOP'     =>  '用户被禁用',
-    'ALREADY_OUT'   =>  '已经登出'
+    'ALREADY_OUT'   =>  '已经登出',
+    /** JS 文件中的语言 **/
+    'DEL_MSG_ONE'   =>  ' 确定要删除吗？',
+    'DEL_MSG_ALL'   =>  ' 确定要删除该栏目及其所有子栏目吗？',
+    'DEL_CHECK_MSG' =>  '请选择至少一项！'
 );

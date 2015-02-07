@@ -29,7 +29,7 @@
                             <case value="select">
                                 <div class="col-sm-9 no-padding">
                                     <div class="input-group col-xs-12 select-click">
-                                        <input class="editable-input hide" type="text" name="{$vo.varname}" value="0"/>
+                                        <input class="editable-input hide" type="text" name="{$vo.varname}" value="{$vo.value|formrows=$vo['type'],1}"/>
                                         <div class="form-control select-input cude pt5 h30"></div>
                                         <span class="input-group-addon cude">
                                             <i class="glyphicon glyphicon-chevron-down"></i>
@@ -63,7 +63,7 @@
                                 <sky:assign name="checkboxs" value="$vo.value|formrows=$vo['type']"/>
                                 <foreach name="checkboxs" item="vv" key="kk">
                                     <label class="mr5">
-                                        <sky:assign name="box" value="$vo.value|formrows=$vo['type'],1"/>
+                                        <sky:assign name="box" value="$vo.value|formrows=$vo['type'],1|acq=array()"/>
                                         <input class="ace" type="checkbox" value="{$kk}" name="value[{$vo.varname}][]" <in name="kk" value="$box">checked="checked"</in>/>
                                         <span class="lbl">{$vv}</span>
                                     </label>

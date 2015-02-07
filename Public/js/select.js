@@ -12,12 +12,15 @@ $('.select-click').click(function(e){
     var ul = $('.select-option[data-name="'+$(this).children('input').attr('name')+'"]').parent('.select-choices');
     if(ul.is(':hidden')){
         ul.find('li').removeClass('select-active');
-        var there = ul.find('li[data-val="'+$(this).children('input').val()+'"]');
+        var defval = $(this).children('input').val();
+        var there = ul.find('li[data-val="'+defval+'"]');
         there.addClass('select-active');
         $('.select-choices:visible').hide();
         ul.show();
-        var lt = there.position();
-        if(lt.top>420) ul.scrollTop(lt.top-400);
+        if(defval != ''){
+            var lt = there.position();
+            if(lt.top>420) ul.scrollTop(lt.top-400);
+        }
     }else{
         ul.scrollTop(0);
         ul.hide();

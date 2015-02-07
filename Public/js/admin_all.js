@@ -1,4 +1,6 @@
 $(function(){
+    //滚动条样式
+    $(document.body).scrollator();
     //判断:当前元素是否是被筛选元素的子元素
     $.fn.isChildOf = function(b){
     return (this.parents(b).length > 0);
@@ -25,6 +27,7 @@ $(function(){
                 $("#btn-scroll-up").show();
         }else{
             $("#btn-scroll-up").hide();
+            $(document.body).scrollator('refresh');
         }
     });
     //ajax加载页面到主页面显示
@@ -38,6 +41,7 @@ $(function(){
                     show_msg(data);
                 }else{
                     $('#new_content').html(data);
+                    $(document.body).scrollator('refresh');
                 }
             }
         });
@@ -109,9 +113,9 @@ function load(e,t){
 function del(e,t,a){
     e.preventDefault();
     if(a=='c'){
-        var msg = ' 确定要删除吗?';
+        var msg = ITskyLang.DEL_MSG_ONE;
     }else if(a=='p'){
-        var msg = ' 确定要删除该栏目及其所有子栏目吗?';
+        var msg = ITskyLang.DEL_MSG_ALL;
     }
     bootbox.confirm('<span class="glyphicon glyphicon-question-sign yellow"></span>'+msg,function(result){
         if(result){
@@ -141,7 +145,7 @@ function delcheck(e,t){
         vid[i] = $(this).val();
     });
     if(vid == ''){
-        show_msg($.parseJSON('{"info":"请选择至少一项！","status":"0"}'));
+        show_msg($.parseJSON('{"info":ITskyLang.DEL_CHECK_MSG,"status":"0"}'));
         return false;
     }else{
         $.ajax({

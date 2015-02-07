@@ -97,7 +97,7 @@
     $('.page-header h1').append('{:L('M_SITECONFIG_INDEX')}<small class="glyphicon glyphicon-chevron-right"> {:L('M_'.$Think.CONTROLLER_NAME.'_'.$Think.ACTION_NAME)}</small>');
     $('input[name="type"]').click(function(){
         if($(this).hasClass('mrow')){
-            $('.omrow').html('<textarea class="col-xs-9" name="value"></textarea>');
+            $('.omrow').html('<textarea class="col-xs-9 minh80" name="value"></textarea>');
         }else{
             $('.omrow').html('<input class="col-xs-9" type="text" name="value"/>');
         }

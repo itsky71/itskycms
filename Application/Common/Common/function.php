@@ -183,9 +183,11 @@ function formrows($str,$type,$res=0){
     if($res == 0){
         return $kvarr;
     }elseif($res == 1){
-        return implode(',', array_keys($defaultarr)) ? implode(',', array_keys($defaultarr)) : array();
+        $resstrk = implode(',', array_keys($defaultarr));
+        return $resstrk;
     }elseif($res == 2){
-        return implode(' / ', $defaultarr) ? implode(' / ', $defaultarr) : 'NULL';
+        $resstrv = implode(' / ', $defaultarr);
+        return $resstrv ? $resstrv : 'NULL';
     }else{
         return;
     }
@@ -197,5 +199,5 @@ function formrows($str,$type,$res=0){
  * @return string 若 $var 为空，则返回 $acq ,否则返回 $var
  */
 function acq($var,$acq){
-    return $var === '' ? $acq : $var;
+    return ($var === '' || $var === NULL) ? $acq : $var;
 }
