@@ -3,11 +3,11 @@ $(function(){
     $(document.body).scrollator();
     //判断:当前元素是否是被筛选元素的子元素
     $.fn.isChildOf = function(b){
-    return (this.parents(b).length > 0);
+        return (this.parents(b).length > 0);
     };
     //判断:当前元素是否是被筛选元素的子元素或者本身
     $.fn.isChildAndSelfOf = function(b){
-    return (this.closest(b).length > 0);
+        return (this.closest(b).length > 0);
     };
     /*  登录页面初始化选中用户名输入框  */
     $(".login_input").find("input[name=username]").focus();

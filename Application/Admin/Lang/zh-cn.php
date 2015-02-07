@@ -35,6 +35,8 @@ $common = array(
     'ADD'               =>  '添加',
     'STATUS'            =>  '状态',
     'SAVE_ERROR'        =>  '保存失败！',
-    'SAVE_OK'           =>  '保存成功！'
+    'SAVE_OK'           =>  '保存成功！',
+    'ON'                =>  '开启',
+    'OFF'               =>  '关闭'
 );
 return array_merge($common, $menu_common);

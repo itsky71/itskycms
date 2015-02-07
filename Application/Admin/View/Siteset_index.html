@@ -22,7 +22,7 @@
                             <case value="number"><input class="col-xs-5 editable-input" type="text" name="{$vo.varname}" value="{$vo.value}"/></case>
                             <case value="bool">
                             <label>
-                                <input class="ace ace-switch ace-switch-7" type="checkbox" name="{$vo.varname}" value="1"{$vo['value']?' checked="checked"':''}/>
+                                <input class="ace ace-switch ace-switch-7 editable-input" type="checkbox" name="{$vo.varname}" value="1"{$vo['value']?' checked="checked"':''}/>
                                 <span class="lbl no-margin-left mt4"></span>
                             </label>
                             </case>
@@ -30,7 +30,7 @@
                                 <div class="col-sm-9 no-padding">
                                     <div class="input-group col-xs-12 select-click">
                                         <input class="editable-input hide" type="text" name="{$vo.varname}" value="{$vo.value|formrows=$vo['type'],1}"/>
-                                        <div class="form-control select-input cude pt5 h30"></div>
+                                        <div class="form-control select-input cude pt5 h30 overflow-hidden"></div>
                                         <span class="input-group-addon cude">
                                             <i class="glyphicon glyphicon-chevron-down"></i>
                                         </span>
@@ -52,14 +52,14 @@
                                 <sky:assign name="radios" value="$vo.value|formrows=$vo['type']"/>
                                 <foreach name="radios" item="vv" key="kk">
                                 <label class="mr5">
-                                    <input class="ace" type="radio" value="{$kk}" <if condition="formrows($vo['value'],$vo['type'],1) eq $kk">checked="checked"</if> name="{$vo.varname}"/>
+                                    <input class="ace editable-input" type="radio" value="{$kk}" <if condition="formrows($vo['value'],$vo['type'],1) eq $kk">checked="checked"</if> name="{$vo.varname}"/>
                                     <span class="lbl">{$vv}</span>
                                 </label>
                                 </foreach>
                             </div>
                             </case>
                             <case value="checkbox">
-                            <div class="col-xs-10 no-padding">
+                            <div class="col-xs-10 no-padding editable-input">
                                 <sky:assign name="checkboxs" value="$vo.value|formrows=$vo['type']"/>
                                 <foreach name="checkboxs" item="vv" key="kk">
                                     <label class="mr5">
@@ -138,8 +138,9 @@
     $('button.editable-submit').click(function(){
         var type = $(this).attr('data-type');
         var varname = $(this).attr('data-var');
-        if(type == 'radio'){
-            var val = 'value='+$('[name="'+varname+'"]:checked').val();
+        if(type == 'radio' || type == 'bool'){
+            var v = $('[name="'+varname+'"]:checked').val();
+            var val = 'value='+($.type(v) == 'undefined' ? 0 : v);
         }else if(type == 'checkbox'){
             var val = $('[name="value['+varname+'][]"]').serialize();
         }else{

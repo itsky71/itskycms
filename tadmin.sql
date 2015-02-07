@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2015-01-28 09:36:44
+-- Generation Time: 2015-02-07 11:20:44
 -- 服务器版本： 5.6.20
 -- PHP Version: 5.5.15
 
@@ -39,9 +39,9 @@ CREATE TABLE IF NOT EXISTS `ta_auth_group` (
 --
 
 INSERT INTO `ta_auth_group` (`id`, `title`, `remark`, `status`, `rules`) VALUES
-(1, 'A_G_T_1', 'A_G_R_1', 1, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35'),
+(1, 'A_G_T_1', 'A_G_R_1', 1, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39'),
 (2, 'A_G_T_2', 'A_G_R_2', 1, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39'),
-(3, 'A_G_T_3', 'A_G_R_3', 1, '');
+(3, 'A_G_T_3', 'A_G_R_3', 0, '');
 
 -- --------------------------------------------------------
 
@@ -60,7 +60,8 @@ CREATE TABLE IF NOT EXISTS `ta_auth_group_access` (
 
 INSERT INTO `ta_auth_group_access` (`uid`, `group_id`) VALUES
 (1, 1),
-(2, 2);
+(2, 2),
+(5, 2);
 
 -- --------------------------------------------------------
 
@@ -167,7 +168,7 @@ CREATE TABLE IF NOT EXISTS `ta_member` (
   `login_ip` char(15) NOT NULL COMMENT '登入IP',
   `last_login_time` int(10) unsigned NOT NULL COMMENT '最后登入时间戳',
   `login_count` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '登入次数'
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='用户信息表' AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='用户信息表' AUTO_INCREMENT=6 ;
 
 --
 -- 转存表中的数据 `ta_member`
@@ -175,7 +176,8 @@ CREATE TABLE IF NOT EXISTS `ta_member` (
 
 INSERT INTO `ta_member` (`id`, `password`, `username`, `realname`, `email`, `question`, `answer`, `status`, `regtime`, `login_ip`, `last_login_time`, `login_count`) VALUES
 (1, '30bc103d85df152c8c703bcbbcc7fd4d', 'admin', '你买单我就来', 'itsky71@foxmail.com', '我还会回来的...', '灰太狼？呵呵。。。', 1, 1419068912, '127.0.0.1', 1421732415, 30),
-(2, '30bc103d85df152c8c703bcbbcc7fd4d', 'itsky', '你地盘我做主', 'zmh0515005@163.com', '你是谁?', '呵呵...', 1, 1419587881, '127.0.0.1', 1422409852, 101);
+(2, '30bc103d85df152c8c703bcbbcc7fd4d', 'itsky', '你地盘我做主', 'zmh0515005@163.com', '你是谁?', '呵呵...', 1, 1419587881, '127.0.0.1', 1423291947, 119),
+(5, '30bc103d85df152c8c703bcbbcc7fd4d', 'zhongchonghua', '111111', 'fireloong@foxmail.com', '', '', 1, 1423140277, '', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -264,19 +266,34 @@ CREATE TABLE IF NOT EXISTS `ta_siteset` (
   `type` varchar(10) NOT NULL DEFAULT 'string' COMMENT '类型',
   `lang` varchar(10) NOT NULL DEFAULT '' COMMENT '语言',
   `value` text NOT NULL COMMENT '变量值'
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='系统参数' AUTO_INCREMENT=8 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='系统参数' AUTO_INCREMENT=23 ;
 
 --
 -- 转存表中的数据 `ta_siteset`
 --
 
 INSERT INTO `ta_siteset` (`id`, `varname`, `info`, `groupid`, `type`, `lang`, `value`) VALUES
-(1, 'webname', 'S_WEBNAME', 1, 'string', 'zh-cn', 'ITskyCMS内容管理系统'),
-(2, 'weburl', 'S_WEBURL', 1, 'string', 'zh-cn', 'http://www.itsky71.net'),
-(3, 'powerby', 'S_POWERBY', 1, 'text', 'zh-cn', 'Copyright &copy; 2014-2015 ITskyCMS. itsky71 版权所有'),
-(4, 'default_theme', 'S_DEFAULT_THEME', 1, 'string', 'zh-cn', 'default'),
-(5, 'keywords', 'S_KEYWORDS', 1, 'string', 'zh-cn', 'ITskyCMS'),
-(6, 'description', 'S_DESCRIPTION', 1, 'text', 'zh-cn', 'ITskyCMS 内容管理系统');
+(1, 'webname', '网站名称', 1, 'string', 'zh-cn', 'ITskyCMS内容管理系统'),
+(2, 'weburl', '站点根网址', 1, 'string', 'zh-cn', 'http://www.itsky71.net'),
+(4, 'powerby', '网站版权信息', 1, 'text', 'zh-cn', 'Copyright © 2014-2015 &lt;a href=&quot;#&quot; target=&quot;_blank&quot;&gt;ITskyCMS&lt;/a&gt;. &lt;a href=&quot;#&quot; target=&quot;_blank&quot;&gt;itsky71&lt;/a&gt; 版权所有'),
+(5, 'default_theme', '模板默认风格', 1, 'string', 'zh-cn', 'default'),
+(6, 'keywords', '站点默认关键字', 1, 'string', 'zh-cn', 'ITskyCMS'),
+(7, 'description', '站点描述', 1, 'text', 'zh-cn', 'ITskyCMS 内容管理系统'),
+(8, 'record', '网站备案号', 1, 'string', 'zh-cn', ''),
+(3, 'indexurl', '网页主页链接', 1, 'string', 'zh-cn', '/'),
+(9, 'page_rows', '列表分页数', 2, 'number', 'zh-cn', '15'),
+(10, 'url_model', 'URL访问模式', 2, 'select', 'zh-cn', '普通模式|0|default\r\nPATHINFO 模式|1\r\nREWRITE  模式|2\r\n兼容模式|3'),
+(11, 'url_rule', 'URL规则', 2, 'select', 'zh-cn', '内容页:show-1-1.html或show-1-1-1.html, 列表页:list-1.html或list-1-1.html|0\r\n内容页:Article/show/1.html或Article/show/1-1.html, 列表页:Article/list/1.html或Article/list/1-1.html|1|default'),
+(12, 'url_html_suffix', 'URL伪静态后缀', 2, 'string', 'zh-cn', 'html'),
+(13, 'tmpl_cache_on', '模板编译缓存', 2, 'bool', 'zh-cn', '1'),
+(14, 'tmpl_cache_time', '模板缓存有效期', 2, 'number', 'zh-cn', '0'),
+(15, 'html_cache_on', '静态缓存', 2, 'bool', 'zh-cn', '1'),
+(16, 'html_cache_time', '缓存有效期', 2, 'number', 'zh-cn', '3600'),
+(17, 'html_file_suffix', '静态文件后缀', 2, 'string', 'zh-cn', '.html'),
+(18, 'cookie_domain', '跨域共享cookie的域名(例如: .itsky.net)', 2, 'string', 'zh-cn', ''),
+(19, 'cookie_path', 'cookie路径', 2, 'string', 'zh-cn', ''),
+(21, 'default_lang', '默认语言', 2, 'select', 'zh-cn', '简体中文|zh-cn|default\r\n繁体中文|zh-tw\r\n美式英文|en-us'),
+(20, 'cookie_encode', 'cookie加密码', 2, 'string', 'zh-cn', 'KxZ06ual');
 
 --
 -- Indexes for dumped tables
@@ -322,7 +339,7 @@ ALTER TABLE `ta_menu`
 -- Indexes for table `ta_siteset`
 --
 ALTER TABLE `ta_siteset`
- ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `varname` (`varname`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -347,7 +364,7 @@ MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_I
 -- AUTO_INCREMENT for table `ta_member`
 --
 ALTER TABLE `ta_member`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户ID',AUTO_INCREMENT=4;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户ID',AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `ta_menu`
 --
@@ -357,7 +374,7 @@ MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=49;
 -- AUTO_INCREMENT for table `ta_siteset`
 --
 ALTER TABLE `ta_siteset`
-MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=8;
+MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=23;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

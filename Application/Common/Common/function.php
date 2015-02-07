@@ -168,7 +168,7 @@ function auto_lang(){
  */
 function formrows($str,$type,$res=0){
     if($type == 'bool'){
-        return $str ? 'ON' : 'OFF';
+        return $str ? L('ON') : L('OFF');
     }
     $typearr = array('select','radio','checkbox');
     if(!in_array($type, $typearr)) return $str;
