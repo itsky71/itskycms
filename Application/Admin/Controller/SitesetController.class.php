@@ -46,12 +46,13 @@ class SitesetController extends AdminController{
             }
         }else{
             if(I('get.lang')){
-                $list = $Siteset->where('groupid=1 and lang=\''.I('get.lang').'\'')->order(id)->select();
+                $l = I('get.lang');
             }elseif($this->clang){
-                $list = $Siteset->where('groupid=1 and lang=\''.$this->clang.'\'')->order(id)->select();
+                $l = $this->clang;
             }else{
-                $list = $Siteset->where('groupid=1 and lang=\''.LANG_SET.'\'')->order(id)->select();
+                $l = LANG_SET;
             }
+            $list = $Siteset->where('groupid=1 and lang=\''.$l.'\'')->order(id)->select();
             $this->assign('list', $list);
             $this->display();
         }
@@ -61,12 +62,49 @@ class SitesetController extends AdminController{
         if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
         $Siteset = D('Siteset');
         if(I('get.lang')){
-            $list = $Siteset->where('groupid=2 and lang=\''.I('get.lang').'\'')->order(id)->select();
+            $l = I('get.lang');
         }elseif($this->clang){
-            $list = $Siteset->where('groupid=2 and lang=\''.$this->clang.'\'')->order(id)->select();
+            $l = $this->clang;
         }else{
-            $list = $Siteset->where('groupid=2 and lang=\''.LANG_SET.'\'')->order(id)->select();
+            $l = LANG_SET;
         }
+        $langs = S('langs');
+        $where['lang'] = $l;
+        $where['varname'] = 'default_lang';
+        $varlangs = $Siteset->where($where)->field('value')->find();
+        $langa = formrows($varlangs['value'], 'select');
+        $default = formrows($varlangs['value'], 'select',1);
+        foreach ($langs as $value){
+            $langb[$value['value']] = $value['name'];
+        }
+        if(!arrequal($langa, $langb)){
+            foreach ($langb as $key=>$value){
+                if($key == $default){
+                    $de = '|default';
+                    $langsval .= $value.'|'.$key.$de.'PHP_EOL';
+                }else{
+                    $langsval .= $value.'|'.$key.'PHP_EOL';
+                }
+            }
+            $langval = str_replace('PHP_EOL', PHP_EOL, substr($langsval, 0, -7));
+            $Siteset->where($where)->save(array('value'=>$langval));
+        }
+        $list = $Siteset->where('groupid=2 and lang=\''.$l.'\'')->order(id)->select();
+        $this->assign('list', $list);
+        $this->display('index');
+    }
+    //系统邮箱
+    public function osemail(){
+        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        $Siteset = D('Siteset');
+        if(I('get.lang')){
+            $l = I('get.lang');
+        }elseif($this->clang){
+            $l = $this->clang;
+        }else{
+            $l = LANG_SET;
+        }
+        $list = $Siteset->where('groupid=3 and lang=\''.$l.'\'')->order(id)->select();
         $this->assign('list', $list);
         $this->display('index');
     }
@@ -98,5 +136,20 @@ class SitesetController extends AdminController{
             $this->assign('group', $group);
             $this->display();
         }
+    }
+    
+    public function attach(){
+        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        $Siteset = D('Siteset');
+        if(I('get.lang')){
+            $l = I('get.lang');
+        }elseif($this->clang){
+            $l = $this->clang;
+        }else{
+            $l = LANG_SET;
+        }
+        $list = $Siteset->where('groupid=4 and lang=\''.$l.'\'')->order(id)->select();
+        $this->assign('list', $list);
+        $this->display('index');
     }
 }

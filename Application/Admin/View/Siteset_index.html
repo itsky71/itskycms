@@ -48,11 +48,11 @@
                                 </div>
                             </case>
                             <case value="radio">
-                            <div class="col-xs-10 no-padding">
+                            <div class="col-xs-10 no-padding editable-input">
                                 <sky:assign name="radios" value="$vo.value|formrows=$vo['type']"/>
                                 <foreach name="radios" item="vv" key="kk">
                                 <label class="mr5">
-                                    <input class="ace editable-input" type="radio" value="{$kk}" <if condition="formrows($vo['value'],$vo['type'],1) eq $kk">checked="checked"</if> name="{$vo.varname}"/>
+                                    <input class="ace" type="radio" value="{$kk}" <if condition="formrows($vo['value'],$vo['type'],1) eq $kk">checked="checked"</if> name="{$vo.varname}"/>
                                     <span class="lbl">{$vv}</span>
                                 </label>
                                 </foreach>

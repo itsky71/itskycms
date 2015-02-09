@@ -174,10 +174,12 @@ function formrows($str,$type,$res=0){
     if(!in_array($type, $typearr)) return $str;
     $rows = explode(PHP_EOL, $str);
     foreach ($rows as $item){
-        $kv = explode('|', $item);
-        $kvarr[$kv[1]] = $kv[0];
-        if($kv[2] == 'default'){
-            $defaultarr[$kv[1]] = $kv[0];
+        if($item){
+            $kv = explode('|', $item);
+            $kvarr[$kv[1]] = $kv[0];
+            if($kv[2] == 'default'){
+                $defaultarr[$kv[1]] = $kv[0];
+            }
         }
     }
     if($res == 0){
@@ -200,4 +202,67 @@ function formrows($str,$type,$res=0){
  */
 function acq($var,$acq){
     return ($var === '' || $var === NULL) ? $acq : $var;
+}
+/**
+ * 发送电子邮件
+ * @param string $tomail 要发送的目标email
+ * @param string $subject 主题
+ * @param string $body 正文
+ * @param string $config 配置
+ * @return boolean 若发送成功返回TRUE，否则返回FALSE
+ */
+function sendmail($tomail,$subject,$body,$config=''){
+    if(!$config) $config = F('Config');
+    $mail = new Common\Lib\PHPMailer();
+    if($config['mail_type'] == 1){
+        $mail->isSMTP();
+    }elseif($config['mail_type'] == 2){
+        $mail->isMail();
+    }else{
+        $mail->isSendmail();
+    }
+    if($config['mail_auth']){
+        $mail->SMTPAuth = TRUE;
+    }else{
+        $mail->SMTPAuth = FALSE;
+    }
+    $mail->CharSet = 'UTF-8';
+    $mail->setLanguage(LANG_SET);
+    $mail->Debugoutput = 'html';
+    $mail->Host = $config['mail_server'];
+    $mail->Port = $config['mail_port'];
+    $mail->Username = $config['mail_user'];
+    $mail->Password = $config['mail_password'];
+    $mail->setFrom($config['mail_from'],$config['site_name']);
+    $mail->addReplyTo($config['mail_from'], $config['site_name']);
+    $mail->addAddress($tomail);
+    $mail->Subject = $subject;
+    $mail->msgHTML($body);
+    if(!$mail->send()){
+        return FALSE;
+    }else{
+        return TRUE;
+    }
+}
+/**
+ * 比较两个数组是否相等
+ * @param array $array1 数组1
+ * @param array $array2 数组2
+ * @return boolean
+ */
+function arrequal($array1,$array2){
+    if(!is_array($array1) || !is_array($array2)){
+        return FALSE;
+    }
+    foreach ($array1 as $key=>$value){
+        if($array2[$key] !== $value){
+            return FALSE;
+        }
+    }
+    foreach ($array2 as $key=>$value){
+        if($array1[$key] !== $value){
+            return FALSE;
+        }
+    }
+    return TRUE;
 }
