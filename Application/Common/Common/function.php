@@ -239,7 +239,7 @@ function sendmail($tomail,$subject,$body,$config=''){
     $mail->Subject = $subject;
     $mail->msgHTML($body);
     if(!$mail->send()){
-        return FALSE;
+        return $mail->ErrorInfo;
     }else{
         return TRUE;
     }

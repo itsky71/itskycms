@@ -21,6 +21,30 @@ class SitesetController extends AdminController{
         $Siteset = D('Siteset');
         if(IS_POST){
             $post = I('post.');
+            if($post['varname'] == 'mail_to'){
+                $body = '<h2>这是一份系统测试邮件！</h2>';
+                $configs = array(
+                    'mail_type' => 3,
+                    'mail_auth' => TRUE,
+                    'mail_server' => 'smtp.qq.com',
+                    'mail_port' => 25,
+                    'mail_user' => 'itsky71@foxmail.com',
+                    'mail_password' => 'jingfing008-',
+                    'mail_from' => 'itsky71@foxmail.com',
+                    'site_name' => 'ITskyCMS系统'
+                );
+                $sendres = sendmail($post['value'], '测试邮件', $body, $configs);
+                if($sendres === TRUE){
+                    $resdata = array(
+                        'info' => L('SEND_OK'),
+                        'status' => 1,
+                        'send' => 1
+                    );
+                    $this->ajaxReturn($resdata);
+                }else{
+                    $this->error($sendres);
+                }
+            }
             $typearr = array('select','radio','checkbox');
             if(in_array($post['type'], $typearr)){
                 $find = $Siteset->where('varname=\''.$post['varname'].'\'')->find();
@@ -137,7 +161,7 @@ class SitesetController extends AdminController{
             $this->display();
         }
     }
-    
+    //附件配置
     public function attach(){
         if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
         $Siteset = D('Siteset');

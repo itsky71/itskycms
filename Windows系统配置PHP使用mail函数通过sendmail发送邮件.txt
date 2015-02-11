@@ -1,0 +1,69 @@
+两种php发信方式
+在许多php程序中通常都需要发邮件比如discuz需要选择sendmail发信，wordpress评论回复需要发信，然而发送邮件则有两种不同的方式。一是直接通过php中的mail()函数进行发信，而则是通过写一些程序来通过stmp服务来进行发信。
+
+前者需要程序所在服务器的支持，通常linux服务器大多有这项服务。比如之前我用的Godaddy主机就可以进行发信，但是国内主机服务商则基本不带这个函数的支持。因为在这个垃圾邮件横行霸道的年代，服务器提供商则索性关闭这个函数的使用，所以大家很难可以调用mail()进行发信。具体测试大家可以调用<? php phpinfo(); ?>来查看自己的服务器是否支持这个函数。 
+
+而后者虽然可以实现发邮件这个功能，但是需要自己写相关程序带调用stmp服务器的使用。网上也有相关现成的程序可以直接拿来用。但是毕竟没有mail（）函数来的直接，来的快。虚拟主机用户还是选择stmp来进行发邮件的操作。如果是vps或者服务器主机用户则推荐使用第一种方式。
+
+今天我讲解下如何让php 中的 mail()发挥作用。今天我们主要讲解sendmail在windows的使用。
+
+sendmail原本是unix系的软件，在LAMP体系中有着良好的使用性。windows下实现这个的确有些难度，但是就像memcached一样，总有牛人开发出了windows能用的版本。如果你是XAMPP套件的用户就不需要下载，则把里面的sendmail文件夹复制到合适地方。否则需要到这个进行下载。
+
+我放到的位置是D:/server/sendmail/ ，据说地址的长度不能太长，不然会有错误发生。接下来做两步，来配置php和sendmail。
+
+配置php.ini
+[mail function]
+SMTP = localhost
+smtp_port = 25
+sendmail_from = mail@ijophy.com<发件人的邮箱>
+sendmail_path = "D:\sendmail\sendmail.exe -t"
+
+ 缺省状态sendmail_path前面是有“；”的，我们需要去掉，然后在" "里填写sendmail.exe所在地址，之后再加一个参数-t。sendmail_from = ，这个貌似没有什么用，随便填写即可。
+
+配置sendmail.ini
+[sendmail]
+
+smtp_server=smtp.qq.com
+smtp_port=25
+smtp_ssl=auto
+error_logfile=error.log
+debug_logfile=debug.log
+auth_username=<发件人的邮箱帐户：xx@xx.com>
+auth_password=<发件人的邮箱密码>
+pop3_server=
+pop3_username=
+pop3_password=
+
+smtp_server=，这个需要填写你想选用的smtp服务器，可以选择本地搭建（以后文章会讲解），也可以选择163、QQ、gmail（如果是gmail需要服务器启用ssl_module modules）的smtp或者pop3服务器。注意第一次使用建议把debug_logfile=debug.log前面的；去掉，这样可以记录每次发送邮件的具体信息了，如果发生错误可以在error.log里面找到。auth_username=、auth_password=需要填写你的stmp账户信息（具体可以Google一下），如果是pop3则对应填写。填写一类就可以了。
+
+配置http.conf
+
+sendmail网上有下的，如果你是用xampp，那里面直接就带了。 
+
+同时在虚拟主机的conf里加上这样一句 
+
+代码如下:
+
+php_admin_value sendmail_path ‘D:\xampp\sendmail\sendmail.exe -t 4u4v@163.com’<发件人的邮箱> 
+此邮件地址为用户的邮件地址，随便添。 
+ 测试
+之后我们重启apache后就可以正式生效了。我们用一个php程序测试一下是否生效。
+
+<?php
+$to = 接收人的邮箱
+$now = date(“Y-m-d h:i:s”);
+$from_name = ’测试sendmail’;
+$from_email =
+$headers = ’From: $from_name <$from_email>’;
+$body = ’这是一封来自 $from_name <$from_email>的测试邮件.’;
+$subject = ’[$now] 邮件测试’;
+if (mail($to, $subject, $body, $headers)) {
+echo ”success!”;
+} else {
+echo ”fail…”;
+}
+?>
+
+需要注意的地方：
+1.在WAMP环境下，默认是没有sendmail，所以要进行下载，有时候从网站下载的sendmail有问题，就另外下载一个sendmail。
+2.设置完php.ini,sendmail.ini,http.conf一定记得要重启apache。

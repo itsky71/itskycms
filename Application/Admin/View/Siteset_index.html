@@ -86,6 +86,10 @@
     </form>
 </div>
 {$langs}
+<div id="sending" class="alert alert-info text-center w225 position-absolute hide">
+    <p><strong>{:L('SENDING')}</strong></p>
+    <img id="loadingimg" src="__PUBLIC__/img/loading.gif"/>
+</div>
 <script type="text/javascript">
     var pan = '<li><a onclick="load(event,this)" href="{:U(CONTROLLER_NAME.'/index',$vl)}">{:L('M_SITECONFIG_INDEX')}</a></li>\n\
 <li class="active">{:L('M_'.$Think.CONTROLLER_NAME.'_'.$Think.ACTION_NAME)}</li>';
@@ -138,6 +142,10 @@
     $('button.editable-submit').click(function(){
         var type = $(this).attr('data-type');
         var varname = $(this).attr('data-var');
+        if (varname == 'mail_to') {
+            $('#loading').removeClass('hide');
+            $('#sending').removeClass('hide');
+        };
         if(type == 'radio' || type == 'bool'){
             var v = $('[name="'+varname+'"]:checked').val();
             var val = 'value='+($.type(v) == 'undefined' ? 0 : v);
@@ -152,7 +160,17 @@
             data:'varname='+varname+'&type='+type+'&'+val,
             success:function(data){
                 if($.isPlainObject(data)){
+                    if(data.send){
+                        $('#sending').addClass('hide');
+                    }
                     show_msg(data);
+                    if(data.send){
+                        var dnum = $('[name="mail_to"]').parent('span').attr('data-num');
+                        $('.editable-click[data-num="'+dnum+'"]').removeClass('hide');
+                        $('.editable-inline[data-num="'+dnum+'"]').addClass('hide');
+                        $('[name="mail_to"]').val('');
+                        $('#loading').addClass('hide');
+                    }
                 }else{
                     $('#new_content').html(data);
                 }

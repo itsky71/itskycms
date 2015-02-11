@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2015-02-07 11:20:44
+-- Generation Time: 2015-02-09 10:39:34
 -- 服务器版本： 5.6.20
 -- PHP Version: 5.5.15
 
@@ -138,7 +138,7 @@ CREATE TABLE IF NOT EXISTS `ta_lang` (
   `flag` varchar(30) NOT NULL DEFAULT '' COMMENT '国旗',
   `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '状态',
   `listorder` smallint(5) NOT NULL DEFAULT '0' COMMENT '排序'
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='多语言' AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='多语言' AUTO_INCREMENT=5 ;
 
 --
 -- 转存表中的数据 `ta_lang`
@@ -147,7 +147,8 @@ CREATE TABLE IF NOT EXISTS `ta_lang` (
 INSERT INTO `ta_lang` (`id`, `name`, `value`, `flag`, `status`, `listorder`) VALUES
 (1, '简体中文', 'zh-cn', '0px 0px', 1, 0),
 (2, '繁體中文', 'zh-tw', '0px -12px', 1, 0),
-(3, 'English', 'en-us', '0px -24px', 1, 0);
+(3, 'English', 'en-us', '0px -24px', 1, 0),
+(4, '日本語', 'ja', '0px -48px', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -176,7 +177,7 @@ CREATE TABLE IF NOT EXISTS `ta_member` (
 
 INSERT INTO `ta_member` (`id`, `password`, `username`, `realname`, `email`, `question`, `answer`, `status`, `regtime`, `login_ip`, `last_login_time`, `login_count`) VALUES
 (1, '30bc103d85df152c8c703bcbbcc7fd4d', 'admin', '你买单我就来', 'itsky71@foxmail.com', '我还会回来的...', '灰太狼？呵呵。。。', 1, 1419068912, '127.0.0.1', 1421732415, 30),
-(2, '30bc103d85df152c8c703bcbbcc7fd4d', 'itsky', '你地盘我做主', 'zmh0515005@163.com', '你是谁?', '呵呵...', 1, 1419587881, '127.0.0.1', 1423291947, 119),
+(2, '30bc103d85df152c8c703bcbbcc7fd4d', 'itsky', '你地盘我做主', 'zmh0515005@163.com', '你是谁?', '呵呵...', 1, 1419587881, '127.0.0.1', 1423453747, 121),
 (5, '30bc103d85df152c8c703bcbbcc7fd4d', 'zhongchonghua', '111111', 'fireloong@foxmail.com', '', '', 1, 1423140277, '', 0, 0);
 
 -- --------------------------------------------------------
@@ -266,7 +267,7 @@ CREATE TABLE IF NOT EXISTS `ta_siteset` (
   `type` varchar(10) NOT NULL DEFAULT 'string' COMMENT '类型',
   `lang` varchar(10) NOT NULL DEFAULT '' COMMENT '语言',
   `value` text NOT NULL COMMENT '变量值'
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='系统参数' AUTO_INCREMENT=23 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='系统参数' AUTO_INCREMENT=31 ;
 
 --
 -- 转存表中的数据 `ta_siteset`
@@ -292,8 +293,16 @@ INSERT INTO `ta_siteset` (`id`, `varname`, `info`, `groupid`, `type`, `lang`, `v
 (17, 'html_file_suffix', '静态文件后缀', 2, 'string', 'zh-cn', '.html'),
 (18, 'cookie_domain', '跨域共享cookie的域名(例如: .itsky.net)', 2, 'string', 'zh-cn', ''),
 (19, 'cookie_path', 'cookie路径', 2, 'string', 'zh-cn', ''),
-(21, 'default_lang', '默认语言', 2, 'select', 'zh-cn', '简体中文|zh-cn|default\r\n繁体中文|zh-tw\r\n美式英文|en-us'),
-(20, 'cookie_encode', 'cookie加密码', 2, 'string', 'zh-cn', 'KxZ06ual');
+(21, 'default_lang', '默认语言', 2, 'select', 'zh-cn', '简体中文|zh-cn|default\r\n繁體中文|zh-tw\r\nEnglish|en-us\r\n日本語|ja'),
+(20, 'cookie_encode', 'cookie加密码', 2, 'string', 'zh-cn', 'KxZ06ual'),
+(23, 'mail_type', '邮件发送模式', 3, 'radio', 'zh-cn', 'SMTP 函数发送|1|default\r\nmail 模块发送|2\r\nsendmail|3'),
+(24, 'mail_server', '邮件服务器', 3, 'string', 'zh-cn', 'smtp.qq.com'),
+(25, 'mail_port', '邮件发送端口', 3, 'number', 'zh-cn', '25'),
+(26, 'mail_from', '发件人地址', 3, 'string', 'zh-cn', 'itsky71@foxmail.com'),
+(27, 'mail_auth', 'AUTH 验证', 3, 'bool', 'zh-cn', '1'),
+(28, 'mail_user', '发件人用户名', 3, 'string', 'zh-cn', 'itsky'),
+(29, 'mail_password', '发件箱密码', 3, 'string', 'zh-cn', '12345678'),
+(30, 'mail_to', '邮件设置测试', 3, 'string', 'zh-cn', '');
 
 --
 -- Indexes for dumped tables
@@ -359,7 +368,7 @@ MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_
 -- AUTO_INCREMENT for table `ta_lang`
 --
 ALTER TABLE `ta_lang`
-MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=4;
+MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `ta_member`
 --
@@ -374,7 +383,7 @@ MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=49;
 -- AUTO_INCREMENT for table `ta_siteset`
 --
 ALTER TABLE `ta_siteset`
-MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=23;
+MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=31;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -24,6 +24,8 @@ $siteset = array(
     'INFOL'         =>  '参数说明长度必须为2-50个字符！',
     'GROUPIDR'      =>  '所属组为必选！',
     'ADD_ERROR'     =>  '系统变量添加失败！',
-    'ADD_SUCCESS'   =>  '系统变量添加成功！'
+    'ADD_SUCCESS'   =>  '系统变量添加成功！',
+    'SENDING'       =>  '发送中...',
+    'SEND_OK'       =>  '发送成功！'
 );
 return array_merge($siteset, $siteset_info);

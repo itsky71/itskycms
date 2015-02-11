@@ -14,7 +14,7 @@ input.ace-switch[type="checkbox"] + .lbl:before{margin-top: 0}
 input.ace[type="radio"] + .lbl:before{line-height: 17px}
 .badge{padding-top: 2px;padding-bottom: 2px;}.text-muted{color: #aaa}.cude{cursor: default}
 label{cursor: default}.vam{vertical-align:middle !important;}
-.btn-scroll-up{right:20px}.ace-settings-container{right: 5px}
+.btn-scroll-up{right:20px}.ace-settings-container{right: 5px}.clearboth{clear: both}
 /*-------select-input-------*/
 .select-input,.select-option{
     -moz-user-select:none;
@@ -125,4 +125,11 @@ height: 16px;line-height: normal;vertical-align: baseline;background-image: none
     width: 16px;
     height: 11px;
     display: block;
+}
+/*-- sending --*/
+#sending{
+    top: 15%;
+    left: 50%;
+    margin-left: -200px;
+    z-index: 1050;
 }
