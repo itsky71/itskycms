@@ -22,18 +22,25 @@ class SitesetController extends AdminController{
         if(IS_POST){
             $post = I('post.');
             if($post['varname'] == 'mail_to'){
-                $body = '<h2>这是一份系统测试邮件！</h2>';
-                $configs = array(
-                    'mail_type' => 3,
-                    'mail_auth' => TRUE,
-                    'mail_server' => 'smtp.qq.com',
-                    'mail_port' => 25,
-                    'mail_user' => 'itsky71@foxmail.com',
-                    'mail_password' => 'jingfing008-',
-                    'mail_from' => 'itsky71@foxmail.com',
-                    'site_name' => 'ITskyCMS系统'
-                );
-                $sendres = sendmail($post['value'], '测试邮件', $body, $configs);
+                $body = '本邮件来自<a href="http://www.itsky71.me">ITskyCMS</a>：<br/>';
+                $body .= '<strong>&emsp;&emsp;这是一封使用邮件发送模式为 <i style="font-weight:normal">SMTP 函数发送</i> 的系统测试邮件！</strong><br/>';
+                $body .= '&emsp;&emsp;ITskyCMS 管理团队';
+                $where['varname'] = array(array('like','mail_%'),'webname','or');
+                $where['lang'] = cookie('lang') ? cookie('lang') : LANG_SET;
+                $mail_config = $Siteset->field('varname,value')->where($where)->select();
+                foreach ($mail_config as $value){
+                    if($value['varname'] == 'mail_type'){
+                        $configs[$value['varname']] = formrows($value['value'],'radio',1);
+                    }elseif($value['varname'] == 'webname'){
+                        $configs['site_name'] = $value['value'];
+                    }elseif($value['varname'] == 'mail_to'){
+                        continue;
+                    }else{
+                        $configs[$value['varname']] = $value['value'];
+                    }
+                }
+//                print_r($configs);exit;
+                $sendres = sendmail($post['value'], L('TEST_MAIL_TITLE'), $body, $configs);
                 if($sendres === TRUE){
                     $resdata = array(
                         'info' => L('SEND_OK'),
@@ -42,31 +49,37 @@ class SitesetController extends AdminController{
                     );
                     $this->ajaxReturn($resdata);
                 }else{
-                    $this->error($sendres);
+                    $resdata = array(
+                        'info' => $sendres,
+                        'status' => 0,
+                        'send' => 1
+                    );
+                    $this->ajaxReturn($resdata);
                 }
-            }
-            $typearr = array('select','radio','checkbox');
-            if(in_array($post['type'], $typearr)){
-                $find = $Siteset->where('varname=\''.$post['varname'].'\'')->find();
-                $rows = explode(PHP_EOL, $find['value']);
-                foreach ($rows as $value){
-                    $kv = explode('|', $value);
-                    if($post['type'] == 'checkbox'){
-                        $default = in_array($kv[1], $post['value'][$post['varname']])?'|default':'';
-                    }else{
-                        $default = $post['value'] == $kv[1] ? '|default' : '';
+            }else{
+                $typearr = array('select','radio','checkbox');
+                if(in_array($post['type'], $typearr)){
+                    $find = $Siteset->where('varname=\''.$post['varname'].'\'')->find();
+                    $rows = explode(PHP_EOL, $find['value']);
+                    foreach ($rows as $value){
+                        $kv = explode('|', $value);
+                        if($post['type'] == 'checkbox'){
+                            $default = in_array($kv[1], $post['value'][$post['varname']])?'|default':'';
+                        }else{
+                            $default = $post['value'] == $kv[1] ? '|default' : '';
+                        }
+                        $kvarr[] = $kv[0].'|'.$kv[1].$default;
                     }
-                    $kvarr[] = $kv[0].'|'.$kv[1].$default;
+                    $data['value'] = implode(PHP_EOL, $kvarr);
+                }else{
+                    $data['value'] = $post['value'];
                 }
-                $data['value'] = implode(PHP_EOL, $kvarr);
-            }else{
-                $data['value'] = $post['value'];
-            }
-            $result = $Siteset->where('varname=\''.$post['varname'].'\'')->save($data);
-            if($result !== FALSE){
-                $this->success(L('SAVE_OK'),U('Siteset/'.I('get.action'),$this->vl));
-            }else{
-                $this->error(L('SAVE_ERROR'));
+                $result = $Siteset->where('varname=\''.$post['varname'].'\'')->save($data);
+                if($result !== FALSE){
+                    $this->success(L('SAVE_OK'),U('Siteset/'.I('get.action'),$this->vl));
+                }else{
+                    $this->error(L('SAVE_ERROR'));
+                }
             }
         }else{
             if(I('get.lang')){
@@ -173,6 +186,21 @@ class SitesetController extends AdminController{
             $l = LANG_SET;
         }
         $list = $Siteset->where('groupid=4 and lang=\''.$l.'\'')->order(id)->select();
+        $this->assign('list', $list);
+        $this->display('index');
+    }
+    //用户中心设置
+    public function user(){
+        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        $Siteset = D('Siteset');
+        if(I('get.lang')){
+            $l = I('get.lang');
+        }elseif($this->clang){
+            $l = $this->clang;
+        }else{
+            $l = LANG_SET;
+        }
+        $list = $Siteset->where('groupid=5 and lang=\''.$l.'\'')->order(id)->select();
         $this->assign('list', $list);
         $this->display('index');
     }

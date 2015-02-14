@@ -60,4 +60,5 @@ $menu_common = array(
     'M_SITECONFIG_INDEX' => '系統參數',
     'M_EGEG_EGEGE' => '二哥',
     'M_JDIPE_INDEX' => '肯德基',
+    'M_SITESET_USER' => '用戶中心設置',
 );

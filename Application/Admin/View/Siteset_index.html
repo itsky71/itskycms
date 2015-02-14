@@ -116,6 +116,7 @@
     $('.editable-clear').click(function(){
         $(this).parent().prev('.editable-input').val('');
     });
+    $('[name="watermark_pos"]').parents('.editable-input').addClass('latota');
     function editable(tar,num){
         var dragel = $('.editable-inline')[num];
         var textel = $('.editable-click')[num];

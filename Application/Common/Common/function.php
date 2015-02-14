@@ -168,7 +168,7 @@ function auto_lang(){
  */
 function formrows($str,$type,$res=0){
     if($type == 'bool'){
-        return $str ? L('ON') : L('OFF');
+        return $res == 1 ? ($str ? 1 : 0) : ($str ? L('ON') : L('OFF'));
     }
     $typearr = array('select','radio','checkbox');
     if(!in_array($type, $typearr)) return $str;
@@ -231,10 +231,10 @@ function sendmail($tomail,$subject,$body,$config=''){
     $mail->Debugoutput = 'html';
     $mail->Host = $config['mail_server'];
     $mail->Port = $config['mail_port'];
-    $mail->Username = $config['mail_user'];
+    $mail->Username = $config['mail_from'];
     $mail->Password = $config['mail_password'];
-    $mail->setFrom($config['mail_from'],$config['site_name']);
-    $mail->addReplyTo($config['mail_from'], $config['site_name']);
+    $mail->setFrom($config['mail_from'],$config['mail_user']);
+    $mail->addReplyTo($config['mail_from'], $config['mail_user']);
     $mail->addAddress($tomail);
     $mail->Subject = $subject;
     $mail->msgHTML($body);

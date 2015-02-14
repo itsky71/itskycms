@@ -42,10 +42,10 @@
                         <td>{$v.name}</td>
                         <td class="center">{$v.status}</td>
                         <td class="center">
-                            <a class="btn btn-success btn-minier" onclick="load(event,this)" href="{:U('Rule/edit',$vl.'&id='.$vo['id'])}">
+                            <a class="btn btn-success btn-minier" onclick="load(event,this)" href="{:U('Rule/edit',$vl.'&id='.$v['id'])}">
                                 <span class="glyphicon glyphicon-edit"></span> {:L('EDIT')}
                             </a>
-                            <a class="btn btn-danger btn-minier" onclick="del(event,this,'c')" href="{:U('Rule/del',$vl.'&id='.$vo['id'])}">
+                            <a class="btn btn-danger btn-minier" onclick="del(event,this,'c')" href="{:U('Rule/del',$vl.'&id='.$v['id'])}">
                                 <span class="glyphicon glyphicon-trash"></span> {:L('DELETE')}
                             </a>
                         </td>
