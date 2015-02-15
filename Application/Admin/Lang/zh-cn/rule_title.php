@@ -41,4 +41,7 @@ $rule_title = array(
     'R_LANG_DEL' => '删除',
     'R_LANG_ORDER' => '排序',
     'R_LANG_SET' => '设置语言包',
+    'R_SITESET_USER' => '用户中心设置',
+    'R_SITESET_DEL' => '删除',
+    'R_SITESET_ADD' => '添加',
 );

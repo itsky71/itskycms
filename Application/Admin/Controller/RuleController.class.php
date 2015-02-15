@@ -45,7 +45,9 @@ class RuleController extends AdminController{
         $Rule = D('AuthRule');
         if(IS_POST){
             if($Rule->create()){
+                $tid = $Rule->getFieldByName(I('post.group').'/index','tid');
                 $data = array(
+                    'tid' => $tid,
                     'name' => I('post.group').'/'.I('post.name'),
                     'title' => 'R_'.  strtoupper(I('post.group').'_'.I('post.name')),
                     'condition' => $_POST['condition'],
