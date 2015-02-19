@@ -1,0 +1,30 @@
+<div class="col-sm-12">
+    <a class="btn btn-primary btn-xs ml10 mb10" href="{:U('Urlrule/add',$vl)}" onclick="load(event,this)">
+        <span class="glyphicon glyphicon-plus"></span>{:L('ADD')}
+    </a>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th class="center w60">{:L('NUMBER')}</th>
+                    <th class="center w120">{:L('IS_HTML')}</th>
+                    <th>{:L('SHOW_EXAMPLE')}</th>
+                    <th>{:L('SHOW_URL_RULE')}</th>
+                    <th class="center w120">{:L('MANOPE')}</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+    var pan = '<li><a onclick="load(event,this)" href="{:U(CONTROLLER_NAME.'/'.ACTION_NAME,$vl)}">{:L('M_'.$Think.CONTROLLER_NAME.'_'.$Think.ACTION_NAME)}</a></li>\n\
+<li class="active">{:L($Think.ACTION_NAME)}</li>';
+    $('#breadcrumbs .breadcrumb li:gt(0)').remove();
+    $('#breadcrumbs .breadcrumb').append(pan);
+    $('#sidebar .nav-list li.active').removeClass('active');
+    $('#sidebar .nav-list li.open .submenu').hide();
+    $('#sidebar .nav-list li.open').removeClass('open');
+    $('a[href="{:U(CONTROLLER_NAME.'/'.ACTION_NAME,$vl)}"]').parent().addClass('active').parent().show().parent().addClass('open active');
+    $('.page-header h1').empty();
+    $('.page-header h1').append('{:L('M_'.$Think.CONTROLLER_NAME.'_'.$Think.ACTION_NAME)}<small class="glyphicon glyphicon-chevron-right"> {:L($Think.ACTION_NAME)}</small>');
+</script>

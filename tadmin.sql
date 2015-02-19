@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2015-02-09 10:39:34
+-- Generation Time: 2015-02-15 07:58:53
 -- 服务器版本： 5.6.20
 -- PHP Version: 5.5.15
 
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `ta_auth_group` (
 
 INSERT INTO `ta_auth_group` (`id`, `title`, `remark`, `status`, `rules`) VALUES
 (1, 'A_G_T_1', 'A_G_R_1', 1, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39'),
-(2, 'A_G_T_2', 'A_G_R_2', 1, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39'),
+(2, 'A_G_T_2', 'A_G_R_2', 1, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40'),
 (3, 'A_G_T_3', 'A_G_R_3', 0, '');
 
 -- --------------------------------------------------------
@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `ta_auth_rule` (
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '状态：为1正常，为0禁用',
   `listorder` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
   `condition` char(100) NOT NULL DEFAULT '' COMMENT '规则表达式，为空表示存在就验证，不为空表示按照条件验证'
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='规则表' AUTO_INCREMENT=40 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='规则表' AUTO_INCREMENT=41 ;
 
 --
 -- 转存表中的数据 `ta_auth_rule`
@@ -115,7 +115,7 @@ INSERT INTO `ta_auth_rule` (`id`, `tid`, `name`, `title`, `type`, `status`, `lis
 (28, 2, 'Siteset/ospro', 'R_SITESET_OSPRO', 1, 1, 0, ''),
 (29, 2, 'Siteset/osemail', 'R_SITESET_OSEMAIL', 1, 1, 0, ''),
 (30, 2, 'Siteset/attach', 'R_SITESET_ATTACH', 1, 1, 0, ''),
-(31, 2, 'Siteset/member', 'R_SITESET_MEMBER', 1, 1, 0, ''),
+(31, 2, 'Siteset/user', 'R_SITESET_USER', 1, 1, 0, ''),
 (32, 2, 'Siteset/addvar', 'R_SITESET_ADDVAR', 1, 1, 0, ''),
 (33, 2, 'Lang/index', 'R_LANG_INDEX', 1, 1, 0, ''),
 (34, 2, 'Lang/add', 'R_LANG_ADD', 1, 1, 0, ''),
@@ -123,7 +123,8 @@ INSERT INTO `ta_auth_rule` (`id`, `tid`, `name`, `title`, `type`, `status`, `lis
 (36, 2, 'Lang/edit', 'R_LANG_EDIT', 1, 1, 0, ''),
 (37, 2, 'Lang/del', 'R_LANG_DEL', 1, 1, 0, ''),
 (38, 2, 'Lang/order', 'R_LANG_ORDER', 1, 1, 0, ''),
-(39, 2, 'Lang/set', 'R_LANG_SET', 1, 1, 0, '');
+(39, 2, 'Lang/set', 'R_LANG_SET', 1, 1, 0, ''),
+(40, 2, 'Siteset/del', 'R_SITESET_DEL', 1, 1, 0, '');
 
 -- --------------------------------------------------------
 
@@ -177,7 +178,7 @@ CREATE TABLE IF NOT EXISTS `ta_member` (
 
 INSERT INTO `ta_member` (`id`, `password`, `username`, `realname`, `email`, `question`, `answer`, `status`, `regtime`, `login_ip`, `last_login_time`, `login_count`) VALUES
 (1, '30bc103d85df152c8c703bcbbcc7fd4d', 'admin', '你买单我就来', 'itsky71@foxmail.com', '我还会回来的...', '灰太狼？呵呵。。。', 1, 1419068912, '127.0.0.1', 1421732415, 30),
-(2, '30bc103d85df152c8c703bcbbcc7fd4d', 'itsky', '你地盘我做主', 'zmh0515005@163.com', '你是谁?', '呵呵...', 1, 1419587881, '127.0.0.1', 1423453747, 121),
+(2, '30bc103d85df152c8c703bcbbcc7fd4d', 'itsky', '你地盘我做主', 'zmh0515005@163.com', '你是谁?', '呵呵...', 1, 1419587881, '127.0.0.1', 1423978500, 132),
 (5, '30bc103d85df152c8c703bcbbcc7fd4d', 'zhongchonghua', '111111', 'fireloong@foxmail.com', '', '', 1, 1423140277, '', 0, 0);
 
 -- --------------------------------------------------------
@@ -214,7 +215,7 @@ INSERT INTO `ta_menu` (`id`, `pid`, `icon`, `name`, `model`, `action`, `data`, `
 (7, 5, 'glyphicon glyphicon-hdd', 'M_SITESET_OSPRO', 'Siteset', 'ospro', '', '', 1, 1, 0),
 (8, 5, 'glyphicon glyphicon-envelope', 'M_SITESET_OSEMAIL', 'Siteset', 'osemail', '', '', 1, 1, 0),
 (9, 5, 'glyphicon glyphicon-floppy-disk', 'M_SITESET_ATTACH', 'Siteset', 'attach', '', '', 1, 1, 0),
-(10, 5, 'glyphicon glyphicon-user', 'M_SITESET_MEMBER', 'Siteset', 'member', '', '', 1, 1, 0),
+(10, 5, 'glyphicon glyphicon-user', 'M_SITESET_USER', 'Siteset', 'user', '', '', 1, 1, 0),
 (11, 5, 'glyphicon glyphicon-plus-sign', 'M_SITESET_ADDVAR', 'Siteset', 'addvar', '', '', 1, 1, 0),
 (12, 4, '', 'M_POSID_INDEX', 'Posid', 'index', '', '', 1, 1, 0),
 (13, 4, '', 'M_URLRULE_INDEX', 'Urlrule', 'index', '', '', 1, 1, 0),
@@ -266,43 +267,66 @@ CREATE TABLE IF NOT EXISTS `ta_siteset` (
   `groupid` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '分组ID',
   `type` varchar(10) NOT NULL DEFAULT 'string' COMMENT '类型',
   `lang` varchar(10) NOT NULL DEFAULT '' COMMENT '语言',
-  `value` text NOT NULL COMMENT '变量值'
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='系统参数' AUTO_INCREMENT=31 ;
+  `value` text NOT NULL COMMENT '变量值',
+  `sys` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否系统变量'
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='系统参数' AUTO_INCREMENT=52 ;
 
 --
 -- 转存表中的数据 `ta_siteset`
 --
 
-INSERT INTO `ta_siteset` (`id`, `varname`, `info`, `groupid`, `type`, `lang`, `value`) VALUES
-(1, 'webname', '网站名称', 1, 'string', 'zh-cn', 'ITskyCMS内容管理系统'),
-(2, 'weburl', '站点根网址', 1, 'string', 'zh-cn', 'http://www.itsky71.net'),
-(4, 'powerby', '网站版权信息', 1, 'text', 'zh-cn', 'Copyright © 2014-2015 &lt;a href=&quot;#&quot; target=&quot;_blank&quot;&gt;ITskyCMS&lt;/a&gt;. &lt;a href=&quot;#&quot; target=&quot;_blank&quot;&gt;itsky71&lt;/a&gt; 版权所有'),
-(5, 'default_theme', '模板默认风格', 1, 'string', 'zh-cn', 'default'),
-(6, 'keywords', '站点默认关键字', 1, 'string', 'zh-cn', 'ITskyCMS'),
-(7, 'description', '站点描述', 1, 'text', 'zh-cn', 'ITskyCMS 内容管理系统'),
-(8, 'record', '网站备案号', 1, 'string', 'zh-cn', ''),
-(3, 'indexurl', '网页主页链接', 1, 'string', 'zh-cn', '/'),
-(9, 'page_rows', '列表分页数', 2, 'number', 'zh-cn', '15'),
-(10, 'url_model', 'URL访问模式', 2, 'select', 'zh-cn', '普通模式|0|default\r\nPATHINFO 模式|1\r\nREWRITE  模式|2\r\n兼容模式|3'),
-(11, 'url_rule', 'URL规则', 2, 'select', 'zh-cn', '内容页:show-1-1.html或show-1-1-1.html, 列表页:list-1.html或list-1-1.html|0\r\n内容页:Article/show/1.html或Article/show/1-1.html, 列表页:Article/list/1.html或Article/list/1-1.html|1|default'),
-(12, 'url_html_suffix', 'URL伪静态后缀', 2, 'string', 'zh-cn', 'html'),
-(13, 'tmpl_cache_on', '模板编译缓存', 2, 'bool', 'zh-cn', '1'),
-(14, 'tmpl_cache_time', '模板缓存有效期', 2, 'number', 'zh-cn', '0'),
-(15, 'html_cache_on', '静态缓存', 2, 'bool', 'zh-cn', '1'),
-(16, 'html_cache_time', '缓存有效期', 2, 'number', 'zh-cn', '3600'),
-(17, 'html_file_suffix', '静态文件后缀', 2, 'string', 'zh-cn', '.html'),
-(18, 'cookie_domain', '跨域共享cookie的域名(例如: .itsky.net)', 2, 'string', 'zh-cn', ''),
-(19, 'cookie_path', 'cookie路径', 2, 'string', 'zh-cn', ''),
-(21, 'default_lang', '默认语言', 2, 'select', 'zh-cn', '简体中文|zh-cn|default\r\n繁體中文|zh-tw\r\nEnglish|en-us\r\n日本語|ja'),
-(20, 'cookie_encode', 'cookie加密码', 2, 'string', 'zh-cn', 'KxZ06ual'),
-(23, 'mail_type', '邮件发送模式', 3, 'radio', 'zh-cn', 'SMTP 函数发送|1|default\r\nmail 模块发送|2\r\nsendmail|3'),
-(24, 'mail_server', '邮件服务器', 3, 'string', 'zh-cn', 'smtp.qq.com'),
-(25, 'mail_port', '邮件发送端口', 3, 'number', 'zh-cn', '25'),
-(26, 'mail_from', '发件人地址', 3, 'string', 'zh-cn', 'itsky71@foxmail.com'),
-(27, 'mail_auth', 'AUTH 验证', 3, 'bool', 'zh-cn', '1'),
-(28, 'mail_user', '发件人用户名', 3, 'string', 'zh-cn', 'itsky'),
-(29, 'mail_password', '发件箱密码', 3, 'string', 'zh-cn', '12345678'),
-(30, 'mail_to', '邮件设置测试', 3, 'string', 'zh-cn', '');
+INSERT INTO `ta_siteset` (`id`, `varname`, `info`, `groupid`, `type`, `lang`, `value`, `sys`) VALUES
+(1, 'webname', '网站名称', 1, 'string', 'zh-cn', 'ITskyCMS内容管理系统', 1),
+(2, 'weburl', '站点根网址', 1, 'string', 'zh-cn', 'http://www.itsky71.net', 1),
+(4, 'powerby', '网站版权信息', 1, 'text', 'zh-cn', 'Copyright © 2014-2015 &lt;a href=&quot;#&quot; target=&quot;_blank&quot;&gt;ITskyCMS&lt;/a&gt;. &lt;a href=&quot;#&quot; target=&quot;_blank&quot;&gt;itsky71&lt;/a&gt; 版权所有', 1),
+(5, 'default_theme', '模板默认风格', 1, 'string', 'zh-cn', 'default', 1),
+(6, 'keywords', '站点默认关键字', 1, 'string', 'zh-cn', 'ITskyCMS', 1),
+(7, 'description', '站点描述', 1, 'text', 'zh-cn', 'ITskyCMS 内容管理系统', 1),
+(8, 'record', '网站备案号', 1, 'string', 'zh-cn', '', 1),
+(3, 'indexurl', '网页主页链接', 1, 'string', 'zh-cn', '/', 1),
+(9, 'page_rows', '列表分页数', 2, 'number', 'zh-cn', '15', 1),
+(10, 'url_model', 'URL访问模式', 2, 'select', 'zh-cn', '普通模式|0|default\r\nPATHINFO 模式|1\r\nREWRITE  模式|2\r\n兼容模式|3', 1),
+(11, 'url_rule', 'URL规则', 2, 'select', 'zh-cn', '内容页:show-1-1.html或show-1-1-1.html, 列表页:list-1.html或list-1-1.html|0\r\n内容页:Article/show/1.html或Article/show/1-1.html, 列表页:Article/list/1.html或Article/list/1-1.html|1|default', 1),
+(12, 'url_html_suffix', 'URL伪静态后缀', 2, 'string', 'zh-cn', 'html', 1),
+(13, 'tmpl_cache_on', '模板编译缓存', 2, 'bool', 'zh-cn', '1', 1),
+(14, 'tmpl_cache_time', '模板缓存有效期', 2, 'number', 'zh-cn', '0', 1),
+(15, 'html_cache_on', '静态缓存', 2, 'bool', 'zh-cn', '1', 1),
+(16, 'html_cache_time', '缓存有效期', 2, 'number', 'zh-cn', '3600', 1),
+(17, 'html_file_suffix', '静态文件后缀', 2, 'string', 'zh-cn', '.html', 1),
+(18, 'cookie_domain', '跨域共享cookie的域名(例如: .itsky.net)', 2, 'string', 'zh-cn', '', 1),
+(19, 'cookie_path', 'cookie路径', 2, 'string', 'zh-cn', '', 1),
+(21, 'default_lang', '默认语言', 2, 'select', 'zh-cn', '简体中文|zh-cn|default\r\n繁體中文|zh-tw\r\nEnglish|en-us\r\n日本語|ja', 1),
+(20, 'cookie_encode', 'cookie加密码', 2, 'string', 'zh-cn', 'KxZ06ual', 1),
+(22, 'mail_type', '邮件发送模式', 3, 'radio', 'zh-cn', 'SMTP 函数发送|1|default\r\nmail 模块发送|2\r\nsendmail|3', 1),
+(23, 'mail_server', '邮件服务器', 3, 'string', 'zh-cn', 'smtp.qq.com', 1),
+(24, 'mail_port', '邮件发送端口', 3, 'number', 'zh-cn', '25', 1),
+(25, 'mail_from', '发件人地址', 3, 'string', 'zh-cn', 'itsky71@foxmail.com', 1),
+(26, 'mail_auth', 'AUTH 验证', 3, 'bool', 'zh-cn', '1', 1),
+(27, 'mail_user', '发件人用户名', 3, 'string', 'zh-cn', 'ITskyCMS', 1),
+(28, 'mail_password', '发件箱密码', 3, 'string', 'zh-cn', 'jingfing008-', 1),
+(29, 'mail_to', '邮件设置测试', 3, 'string', 'zh-cn', '', 1),
+(30, 'attach_maxsize', '允许上传附件大小', 4, 'number', 'zh-cn', '2048', 1),
+(32, 'watermark_type', '水印类型', 4, 'select', 'zh-cn', '无水印|0|default\r\n图片水印|1\r\n文字水印|2', 1),
+(31, 'attach_allowext', '允许上传附件类型', 4, 'string', 'zh-cn', 'jpg,jpeg,gif,png,doc,docx,rar,zip,swf,php', 1),
+(38, 'watermark_img', '水印图片', 4, 'string', 'zh-cn', '/Public/img/mark.png', 1),
+(39, 'watermark_pct', '水印透明度', 4, 'number', 'zh-cn', '80', 1),
+(40, 'watermark_quality', '水印质量', 4, 'number', 'zh-cn', '100', 1),
+(41, 'watermark_pospad', '水印边距', 4, 'number', 'zh-cn', '10', 1),
+(42, 'watermark_pos', '水印位置', 4, 'radio', 'zh-cn', '随机位置|0\r\n顶部居左|1\r\n顶部居中|2\r\n顶部居右|3\r\n左部居左|4\r\n左部居中|5\r\n左部居右|6\r\n底部居左|7\r\n底部居中|8\r\n底部居右|9|default', 1),
+(33, 'watemard_text', '水印文字内容', 4, 'string', 'zh-cn', 'ITskyCMS', 1),
+(34, 'watemard_text_size', '文字大小', 4, 'string', 'zh-cn', '20', 1),
+(35, 'watemard_text_color', '文字颜色', 4, 'string', 'zh-cn', '#FFFFFF', 1),
+(36, 'watemard_text_face', '字体', 4, 'string', 'zh-cn', 'elephant.ttf', 1),
+(37, 'watermark_min', '水印添加条件', 4, 'string', 'zh-cn', '300,300', 1),
+(43, 'user_register', '新会员注册', 5, 'bool', 'zh-cn', '1', 1),
+(44, 'member_emailcheck', '新会员注册邮件验证', 5, 'bool', 'zh-cn', '1', 1),
+(45, 'member_registecheck', '新会员注册审核', 5, 'bool', 'zh-cn', '1', 1),
+(46, 'member_login_verify', '注册登陆验证码', 5, 'bool', 'zh-cn', '1', 1),
+(47, 'member_emailchecktpl', '邮件认证模板', 5, 'text', 'zh-cn', '欢迎您注册成为yourphp用户，您的账号需要邮箱认证，点击下面链接进行认证：{click}\r\n或者将网址复制到浏览器：{url}', 1),
+(48, 'member_getpwdemaitpl', '密码找回邮件模板', 5, 'text', 'zh-cn', '尊敬的用户{username}，请点击进入&lt;a href=&quot;{url}&quot;&gt;重置密码&lt;/a&gt;,\r\n或者将网址复制到浏览器：{url}（链接3天内有效）。&lt;br&gt;\r\n感谢您对本站的支持。&lt;br&gt;{sitename}&lt;br&gt;\r\n此邮件为系统自动邮件，无需回复。', 1),
+(49, 'isuserbuy', '游客购物', 5, 'bool', 'zh-cn', '0', 1),
+(50, 'use_address', '订单收货人地址必填', 5, 'bool', 'zh-cn', '1', 1),
+(51, 'credit_exchange', '积分兑换', 5, 'number', 'zh-cn', '10', 1);
 
 --
 -- Indexes for dumped tables
@@ -363,7 +387,7 @@ MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户组id',
 -- AUTO_INCREMENT for table `ta_auth_rule`
 --
 ALTER TABLE `ta_auth_rule`
-MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=40;
+MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=41;
 --
 -- AUTO_INCREMENT for table `ta_lang`
 --
@@ -383,7 +407,7 @@ MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=49;
 -- AUTO_INCREMENT for table `ta_siteset`
 --
 ALTER TABLE `ta_siteset`
-MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=31;
+MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=52;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

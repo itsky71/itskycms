@@ -11,7 +11,7 @@
 namespace Admin\Controller;
 /**
  * Description of UpdateController
- * 更新网站控制器
+ * 更新网站控制器类
  * @author itsky
  */
 class UpdateController extends AdminController{
@@ -29,8 +29,8 @@ class UpdateController extends AdminController{
                 $this->buildHtml('index','./',$module.'@'.$hf[0]);
                 $this->success(L('UPDATE_OK'));
             }else{
-                if(is_file('./index')){
-                    $isdel = unlink('./index');
+                if(is_file('./index.html')){
+                    $isdel = unlink('./index.html');
                 if($isdel){
                     $this->success(L('UPDATE_OK'));
                 }else{

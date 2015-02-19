@@ -42,4 +42,7 @@ $rule_title = array(
     'R_LANG_ORDER' => '排序',
     'R_LANG_SET' => '設置語言包',
     'R_SITESET_USER' => '用戶中心設置',
+    'R_URLRULE_INDEX' => 'URL規則',
+    'R_SITESET_DEL' => '删除',
+    'R_URLRULE_ADD' => '添加',
 );

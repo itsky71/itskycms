@@ -39,7 +39,6 @@ class SitesetController extends AdminController{
                         $configs[$value['varname']] = $value['value'];
                     }
                 }
-//                print_r($configs);exit;
                 $sendres = sendmail($post['value'], L('TEST_MAIL_TITLE'), $body, $configs);
                 if($sendres === TRUE){
                     $resdata = array(

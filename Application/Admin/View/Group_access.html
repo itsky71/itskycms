@@ -8,19 +8,19 @@
             <input type="hidden" name="gid" value="{$v.id}"/>
             <table class="table table-striped">
                 <foreach name="top" item="t" key="n">
-                <tr><td><label><span class="badge badge-grey">{$n+1}</span> <input class="ace" type="checkbox" data-key="{$n+1}"/><span class="lbl"> {:L($t['name'])}</span></label></td></tr>
+                <tr><td><label><span class="badge badge-grey">{$n+1}</span> <input class="ace" type="checkbox" data-key="{$n+1}"/><span class="lbl">{:L($t['name'])}</span></label></td></tr>
                 <tr>
                     <td>
                         <sky:db table="AuthRule" where="tid=$n+1 and name like '%/index'" order="listorder,id" item="vo">
                         <div class="line-height-1 mtb4"></div>
                         <label class="mr10">
-                            <input class="ace" type="checkbox"{:in_array($vo['id'],$rules)?' checked="checked"':''} name="id[{$vo.id}]" value="{$vo.id}" data-var="{$n+1}"/><span class="lbl"> {:L($vo['title'])}</span>
+                            <input class="ace" type="checkbox"{:in_array($vo['id'],$rules)?' checked="checked"':''} name="id[{$vo.id}]" value="{$vo.id}" data-var="{$n+1}"/><span class="lbl">{:L($vo['title'])}</span>
                             <span class="text-muted f12">({$vo.name})</span>
                         </label>
                         <php>$like=substr($vo['name'],0,-6);</php>
                         <sky:db table="AuthRule" where="tid=$n+1 and name like '$like%' and name not like '%/index'" order="listorder,id" item="i">
                             <label class="mr10">
-                                <input class="ace" type="checkbox"{:in_array($i['id'],$rules)?' checked="checked"':''} name="id[{$i.id}]" value="{$i.id}" data-var="{$n+1}"/><span class="lbl"> {:L($i['title'])}</span>
+                                <input class="ace" type="checkbox"{:in_array($i['id'],$rules)?' checked="checked"':''} name="id[{$i.id}]" value="{$i.id}" data-var="{$n+1}"/><span class="lbl">{:L($i['title'])}</span>
                                 <span class="text-muted f12">({$i.name})</span>
                             </label>
                         </sky:db>

@@ -9,5 +9,13 @@ return array(
     'HTML_FILE_SUFFIX' => '.html', //设置静态缓存文件后缀
     'HTML_CACHE_RULES' => array(//定义静态缓存规则
         '*'=>array(auto_lang().'/{:module}_{:controller}_{:action}_{id}')
+    ),
+    'URL_ROUTER_ON' => TRUE,//开启URL路由
+    'URL_ROUTE_RULES' => array(//路由规则
+        'avatar/:id'=>'member/avatar/id/:1_small',
+        '/^new\/(\d+)$/'        => 'Index/index?hehe=jeg_:1'
+    ),
+    'URL_MAP_RULES' => array(
+        'new/top' => 'index/index'
     )
 );

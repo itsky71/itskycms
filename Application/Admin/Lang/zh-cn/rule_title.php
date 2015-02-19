@@ -44,4 +44,5 @@ $rule_title = array(
     'R_SITESET_USER' => '用户中心设置',
     'R_SITESET_DEL' => '删除',
     'R_SITESET_ADD' => '添加',
+    'R_URLRULE_INDEX' => 'URL规则',
 );

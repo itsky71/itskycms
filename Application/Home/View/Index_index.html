@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ITskyCMS</title>
 <link rel="shortcut icon" href="/favicon.ico?t={:time()}" type="image/x-icon" />
-{js href="__PUBLIC__/js/jquery.min.js"/}
+<script type="text/javascript" src="http://cdn.staticfile.org/jquery/1.8.3/jquery.min.js"></script>
 <script type="text/javascript">
     var ThinkPHP = {
         'ROOT' : '__ROOT__',    //网站根目录地址
@@ -31,6 +31,6 @@
 <body id="{$Think.CONTROLLER_NAME}_{$Think.ACTION_NAME}">
     <a href="{$home}">首页</a>
     <div>{:LANG_SET}</div><br/>
-    {:I('get.id')}<br/>{:I('get.l')}
+    {:I('get.id')}<br/>{:I('get.l')}<br/>{:dump(I('get.'))}<br/>__SELF__
 </body>
 </html>
