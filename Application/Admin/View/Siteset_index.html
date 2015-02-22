@@ -32,7 +32,7 @@
                                         <input class="editable-input hide" type="text" name="{$vo.varname}" value="{$vo.value|formrows=$vo['type'],1}"/>
                                         <div class="form-control select-input cude pt5 h30 overflow-hidden"></div>
                                         <span class="input-group-addon cude">
-                                            <i class="glyphicon glyphicon-chevron-down"></i>
+                                            <i class="glyphicon glyphicon-menu-down"></i>
                                         </span>
                                     </div>
                                     <div class="col-xs-12">
@@ -107,7 +107,7 @@
     $('#sidebar .nav-list li.open').removeClass('open');
     $('a[href="{:U(CONTROLLER_NAME.'/'.ACTION_NAME,$vl)}"]').parent().addClass('active').parent().show().parent().addClass('open active').parent().show().parent().addClass('open active');
     $('.page-header h1').empty();
-    $('.page-header h1').append('{:L('M_SITECONFIG_INDEX')}<small class="glyphicon glyphicon-chevron-right"> {:L('M_'.$Think.CONTROLLER_NAME.'_'.$Think.ACTION_NAME)}</small>');
+    $('.page-header h1').append('{:L('M_SITECONFIG_INDEX')}<small class="glyphicon glyphicon-menu-right"> {:L('M_'.$Think.CONTROLLER_NAME.'_'.$Think.ACTION_NAME)}</small>');
     $('.table tr').hover(
         function(){
             $(this).find('.del').removeClass('hide');

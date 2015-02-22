@@ -16,7 +16,7 @@ use Think\Model;
  * @author itsky
  */
 class MenuModel extends Model{
-    //表单验证
+    //表单自动验证
     protected $_validate = array(
         array('pid','number','{%PIDN}'),
         array('realname','checkRealname','{%RNAMEL}',self::EXISTS_VALIDATE,'callback'),

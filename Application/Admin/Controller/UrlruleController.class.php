@@ -21,6 +21,20 @@ class UrlruleController extends AdminController{
     }
 
     public function add(){
-        $this->display('edit');
+        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        if(IS_POST){
+            $Urlrule = D('Urlrule');
+            if($Urlrule->create()){
+                if($Urlrule->add(I('post.'))){
+                    $this->success(L('ADD_OK'),U('Urlrule/index', $this->vl));
+                }else{
+                    $this->error(L('ADD_ERROR'));
+                }
+            }else{
+                $this->error($Urlrule->getError());
+            }
+        }else{
+            $this->display('edit');
+        }
     }
 }

@@ -11,17 +11,17 @@
 <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 <block name="cssjs">
-<link rel="stylesheet" type="text/css" href="http://cdn.staticfile.org/twitter-bootstrap/3.2.0/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="http://cdn.staticfile.org/twitter-bootstrap/3.2.0/css/bootstrap-theme.min.css" />
+<link rel="stylesheet" type="text/css" href="http://cdn.oschina.mopaas.com/bootstrap/3.3.2/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="http://cdn.oschina.mopaas.com/bootstrap/3.3.2/css/bootstrap-theme.min.css" />
 <import type="css" file="css.ace#min"/>
 <import type="css" file="css.ace-rtl#min"/>
 <import type="css" file="css.ace-skins#min"/>
 <import type="css" file="validator.jquery#validator"/>
 <import type="css" file="scrollator.fm#scrollator#jquery"/>
 <import type="css" file="css.admin_all"/>
-<script type="text/javascript" src="http://cdn.staticfile.org/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="http://cdn.oschina.mopaas.com/jquery/2.1.3/jquery.min.js"></script>
 <script type="text/javascript" src="{:U('Public/langjs',$vl)}"></script>
-<script type="text/javascript" src="http://cdn.staticfile.org/twitter-bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://cdn.oschina.mopaas.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="http://cdn.staticfile.org/bootbox.js/4.3.0/bootbox.min.js"></script>
 <script type="text/javascript" src="http://cdn.staticfile.org/datatables/1.10.1/js/jquery.dataTables.min.js"></script>
 <import type="js" file="js.ace#min"/>
@@ -61,7 +61,7 @@
                         <span class="user-info">
                             <small>{:L('WELCOME')},</small>{$Think.session.uname}
                         </span>
-                        <span class="glyphicon glyphicon-chevron-down"></span>
+                        <span class="glyphicon glyphicon-triangle-bottom f12"></span>
                     </a>
                     <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
                         <foreach name="indexchild" item="vo">
@@ -84,7 +84,7 @@
         <if condition="$mlang">
         <div class="btn-group pull-right mr10">
             <button class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
-                {:L('CHANGE_LANG')}:<span class="lang-qie">{$tlang.name}</span> <span class="glyphicon glyphicon-chevron-down"></span>
+                {:L('CHANGE_LANG')}:<span class="lang-qie">{$tlang.name}</span> <span class="glyphicon glyphicon-triangle-bottom f12"></span>
             </button>
             <ul class="dropdown-menu dropdown-success">
                 <foreach name="mlang" item="vo">
@@ -153,7 +153,7 @@
             </div>
             <div class="page-content">
                 <div class="page-header">
-                    <h1>{:L('M_INDEX_INDEX')}<small class="glyphicon glyphicon-chevron-right"> {:L('MENU_LOOK')}</small></h1>
+                    <h1>{:L('M_INDEX_INDEX')}<small class="glyphicon glyphicon-menu-right"> {:L('MENU_LOOK')}</small></h1>
                 </div>
                 <div class="row">
                     <div id="new_content" class="col-xs-12">

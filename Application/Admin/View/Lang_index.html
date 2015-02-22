@@ -61,7 +61,7 @@
     $('#sidebar .nav-list li.open').removeClass('open');
     $('a[href="{:U(CONTROLLER_NAME.'/'.ACTION_NAME,$vl)}"]').parent().addClass('active').parent().show().parent().addClass('open active');
     $('.page-header h1').empty();
-    $('.page-header h1').append('{:L('M_'.$Think.CONTROLLER_NAME.'_'.$Think.ACTION_NAME)}<small class="glyphicon glyphicon-chevron-right"> {:L($Think.ACTION_NAME)}</small>');
+    $('.page-header h1').append('{:L('M_'.$Think.CONTROLLER_NAME.'_'.$Think.ACTION_NAME)}<small class="glyphicon glyphicon-menu-right"> {:L($Think.ACTION_NAME)}</small>');
     $('input[name^="listorder"]').keydown(function(e){
         var code = parseInt(e.keyCode);
         if(code >= 96 && code <= 105 || code >= 48 && code <= 57 || code == 8 || code == 46){

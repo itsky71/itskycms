@@ -29,15 +29,15 @@ class IndexController extends AdminController {
         }
         $li = array(
             array(
-                'folder' => "<a class='dropdown-toggle' href='javascript:;'>\$icon<span class='menu-text'>\$name</span><b class='arrow glyphicon glyphicon-chevron-down'></b></a>",
+                'folder' => "<a class='dropdown-toggle' href='javascript:;'>\$icon<span class='menu-text'>\$name</span><b class='arrow glyphicon glyphicon-menu-down'></b></a>",
                 'file' => "<a class='\$tar' href='\$url'>\$icon<span class='menu-text'>\$name</span></a>"
             ),
             array(
-                'folder' => "<a class='dropdown-toggle' href='javascript:;'><span class='glyphicon glyphicon-chevron-right'></span>\$icon \$name<b class='arrow glyphicon glyphicon-chevron-down'></b></a>",
-                'file' => "<a class='tarmain' href='\$url'><span class='glyphicon glyphicon-chevron-right'></span> \$icon \$name</a>"
+                'folder' => "<a class='dropdown-toggle' href='javascript:;'><span class='glyphicon glyphicon-menu-right'></span>\$icon \$name<b class='arrow glyphicon glyphicon-menu-down'></b></a>",
+                'file' => "<a class='tarmain' href='\$url'><span class='glyphicon glyphicon-menu-right'></span> \$icon \$name</a>"
             ),
             array(
-                'folder' => "<a class='dropdown-toggle' href='javascript:;'>\$icon\$name<b class='arrow glyphicon glyphicon-chevron-down'></b></a>",
+                'folder' => "<a class='dropdown-toggle' href='javascript:;'>\$icon\$name<b class='arrow glyphicon glyphicon-menu-down'></b></a>",
                 'file' => "<a class='tarmain' href='\$url'>\$icon\$name</a>"
             )
         );

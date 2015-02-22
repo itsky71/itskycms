@@ -153,7 +153,7 @@ function urlh($add){
 function accept_lang(){
     if(isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])){
         preg_match('/^([a-z\d\-]+)/i', $_SERVER['HTTP_ACCEPT_LANGUAGE'], $matches);
-        return $matches[1];
+        return strtolower($matches[1]);
     }
 }
 function auto_lang(){

@@ -51,13 +51,13 @@ $(function(){
         e.preventDefault();
     });
     //ajax请求开始时显示加载中样式
-    $('#loading').ajaxStart(function(){
-        $(this).removeClass('hide');
+    $(document).ajaxStart(function(){
+        $('#loading').removeClass('hide');
         $('#loadimg').removeClass('hide');
     });
     //ajax请求结束时结束加载中样式
-    $('#loading').ajaxComplete(function(){
-        $(this).addClass('hide');
+    $(document).ajaxComplete(function(){
+        $('#loading').addClass('hide');
         $('#loadimg').addClass('hide');
     });
     //ajax全局默认设置

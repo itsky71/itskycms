@@ -9,7 +9,7 @@
                     <input class="hide" type="text" name="pid" value="{$pid}"/>
                     <div class="form-control select-input cude"></div>
                     <span class="input-group-addon cude">
-                        <i class="glyphicon glyphicon-chevron-down"></i>
+                        <i class="glyphicon glyphicon-menu-down"></i>
                     </span>
                 </div>
                 <div class="col-xs-12">
@@ -281,6 +281,64 @@
         <li><span class="glyphicon glyphicon-cloud-upload"></span></li>
         <li><span class="glyphicon glyphicon-tree-conifer"></span></li>
         <li><span class="glyphicon glyphicon-tree-deciduous"></span></li>
+        <li><span class="glyphicon glyphicon-cd"></span></li>
+        <li><span class="glyphicon glyphicon-save-file"></span></li>
+        <li><span class="glyphicon glyphicon-open-file"></span></li>
+        <li><span class="glyphicon glyphicon-level-up"></span></li>
+        <li><span class="glyphicon glyphicon-cd"></span></li>
+        <li><span class="glyphicon glyphicon-copy"></span></li>
+        <li><span class="glyphicon glyphicon-paste"></span></li>
+        <li><span class="glyphicon glyphicon-alert"></span></li>
+        <li><span class="glyphicon glyphicon-equalizer"></span></li>
+        <li><span class="glyphicon glyphicon-king"></span></li>
+        <li><span class="glyphicon glyphicon-queen"></span></li>
+        <li><span class="glyphicon glyphicon-pawn"></span></li>
+        <li><span class="glyphicon glyphicon-bishop"></span></li>
+        <li><span class="glyphicon glyphicon-knight"></span></li>
+        <li><span class="glyphicon glyphicon-formula"></span></li>
+        <li><span class="glyphicon glyphicon-tent"></span></li>
+        <li><span class="glyphicon glyphicon-blackboard"></span></li>
+        <li><span class="glyphicon glyphicon-bed"></span></li>
+        <li><span class="glyphicon glyphicon-apple"></span></li>
+        <li><span class="glyphicon glyphicon-erase"></span></li>
+        <li><span class="glyphicon glyphicon-hourglass"></span></li>
+        <li><span class="glyphicon glyphicon-lamp"></span></li>
+        <li><span class="glyphicon glyphicon-duplicate"></span></li>
+        <li><span class="glyphicon glyphicon-piggy-bank"></span></li>
+        <li><span class="glyphicon glyphicon-scissors"></span></li>
+        <li><span class="glyphicon glyphicon-bitcoin"></span></li>
+        <li><span class="glyphicon glyphicon-yen"></span></li>
+        <li><span class="glyphicon glyphicon-ruble"></span></li>
+        <li><span class="glyphicon glyphicon-ice-lolly"></span></li>
+        <li><span class="glyphicon glyphicon-ice-lolly-tasted"></span></li>
+        <li><span class="glyphicon glyphicon-education"></span></li>
+        <li><span class="glyphicon glyphicon-option-horizontal"></span></li>
+        <li><span class="glyphicon glyphicon-option-vertical"></span></li>
+        <li><span class="glyphicon glyphicon-menu-hamburger"></span></li>
+        <li><span class="glyphicon glyphicon-modal-window"></span></li>
+        <li><span class="glyphicon glyphicon-oil"></span></li>
+        <li><span class="glyphicon glyphicon-grain"></span></li>
+        <li><span class="glyphicon glyphicon-sunglasses"></span></li>
+        <li><span class="glyphicon glyphicon-text-size"></span></li>
+        <li><span class="glyphicon glyphicon-text-color"></span></li>
+        <li><span class="glyphicon glyphicon-text-background"></span></li>
+        <li><span class="glyphicon glyphicon-object-align-top"></span></li>
+        <li><span class="glyphicon glyphicon-object-align-bottom"></span></li>
+        <li><span class="glyphicon glyphicon-object-align-horizontal"></span></li>
+        <li><span class="glyphicon glyphicon-object-align-left"></span></li>
+        <li><span class="glyphicon glyphicon-object-align-vertical"></span></li>
+        <li><span class="glyphicon glyphicon-object-align-right"></span></li>
+        <li><span class="glyphicon glyphicon-triangle-right"></span></li>
+        <li><span class="glyphicon glyphicon-triangle-left"></span></li>
+        <li><span class="glyphicon glyphicon-triangle-bottom"></span></li>
+        <li><span class="glyphicon glyphicon-triangle-top"></span></li>
+        <li><span class="glyphicon glyphicon-console"></span></li>
+        <li><span class="glyphicon glyphicon-superscript"></span></li>
+        <li><span class="glyphicon glyphicon-subscript"></span></li>
+        <li><span class="glyphicon glyphicon-menu-left"></span></li>
+        <li><span class="glyphicon glyphicon-menu-right"></span></li>
+        <li><span class="glyphicon glyphicon-menu-down"></span></li>
+        <li><span class="glyphicon glyphicon-menu-up"></span></li>
     </ul>
 </div>
 <script type="text/javascript">
@@ -289,7 +347,7 @@
     $('#breadcrumbs .breadcrumb li:gt(0)').remove();
     $('#breadcrumbs .breadcrumb').append(pan);
     $('.page-header h1').empty();
-    $('.page-header h1').append('{:L('M_'.$Think.CONTROLLER_NAME.'_INDEX')}<small class="glyphicon glyphicon-chevron-right"> {:L($Think.ACTION_NAME)}</small>');
+    $('.page-header h1').append('{:L('M_'.$Think.CONTROLLER_NAME.'_INDEX')}<small class="glyphicon glyphicon-menu-right"> {:L($Think.ACTION_NAME)}</small>');
     $('form[role="form"]').validator({
         rules:{
             realname:[/^[\u0391-\uFFE5\w ]+$/, "{:L('JS_INPUT_INFO')}"],

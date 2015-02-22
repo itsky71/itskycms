@@ -76,7 +76,7 @@
     $('#breadcrumbs .breadcrumb li:gt(0)').remove();
     $('#breadcrumbs .breadcrumb').append(pan);
     $('.page-header h1').empty();
-    $('.page-header h1').append('{:L('M_'.$Think.CONTROLLER_NAME.'_INDEX')}<small class="glyphicon glyphicon-chevron-right"> {:L($Think.ACTION_NAME)}</small>');
+    $('.page-header h1').append('{:L('M_'.$Think.CONTROLLER_NAME.'_INDEX')}<small class="glyphicon glyphicon-menu-right"> {:L($Think.ACTION_NAME)}</small>');
     $('[data-rel=tooltip]').tooltip();
     $('#flag').on(ace.click_event,function(){
         bootbox.dialog({
