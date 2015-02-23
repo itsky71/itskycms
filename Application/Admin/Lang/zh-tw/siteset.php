@@ -27,6 +27,8 @@ $siteset = array(
     'ADD_SUCCESS'       =>  '系統變量添加成功！',
     'SENDING'           =>  '發送中...',
     'SEND_OK'           =>  '發送成功！',
-    'TEST_MAIL_TITLE'   => 'ITskyCMS - 測試郵件'
+    'TEST_MAIL_TITLE'   => 'ITskyCMS - 測試郵件',
+    'SHOW_PAGE'         =>  '內容頁：',
+    'LIST_PAGE'         =>  '列表頁：'
 );
 return array_merge($siteset, $siteset_info);

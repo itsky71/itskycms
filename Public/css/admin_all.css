@@ -42,6 +42,19 @@ label{cursor: default}.vam{vertical-align:middle !important;}
 .select-active{background-color: #39f;color: #fff}
 .no-border-right-color{border-top-color:#f59942 !important;border-left-color:#f59942 !important;border-bottom-color:#f59942 !important;}
 .no-border-left-color{border-top-color:#f59942 !important;border-right-color:#f59942 !important;border-bottom-color:#f59942 !important;}
+/*------ hlink ------*/
+.hlink{
+    color: #e3eef5;
+    font-size: 14px;
+    padding: 0 10px;
+    margin-top: 10px;
+    float: left;
+    border-right: 1px solid #327da8;
+}
+#top_link a.hlink:last-child{border-right: none}
+.hlink:hover{
+    color: #fff;
+}
 /*-------lang-------*/
 #lang{position: absolute;top: -111px;right:0;z-index: 13;}
 #lang .lang-list{background-color: #fff;border: 2px solid #9889c1;padding: 5px 0 0 5px;max-width: 500px;float: left;display: none;}
@@ -112,7 +125,7 @@ height: 16px;line-height: normal;vertical-align: baseline;background-image: none
 .bootbox-body #icon-all li{display: inline-block;list-style: none;cursor: pointer;width: 25px;height: 25px;line-height: 25px;text-align: center;}
 .bootbox-body #icon-all li:hover{color: #FFF;background-color: blue;}
 /*  loading  */
-#loading{height: 100%;z-index: 5}
+#loading{height: 100%;z-index: 90}
 #loadimg{width: 301px;height: 300px;z-index: 99;position: fixed;top: 45%;left: 50%;margin-left: -150px;margin-top: -150px;opacity: 0.5}
 /*-- rule tooltip --*/
 #ruleform .rti .tooltip .tooltip-inner{width: 150px;}
@@ -132,4 +145,4 @@ height: 16px;line-height: normal;vertical-align: baseline;background-image: none
 .latota label:nth-child(8),.latota label:nth-child(9),.latota label:nth-child(10){border-bottom: 1px solid #ccc}
 .latota + .btn-group{margin-top: 5px;}
 /*-- tip --*/
-.tip{float: left;padding-left: 3px;padding-top: 3px;color: #888;}
+.tip{padding-left: 3px;padding-top: 3px;color: #888;}

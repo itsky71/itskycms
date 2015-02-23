@@ -24,15 +24,16 @@ class Sky extends TagLib{
     );
     /**
      * 模板调用数据库的数据
-     * @param string $tag
-     * @param string $content
+     * 格式：<sky:db table="" where=""></sky:db>
+     * @param array $tag 标签属性
+     * @param string $content 标签内容
      * @return string
      */
     public function _db($tag,$content){
         $table  =   !empty($tag['table'])?$tag['table']:'';
         $order  =   !empty($tag['order'])?$tag['order']:'';
         $limit  =   !empty($tag['limit'])?intval($tag['limit']):'';
-        $item     =   !empty($tag['item'])?$tag['item']:'';
+        $item   =   !empty($tag['item'])?$tag['item']:'v';
         $where  =   !empty($tag['where'])?$tag['where']:' 1 ';
         $key    =   !empty($tag['key'])?$tag['key']:'i';
         $mod    =   !empty($tag['mod'])?$tag['mod']:'2';
@@ -59,14 +60,18 @@ class Sky extends TagLib{
                 $parsestr .= '$ret=$m->query("'.$sql.'");';
             }
         }else{
+            $fieldstr = $field ? '->field("'.$field.'")' : '';
+            $wherestr = $where ? '->where("'.$where.'")' : '';
+            $orderstr = $order ? '->order("'.$order.'")' : '';
+            $limitstr = $limit ? '->limit("'.$limit.'")' : '';
             if($page){
                 $limit = $limit ? $limit : 10;//如果有page，没有输入limit则默认为10
                 $parsestr .= '$count=$m->where("'.$where.'")->count();';
                 $parsestr .= '$p = new \Think\Page( $count, '.$limit.' );';
-                $parsestr .= '$ret=$m->field("'.$field.'")->where("'.$where.'")->limit($p->firstRow.",".$p->listRows)->order("'.$order.'")->select();';
+                $parsestr .= '$ret=$m'.$fieldstr.$wherestr.$orderstr.'->limit($p->firstRow.",".$p->listRows)->select();';
                 $parsestr .= '$pages=$p->show();';
             }else{
-                $parsestr .= '$ret=$m->field("'.$field.'")->where("'.$where.'")->order("'.$order.'")->limit("'.$limit.'")->select();';
+                $parsestr .= '$ret=$m'.$fieldstr.$wherestr.$orderstr.$limitstr.'->select();';
             }
         }
         if($debug != FALSE){
@@ -82,7 +87,7 @@ class Sky extends TagLib{
 
     /**
      * assign标签解析
-     * 在模板中给某个变量赋值 支持变量赋值
+     * 在模板中给某个变量赋值 支持变量赋值 添加支持函数
      * 格式： <assign name="" value="" />
      * @access public
      * @param array $tag 标签属性

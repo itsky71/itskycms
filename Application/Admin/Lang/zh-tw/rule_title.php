@@ -45,4 +45,6 @@ $rule_title = array(
     'R_URLRULE_INDEX' => 'URL規則',
     'R_SITESET_DEL' => '删除',
     'R_URLRULE_ADD' => '添加',
+    'R_URLRULE_EDIT' => '編輯',
+    'R_URLRULE_DEL' => '刪除',
 );

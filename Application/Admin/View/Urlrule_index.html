@@ -3,16 +3,34 @@
         <span class="glyphicon glyphicon-plus"></span>{:L('ADD')}
     </a>
     <div class="table-responsive">
-        <table class="table table-hover">
+        <table class="table table-striped table-hover">
             <thead>
                 <tr>
                     <th class="center w60">{:L('NUMBER')}</th>
                     <th class="center w120">{:L('IS_HTML')}</th>
                     <th>{:L('SHOW_EXAMPLE')}</th>
                     <th>{:L('SHOW_URL_RULE')}</th>
-                    <th class="center w120">{:L('MANOPE')}</th>
+                    <th class="center w180">{:L('MANOPE')}</th>
                 </tr>
             </thead>
+            <tbody>
+            <foreach name="list" item="vo">
+                <tr>
+                    <td class="center">{$vo.id}</td>
+                    <td class="center">{$vo['ishtml']?L('YES'):L('NO')}</td>
+                    <td>{$vo.showexample}<br/>{$vo.listexample}</td>
+                    <td>{$vo.showurlrule}<br/>{$vo.listurlrule}</td>
+                    <td class="center">
+                        <a class="btn btn-success btn-minier" onclick="load(event,this)" href="{:U('Urlrule/edit',$vl.'&id='.$vo['id'])}">
+                            <span class="glyphicon glyphicon-edit"></span> {:L('EDIT')}
+                        </a>
+                        <a class="btn btn-danger btn-minier" onclick="del(event,this,'c')" href="{:U('Urlrule/del',$vl.'&id='.$vo['id'])}">
+                            <span class="glyphicon glyphicon-trash"></span> {:L('DELETE')}
+                        </a>
+                    </td>
+                </tr>
+            </foreach>
+            </tbody>
         </table>
     </div>
 </div>

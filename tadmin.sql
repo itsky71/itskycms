@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2015-02-15 07:58:53
+-- Generation Time: 2015-02-23 09:29:31
 -- 服务器版本： 5.6.20
 -- PHP Version: 5.5.15
 
@@ -39,8 +39,8 @@ CREATE TABLE IF NOT EXISTS `ta_auth_group` (
 --
 
 INSERT INTO `ta_auth_group` (`id`, `title`, `remark`, `status`, `rules`) VALUES
-(1, 'A_G_T_1', 'A_G_R_1', 1, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39'),
-(2, 'A_G_T_2', 'A_G_R_2', 1, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40'),
+(1, 'A_G_T_1', 'A_G_R_1', 1, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44'),
+(2, 'A_G_T_2', 'A_G_R_2', 1, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44'),
 (3, 'A_G_T_3', 'A_G_R_3', 0, '');
 
 -- --------------------------------------------------------
@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `ta_auth_rule` (
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '状态：为1正常，为0禁用',
   `listorder` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
   `condition` char(100) NOT NULL DEFAULT '' COMMENT '规则表达式，为空表示存在就验证，不为空表示按照条件验证'
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='规则表' AUTO_INCREMENT=41 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='规则表' AUTO_INCREMENT=45 ;
 
 --
 -- 转存表中的数据 `ta_auth_rule`
@@ -124,7 +124,11 @@ INSERT INTO `ta_auth_rule` (`id`, `tid`, `name`, `title`, `type`, `status`, `lis
 (37, 2, 'Lang/del', 'R_LANG_DEL', 1, 1, 0, ''),
 (38, 2, 'Lang/order', 'R_LANG_ORDER', 1, 1, 0, ''),
 (39, 2, 'Lang/set', 'R_LANG_SET', 1, 1, 0, ''),
-(40, 2, 'Siteset/del', 'R_SITESET_DEL', 1, 1, 0, '');
+(40, 2, 'Siteset/del', 'R_SITESET_DEL', 1, 1, 0, ''),
+(41, 2, 'Urlrule/index', 'R_URLRULE_INDEX', 1, 1, 0, ''),
+(42, 2, 'Urlrule/add', 'R_URLRULE_ADD', 1, 1, 0, ''),
+(43, 2, 'Urlrule/edit', 'R_URLRULE_EDIT', 1, 1, 0, ''),
+(44, 2, 'Urlrule/del', 'R_URLRULE_DEL', 1, 1, 0, '');
 
 -- --------------------------------------------------------
 
@@ -178,7 +182,7 @@ CREATE TABLE IF NOT EXISTS `ta_member` (
 
 INSERT INTO `ta_member` (`id`, `password`, `username`, `realname`, `email`, `question`, `answer`, `status`, `regtime`, `login_ip`, `last_login_time`, `login_count`) VALUES
 (1, '30bc103d85df152c8c703bcbbcc7fd4d', 'admin', '你买单我就来', 'itsky71@foxmail.com', '我还会回来的...', '灰太狼？呵呵。。。', 1, 1419068912, '127.0.0.1', 1421732415, 30),
-(2, '30bc103d85df152c8c703bcbbcc7fd4d', 'itsky', '你地盘我做主', 'zmh0515005@163.com', '你是谁?', '呵呵...', 1, 1419587881, '127.0.0.1', 1423978500, 132),
+(2, '30bc103d85df152c8c703bcbbcc7fd4d', 'itsky', '你地盘我做主', 'zmh0515005@163.com', '你是谁?', '呵呵...', 1, 1419587881, '127.0.0.1', 1424654930, 144),
 (5, '30bc103d85df152c8c703bcbbcc7fd4d', 'zhongchonghua', '111111', 'fireloong@foxmail.com', '', '', 1, 1423140277, '', 0, 0);
 
 -- --------------------------------------------------------
@@ -286,7 +290,7 @@ INSERT INTO `ta_siteset` (`id`, `varname`, `info`, `groupid`, `type`, `lang`, `v
 (3, 'indexurl', '网页主页链接', 1, 'string', 'zh-cn', '/', 1),
 (9, 'page_rows', '列表分页数', 2, 'number', 'zh-cn', '15', 1),
 (10, 'url_model', 'URL访问模式', 2, 'select', 'zh-cn', '普通模式|0|default\r\nPATHINFO 模式|1\r\nREWRITE  模式|2\r\n兼容模式|3', 1),
-(11, 'url_rule', 'URL规则', 2, 'select', 'zh-cn', '内容页:show-1-1.html或show-1-1-1.html, 列表页:list-1.html或list-1-1.html|0\r\n内容页:Article/show/1.html或Article/show/1-1.html, 列表页:Article/list/1.html或Article/list/1-1.html|1|default', 1),
+(11, 'url_rule', 'URL规则', 2, 'select', 'zh-cn', '1', 1),
 (12, 'url_html_suffix', 'URL伪静态后缀', 2, 'string', 'zh-cn', 'html', 1),
 (13, 'tmpl_cache_on', '模板编译缓存', 2, 'bool', 'zh-cn', '1', 1),
 (14, 'tmpl_cache_time', '模板缓存有效期', 2, 'number', 'zh-cn', '0', 1),
@@ -327,6 +331,31 @@ INSERT INTO `ta_siteset` (`id`, `varname`, `info`, `groupid`, `type`, `lang`, `v
 (49, 'isuserbuy', '游客购物', 5, 'bool', 'zh-cn', '0', 1),
 (50, 'use_address', '订单收货人地址必填', 5, 'bool', 'zh-cn', '1', 1),
 (51, 'credit_exchange', '积分兑换', 5, 'number', 'zh-cn', '10', 1);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `ta_urlrule`
+--
+
+CREATE TABLE IF NOT EXISTS `ta_urlrule` (
+`id` smallint(5) unsigned NOT NULL COMMENT '主键',
+  `ishtml` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否生成静态',
+  `showurlrule` varchar(255) NOT NULL DEFAULT '' COMMENT '內容頁URL規則',
+  `showexample` varchar(255) NOT NULL DEFAULT '' COMMENT '內容頁URL示例',
+  `listurlrule` varchar(255) NOT NULL DEFAULT '' COMMENT '列表頁URL規則',
+  `listexample` varchar(255) NOT NULL DEFAULT '' COMMENT '列表頁URL示例',
+  `listorder` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '排序'
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='URL规则' AUTO_INCREMENT=5 ;
+
+--
+-- 转存表中的数据 `ta_urlrule`
+--
+
+INSERT INTO `ta_urlrule` (`id`, `ishtml`, `showurlrule`, `showexample`, `listurlrule`, `listexample`, `listorder`) VALUES
+(1, 1, '{$catdir}/show/{$id}.html|{$catdir}/show/{$id}_{$p}.html', 'news/show/1.html|news/show/1_1.html', '{$catdir}/|{$catdir}/{$p}.html', 'news/|news/1.html', 0),
+(2, 0, 'show-{$catid}-{$id}.html|show-{$catid}-{$id}-{$p}.html', 'show-1-1.html|show-1-1-1.html', 'list-{$catid}.html|list-{$catid}-{$p}.html', 'list-1.html|list-1-1.html', 0),
+(3, 0, '{$module}/show/{$id}.html|{$module}/show/{$id}-{$p}.html', 'Article/show/1.html|Article/show/1-1.html', '{$module}/list/{$catid}.html|{$module}/list/{$catid}-{$p}.html', 'Article/list/1.html|Article/list/1-1.html', 0);
 
 --
 -- Indexes for dumped tables
@@ -375,6 +404,12 @@ ALTER TABLE `ta_siteset`
  ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `ta_urlrule`
+--
+ALTER TABLE `ta_urlrule`
+ ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -387,7 +422,7 @@ MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户组id',
 -- AUTO_INCREMENT for table `ta_auth_rule`
 --
 ALTER TABLE `ta_auth_rule`
-MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=41;
+MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=45;
 --
 -- AUTO_INCREMENT for table `ta_lang`
 --
@@ -408,6 +443,11 @@ MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=49;
 --
 ALTER TABLE `ta_siteset`
 MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=52;
+--
+-- AUTO_INCREMENT for table `ta_urlrule`
+--
+ALTER TABLE `ta_urlrule`
+MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=5;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

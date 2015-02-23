@@ -13,8 +13,17 @@
                 <tr>
                     <td class="center">{$vo.info}:</td>
                     <td>
-                        <div class="editable-val hide" data-num="{$k}">{$vo.value|formrows=$vo['type'],1|htmlspecialchars_decode}</div>
-                        <span class="editable-click text-info" data-num="{$k}">{$vo.value|formrows=$vo['type'],2|acq='NULL'}</span>
+                        <div class="editable-val hide" data-num="{$k}">
+                            <if condition="$vo.varname eq 'url_rule'">{$vo.value}<else/>{$vo.value|formrows=$vo['type'],1|htmlspecialchars_decode}</if>
+                        </div>
+                        <span class="editable-click text-info" data-num="{$k}">
+                            <if condition="$vo.varname eq 'url_rule'">
+                            <assign name="wid" value="$vo.value"/>
+                            <sky:db table="urlrule" where="id=$wid">{:L('SHOW_PAGE')}{$v.showexample} , {:L('LIST_PAGE')}{$v.listexample}</sky:db>
+                            <else/>
+                            {$vo.value|formrows=$vo['type'],2|acq='NULL'}
+                            </if>
+                        </span>
                         <span class="editable-inline hide" data-num="{$k}">
                             <switch name="vo.type">
                             <case value="string"><input class="col-xs-10 editable-input" type="text" name="{$vo.varname}" value="{$vo.value}"/></case>
@@ -28,6 +37,24 @@
                             </case>
                             <case value="select">
                                 <div class="col-sm-9 no-padding">
+                                    <if condition="$vo.varname eq 'url_rule'">
+                                    <div class="input-group col-xs-12 select-click">
+                                        <input class="editable-input hide" type="text" name="{$vo.varname}" value="{$vo.value}"/>
+                                        <div class="form-control select-input cude pt5 h30 overflow-hidden"></div>
+                                        <span class="input-group-addon cude">
+                                            <i class="glyphicon glyphicon-menu-down"></i>
+                                        </span>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="select-choices">
+                                            <ul class="list-unstyled select-option" data-name="{$vo.varname}">
+                                                <sky:db table="urlrule" item="vv">
+                                                <li data-val="{$vv.id}">{:L('SHOW_PAGE')}{$vv.showexample} , {:L('LIST_PAGE')}{$vv.listexample}</li>
+                                                </sky:db>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <else/>
                                     <div class="input-group col-xs-12 select-click">
                                         <input class="editable-input hide" type="text" name="{$vo.varname}" value="{$vo.value|formrows=$vo['type'],1}"/>
                                         <div class="form-control select-input cude pt5 h30 overflow-hidden"></div>
@@ -45,6 +72,7 @@
                                             </ul>
                                         </div>
                                     </div>
+                                    </if>
                                 </div>
                             </case>
                             <case value="radio">
@@ -147,11 +175,11 @@
             var inputs = $('.editable-input').eq(num);
             $('form[role="form"]')[0].reset();
             if(inputs.parent('div').has('select-click')){
-                inputs.attr('value',$('.editable-val[data-num="'+num+'"]').html());
+                inputs.attr('value',$.trim($('.editable-val[data-num="'+num+'"]').html()));
                 var text = $('.select-option[data-name="'+inputs.attr('name')+'"] li[data-val="'+inputs.val()+'"]').text();
                 inputs.nextAll('.select-input').text(text);
             }else{
-                $('.editable-input').eq(num).val($('.editable-val[data-num="'+num+'"]').html());
+                $('.editable-input').eq(num).val($.trim($('.editable-val[data-num="'+num+'"]').html()));
             }
         }
     }

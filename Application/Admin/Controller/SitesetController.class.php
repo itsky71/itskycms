@@ -57,7 +57,7 @@ class SitesetController extends AdminController{
                 }
             }else{
                 $typearr = array('select','radio','checkbox');
-                if(in_array($post['type'], $typearr)){
+                if(in_array($post['type'], $typearr) && $post['varname'] != 'url_rule'){
                     $find = $Siteset->where('varname=\''.$post['varname'].'\'')->find();
                     $rows = explode(PHP_EOL, $find['value']);
                     foreach ($rows as $value){

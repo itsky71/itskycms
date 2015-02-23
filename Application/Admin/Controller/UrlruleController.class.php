@@ -17,6 +17,9 @@ namespace Admin\Controller;
 class UrlruleController extends AdminController{
     public function index(){
         if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        $Urlrule = D('Urlrule');
+        $list = $Urlrule->order('listorder,id desc')->select();
+        $this->assign('list', $list);
         $this->display();
     }
 
@@ -35,6 +38,22 @@ class UrlruleController extends AdminController{
             }
         }else{
             $this->display('edit');
+        }
+    }
+    
+    public function edit() {
+        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        $Urlrule = D('Urlrule');
+        if(IS_POST){
+            if($Urlrule->create()){
+                print_r(I('post.'));
+            }else{
+                $this->error($Urlrule->getError());
+            }
+        }else{
+            $v = $Urlrule->where('id='.I('get.id'))->find();
+            $this->assign('v', $v);
+            $this->display();
         }
     }
 }

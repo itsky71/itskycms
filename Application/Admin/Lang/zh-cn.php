@@ -37,6 +37,9 @@ $common = array(
     'SAVE_ERROR'        =>  '保存失败！',
     'SAVE_OK'           =>  '保存成功！',
     'ON'                =>  '开启',
-    'OFF'               =>  '关闭'
+    'OFF'               =>  '关闭',
+    'YES'               =>  '是',
+    'NO'                =>  '否',
+    'FONT_INDEX'        =>  '前台主页'
 );
 return array_merge($common, $menu_common);

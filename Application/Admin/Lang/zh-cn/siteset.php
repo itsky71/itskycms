@@ -26,6 +26,9 @@ $siteset = array(
     'ADD_ERROR'     =>  '系统变量添加失败！',
     'ADD_SUCCESS'   =>  '系统变量添加成功！',
     'SENDING'       =>  '发送中...',
-    'SEND_OK'       =>  '发送成功！'
+    'SEND_OK'       =>  '发送成功！',
+    'TEST_MAIL_TITLE'   => 'ITskyCMS - 测试邮件',
+    'SHOW_PAGE'     =>  '内容页：',
+    'LIST_PAGE'     =>  '列表页：'
 );
 return array_merge($siteset, $siteset_info);
