@@ -40,6 +40,8 @@ $common = array(
     'OFF'               =>  '關閉',
     'YES'               =>  '是',
     'NO'                =>  '否',
-    'FONT_INDEX'        =>  '前台主頁'
+    'FONT_INDEX'        =>  '前台主頁',
+    'ADD_ERROR'         =>  '數據添加失敗！',
+    'ADD_OK'            =>  '數據添加成功！'
 );
 return array_merge($common, $menu_common);

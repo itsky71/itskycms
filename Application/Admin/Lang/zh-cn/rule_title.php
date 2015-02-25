@@ -45,4 +45,9 @@ $rule_title = array(
     'R_SITESET_DEL' => '删除',
     'R_SITESET_ADD' => '添加',
     'R_URLRULE_INDEX' => 'URL规则',
+    'R_POSID_INDEX' => '推荐位管理',
+    'R_URLRULE_ADD' => '添加',
+    'R_URLRULE_EDIT' => '编辑',
+    'R_URLRULE_DEL' => '删除',
+    'R_POSID_ADD' => '添加',
 );

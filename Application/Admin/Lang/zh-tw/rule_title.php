@@ -47,4 +47,8 @@ $rule_title = array(
     'R_URLRULE_ADD' => '添加',
     'R_URLRULE_EDIT' => '編輯',
     'R_URLRULE_DEL' => '刪除',
+    'R_POSID_INDEX' => '推薦位管理',
+    'R_POSID_ADD' => '添加',
+    'R_POSID_EDIT' => '編輯',
+    'R_POSID_DEL' => '刪除',
 );

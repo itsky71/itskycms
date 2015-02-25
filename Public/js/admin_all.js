@@ -145,20 +145,27 @@ function delcheck(e,t){
         vid[i] = $(this).val();
     });
     if(vid == ''){
-        show_msg($.parseJSON('{"info":ITskyLang.DEL_CHECK_MSG,"status":"0"}'));
+        show_msg($.parseJSON('{"info":"'+ITskyLang.DEL_CHECK_MSG+'","status":"0"}'));
         return false;
     }else{
-        $.ajax({
-            type:'post',
-            url:$(t).attr('href'),
-            data:'ids='+vid.join(','),
-            success:function(data){
-                if($.isPlainObject(data)){
-                    show_msg(data);
-                }else{
-                    $('#new_content').html(data);
-                }
+        bootbox.confirm('<span class="glyphicon glyphicon-question-sign yellow bigger-120"></span>'+ITskyLang.DEL_CHECK_MSG_CONFIRM,function(result){
+            if(result){
+                $.ajax({
+                    type:'post',
+                    url:$(t).attr('href'),
+                    global:true,
+                    data:'ids='+vid.join(','),
+                    success:function(data){
+                        if($.isPlainObject(data)){
+                            show_msg(data);
+                        }else{
+                            $('#new_content').html(data);
+                        }
+                    }
+                });
             }
         });
+        $('.bootbox .modal-footer .btn').addClass('btn-sm');
+        $('.bootbox .modal-dialog').addClass('modal-sm');
     }
 }

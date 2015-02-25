@@ -11,6 +11,7 @@
 namespace Admin\Controller;
 use Think\Controller;
 use Think\Auth;
+use Think\Model;
 /**
  * Description of AdminController
  * 后台公用控制器类
@@ -69,6 +70,22 @@ class AdminController extends Controller{
      */
     public function index(){
         if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        $Model = new Model();
+        $islang = $Model->query('Describe __'.strtoupper(CONTROLLER_NAME).'__ lang');
+        if($islang[0]['field'] == 'lang'){
+            if(I('get.lang')){
+                $wl = 'lang=\''.I('get.lang').'\'';
+            }elseif($this->clang){
+                $wl = 'lang=\''.$this->clang.'\'';
+            }else{
+                $wl = 'lang=\''.LANG_SET.'\'';
+            }
+        }else{
+            $wl = '1';
+        }
+        $name = M(CONTROLLER_NAME);
+        $list = $name->where($wl)->order('listorder,id')->select();
+        $this->assign('list', $list);
         $this->display();
     }
 
@@ -80,7 +97,11 @@ class AdminController extends Controller{
         if(IS_POST){
             $name = M(CONTROLLER_NAME);
             if($name->create()){
-                
+                if($name->add(I('post.'))){
+                    $this->success(L('ADD_OK'),U(CONTROLLER_NAME.'/index',  $this->vl));
+                }else{
+                    $this->error(L('ADD_ERROR'));
+                }
             }else{
                 $this->error($name->getError());
             }
