@@ -54,7 +54,8 @@ class AdminController extends Controller{
                     $btncolor = $value['value'] == LANG_SET ? 'btn-primary' : 'btn-light';
                 }
             }
-            $langs .= '<a class="btn btn-xs '.$btncolor.' mr5 mb5" href="'.urlh($vl.'&lang='.$value['value']).'" onclick="load(event,this)">'.$value['name'].'</a>';
+            $langs .= '<a class="btn btn-xs '.$btncolor.' mr5 mb5" href="'.urlh($vl.'&lang='.$value['value']).'" ';
+            $langs .= 'onclick="load(event,this)">'.$value['name'].'</a>';
         }
         $langs .= '</div></div>';
         $this->assign('langs', S('langs')?$langs:'');

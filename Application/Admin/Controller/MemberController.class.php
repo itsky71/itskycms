@@ -20,9 +20,11 @@ class MemberController extends AdminController{
         $Member = D('Member');
         $Group = D('AuthGroup');
         if(I('get.groupid')){
-            $data = $Member->join('__AUTH_GROUP_ACCESS__ ON __MEMBER__.id = __AUTH_GROUP_ACCESS__.uid')->where('group_id='.I('get.groupid'))->order('id desc')->select();
+            $data = $Member->join('__AUTH_GROUP_ACCESS__ ON __MEMBER__.id = __AUTH_GROUP_ACCESS__.uid')
+                    ->where('group_id='.I('get.groupid'))->order('id desc')->select();
         }else{
-            $data = $Member->join('__AUTH_GROUP_ACCESS__ ON __MEMBER__.id = __AUTH_GROUP_ACCESS__.uid')->order('id desc')->select();
+            $data = $Member->join('__AUTH_GROUP_ACCESS__ ON __MEMBER__.id = __AUTH_GROUP_ACCESS__.uid')
+                    ->order('id desc')->select();
         }
         foreach ($data as $item){
             if($item['username'] == C('ADMIN_AUTH_KEY') || $item['id'] == session(C('USER_AUTH_KEY'))){
@@ -31,8 +33,10 @@ class MemberController extends AdminController{
                 $disabled = '';
             }
             $staop = $this->vl.'&status='.$item['status'].'&id='.$item['id'];
-            $allow = '<a class="btn btn-success btn-minier" href="'.U('Member/status',$staop).'" onclick="load(event,this)"'.$disabled.'><span class="glyphicon glyphicon-ok"></span></a>';
-            $ban = '<a class="btn btn-danger btn-minier" href="'.U('Member/status',$staop).'" onclick="load(event,this)"'.$disabled.'><span class="glyphicon glyphicon-ban-circle"></span></a>';
+            $allow = '<a class="btn btn-success btn-minier" href="'.U('Member/status',$staop).'" ';
+            $allow .= 'onclick="load(event,this)"'.$disabled.'><span class="glyphicon glyphicon-ok"></span></a>';
+            $ban = '<a class="btn btn-danger btn-minier" href="'.U('Member/status',$staop).'" ';
+            $ban .= 'onclick="load(event,this)"'.$disabled.'><span class="glyphicon glyphicon-ban-circle"></span></a>';
             $item['status'] = $item['status'] ? $allow.'<i class="hide">1</i>' : $ban.'<i class="hide">0</i>';
             $title = $Group->getFieldById($item['group_id'],'title');
             $item['group'] = L($title);
@@ -105,7 +109,8 @@ class MemberController extends AdminController{
             $v = $Member->where('id='.I('get.id'))->find();
             $Group = D('AuthGroup');
             $glist = $Group->where('status=1')->select();
-            $vdata = $Member->where('id='.I('get.id'))->join('__AUTH_GROUP_ACCESS__ ON __MEMBER__.id = __AUTH_GROUP_ACCESS__.uid')->find();
+            $vdata = $Member->where('id='.I('get.id'))
+                    ->join('__AUTH_GROUP_ACCESS__ ON __MEMBER__.id = __AUTH_GROUP_ACCESS__.uid')->find();
             $this->assign('glist', $glist);
             $this->assign('gid', $vdata['group_id']);
             $this->assign('v', $v);

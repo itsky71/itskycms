@@ -29,6 +29,9 @@
     $('.page-header h1').empty();
     $('.page-header h1').append('{:L('M_'.$Think.CONTROLLER_NAME.'_INDEX')}<small class="glyphicon glyphicon-menu-right"> {:L($Think.ACTION_NAME)}</small>');
     $('form[role="form"]').validator({
+        fields:{
+            name:'required;length[2~20];zhendig'
+        },
         valid:function(form){
             $.ajax({
                 type: 'POST',

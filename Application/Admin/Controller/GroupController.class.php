@@ -21,8 +21,10 @@ class GroupController extends AdminController{
         $groups = $Group->select();
         foreach ($groups as $value){
             $staop = $this->vl.'&status='.$value['status'].'&id='.$value['id'];
-            $allow = '<a class="btn btn-success btn-minier" href="'.U('Group/status',$staop).'" onclick="load(event,this)"><span class="glyphicon glyphicon-ok"></span></a>';
-            $ban = '<a class="btn btn-danger btn-minier" href="'.U('Group/status',$staop).'" onclick="load(event,this)"><span class="glyphicon glyphicon-ban-circle"></span></a>';
+            $allow = '<a class="btn btn-success btn-minier" href="'.U('Group/status',$staop).'" ';
+            $allow .= 'onclick="load(event,this)"><span class="glyphicon glyphicon-ok"></span></a>';
+            $ban = '<a class="btn btn-danger btn-minier" href="'.U('Group/status',$staop).'" ';
+            $ban .= 'onclick="load(event,this)"><span class="glyphicon glyphicon-ban-circle"></span></a>';
             $value['status'] = $value['status'] ? $allow : $ban;
             $list[] = $value;
         }

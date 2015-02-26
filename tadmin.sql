@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2015-02-23 09:29:31
+-- Generation Time: 2015-02-25 11:01:03
 -- 服务器版本： 5.6.20
 -- PHP Version: 5.5.15
 
@@ -39,8 +39,8 @@ CREATE TABLE IF NOT EXISTS `ta_auth_group` (
 --
 
 INSERT INTO `ta_auth_group` (`id`, `title`, `remark`, `status`, `rules`) VALUES
-(1, 'A_G_T_1', 'A_G_R_1', 1, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44'),
-(2, 'A_G_T_2', 'A_G_R_2', 1, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44'),
+(1, 'A_G_T_1', 'A_G_R_1', 1, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48'),
+(2, 'A_G_T_2', 'A_G_R_2', 1, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48'),
 (3, 'A_G_T_3', 'A_G_R_3', 0, '');
 
 -- --------------------------------------------------------
@@ -60,8 +60,7 @@ CREATE TABLE IF NOT EXISTS `ta_auth_group_access` (
 
 INSERT INTO `ta_auth_group_access` (`uid`, `group_id`) VALUES
 (1, 1),
-(2, 2),
-(5, 2);
+(2, 2);
 
 -- --------------------------------------------------------
 
@@ -78,7 +77,7 @@ CREATE TABLE IF NOT EXISTS `ta_auth_rule` (
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '状态：为1正常，为0禁用',
   `listorder` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
   `condition` char(100) NOT NULL DEFAULT '' COMMENT '规则表达式，为空表示存在就验证，不为空表示按照条件验证'
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='规则表' AUTO_INCREMENT=45 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='规则表' AUTO_INCREMENT=49 ;
 
 --
 -- 转存表中的数据 `ta_auth_rule`
@@ -128,7 +127,11 @@ INSERT INTO `ta_auth_rule` (`id`, `tid`, `name`, `title`, `type`, `status`, `lis
 (41, 2, 'Urlrule/index', 'R_URLRULE_INDEX', 1, 1, 0, ''),
 (42, 2, 'Urlrule/add', 'R_URLRULE_ADD', 1, 1, 0, ''),
 (43, 2, 'Urlrule/edit', 'R_URLRULE_EDIT', 1, 1, 0, ''),
-(44, 2, 'Urlrule/del', 'R_URLRULE_DEL', 1, 1, 0, '');
+(44, 2, 'Urlrule/del', 'R_URLRULE_DEL', 1, 1, 0, ''),
+(45, 2, 'Posid/index', 'R_POSID_INDEX', 1, 1, 0, ''),
+(46, 2, 'Posid/add', 'R_POSID_ADD', 1, 1, 0, ''),
+(47, 2, 'Posid/edit', 'R_POSID_EDIT', 1, 1, 0, ''),
+(48, 2, 'Posid/del', 'R_POSID_DEL', 1, 1, 0, '');
 
 -- --------------------------------------------------------
 
@@ -182,8 +185,7 @@ CREATE TABLE IF NOT EXISTS `ta_member` (
 
 INSERT INTO `ta_member` (`id`, `password`, `username`, `realname`, `email`, `question`, `answer`, `status`, `regtime`, `login_ip`, `last_login_time`, `login_count`) VALUES
 (1, '30bc103d85df152c8c703bcbbcc7fd4d', 'admin', '你买单我就来', 'itsky71@foxmail.com', '我还会回来的...', '灰太狼？呵呵。。。', 1, 1419068912, '127.0.0.1', 1421732415, 30),
-(2, '30bc103d85df152c8c703bcbbcc7fd4d', 'itsky', '你地盘我做主', 'zmh0515005@163.com', '你是谁?', '呵呵...', 1, 1419587881, '127.0.0.1', 1424654930, 144),
-(5, '30bc103d85df152c8c703bcbbcc7fd4d', 'zhongchonghua', '111111', 'fireloong@foxmail.com', '', '', 1, 1423140277, '', 0, 0);
+(2, '30bc103d85df152c8c703bcbbcc7fd4d', 'itsky', '你地盘我做主', 'zmh0515005@163.com', '你是谁?', '呵呵...', 1, 1419587881, '127.0.0.1', 1424848420, 147);
 
 -- --------------------------------------------------------
 
@@ -257,6 +259,29 @@ INSERT INTO `ta_menu` (`id`, `pid`, `icon`, `name`, `model`, `action`, `data`, `
 (45, 38, '', 'M_UPDATE_LANG', 'Update', 'lang', '', '', 0, 1, 99),
 (46, 38, '', 'M_UPDATE_COLHTML', 'Update', 'colhtml', '', '', 0, 1, 99),
 (47, 38, '', 'M_UPDATE_CONHTML', 'Update', 'conhtml', '', '', 0, 1, 99);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `ta_posid`
+--
+
+CREATE TABLE IF NOT EXISTS `ta_posid` (
+`id` tinyint(2) unsigned NOT NULL COMMENT '主键',
+  `name` varchar(40) NOT NULL DEFAULT '' COMMENT '名称',
+  `listorder` tinyint(2) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
+  `lang` varchar(10) NOT NULL COMMENT '语言'
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='推荐位' AUTO_INCREMENT=7 ;
+
+--
+-- 转存表中的数据 `ta_posid`
+--
+
+INSERT INTO `ta_posid` (`id`, `name`, `listorder`, `lang`) VALUES
+(1, '首页推荐', 0, 'zh-cn'),
+(2, '首页幻灯片', 0, 'zh-cn'),
+(3, '推荐产品', 0, 'zh-cn'),
+(4, '促销产品', 0, 'zh-cn');
 
 -- --------------------------------------------------------
 
@@ -398,6 +423,12 @@ ALTER TABLE `ta_menu`
  ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `ta_posid`
+--
+ALTER TABLE `ta_posid`
+ ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `ta_siteset`
 --
 ALTER TABLE `ta_siteset`
@@ -422,7 +453,7 @@ MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户组id',
 -- AUTO_INCREMENT for table `ta_auth_rule`
 --
 ALTER TABLE `ta_auth_rule`
-MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=45;
+MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=49;
 --
 -- AUTO_INCREMENT for table `ta_lang`
 --
@@ -438,6 +469,11 @@ MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户ID',AUTO_INC
 --
 ALTER TABLE `ta_menu`
 MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=49;
+--
+-- AUTO_INCREMENT for table `ta_posid`
+--
+ALTER TABLE `ta_posid`
+MODIFY `id` tinyint(2) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `ta_siteset`
 --

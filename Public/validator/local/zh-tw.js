@@ -40,6 +40,7 @@
             ,username: [/^\w{3,20}$/, "請輸入3-20位數字、字母、下劃線"]
             ,password: [/^[0-9a-zA-Z]{6,16}$/, "密碼由6-16位數字、字母組成"]
             ,verify: [/^[0-9a-zA-Z]{4}$/, "驗證碼由4位數字、字母組成"]
+            ,zhendig:[/^[\u0391-\uFFE5a-zA-Z\d]+$/, "請輸入中文、英文字母、數字"]
             ,accept: function (element, params){
                 if (!params) return true;
                 var ext = params[0];

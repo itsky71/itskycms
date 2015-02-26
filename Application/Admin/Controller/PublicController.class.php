@@ -47,8 +47,10 @@ class PublicController extends Controller {
                     if(I('post.keep')=='on'){
                         $crypt = new \Think\Crypt();
                         $userinfo = array(
-                            'username' => $crypt->encrypt($resuser['username'], sys_md5(C('DATA_AUTH_KEY'), 'isky71'), 3600*24*15),
-                            'password' => $crypt->encrypt($resuser['password'], sys_md5(C('DATA_AUTH_KEY'), 'CMS'), 3600*24*15)
+                            'username' => $crypt->encrypt($resuser['username'],
+                                    sys_md5(C('DATA_AUTH_KEY'), 'isky71'), 3600*24*15),
+                            'password' => $crypt->encrypt($resuser['password'],
+                                    sys_md5(C('DATA_AUTH_KEY'), 'CMS'), 3600*24*15)
                         );
                         $str = $crypt->encrypt(json_encode($userinfo), C('DATA_AUTH_KEY').$__SERVER["HTTP_USER_AGENT"]);
                         cookie('member', $str,3600*24*15);

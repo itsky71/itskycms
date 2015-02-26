@@ -6,7 +6,7 @@ return array(
     //'TMPL_STRIP_SPACE' => TRUE, // 是否去除模板文件里面的html空格与换行
     //auth权限管理配置
     'AUTH_CONFIG'=> array(
-        'AUTH_ON'           => true,                      // 认证开关
+        'AUTH_ON'           => TRUE,                      // 认证开关
         'AUTH_TYPE'         => 1,                         // 认证方式，1为实时认证；2为登录认证。
         'AUTH_GROUP'        => 'auth_group',        // 用户组数据表名
         'AUTH_GROUP_ACCESS' => 'auth_group_access', // 用户-用户组关系表

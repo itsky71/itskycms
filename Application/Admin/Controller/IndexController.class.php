@@ -27,17 +27,20 @@ class IndexController extends AdminController {
             $item['tar'] = $item['id'] == 1 ? 'noa' : 'tarmain';
             $newarr[] = $item;
         }
+        $atag = "<a class='dropdown-toggle' href='javascript:;'>";
+        $icon = "<span class='glyphicon glyphicon-menu-right'></span>";
+        $icon2 = "<b class='arrow glyphicon glyphicon-menu-down'></b>";
         $li = array(
             array(
-                'folder' => "<a class='dropdown-toggle' href='javascript:;'>\$icon<span class='menu-text'>\$name</span><b class='arrow glyphicon glyphicon-menu-down'></b></a>",
+                'folder' => $atag."\$icon<span class='menu-text'>\$name</span>".$icon2."</a>",
                 'file' => "<a class='\$tar' href='\$url'>\$icon<span class='menu-text'>\$name</span></a>"
             ),
             array(
-                'folder' => "<a class='dropdown-toggle' href='javascript:;'><span class='glyphicon glyphicon-menu-right'></span>\$icon \$name<b class='arrow glyphicon glyphicon-menu-down'></b></a>",
-                'file' => "<a class='tarmain' href='\$url'><span class='glyphicon glyphicon-menu-right'></span> \$icon \$name</a>"
+                'folder' => $atag.$icon."\$icon \$name<b class='arrow glyphicon glyphicon-menu-down'></b></a>",
+                'file' => "<a class='tarmain' href='\$url'>".$icon." \$icon \$name</a>"
             ),
             array(
-                'folder' => "<a class='dropdown-toggle' href='javascript:;'>\$icon\$name<b class='arrow glyphicon glyphicon-menu-down'></b></a>",
+                'folder' => $atag."\$icon\$name<b class='arrow glyphicon glyphicon-menu-down'></b></a>",
                 'file' => "<a class='tarmain' href='\$url'>\$icon\$name</a>"
             )
         );
