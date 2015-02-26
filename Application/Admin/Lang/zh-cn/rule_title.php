@@ -50,4 +50,9 @@ $rule_title = array(
     'R_URLRULE_EDIT' => '编辑',
     'R_URLRULE_DEL' => '删除',
     'R_POSID_ADD' => '添加',
+    'R_DBSOURCE_INDEX' => '数据源',
+    'R_DATABASE_INDEX' => '数据库管理',
+    'R_TYPE_INDEX' => '类别管理',
+    'R_POSID_EDIT' => '编辑',
+    'R_POSID_DEL' => '删除',
 );

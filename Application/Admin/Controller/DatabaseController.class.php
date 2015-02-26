@@ -8,23 +8,22 @@
 // +----------------------------------------------------------------------
 // | Author: itsky <itsky71@foxmail.com>
 // +----------------------------------------------------------------------
-namespace Home\Controller;
-use Think\Controller;
+namespace Admin\Controller;
+use Think\Model;
 /**
- * Description of LangController
- * 前台空控制器
+ * Description of DatabaseController
+ * 数据库管理控制器类
  * @author itsky
  */
-class EmptyController extends Controller{
-    public function index(){
-        header('HTTP/1.1 404 Not Found');
-        header('Status:404 Not Found');
-        $this->display('Empty:index');
-    }
-
-    public function page(){
-        $this->assign('code', I('get.code'));
-        header("HTTP/1.0 404 Not Found");
-        $this->display('Empty:pages');
+class DatabaseController extends AdminController{
+    public function index() {
+        $db = new Model();
+        $list = $db->query('SHOW TABLE STATUS LIKE \''.C('DB_PREFIX').'%\'');
+        foreach ($list as $row){
+            $total += $row['data_length'];
+        }
+        $this->assign('list', $list);
+        $this->assign('totalsize', $total);
+        $this->display();
     }
 }

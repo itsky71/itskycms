@@ -61,4 +61,5 @@ $menu_common = array(
     'M_EGEG_EGEGE' => '二哥',
     'M_JDIPE_INDEX' => '肯德基',
     'M_SITESET_USER' => '用戶中心設置',
+    'M_DATABASE_INDEX' => '數據庫管理',
 );

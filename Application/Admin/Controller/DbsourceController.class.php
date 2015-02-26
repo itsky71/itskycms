@@ -8,23 +8,14 @@
 // +----------------------------------------------------------------------
 // | Author: itsky <itsky71@foxmail.com>
 // +----------------------------------------------------------------------
-namespace Home\Controller;
-use Think\Controller;
+namespace Admin\Controller;
 /**
- * Description of LangController
- * 前台空控制器
+ * Description of DbsourceController
+ * DB数据源控制器类
  * @author itsky
  */
-class EmptyController extends Controller{
-    public function index(){
-        header('HTTP/1.1 404 Not Found');
-        header('Status:404 Not Found');
-        $this->display('Empty:index');
-    }
-
-    public function page(){
-        $this->assign('code', I('get.code'));
-        header("HTTP/1.0 404 Not Found");
-        $this->display('Empty:pages');
+class DbsourceController extends AdminController{
+    public function _initialize() {
+        parent::_initialize();
     }
 }

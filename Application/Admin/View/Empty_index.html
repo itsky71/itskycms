@@ -1,0 +1,45 @@
+<style type="text/css">
+.body{ background: #fff; font-family: '微软雅黑'; color: #333; font-size: 16px; }
+.body img{ border: 0; }
+.body .error{ padding: 24px 48px; }
+.body .face{ font-size: 100px; font-weight: normal; line-height: 120px; margin-bottom: 12px; }
+.body h1{ font-size: 32px; line-height: 48px; font-weight: bold}
+.body .error .content{ padding-top: 10px}
+.body .error .info{ margin-bottom: 12px; }
+.body .error .info .title{ margin-bottom: 3px; }
+.body .error .info .title h3{ color: #000; font-weight: 700; font-size: 16px; }
+.body .error .info .text{ line-height: 24px; }
+.body .copyright{ padding: 12px 48px; color: #999; }
+.body .copyright a{ color: #000; text-decoration: none; }
+</style>
+<div class="body">
+<div class="error">
+<p class="face">:(</p>
+<h1>{$e.message|strip_tags}</h1>
+<div class="content">
+<if condition="isset($e['file'])">
+	<div class="info">
+		<div class="title">
+			<h3>错误位置</h3>
+		</div>
+		<div class="text">
+			<p>FILE: {$e.file} &#12288;LINE: {$e.line}</p>
+		</div>
+	</div>
+</if>
+<if condition="isset($e['trace'])">
+	<div class="info">
+		<div class="title">
+			<h3>TRACE</h3>
+		</div>
+		<div class="text">
+			<p>{$e.trace|nl2br}</p>
+		</div>
+	</div>
+</if>
+</div>
+</div>
+<div class="copyright">
+<p><a title="官方网站" href="http://www.thinkphp.cn">ThinkPHP</a><sup>{:THINK_VERSION}</sup> { Fast & Simple OOP PHP Framework } -- [ WE CAN DO IT JUST THINK ]</p>
+</div>
+</div>

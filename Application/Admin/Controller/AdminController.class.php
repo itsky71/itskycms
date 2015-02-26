@@ -84,8 +84,10 @@ class AdminController extends Controller{
         }else{
             $wl = '1';
         }
+        $isorder = $Model->query('Describe __'.strtoupper(CONTROLLER_NAME).'__ listorder');
+        $ol = $isorder == 'listorder' ? 'listorder,' : '';
         $name = M(CONTROLLER_NAME);
-        $list = $name->where($wl)->order('listorder,id')->select();
+        $list = $name->where($wl)->order($ol,'id')->select();
         $this->assign('list', $list);
         $this->display();
     }

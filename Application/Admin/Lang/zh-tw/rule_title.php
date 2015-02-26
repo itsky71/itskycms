@@ -51,4 +51,6 @@ $rule_title = array(
     'R_POSID_ADD' => '添加',
     'R_POSID_EDIT' => '編輯',
     'R_POSID_DEL' => '刪除',
+    'R_DBSOURCE_INDEX' => 'DB數據源',
+    'R_DATABASE_INDEX' => '數據庫管理',
 );
