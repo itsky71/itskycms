@@ -55,4 +55,8 @@ $rule_title = array(
     'R_TYPE_INDEX' => '类别管理',
     'R_POSID_EDIT' => '编辑',
     'R_POSID_DEL' => '删除',
+    'R_DATABASE_REPAIR' => '修复',
+    'R_DATABASE_OPTIMIZE' => '优化',
+    'R_DATABASE_CHECK' => '检查',
+    'R_DATABASE_ANALYZE' => '分析',
 );

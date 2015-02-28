@@ -23,26 +23,47 @@
  * @version 	1.0 (2008-01-31)
  */
 namespace Common\Lib;
-class cssmin
-	{
-	/**
-	 * Minifies stylesheet definitions
-	 *
-	 * @param 	string	$v	Stylesheet definitions as string
-	 * @return 	string		Minified stylesheet definitions
-	 */
-	public static function minify($v) 
-		{
-		$v = trim($v);
-		$v = str_replace("\r\n", "\n", $v);
-        $search = array("/\/\*[\d\D]*?\*\/|\t+/", "/\s+/", "/\}\s+/");
-        $replace = array(null, " ", "}\n");
-		$v = preg_replace($search, $replace, $v);
-		$search = array("/\\;\s/", "/\s+\{\\s+/", "/\\:\s+\\#/", "/,\s+/i", "/\\:\s+\\\'/i", "/\\:\s+([0-9]+|[A-F]+)/i");
-        $replace = array(";", "{", ":#", ",", ":\'", ":$1");
+class Cssmin{
+    /**
+     * Minifies stylesheet definitions
+     *
+     * @param 	string	$v	Stylesheet definitions as string
+     * @return 	string		Minified stylesheet definitions
+     */
+    public static function minify($v){
+        $v = trim($v);
+        $v = str_replace("\r\n", "\n", $v);
+        $sea = array("/\/\*[\d\D]*?\*\/|\t+/", "/\s+/", "/\}\s+/");
+        $rep = array(null, " ", "}\n");
+        $v = preg_replace($sea, $rep, $v);
+        $search = array(
+            "/\\;\s/",
+            "/\s+\{\\s+/",
+            "/\\:\s+\\#/",
+            "/,\s+/i",
+            "/\\:\s+\\\'/i",
+            "/\\:\s+([0-9]+|[A-F]+)/i",
+            "/\\s+\{/",
+            "/\{\\s+/",
+            "/\\s+\}/",
+            "/\}\\s+/",
+            "/;\}/"
+        );
+        $replace = array(
+            ";",
+            "{",
+            ":#",
+            ",",
+            ":\'",
+            ":$1",
+            "{",
+            "{",
+            "}",
+            "}",
+            "}"
+        );
         $v = preg_replace($search, $replace, $v);
         $v = str_replace("\n", null, $v);
-    	return $v;	
-  		}
-	}
-?>
+        return $v;	
+    }
+}

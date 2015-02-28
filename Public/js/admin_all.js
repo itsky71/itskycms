@@ -169,3 +169,53 @@ function delcheck(e,t){
         $('.bootbox .modal-dialog').addClass('modal-sm');
     }
 }
+
+//管理数据库表
+function manope(e,t,o){
+    e.preventDefault();
+    var tables = new Array();
+    $('input[name="table"]:checked').each(function(i){
+        tables[i] = $(this).val();
+    });
+    if(tables == ''){
+        show_msg($.parseJSON('{"info":"'+ITskyLang.CHECK_MSG+'","status":"0"}'));
+        return false;
+    }else{
+        var msg = '';
+        switch (o){
+            case 'repair':
+                msg = ITskyLang.REPAIR_CHECK_MSG_CONFIRM;
+                break;
+            case 'optimize':
+                msg = ITskyLang.OPTIMIZATION_CHECK_MSG_CONFIRM;
+                break;
+            case 'check':
+                msg = ITskyLang.CHECK_CHECK_MSG_CONFIRM;
+                break;
+            case 'analyze':
+                msg = ITskyLang.ANALYZE_CHECK_MSG_CONFIRM;
+                break;
+            default :
+                msg = '';
+        }
+        bootbox.confirm('<span class="glyphicon glyphicon-question-sign yellow bigger-120"></span>'+msg,function(result){
+            if(result){
+                $.ajax({
+                    type:'post',
+                    url:$(t).attr('href'),
+                    global:true,
+                    data:'tables='+tables.join(','),
+                    success:function(data){
+                        if($.isPlainObject(data)){
+                            show_msg(data);
+                        }else{
+                            $('#new_content').html(data);
+                        }
+                    }
+                });
+            }
+        });
+        $('.bootbox .modal-footer .btn').addClass('btn-sm');
+        $('.bootbox .modal-dialog').addClass('modal-sm');
+    }
+}

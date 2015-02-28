@@ -5,8 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ITskyCMS</title>
-<link rel="shortcut icon" href="/favicon.ico?t={:time()}" type="image/x-icon" />
-<script type="text/javascript" src="http://cdn.staticfile.org/jquery/1.8.3/jquery.min.js"></script>
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<script type="text/javascript" src="http://cdn.staticfile.org/jquery/1.8.3/jquery.min.js">              </script>
 <script type="text/javascript">
     var ThinkPHP = {
         'ROOT' : '__ROOT__',    //网站根目录地址
@@ -26,6 +26,156 @@
  p.c2 {text-align: center;padding: 5px 0;}
  div.c1 {font-weight: bold; text-align: center}
 /*]]>*/
+@CHARSET "UTF-8";
+/*---------common---------*/
+.green{color:#69aa46}.red{color:#dd5a43}.white{color:#fff}.blue{color:#478fca}.yellow{color: #f89406}
+button.btn:active{position:relative;top:1px;left:1px;}.mtb0a{margin:0 auto !important}.mt2{margin-top: 2px}
+.mt4{margin-top: 4px !important}.mt5{margin-top: 5px}.mb0{margin-bottom: 0}.mb5{margin-bottom: 5px}
+.mb10{margin-bottom: 10px}.ml10{margin-left: 10px;}.mr5{margin-right: 5px}.mr10{margin-right: 10px;}.mtb4{margin: 4px 0}
+.pl5{padding-left: 5px}.pl10{padding-left: 10px}.pl15{padding-left: 15px !important}.pl20{padding-left: 20px !important}
+.pt5{padding-top: 5px !important}.pt10{padding-top: 10px !important;}.pt13{padding-top: 13px !important;}
+.p1-8{padding:1px 8px !important}.p5-4{padding: 5px 4px !important}
+.dib{display: inline-block}.w60{width: 60px}.w80{width: 80px}.w120{width: 120px;}.w180{width: 180px}.w225{width: 225px}.h30{height: 30px}
+.minh80{min-height: 80px}.blblue{border-left:1px solid #9acfea}.f14{font-size: 14px !important}.f12{font-size: 12px !important}
+.bootbox-body{font-size: 14px}select option[value=""],select.form-control option[value=""]{padding: 3px 4px;color: #999}
+input.ace[type="checkbox"] + .lbl:before, input.ace[type="radio"] + .lbl:before{margin-top: -3px}
+input.ace-switch[type="checkbox"] + .lbl:before{margin-top: 0}
+input.ace[type="radio"] + .lbl:before{line-height: 17px}
+.badge{padding-top: 2px;padding-bottom: 2px;}.text-muted{color: #aaa}.cude{cursor: default}
+label{cursor: default}.vam{vertical-align:middle !important;}
+.btn-scroll-up{right:20px}.ace-settings-container{right: 5px}.clearboth{clear: both}
+/*-------select-input-------*/
+.select-input,.select-option{
+    -moz-user-select:none;
+    -webkit-user-select: none;
+    -o-user-select:none;
+    -khtml-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}
+.select-choices{
+    position: absolute;
+    left: 0;
+    top:0;
+    border:1px solid #CCC;
+    width: 100%;
+    background-color: #fff;
+    z-index: 999;
+    max-height: 425px;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    display: none;
+}
+.select-option{width: 100%;padding: 0;margin: 0;}
+.select-option li{cursor: default;padding-left: 10px;font-size: 14px}
+.select-active{background-color: #39f;color: #fff}
+.no-border-right-color{border-top-color:#f59942 !important;border-left-color:#f59942 !important;border-bottom-color:#f59942 !important;}
+.no-border-left-color{border-top-color:#f59942 !important;border-right-color:#f59942 !important;border-bottom-color:#f59942 !important;}
+/*------ hlink ------*/
+.hlink{
+    color: #e3eef5;
+    font-size: 14px;
+    padding: 0 10px;
+    margin-top: 10px;
+    float: left;
+    border-right: 1px solid #327da8;
+}
+#top_link a.hlink:last-child{border-right: none}
+.hlink:hover{
+    color: #fff;
+}
+/*-------lang-------*/
+#lang{position: absolute;top: -111px;right:0;z-index: 13;}
+#lang .lang-list{background-color: #fff;border: 2px solid #C9C3DB;padding: 5px 0 0 5px;max-width: 500px;float: left;}
+#lang .lang-list .btn-light{display: none}
+#lang .ace-settings-btn{padding-bottom: 8px;opacity: 0.55;filter:alpha(opacity=55)}
+#lang:hover .ace-settings-btn{opacity:1;filter:alpha(opacity=100)}
+#lang:hover .lang-list{border-color: #9889c1;opacity:1;filter:alpha(opacity=100)}
+#lang:hover .lang-list .btn-light{display: inline-block}
+/*---------Public_login---------*/
+#Public_login{background-color: #1d2024;padding-top: 10px;}
+#Public_login .login_logo{margin: 0 auto;width: 375px;text-align: center;}
+#Public_login .login_box{width: 375px;margin: 15px auto 0;border: 5px solid #394557;border-radius: 8px;}
+#Public_login .login_body{width: 100%;height: 100%;background-color: #F7F7F7;}
+#Public_login .login_main{padding: 16px 36px;}
+#Public_login .login_main h4{border-bottom: 1px solid #d5e3ef;text-align: center;letter-spacing: 8px;line-height: 28px;}
+#Public_login .login_input{margin-bottom: 15px;position: relative;}
+#Public_login .login_input input{border: 1px solid #d5d5d5;background-color: #fff;width: 300px;height: 35px;line-height: 21px;padding: 3px 30px 3px 8px;}
+#Public_login .login_input input:focus{border: 1px solid #f59942;outline:none}
+#Public_login .login_input input:focus + .glyphicon{color: #579;}
+#Public_login .login_input .glyphicon{position: absolute;top: 10px;right: 0;color: #909090;}
+#Public_login .chb{font-weight: normal;}
+#Public_login .login_send input[type="checkbox"]{width: 15px;height: 15px;opacity: 0;filter:alpha(opacity=0)}
+#Public_login .login_send input[type="checkbox"] + .chb:before{content: ' ';border: 1px solid #c8c8c8;width: 15px;height: 15px;
+display: inline-block;background-color: #fff;vertical-align: middle;margin-right: 5px;color: #c8c8c8;}
+#Public_login .login_send input[type="checkbox"]:checked + .chb:before{content: '\e013';font-family: 'Glyphicons Halflings';color: #32a3ce;font-size: 10px;}
+#Public_login .login_floot{width: 100%;height: 45px;line-height: 40px;padding: 0 15px;background-color: #5090c1;border-top: 2px solid #597597;}
+#Public_login .forgot_pwd{float: left;color: #fe9;}
+#Public_login .want_reg{float: right;color: #cf7;}
+#Public_login input[name="verify"]{padding-right: 136px;}
+#Public_login .verifyimg{position: absolute;top: 1px;right: -5px;cursor: pointer;}
+#Public_login .alert,#msg_modal .alert{margin-bottom: 0;}
+
+/* public top  */
+.navbar-brand{height: auto;}
+#navbar .glyphicon-chevron-down{font-size: 10px;}
+#btn-scroll-up{position: fixed;}
+.nav-list>li>.submenu a>.arrow,.nav-list>li a>.arrow{font-size: 10px;}
+.breadcrumb>li+li:before{font-size: 9px;}
+#sidebar-collapse .glyphicon{font-size: 10px;}
+@media(min-width:1200px){.container{max-width:1170px}}
+.menu-min .sidebar-shortcuts-large{width: 200px;}
+
+/* common slide */
+.nav-list > li > .submenu li > .submenu li > a .glyphicon{font-size: 11px !important;}
+
+/* js楠岃瘉琛ㄥ崟鏍峰紡 */
+.n-invalid{border-color: red !important;}
+.n-red .msg-wrap{position:absolute;z-index:1;padding:4px 6px;font-size:12px;border:1px solid transparent;border-radius:2px;font-weight: normal;color:#fff;}
+.n-red .msg-wrap.n-error{background-color:#c94d32;border-color:#d15b47;}
+.n-red .msg-wrap.n-ok{background-color: #629b58;border-color: #87b87f;}
+.n-red .msg-wrap.n-error .n-arrow b{color:#d15b47;/*text-shadow:0 0 2px #ccc*/}
+.n-red .msg-wrap.n-error .n-arrow i{color:#c94d32}
+.n-red .msg-wrap.n-ok .n-arrow b{color:#87b87f;/*text-shadow:0 0 2px #ccc*/}
+.n-red .msg-wrap.n-ok .n-arrow i{color:#629b58}
+.n-red .msg-wrap .n-icon{font-family: 'Glyphicons Halflings';font-weight: normal;font-style: normal;width: 16px;text-align: center;
+height: 16px;line-height: normal;vertical-align: baseline;background-image: none;margin-top: 0;}
+.n-red .msg-wrap.n-error .n-icon:before{content: '\e014';text-decoration: inherit;display: inline-block;speak: none;}
+.n-red .msg-wrap.n-ok .n-icon:before{content: '\e013';text-decoration: inherit;display: inline-block;speak: none;}
+.n-red .n-top .msg-wrap{bottom:100%}
+.n-red .n-bottom .msg-wrap{top:100%}
+.n-red .n-tip,.n-red .n-loading{background-color:#f8fdff;border-color:#ddd;color:#333;}
+.n-red .n-tip .n-arrow b,.n-red .n-loading .n-arrow b{color:#ddd;}
+.n-red .n-tip .n-arrow i,.n-red .n-loading .n-arrow i{color:#f8fdff}
+.n-red .n-tip .n-icon{display:none}
+
+/*  menu_tree  */
+#menu-tree input[name^="listorder"]{width: 50px;height: 21px;line-height: 21px;padding: 0 3px;}
+
+/*  icon-all  */
+.bootbox-body #icon-all{cursor: default;margin: 0;padding: 0;}
+.bootbox-body #icon-all li{display: inline-block;list-style: none;cursor: pointer;width: 25px;height: 25px;line-height: 25px;text-align: center;}
+.bootbox-body #icon-all li:hover{color: #FFF;background-color: blue;}
+/*  loading  */
+#loading{height: 100%;z-index: 90}
+#loadimg{width: 301px;height: 300px;z-index: 99;position: fixed;top: 45%;left: 50%;margin-left: -150px;margin-top: -150px;opacity: 0.5}
+/*-- rule tooltip --*/
+#ruleform .rti .tooltip .tooltip-inner{width: 150px;}
+/*-- group access --*/
+#access .table .line-height-1{border-bottom: 1px solid #eee;width: 100%;height: 0;}
+/*--  siteset --*/
+#siteset .table tr td{vertical-align:middle}
+/*--  flags --*/
+.flags .flag,.flag-ico{background-image: url('/Public/img/flag.gif');width: 16px;height: 11px;display: block;}
+/*-- sending --*/
+#sending{top: 15%;left: 50%;margin-left: -200px;z-index: 1050;}
+/*-- latota --*/
+.latota{margin-top: 5px;margin-bottom: 5px;max-width: 480px;}
+.latota label{background-color: #fff;border: 1px solid #ccc;float: left;margin: 0;padding: 8px 5px;min-width: 111px;}
+.latota label:nth-child(1){height: 119px;line-height: 100px;}
+.latota + .btn-group{margin-top: 5px;}
+/*-- tip --*/
+.tip{padding-left: 3px;padding-top: 3px;color: #888;}
 </style>
 </head>
 <body id="{$Think.CONTROLLER_NAME}_{$Think.ACTION_NAME}">

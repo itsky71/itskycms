@@ -11,6 +11,7 @@
 namespace Common\Behavior;
 use Think\Storage;
 use Common\Lib\Jsmin;
+use Common\Lib\Cssmin;
 /**
  * Description of HtmlBehavior
  * 去除模板文件里面的html空格与换行行为扩展
@@ -20,12 +21,22 @@ class HtmlBehavior extends \Think\Behavior{
     public function run(&$content) {
         if(C('TMPL_STRIP_SPACE')){
             preg_match_all("/<script[\s\S]*?>([\s\S]*?)<\/script>/i", $content, $scripta);
+            preg_match_all("/<style[\s\S]*?>([\s\S]*?)<\/style>/i", $content, $stylea);
             $comhtml = $this->delHtml($content);
             preg_match_all("/<script[\s\S]*?>([\s\S]*?)<\/script>/i", $comhtml, $scriptb);
+            preg_match_all("/<style[\s\S]*?>([\s\S]*?)<\/style>/i", $comhtml, $styleb);
+            foreach ($stylea[0] as $k=>$v){
+                $cssmin[$k] = Cssmin::minify($v);
+            }
             foreach ($scripta[0] as $key=>$value){
-                $jsmin[$key] = Jsmin::minify($value);
+                if(empty(Jsmin::minify($scripta[1][$key]))){
+                    $jsmin[$key] = $scriptb[0][$key];
+                }else{
+                    $jsmin[$key] = Jsmin::minify($value);
+                }
             }
             $content = str_replace($scriptb[0], $jsmin, $comhtml);
+            $content = str_replace($styleb[0], $cssmin, $content);
             if (C('HTML_CACHE_ON') && defined('HTML_FILE_NAME')
                 && !preg_match('/Status.*[345]{1}\d{2}/i', implode(' ', headers_list()))
                 && !preg_match('/(-[a-z0-9]{2}){3,}/i',HTML_FILE_NAME)) {
@@ -42,16 +53,16 @@ class HtmlBehavior extends \Think\Behavior{
             "/> *([^ ]*) *</", //去掉注释标记
             "/[\s]+/",
             "/<!--[^!]*-->/",
-            "/\" /",
-            "/ \"/",
+            //"/\" /",
+            //"/ \"/",
             "'/\*[^*]*\*/'"
         );
         $replace = array (
             ">\\1<",
             " ",
             "",
-            "\"",
-            "\"",
+            //"\"",
+            //"\"",
             ""
         );
         return preg_replace($pattern, $replace, $htmlstr);

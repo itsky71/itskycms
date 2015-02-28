@@ -1,0 +1,48 @@
+<div class="col-lg-6">
+    <a class="btn btn-primary btn-xs ml10 mb10" href="{:U('Database/sql',$vl)}" onclick="load(event,this)">
+        <span class="glyphicon glyphicon-console"></span>{:L('SQL')}
+    </a>
+    <a class="btn btn-xs btn-purple ml10 mb10" href="{:U('Database/index',$vl)}" onclick="load(event,this)">
+        <span class="glyphicon glyphicon-backward"></span>{:L('BACK')}
+    </a>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>Table</th>
+                    <th>Op</th>
+                    <th>Msg_type</th>
+                    <th>Msg_text</th>
+                </tr>
+            </thead>
+            <tbody>
+            <foreach name="list" item="vo">
+                <tr>
+                    <td>{$vo.table}</td>
+                    <td>{$vo.op}</td>
+                    <td>{$vo.msg_type}</td>
+                    <td>{$vo.msg_text}</td>
+                </tr>
+            </foreach>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td class="center" colspan="4">
+                        <a class="btn btn-xs btn-purple" href="{:U('Database/index',$vl)}" onclick="load(event,this)">
+                            <span class="glyphicon glyphicon-backward"></span>
+                            {:L('BACK')}
+                        </a>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+var pan = '<li><a onclick="load(event,this)" href="{:U(CONTROLLER_NAME.'/index',$vl)}">{:L('M_'.$Think.CONTROLLER_NAME.'_INDEX')}</a></li>\n\
+<li class="active">{:L($Think.ACTION_NAME)}</li>';
+    $('#breadcrumbs .breadcrumb li:gt(0)').remove();
+    $('#breadcrumbs .breadcrumb').append(pan);
+    $('.page-header h1').empty();
+    $('.page-header h1').append('{:L('M_'.$Think.CONTROLLER_NAME.'_INDEX')}<small class="glyphicon glyphicon-menu-right"> {:L($Think.ACTION_NAME)}</small>');
+</script>

@@ -1,9 +1,12 @@
 <div class="col-lg-12">
+    <a class="btn btn-primary btn-xs ml10 mb10" href="{:U('Database/sql',$vl)}" onclick="load(event,this)">
+        <span class="glyphicon glyphicon-console"></span>{:L('SQL')}
+    </a>
     <div class="table-responsive">
         <table class="table table-striped table-hover table-bordered">
             <thead>
                 <tr>
-                    <th class="pl20">{:L('SELECT')}</th>
+                    <th class="pl15">{:L('SELECT')}</th>
                     <th>{:L('NAME')}</th>
                     <th>{:L('TYPE')}</th>
                     <th>{:L('CHARSET')}</th>
@@ -30,31 +33,34 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td class="pl20" colspan="7">
+                    <th class="pl20" colspan="4">
                         <label>
                             <input class="ace" type="checkbox"/>
                             <span class="lbl">{:L('ALL_SELECT')}</span>
                         </label>
-                        <button class="btn btn-primary btn-xs ml10">
+                        <a class="btn btn-primary btn-xs ml10" href="{:U('Database/repair',$vl)}" onclick="manope(event,this,'repair')">
                             <span class="glyphicon glyphicon-wrench"></span>{:L('REPAIR')}
-                        </button>
-                        <button class="btn btn-primary btn-xs ml10">
+                        </a>
+                        <a class="btn btn-primary btn-xs ml10" href="{:U('Database/optimize',$vl)}" onclick="manope(event,this,'optimize')">
                             <span class="glyphicon glyphicon-magnet"></span>{:L('OPTIMIZATION')}
-                        </button>
-                        <button class="btn btn-primary btn-xs ml10">
+                        </a>
+                        <a class="btn btn-primary btn-xs ml10" href="{:U('Database/check',$vl)}" onclick="manope(event,this,'check')">
                             <span class="glyphicon glyphicon-eye-open"></span>{:L('CHECK')}
-                        </button>
-                        <button class="btn btn-primary btn-xs ml10">
-                            <span class="glyphicon glyphicon-sound-stereo"></span>{:L('ANALYSIS')}
-                        </button>
-                        <button class="btn btn-primary btn-xs ml10">
+                        </a>
+                        <a class="btn btn-primary btn-xs ml10" href="{:U('Database/analyze',$vl)}" onclick="manope(event,this,'analyze')">
+                            <span class="glyphicon glyphicon-sound-stereo"></span>{:L('ANALYZE')}
+                        </a>
+                        <a class="btn btn-primary btn-xs ml10" href="{:U('Database/structure',$vl)}" onclick="manope(event,this,'structure')">
                             <span class="glyphicon glyphicon-indent-left"></span>{:L('STRUCTURE')}
-                        </button>
+                        </a>
                         <button class="btn btn-primary btn-xs ml10">
                             <span class="glyphicon glyphicon-duplicate"></span>{:L('BACKUP')}
                         </button>
-                        <span class="pull-right red mr10 pt5"><b>{:L('TOTAL_LENGTH')}: {$totalsize|byte_format}</b></span>
-                    </td>
+                        <b class="pull-right pt5 mr10 yellow">{:L('TABLES',array('num'=>$total['tables']))}</b>
+                    </th>
+                    <th class="center pt13 blue"><b>{$total.rows}</b></th>
+                    <th class="center pt13 green"><b>{$total.free|byte_format}</b></th>
+                    <th class="center pt13 red"><b>{$total.size|byte_format}</b></th>
                 </tr>
             </tfoot>
         </table>
@@ -71,4 +77,11 @@
     $('a[href="{:U(CONTROLLER_NAME.'/'.ACTION_NAME,$vl)}"]').parent().addClass('active').parent().show().parent().addClass('open active');
     $('.page-header h1').empty();
     $('.page-header h1').append('{:L('M_'.$Think.CONTROLLER_NAME.'_'.$Think.ACTION_NAME)}<small class="glyphicon glyphicon-menu-right"> {:L($Think.ACTION_NAME)}</small>');
+    $('.table tfoot input:checkbox').on('click',function(){
+        var that = this;
+        $(this).closest('table').find('tr > td:first-child input:checkbox').each(function(){
+            this.checked = that.checked;
+            $(this).closest('tr').toggleClass('selected');
+        });
+    });
 </script>

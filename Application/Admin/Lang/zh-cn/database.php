@@ -11,8 +11,11 @@ return array(
     'REPAIR'        =>  '修复',
     'OPTIMIZATION'  =>  '优化',
     'CHECK'         =>  '检查',
-    'ANALYSIS'      =>  '分析',
+    'ANALYZE'      =>  '分析',
     'STRUCTURE'     =>  '结构',
     'BACKUP'        =>  '执行备份',
-    'TOTAL_LENGTH'  =>  '数据库大小'
+    'TOTAL_LENGTH'  =>  '数据库大小',
+    'TABLES'        =>  '共 {$num} 张表',
+    'SQL'           =>  '执行SQL语句',
+    'BACK'          =>  '返回'
 );

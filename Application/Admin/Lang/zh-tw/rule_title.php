@@ -53,4 +53,9 @@ $rule_title = array(
     'R_POSID_DEL' => '刪除',
     'R_DBSOURCE_INDEX' => 'DB數據源',
     'R_DATABASE_INDEX' => '數據庫管理',
+    'R_TYPE_INDEX' => '類別管理',
+    'R_DATABASE_REPAIR' => '修復',
+    'R_DATABASE_OPTIMIZE' => '優化',
+    'R_DATABASE_CHECK' => '檢查',
+    'R_DATABASE_ANALYZE' => '分析',
 );
