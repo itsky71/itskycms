@@ -90,6 +90,7 @@ function show_msg(data){
         $('#msg_modal').modal('hide');
         if(data.url!==''){
             $('#new_content').load(data.url);
+            $(document.body).scrollator('refresh');
         }
     },2000);
 }
@@ -105,6 +106,7 @@ function load(e,t){
                 show_msg(data);
             }else{
                 $('#new_content').html(data);
+                $(document.body).scrollator('refresh');
             }
         }
     });
@@ -128,6 +130,7 @@ function del(e,t,a){
                         show_msg(data);
                     }else{
                         $('#new_content').html(data);
+                        $(document.body).scrollator('refresh');
                     }
                 }
             });
@@ -160,6 +163,7 @@ function delcheck(e,t){
                             show_msg(data);
                         }else{
                             $('#new_content').html(data);
+                            $(document.body).scrollator('refresh');
                         }
                     }
                 });
@@ -195,8 +199,11 @@ function manope(e,t,o){
             case 'analyze':
                 msg = ITskyLang.ANALYZE_CHECK_MSG_CONFIRM;
                 break;
+            case 'structure':
+                msg = ITskyLang.STRUCTURE_CHECK_MSG_CONFIRM;
+                break;
             default :
-                msg = '';
+                msg = ITskyLang.ORTHER_CHECK_MSG_CONFIRM;
         }
         bootbox.confirm('<span class="glyphicon glyphicon-question-sign yellow bigger-120"></span>'+msg,function(result){
             if(result){
@@ -210,6 +217,7 @@ function manope(e,t,o){
                             show_msg(data);
                         }else{
                             $('#new_content').html(data);
+                            $(document.body).scrollator('refresh');
                         }
                     }
                 });

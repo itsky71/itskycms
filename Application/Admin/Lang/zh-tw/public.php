@@ -22,5 +22,7 @@ return array(
     'REPAIR_CHECK_MSG_CONFIRM'  =>  ' 確定要修復所選表嗎？',
     'OPTIMIZATION_CHECK_MSG_CONFIRM'    =>  ' 確定要優化所選表嗎？',
     'CHECK_CHECK_MSG_CONFIRM'   =>  ' 確定要檢查所選表嗎？',
-    'ANALYZE_CHECK_MSG_CONFIRM' =>  ' 確定要分析所選表嗎？'
+    'ANALYZE_CHECK_MSG_CONFIRM' =>  ' 確定要分析所選表嗎？',
+    'STRUCTURE_CHECK_MSG_CONFIRM'   =>  ' 確定要顯示所選表的結構嗎？',
+    'ORTHER_CHECK_MSG_CONFIRM'      =>  ' 確定要繼續嗎？'
 );

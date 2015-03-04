@@ -1,0 +1,141 @@
+<div class="col-lg-9">
+    <a class="btn btn-primary btn-xs ml10 mb10" href="{:U('Database/sql',$vl)}" onclick="load(event,this)">
+        <span class="glyphicon glyphicon-console"></span>{:L('SQL')}
+    </a>
+    <a class="btn btn-xs btn-purple ml10 mb10" href="{:U('Database/index',$vl)}" onclick="load(event,this)">
+        <span class="glyphicon glyphicon-backward"></span>{:L('BACK')}
+    </a>
+    <foreach name="tablesinfo" item="vo">
+    <div class="widget-box transparent clearboth">
+        <div class="widget-header widget-header-flat bg-grey">
+            <h4 class="lighter"><span class="glyphicon glyphicon-th orange"></span>{$vo.header.name}</h4>
+            <if condition="$vo.header.comment">
+                <b class="grey">({:L('TABLE_COMMENT')}: {$vo.header.comment})</b>
+            </if>
+            <div class="widget-toolbar">
+                <a data-action="collapse" href="javascript:void(0);">
+                    <span class="glyphicon glyphicon-menu-up"></span>
+                </a>
+            </div>
+        </div>
+        <div class="widget-body">
+            <div class="widget-main padding-4">
+                <table class="table table-bordered table-striped table-hover f16">
+                    <thead>
+                        <tr>
+                            <th class="center bg-info">{:L('FIELD')}</th>
+                            <th class="center bg-info">{:L('TYPE')}</th>
+                            <th class="center bg-info">{:L('NULL')}</th>
+                            <th class="center bg-info">{:L('DEFAULT')}</th>
+                            <th class="center bg-info">{:L('COMMENT')}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <assign name="fields" value="$vo.fields"/>
+                    <foreach name="fields" item="v">
+                        <tr>
+                            <td>{$v.field}</td>
+                            <td>{$v.type}</td>
+                            <td>{$v.null}</td>
+                            <td>{$v.default}</td>
+                            <td>{$v.comment}</td>
+                        </tr>
+                    </foreach>
+                    </tbody>
+                </table>
+                <strong class="f16 block">{:L('INDEX')}</strong>
+                <table class="table table-bordered table-striped table-hover f16">
+                    <thead>
+                        <tr>
+                            <th class="bg-info">{:L('KEY')}</th>
+                            <th class="bg-info">{:L('TYPE')}</th>
+                            <th class="bg-info">{:L('UNIQUE')}</th>
+                            <th class="bg-info">{:L('COMPACT')}</th>
+                            <th class="bg-info">{:L('FIELD')}</th>
+                            <th class="bg-info">{:L('BASE')}</th>
+                            <th class="bg-info">{:L('COLLATION')}</th>
+                            <th class="bg-info">{:L('NULL')}</th>
+                            <th class="bg-info">{:L('COMMENT')}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <assign name="index" value="$vo.index"/>
+                    <foreach name="index" item="vi">
+                        <tr>
+                            <td>{$vi.index_name}</td>
+                            <td>{$vi.index_type}</td>
+                            <td>{$vi['non_unique']==0 ? L('YES') : L('NO')}</td>
+                            <td>{$vi['packed'] != '' ? L('YES') : L('NO')}</td>
+                            <td>{$vi.column_name}</td>
+                            <td>{$vi.cardinality}</td>
+                            <td>{$vi.collation}</td>
+                            <td>{$vi['nullable'] != '' ? L('YES') : L('NO')}</td>
+                            <td>{$vi.comment}</td>
+                        </tr>
+                    </foreach>
+                    </tbody>
+                </table>
+                <strong class="f16 block">{:L('INFO')}</strong>
+                <div class="col-lg-3 pull-left">
+                    <table class="table table-striped table-bordered table-hover">
+                        <caption class="center bg-info border-light"><b>{:L('USED_SPACE')}</b></caption>
+                        <tbody>
+                            <tr>
+                                <th>{:L('DATA_LENGTH')}</th>
+                                <td>{$vo.info.data_length|byte_format}</td>
+                            </tr>
+                            <tr>
+                                <th>{:L('INDEX')}</th>
+                                <td>{$vo.info.index_length|byte_format}</td>
+                            </tr>
+                            <tr>
+                                <th>{:L('TOTAL')}</th>
+                                <td>{$vo['info']['data_length']+$vo['info']['index_length']|byte_format}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-lg-5 pull-left">
+                    <table class="table table-striped table-bordered table-hover">
+                        <caption class="center bg-info border-light"><b>Row statistics</b></caption>
+                        <tbody>
+                            <tr>
+                                <th>{:L('FORMAT')}</th>
+                                <td>{$vo['info']['row_format']=='Dynamic'?'动态':'静态'}</td>
+                            </tr>
+                            <tr>
+                                <th>{:L('COLLATION')}</th>
+                                <td>{$vo.info.collation}</td>
+                            </tr>
+                            <tr>
+                                <th>{:L('ROWS')}</th>
+                                <td>{$vo.info.rows}</td>
+                            </tr>
+                            <tr>
+                                <th>{:L('ROW_LENGTH')}</th>
+                                <td>{$vo.info.avg_row_length|byte_format}</td>
+                            </tr>
+                            <tr>
+                                <th>{:L('ROW_SIZE')}</th>
+                                <td>{:byte_format(($vo['info']['data_length']+$vo['info']['index_length'])/$vo['info']['rows'])}</td>
+                            </tr>
+                            <tr>
+                                <th>{:L('CREATE_TIME')}</th>
+                                <td>{$vo.info.create_time}</td>
+                            </tr>
+                            <tr>
+                                <th>{:L('UPDATE_TIME')}</th>
+                                <td>{$vo.info.update_time}</td>
+                            </tr>
+                            <tr>
+                                <th>{:L('CHECK_TIME')}</th>
+                                <td>{$vo.info.check_time}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    </foreach>
+</div>

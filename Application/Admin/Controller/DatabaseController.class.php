@@ -82,11 +82,35 @@ class DatabaseController extends AdminController{
         }
     }
     //表结构
-    public function sql(){
-        $db = new Model();
+    public function structure(){
+        if(IS_AJAX && IS_POST){
+            $tables = explode(',', I('post.tables'));
+            $db = new Model();
+            foreach ($tables as $value){
+                $sqla = 'SELECT table_name as name,table_comment as comment FROM INFORMATION_SCHEMA.TABLES ';
+                $sqla .= 'WHERE table_schema=\''.C('DB_NAME').'\' AND table_name=\''.$value.'\'';
+                $header = $db->query($sqla);
+                $tablesinfo[$value]['header'] = $header[0];
+                $tablesinfo[$value]['fields'] = $db->query('SHOW FULL COLUMNS FROM '.$value.' FROM '.C('DB_NAME'));
+                $sqlb = 'SELECT * FROM INFORMATION_SCHEMA.STATISTICS ';
+                $sqlb .= 'WHERE table_schema=\''.C('DB_NAME').'\' AND table_name=\''.$value.'\'';
+                $tablesinfo[$value]['index'] = $db->query($sqlb);
+                $info = $db->query('SHOW TABLE STATUS FROM '.C('DB_NAME').' WHERE name=\''.$value.'\'');
+                $tablesinfo[$value]['info'] = $info[0];
+            }
+            $this->assign('tablesinfo',$tablesinfo);
+            $this->display();
+        }else{
+            $this->error (L('_ERROR_ACTION_'));
+        }
+        //$db = new Model();
 //        $res = $db->query("SHOW FULL COLUMNS FROM ta_auth_group");
 //        $res = $db->query("SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE table_schema='tadmin'");
 //        $res = $db->query("Row statistics");
-        dump($res);
+        //dump($res);
+    }
+    //备份
+    public function backup(){
+        
     }
 }

@@ -58,4 +58,5 @@ $rule_title = array(
     'R_DATABASE_OPTIMIZE' => '優化',
     'R_DATABASE_CHECK' => '檢查',
     'R_DATABASE_ANALYZE' => '分析',
+    'R_DATABASE_STRUCTURE' => '结构',
 );
