@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2015-02-25 11:01:03
+-- Generation Time: 2015-03-05 14:22:17
 -- 服务器版本： 5.6.20
 -- PHP Version: 5.5.15
 
@@ -39,8 +39,8 @@ CREATE TABLE IF NOT EXISTS `ta_auth_group` (
 --
 
 INSERT INTO `ta_auth_group` (`id`, `title`, `remark`, `status`, `rules`) VALUES
-(1, 'A_G_T_1', 'A_G_R_1', 1, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48'),
-(2, 'A_G_T_2', 'A_G_R_2', 1, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48'),
+(1, 'A_G_T_1', 'A_G_R_1', 1, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50'),
+(2, 'A_G_T_2', 'A_G_R_2', 1, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57'),
 (3, 'A_G_T_3', 'A_G_R_3', 0, '');
 
 -- --------------------------------------------------------
@@ -60,7 +60,8 @@ CREATE TABLE IF NOT EXISTS `ta_auth_group_access` (
 
 INSERT INTO `ta_auth_group_access` (`uid`, `group_id`) VALUES
 (1, 1),
-(2, 2);
+(2, 2),
+(6, 2);
 
 -- --------------------------------------------------------
 
@@ -77,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `ta_auth_rule` (
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '状态：为1正常，为0禁用',
   `listorder` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
   `condition` char(100) NOT NULL DEFAULT '' COMMENT '规则表达式，为空表示存在就验证，不为空表示按照条件验证'
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='规则表' AUTO_INCREMENT=49 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='规则表' AUTO_INCREMENT=58 ;
 
 --
 -- 转存表中的数据 `ta_auth_rule`
@@ -131,7 +132,33 @@ INSERT INTO `ta_auth_rule` (`id`, `tid`, `name`, `title`, `type`, `status`, `lis
 (45, 2, 'Posid/index', 'R_POSID_INDEX', 1, 1, 0, ''),
 (46, 2, 'Posid/add', 'R_POSID_ADD', 1, 1, 0, ''),
 (47, 2, 'Posid/edit', 'R_POSID_EDIT', 1, 1, 0, ''),
-(48, 2, 'Posid/del', 'R_POSID_DEL', 1, 1, 0, '');
+(48, 2, 'Posid/del', 'R_POSID_DEL', 1, 1, 0, ''),
+(49, 2, 'Dbsource/index', 'R_DBSOURCE_INDEX', 1, 1, 0, ''),
+(50, 2, 'Database/index', 'R_DATABASE_INDEX', 1, 1, 0, ''),
+(51, 2, 'Type/index', 'R_TYPE_INDEX', 1, 1, 0, ''),
+(52, 2, 'Database/repair', 'R_DATABASE_REPAIR', 1, 1, 0, ''),
+(53, 2, 'Database/optimize', 'R_DATABASE_OPTIMIZE', 1, 1, 0, ''),
+(54, 2, 'Database/check', 'R_DATABASE_CHECK', 1, 1, 0, ''),
+(55, 2, 'Database/analyze', 'R_DATABASE_ANALYZE', 1, 1, 0, ''),
+(56, 2, 'Database/structure', 'R_DATABASE_STRUCTURE', 1, 1, 0, ''),
+(57, 2, 'Database/backup', 'R_DATABASE_BACKUP', 1, 1, 0, '');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `ta_dbsource`
+--
+
+CREATE TABLE IF NOT EXISTS `ta_dbsource` (
+`id` int(10) unsigned NOT NULL COMMENT '主键',
+  `name` varchar(50) NOT NULL DEFAULT '' COMMENT '数据源名称',
+  `host` varchar(20) NOT NULL DEFAULT '' COMMENT '数据库地址',
+  `port` int(5) NOT NULL DEFAULT '3306' COMMENT '数据库端口',
+  `username` varchar(50) NOT NULL DEFAULT '' COMMENT '数据库帐号',
+  `password` varchar(50) NOT NULL DEFAULT '' COMMENT '数据库密码',
+  `dbname` varchar(50) NOT NULL DEFAULT '' COMMENT '数据库名称',
+  `dbtablepre` varchar(30) NOT NULL DEFAULT '' COMMENT '数据库表前缀'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='数据源' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -177,15 +204,16 @@ CREATE TABLE IF NOT EXISTS `ta_member` (
   `login_ip` char(15) NOT NULL COMMENT '登入IP',
   `last_login_time` int(10) unsigned NOT NULL COMMENT '最后登入时间戳',
   `login_count` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '登入次数'
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='用户信息表' AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='用户信息表' AUTO_INCREMENT=7 ;
 
 --
 -- 转存表中的数据 `ta_member`
 --
 
 INSERT INTO `ta_member` (`id`, `password`, `username`, `realname`, `email`, `question`, `answer`, `status`, `regtime`, `login_ip`, `last_login_time`, `login_count`) VALUES
-(1, '30bc103d85df152c8c703bcbbcc7fd4d', 'admin', '你买单我就来', 'itsky71@foxmail.com', '我还会回来的...', '灰太狼？呵呵。。。', 1, 1419068912, '127.0.0.1', 1421732415, 30),
-(2, '30bc103d85df152c8c703bcbbcc7fd4d', 'itsky', '你地盘我做主', 'zmh0515005@163.com', '你是谁?', '呵呵...', 1, 1419587881, '127.0.0.1', 1424848420, 147);
+(1, '30bc103d85df152c8c703bcbbcc7fd4d', 'admin', '你买单我就来', 'itsky71@foxmail.com', '我还会回来的...', '灰太狼？呵呵。。。', 1, 1419068912, '127.0.0.1', 1425119195, 31),
+(2, '30bc103d85df152c8c703bcbbcc7fd4d', 'itsky', '你地盘我做主', 'zmh0515005@163.com', '你是谁?', '呵呵...', 1, 1419587881, '127.0.0.1', 1425542811, 162),
+(6, '30bc103d85df152c8c703bcbbcc7fd4d', 'yourphp', '111111', 'zmh0515005@163.me', '', '', 1, 1424952659, '', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -205,7 +233,7 @@ CREATE TABLE IF NOT EXISTS `ta_menu` (
   `isos` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否为系统菜单',
   `status` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '状态',
   `listorder` tinyint(3) unsigned NOT NULL DEFAULT '99' COMMENT '排序'
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='后台菜单' AUTO_INCREMENT=49 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='后台菜单' AUTO_INCREMENT=50 ;
 
 --
 -- 转存表中的数据 `ta_menu`
@@ -225,10 +253,10 @@ INSERT INTO `ta_menu` (`id`, `pid`, `icon`, `name`, `model`, `action`, `data`, `
 (11, 5, 'glyphicon glyphicon-plus-sign', 'M_SITESET_ADDVAR', 'Siteset', 'addvar', '', '', 1, 1, 0),
 (12, 4, '', 'M_POSID_INDEX', 'Posid', 'index', '', '', 1, 1, 0),
 (13, 4, '', 'M_URLRULE_INDEX', 'Urlrule', 'index', '', '', 1, 1, 0),
-(14, 4, '', 'M_DBSOURCE_INDEX', 'Dbsource', 'index', '', '', 1, 1, 0),
-(15, 4, '', 'M_LANG_INDEX', 'Lang', 'index', '', '', 1, 1, 0),
-(16, 4, '', 'M_TYPE_INDEX', 'Type', 'index', '', '', 1, 1, 0),
-(17, 4, '', 'M_MENU_INDEX', 'Menu', 'index', '', '', 1, 1, 0),
+(14, 4, '', 'M_DBSOURCE_INDEX', 'Dbsource', 'index', '', '', 1, 1, 99),
+(15, 4, '', 'M_LANG_INDEX', 'Lang', 'index', '', '', 1, 1, 99),
+(16, 4, '', 'M_TYPE_INDEX', 'Type', 'index', '', '', 1, 1, 99),
+(17, 4, '', 'M_MENU_INDEX', 'Menu', 'index', '', '', 1, 1, 99),
 (18, 0, 'glyphicon glyphicon-list-alt', 'M_CONTENT_INDEX', 'Content', 'index', '', '', 1, 1, 0),
 (19, 18, '', 'M_CATEGORY_INDEX', 'Category', 'index', '', '', 1, 1, 0),
 (20, 18, '', 'M_ARTICLE_INDEX', 'Article', 'index', '', '', 1, 1, 0),
@@ -258,7 +286,8 @@ INSERT INTO `ta_menu` (`id`, `pid`, `icon`, `name`, `model`, `action`, `data`, `
 (44, 38, '', 'M_UPDATE_INDEX', 'Update', 'index', '', '', 0, 1, 0),
 (45, 38, '', 'M_UPDATE_LANG', 'Update', 'lang', '', '', 0, 1, 99),
 (46, 38, '', 'M_UPDATE_COLHTML', 'Update', 'colhtml', '', '', 0, 1, 99),
-(47, 38, '', 'M_UPDATE_CONHTML', 'Update', 'conhtml', '', '', 0, 1, 99);
+(47, 38, '', 'M_UPDATE_CONHTML', 'Update', 'conhtml', '', '', 0, 1, 99),
+(49, 4, '', 'M_DATABASE_INDEX', 'Database', 'index', '', '', 0, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -271,7 +300,7 @@ CREATE TABLE IF NOT EXISTS `ta_posid` (
   `name` varchar(40) NOT NULL DEFAULT '' COMMENT '名称',
   `listorder` tinyint(2) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
   `lang` varchar(10) NOT NULL COMMENT '语言'
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='推荐位' AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='推荐位' AUTO_INCREMENT=5 ;
 
 --
 -- 转存表中的数据 `ta_posid`
@@ -405,6 +434,12 @@ ALTER TABLE `ta_auth_rule`
  ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `name` (`name`);
 
 --
+-- Indexes for table `ta_dbsource`
+--
+ALTER TABLE `ta_dbsource`
+ ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `ta_lang`
 --
 ALTER TABLE `ta_lang`
@@ -453,7 +488,12 @@ MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户组id',
 -- AUTO_INCREMENT for table `ta_auth_rule`
 --
 ALTER TABLE `ta_auth_rule`
-MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=49;
+MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=58;
+--
+-- AUTO_INCREMENT for table `ta_dbsource`
+--
+ALTER TABLE `ta_dbsource`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键';
 --
 -- AUTO_INCREMENT for table `ta_lang`
 --
@@ -463,17 +503,17 @@ MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_I
 -- AUTO_INCREMENT for table `ta_member`
 --
 ALTER TABLE `ta_member`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户ID',AUTO_INCREMENT=6;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户ID',AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `ta_menu`
 --
 ALTER TABLE `ta_menu`
-MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=49;
+MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=50;
 --
 -- AUTO_INCREMENT for table `ta_posid`
 --
 ALTER TABLE `ta_posid`
-MODIFY `id` tinyint(2) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=7;
+MODIFY `id` tinyint(2) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `ta_siteset`
 --

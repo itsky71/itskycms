@@ -30,12 +30,14 @@ return array(
     'INFO'          =>  '信息',
     'USED_SPACE'    =>  '已用空间',
     'DATA_LENGTH'   =>  '数据',
-    'INDEX'         =>  '索引',
+    'INDEXS'        =>  '索引',
     'TOTAL'         =>  '总计',
     'FORMAT'        =>  '格式',
     'ROW_LENGTH'    =>  '行长度',
     'ROW_SIZE'      =>  '行大小',
     'CREATE_TIME'   =>  '创建时间',
     'UPDATE_TIME'   =>  '最后更新',
-    'CHECK_TIME'    =>  '最后检查'
+    'CHECK_TIME'    =>  '最后检查',
+    'FIXED'         =>  '静态',
+    'DYNAMIC'       =>  '动态'
 );

@@ -103,14 +103,47 @@ class DatabaseController extends AdminController{
         }else{
             $this->error (L('_ERROR_ACTION_'));
         }
-        //$db = new Model();
-//        $res = $db->query("SHOW FULL COLUMNS FROM ta_auth_group");
-//        $res = $db->query("SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE table_schema='tadmin'");
-//        $res = $db->query("Row statistics");
-        //dump($res);
     }
     //备份
     public function backup(){
-        
+//        if(IS_AJAX){
+            $db = new Model();
+            $datalist = $db->query('SHOW TABLE STATUS FROM '.C('DB_NAME'));
+            $mysql_version = $db->query('SELECT VERSION()');
+            $sql = '-- ITskyCMS SQL Backup'.PHP_EOL.'-- version '.C('VERSION').PHP_EOL;
+            $sql .= '-- http://www.itsky.com'.PHP_EOL.'--'.PHP_EOL;
+            $sql .= '-- Host: '.$_SERVER["HTTP_HOST"].PHP_EOL;
+            $sql .= '-- Generation Time: '.date('Y-m-d H:i:s').PHP_EOL;
+            $sql .= '-- 服务器版本： '.$mysql_version[0]['version()'].PHP_EOL;
+            $sql .= '-- PHP Version: '.phpversion().PHP_EOL.PHP_EOL;
+            $sql .= 'SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";'.PHP_EOL;
+            $sql .= 'SET time_zone = "'.date('P').'"'.PHP_EOL.PHP_EOL;
+            $sql .= '--'.PHP_EOL.'-- Database: '.C('DB_NAME').PHP_EOL.'--'.PHP_EOL.PHP_EOL;
+            foreach ($datalist as $row){
+                $sql .= '-- --------------------------------------------------------'.PHP_EOL.PHP_EOL;
+                $sql .= '--'.PHP_EOL.'-- 表的结构 `'.$row['name'].'`'.PHP_EOL.'--'.PHP_EOL;
+                $sql .= '-- 创建时间： '.$row['create_time'].PHP_EOL;
+                $sql .= '-- 最后更新： '.$row['update_time'].PHP_EOL;
+                $sql .= '-- 最后检查： '.$row['check_time'].PHP_EOL.'--'.PHP_EOL.PHP_EOL;
+                $sql .= 'DROP TABLE IF EXISTS `'.$row['name'].'`;'.PHP_EOL;
+                $sql .= 'CREATE TABLE IF NOT EXISTS `'.$row['name'].'` ('.PHP_EOL;
+                $auto_increment = $row['auto_increment'] ? ' AUTO_INCREMENT='.$row['auto_increment'].' ' : '';
+                $charset = substr($row['collation'], 0, strpos($row['collation'], '_'));
+                $sql .= ') ENGINE='.$row['engine'].'  DEFAULT CHARSET='.$charset.' COMMENT=\''.$row['comment'].'\'';
+                $sql .= $auto_increment.';'.PHP_EOL;
+                $sql .= PHP_EOL;
+            }
+            echo '<pre class="f14">'.$sql.'</pre>';
+//            dump($sql);
+//            print_r($datalist);
+            exit();
+            if(!file_exists(C('BACKUP_PATH'))){
+                mkdir(C('BACKUP_PATH'));
+            }
+            write_file(C('BACKUP_PATH').'tadmin.sql', $sql);
+//            print_r($table_info);
+//        }else{
+//            $this->error (L('_ERROR_ACTION_'));
+//        }
     }
 }

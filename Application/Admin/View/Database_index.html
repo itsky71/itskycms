@@ -19,7 +19,7 @@
             <foreach name="list" item="vo">
                 <tr>
                     <td class="pl20 w60">
-                        <input class="ace" type="checkbox" name="table" value="{$vo.name}"/>
+                        <input class="ace" type="checkbox" name="tables" value="{$vo.name}"/>
                         <span class="lbl"></span>
                     </td>
                     <td>{$vo.name}</td>
@@ -53,9 +53,9 @@
                         <a class="btn btn-primary btn-xs ml10" href="{:U('Database/structure',$vl)}" onclick="manope(event,this,'structure')">
                             <span class="glyphicon glyphicon-indent-left"></span>{:L('STRUCTURE')}
                         </a>
-                        <button class="btn btn-primary btn-xs ml10">
+                        <a class="btn btn-primary btn-xs mr10 pull-right" href="{:U('Database/backup',$vl)}" onclick="load(event,this)">
                             <span class="glyphicon glyphicon-duplicate"></span>{:L('BACKUP')}
-                        </button>
+                        </a>
                         <b class="pull-right pt5 mr10 yellow">{:L('TABLES',array('num'=>$total['tables']))}</b>
                     </th>
                     <th class="center pt13 blue"><b>{$total.rows}</b></th>
