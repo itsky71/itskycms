@@ -106,44 +106,67 @@ class DatabaseController extends AdminController{
     }
     //备份
     public function backup(){
-//        if(IS_AJAX){
+        if(IS_AJAX){
             $db = new Model();
             $datalist = $db->query('SHOW TABLE STATUS FROM '.C('DB_NAME'));
             $mysql_version = $db->query('SELECT VERSION()');
             $sql = '-- ITskyCMS SQL Backup'.PHP_EOL.'-- version '.C('VERSION').PHP_EOL;
-            $sql .= '-- http://www.itsky.com'.PHP_EOL.'--'.PHP_EOL;
+            $sql .= '-- http://www.itsky.com'.PHP_EOL.'-- '.PHP_EOL;
             $sql .= '-- Host: '.$_SERVER["HTTP_HOST"].PHP_EOL;
             $sql .= '-- Generation Time: '.date('Y-m-d H:i:s').PHP_EOL;
             $sql .= '-- 服务器版本： '.$mysql_version[0]['version()'].PHP_EOL;
             $sql .= '-- PHP Version: '.phpversion().PHP_EOL.PHP_EOL;
             $sql .= 'SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";'.PHP_EOL;
-            $sql .= 'SET time_zone = "'.date('P').'"'.PHP_EOL.PHP_EOL;
-            $sql .= '--'.PHP_EOL.'-- Database: '.C('DB_NAME').PHP_EOL.'--'.PHP_EOL.PHP_EOL;
+            $sql .= 'SET time_zone = "'.date('P').'";'.PHP_EOL.PHP_EOL;
+            $sql .= '-- '.PHP_EOL.'-- Database: `'.C('DB_NAME').'`'.PHP_EOL.'-- '.PHP_EOL;
+            $schema_sql = 'SELECT * FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = \''.C('DB_NAME').'\'';
+            $table_collate_info = $db->query($schema_sql);
+            $sql .= 'CREATE DATABASE IF NOT EXISTS `'.C('DB_NAME').'` DEFAULT CHARACTER SET ';
+            $sql .= $table_collate_info[0]['default_character_set_name'].' COLLATE ';
+            $sql .= $table_collate_info[0]['default_collation_name'].';'.PHP_EOL;
+            $sql .= 'USE `'.C('DB_NAME').'`;'.PHP_EOL.PHP_EOL;
             foreach ($datalist as $row){
                 $sql .= '-- --------------------------------------------------------'.PHP_EOL.PHP_EOL;
-                $sql .= '--'.PHP_EOL.'-- 表的结构 `'.$row['name'].'`'.PHP_EOL.'--'.PHP_EOL;
+                $sql .= '-- '.PHP_EOL.'-- 表的结构 `'.$row['name'].'`'.PHP_EOL.'-- '.PHP_EOL;
                 $sql .= '-- 创建时间： '.$row['create_time'].PHP_EOL;
-                $sql .= '-- 最后更新： '.$row['update_time'].PHP_EOL;
-                $sql .= '-- 最后检查： '.$row['check_time'].PHP_EOL.'--'.PHP_EOL.PHP_EOL;
+                if($row['update_time']) $sql .= '-- 最后更新： '.$row['update_time'].PHP_EOL;
+                $check_time = $row['check_time'] ? '-- 最后检查： '.$row['check_time'].PHP_EOL : '';
+                $sql .= $check_time.'-- '.PHP_EOL.PHP_EOL;
                 $sql .= 'DROP TABLE IF EXISTS `'.$row['name'].'`;'.PHP_EOL;
-                $sql .= 'CREATE TABLE IF NOT EXISTS `'.$row['name'].'` ('.PHP_EOL;
-                $auto_increment = $row['auto_increment'] ? ' AUTO_INCREMENT='.$row['auto_increment'].' ' : '';
-                $charset = substr($row['collation'], 0, strpos($row['collation'], '_'));
-                $sql .= ') ENGINE='.$row['engine'].'  DEFAULT CHARSET='.$charset.' COMMENT=\''.$row['comment'].'\'';
-                $sql .= $auto_increment.';'.PHP_EOL;
-                $sql .= PHP_EOL;
+                $create_table = $db->query('SHOW CREATE TABLE '.$row['name']);
+                $sql .= str_replace('CREATE TABLE', 'CREATE TABLE IF NOT EXISTS', $create_table[0]['create table']).';'.PHP_EOL.PHP_EOL;
+                $fields_sql = 'SELECT TABLE_NAME,COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS ';
+                $fields_sql .= 'WHERE TABLE_NAME = \''.$row['name'].'\' AND TABLE_SCHEMA = \''.C('DB_NAME').'\'';
+                $fields = $db->query($fields_sql);
+                foreach ($fields as $item){
+                    $field[] = $item['column_name'];
+                }
+                $fieldstr = implode('`, `', $field);
+                $table_data = $db->query('SELECT * FROM `'.$row['name'].'`');
+                if(count($table_data) != 0){
+                    $sql .= '-- '.PHP_EOL.'-- 转存表中的数据 `'.$row['name'].'`'.PHP_EOL.'-- '.PHP_EOL.PHP_EOL;
+                    $sql .= 'INSERT INTO `'.$row['name'].'` (`'.$fieldstr.'`) VALUES'.PHP_EOL;
+                    foreach ($table_data as $rowdata){
+                        foreach ($rowdata as $k=>$f){
+                            if(is_string($f)){
+                                $rowdata[$k] = '\''.$f.'\'';
+                            }else{
+                                $rowdata[$k] = 'NULL';
+                            }
+                        }
+                        $fdsql[] .= '('.implode(',',$rowdata).')';
+                    }
+                    $sql .= implode(','.PHP_EOL, $fdsql).';'.PHP_EOL.PHP_EOL;
+                }
+                unset($field);
+                unset($fdsql);
             }
-            echo '<pre class="f14">'.$sql.'</pre>';
-//            dump($sql);
-//            print_r($datalist);
-            exit();
             if(!file_exists(C('BACKUP_PATH'))){
                 mkdir(C('BACKUP_PATH'));
             }
             write_file(C('BACKUP_PATH').'tadmin.sql', $sql);
-//            print_r($table_info);
-//        }else{
-//            $this->error (L('_ERROR_ACTION_'));
-//        }
+        }else{
+            $this->error (L('_ERROR_ACTION_'));
+        }
     }
 }

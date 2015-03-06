@@ -178,7 +178,7 @@ function delcheck(e,t){
 function manope(e,t,o){
     e.preventDefault();
     var tables = new Array();
-    $('input[name="table"]:checked').each(function(i){
+    $('input[name="tables"]:checked').each(function(i){
         tables[i] = $(this).val();
     });
     if(tables == ''){
