@@ -293,3 +293,91 @@ function byte_format($num, $precision = 1){
     }
     return number_format($num, $precision).' '.$unit;
 }
+/**
+ * 获取目录中的文件信息
+ *
+ * 获取 $source_dir 目录下的所有文件的文件名，文件大小，
+ * 日期，文件权限等，并将这些内容保存到返回的数组中。
+ *
+ * @access  public
+ * @param   string      $source_dir     文件夹路径
+ * @param   boolean     $top_level_only
+ * @param   boolean     $_recursion    
+ * @return  array
+ */
+function get_dir_file_info($source_dir, $top_level_only = TRUE, $_recursion = FALSE){
+    static $_filedata = array();
+    $relative_path = $source_dir;
+    $fp = opendir($source_dir);
+    if ($fp){
+        // reset the array and make sure $source_dir has a trailing slash on the initial call
+        if ($_recursion === FALSE){
+            $_filedata = array();
+            $source_dir = rtrim(realpath($source_dir), DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR;
+        }
+ 
+        // foreach (scandir($source_dir, 1) as $file) // In addition to being PHP5+, scandir() is simply not as fast
+        while (FALSE !== ($file = readdir($fp))){
+            if (is_dir($source_dir.$file) AND strncmp($file, '.', 1) !== 0 AND $top_level_only === FALSE){
+                get_dir_file_info($source_dir.$file.DIRECTORY_SEPARATOR, $top_level_only, TRUE);
+            }elseif (strncmp($file, '.', 1) !== 0){
+                $_filedata[$file] = get_file_info($source_dir.$file);
+                $_filedata[$file]['relative_path'] = $relative_path;
+            }
+        }
+        return $_filedata;
+    }else{
+        return FALSE;
+    }
+}
+/**
+* 获取文件信息
+*
+* 通过给定的路径和文件名，获取到文件 path/to/file 的文件名，文件大小，文件更改日期等。
+* 第二个参数允许你说明需要返回的信息，这个参数的选项包括 ‘name’，‘server_path’，‘size’，
+* ‘date’，‘readable’，‘writeable’，‘executable’，‘fileperms’。
+* 如果文件不存在则返回 FALSE
+*
+* @access   public
+* @param    string  $file               文件路径
+* @param    mixed   $returned_values    array or comma separated string of information returned
+* @return   array
+*/
+function get_file_info($file, $returned_values = array('name', 'server_path', 'size', 'date')){
+    if (!file_exists($file)){
+        return FALSE;
+    }
+    if (is_string($returned_values)){
+        $returned_values = explode(',', $returned_values);
+    }
+    foreach ($returned_values as $key){
+        switch ($key){
+            case 'name':
+                $fileinfo['name'] = substr(strrchr($file, DIRECTORY_SEPARATOR), 1);
+                break;
+            case 'server_path':
+                $fileinfo['server_path'] = $file;
+                break;
+            case 'size':
+                $fileinfo['size'] = filesize($file);
+                break;
+            case 'date':
+                $fileinfo['date'] = filemtime($file);
+                break;
+            case 'readable':
+                $fileinfo['readable'] = is_readable($file);
+                break;
+            case 'writable':
+                // There are known problems using is_weritable on IIS.  It may not be reliable - consider fileperms()
+                $fileinfo['writable'] = is_writable($file);
+                break;
+            case 'executable':
+                $fileinfo['executable'] = is_executable($file);
+                break;
+            case 'fileperms':
+                $fileinfo['fileperms'] = fileperms($file);
+                break;
+        }
+    }
+    return $fileinfo;
+}

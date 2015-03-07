@@ -150,19 +150,23 @@ class Http {
             $length = filesize($filename);
         }elseif($content != '') {
             $length = strlen($content);
-        }else {
-            E($filename.L('下载文件不存在！'));
+        }else{
+            if(APP_DEBUG){
+                E($filename.L('DOWNLOAD_FILE_NOT_EXIST'));
+            }else{
+                return L('DOWNLOAD_FILE_NOT_EXIST');
+            }
         }
         if(empty($showname)) {
             $showname = $filename;
         }
         $showname = basename($showname);
-		if(!empty($filename)) {
-			$finfo 	= 	new \finfo(FILEINFO_MIME);
-			$type 	= 	$finfo->file($filename);			
-		}else{
-			$type	=	"application/octet-stream";
-		}
+        if(!empty($filename)) {
+                $finfo 	= 	new \finfo(FILEINFO_MIME);
+                $type 	= 	$finfo->file($filename);			
+        }else{
+                $type	=	"application/octet-stream";
+        }
         //发送Http Header信息 开始下载
         header("Pragma: public");
         header("Cache-control: max-age=".$expire);
@@ -177,7 +181,7 @@ class Http {
         if($content == '' ) {
             readfile($filename);
         }else {
-        	echo($content);
+            echo($content);
         }
         exit();
     }
@@ -191,7 +195,7 @@ class Http {
         $headers   	= getallheaders();
         if(!empty($header)) {
             $info 	= $headers[$header];
-            echo($header.':'.$info."\n"); ;
+            echo($header.':'.$info."\n");
         }else {
             foreach($headers as $key=>$val) {
                 echo("$key:$val\n");

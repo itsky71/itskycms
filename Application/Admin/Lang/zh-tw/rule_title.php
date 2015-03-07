@@ -60,4 +60,8 @@ $rule_title = array(
     'R_DATABASE_ANALYZE' => '分析',
     'R_DATABASE_STRUCTURE' => '结构',
     'R_DATABASE_BACKUP' => '执行备份',
+    'R_DATABASE_SQL' => '執行SQL語句',
+    'R_DATABASE_RECOVER' => '恢復數據庫',
+    'R_DATABASE_DATABASE' => '下載',
+    'R_DATABASE_DOWNLOAD' => '下載',
 );

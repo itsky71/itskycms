@@ -39,7 +39,7 @@ class DatabaseController extends AdminController{
             $this->assign('list',$res);
             $this->display('manope');
         }else{
-            $this->error (L('_ERROR_ACTION_'));
+            $this->error(L('_ERROR_ACTION_'));
         }
     }
     //优化表
@@ -52,7 +52,7 @@ class DatabaseController extends AdminController{
             $this->assign('list',$res);
             $this->display('manope');
         }else{
-            $this->error (L('_ERROR_ACTION_'));
+            $this->error(L('_ERROR_ACTION_'));
         }
     }
     //检查表
@@ -65,7 +65,7 @@ class DatabaseController extends AdminController{
             $this->assign('list',$res);
             $this->display('manope');
         }else{
-            $this->error (L('_ERROR_ACTION_'));
+            $this->error(L('_ERROR_ACTION_'));
         }
     }
     //分析表
@@ -78,7 +78,7 @@ class DatabaseController extends AdminController{
             $this->assign('list',$res);
             $this->display('manope');
         }else{
-            $this->error (L('_ERROR_ACTION_'));
+            $this->error(L('_ERROR_ACTION_'));
         }
     }
     //表结构
@@ -101,7 +101,7 @@ class DatabaseController extends AdminController{
             $this->assign('tablesinfo',$tablesinfo);
             $this->display();
         }else{
-            $this->error (L('_ERROR_ACTION_'));
+            $this->error(L('_ERROR_ACTION_'));
         }
     }
     //备份
@@ -164,9 +164,49 @@ class DatabaseController extends AdminController{
             if(!file_exists(C('BACKUP_PATH'))){
                 mkdir(C('BACKUP_PATH'));
             }
-            write_file(C('BACKUP_PATH').'tadmin.sql', $sql);
+            $file_name = C('DB_NAME').'_'.date('Y-m-d-H-i-s').'.sql';
+            write_file(C('BACKUP_PATH').$file_name, $sql);
+            if(file_exists(C('BACKUP_PATH').$file_name)){
+                $this->success(L('BACKUP_OK'),U('Database/recover',$this->vl));
+            }else{
+                $this->error(L('BACKUP_ERROR'));
+            }
         }else{
-            $this->error (L('_ERROR_ACTION_'));
+            $this->error(L('_ERROR_ACTION_'));
+        }
+    }
+    //恢复数据库
+    public function recover(){
+        if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
+        $files_info = get_dir_file_info(C('BACKUP_PATH'));
+        foreach ($files_info as $item){
+            if(pathinfo($item['name'], PATHINFO_EXTENSION) == 'sql'){
+                $newarr[$item['date']] = $item;
+            }
+        }
+        krsort($newarr);
+        $this->assign('list', $newarr);
+        $this->display();
+    }
+    //下载
+    public function download(){
+        if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
+        if(I('get.file')){
+            $filename = base64_decode(I('get.file'));
+            $file = C('BACKUP_PATH').$filename;
+            $res = \Org\Net\Http::download($file);
+            if($res){
+//                $data = array(
+//                    'info' => $res,
+//                    'status' => 0
+//                );
+//                $this->ajaxReturn($data);
+                $this->error($res);
+            }else{
+                $this->backup();
+            }
+        }else{
+            $this->error(L('_ERROR_ACTION_'));
         }
     }
 }

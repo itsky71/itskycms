@@ -17,6 +17,7 @@ return array(
     'TOTAL_LENGTH'  =>  '数据库大小',
     'TABLES'        =>  '共 {$num} 张表',
     'SQL'           =>  '执行SQL语句',
+    'RECOVER'       =>  '恢复数据库',
     'BACK'          =>  '返回',
     'TABLE_COMMENT' =>  '表注釋',
     'FIELD'         =>  '字段',
@@ -39,5 +40,11 @@ return array(
     'UPDATE_TIME'   =>  '最后更新',
     'CHECK_TIME'    =>  '最后检查',
     'FIXED'         =>  '静态',
-    'DYNAMIC'       =>  '动态'
+    'DYNAMIC'       =>  '动态',
+    'BACKUP_OK'     =>  '备份成功！',
+    'BACKUP_ERROR'  =>  '备份失败！',
+    'SIZE'          =>  '大小',
+    'TIME'          =>  '时间',
+    'DOWN'          =>  '下载',
+    'IMPORT'        =>  '导入'
 );

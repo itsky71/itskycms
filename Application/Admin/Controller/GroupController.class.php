@@ -16,7 +16,7 @@ namespace Admin\Controller;
  */
 class GroupController extends AdminController{
     public function index() {
-        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
         $Group = D('AuthGroup');
         $groups = $Group->select();
         foreach ($groups as $value){

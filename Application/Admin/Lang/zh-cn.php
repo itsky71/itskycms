@@ -42,6 +42,9 @@ $common = array(
     'NO'                =>  '否',
     'FONT_INDEX'        =>  '前台主页',
     'ADD_ERROR'         =>  '数据添加失败！',
-    'ADD_OK'            =>  '数据添加成功！'
+    'ADD_OK'            =>  '数据添加成功！',
+
+
+    'DOWNLOAD_FILE_NOT_EXIST'   =>  '下载文件不存在！'
 );
 return array_merge($common, $menu_common);

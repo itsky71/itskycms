@@ -17,6 +17,7 @@ return array(
     'TOTAL_LENGTH'  =>  '數據庫大小',
     'TABLES'        =>  '共 {$num} 張表',
     'SQL'           =>  '執行SQL語句',
+    'RECOVER'       =>  '恢復數據庫',
     'BACK'          =>  '返回',
     'TABLE_COMMENT' =>  '表注釋',
     'FIELD'         =>  '字段',
@@ -39,5 +40,11 @@ return array(
     'UPDATE_TIME'   =>  '最後更新',
     'CHECK_TIME'    =>  '最後檢查',
     'FIXED'         =>  '靜態',
-    'DYNAMIC'       =>  '動態'
+    'DYNAMIC'       =>  '動態',
+    'BACKUP_OK'     =>  '備份成功！',
+    'BACKUP_ERROR'  =>  '備份失敗！',
+    'SIZE'          =>  '大小',
+    'TIME'          =>  '時間',
+    'DOWN'          =>  '下載',
+    'IMPORT'        =>  '導入'
 );
