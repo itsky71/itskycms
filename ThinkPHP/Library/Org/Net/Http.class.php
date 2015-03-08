@@ -181,7 +181,7 @@ class Http {
         if($content == '' ) {
             readfile($filename);
         }else {
-            echo($content);
+        	echo($content);
         }
         exit();
     }
