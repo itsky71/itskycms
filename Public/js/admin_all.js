@@ -148,7 +148,7 @@ function delcheck(e,t){
         vid[i] = $(this).val();
     });
     if(vid == ''){
-        show_msg($.parseJSON('{"info":"'+ITskyLang.DEL_CHECK_MSG+'","status":"0"}'));
+        show_msg($.parseJSON('{"info":"'+ITskyLang.CHECK_MSG+'","status":"0"}'));
         return false;
     }else{
         bootbox.confirm('<span class="glyphicon glyphicon-question-sign yellow bigger-120"></span>'+ITskyLang.DEL_CHECK_MSG_CONFIRM,function(result){

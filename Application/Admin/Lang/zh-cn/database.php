@@ -11,7 +11,7 @@ return array(
     'REPAIR'        =>  '修复',
     'OPTIMIZATION'  =>  '优化',
     'CHECK'         =>  '检查',
-    'ANALYZE'      =>  '分析',
+    'ANALYZE'       =>  '分析',
     'STRUCTURE'     =>  '结构',
     'BACKUP'        =>  '执行备份',
     'TOTAL_LENGTH'  =>  '数据库大小',
@@ -46,5 +46,13 @@ return array(
     'SIZE'          =>  '大小',
     'TIME'          =>  '时间',
     'DOWN'          =>  '下载',
-    'IMPORT'        =>  '导入'
+    'IMPORT'        =>  '导入',
+    'MANOPE'        =>  '操作',
+    'DELETE_SELECT' =>  '删除所选',
+    'SERVER_VERSION'=>  '服务器版本',
+    'TABLE_STRUCTURE'=> '表的结构',
+    'SAVE_TABLE_DATA'=> '转存表中的数据',
+    'DEL_ERROR'     =>  '文件删除失败！',
+    'DEL_OK'        =>  '文件删除成功！',
+    'EMPTY_DATA'    =>  '暂 无 数 据 ！'
 );

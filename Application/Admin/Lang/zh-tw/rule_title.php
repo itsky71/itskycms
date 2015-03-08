@@ -64,4 +64,5 @@ $rule_title = array(
     'R_DATABASE_RECOVER' => '恢復數據庫',
     'R_DATABASE_DATABASE' => '下載',
     'R_DATABASE_DOWNLOAD' => '下載',
+    'R_DATABASE_DEL' => '刪除',
 );

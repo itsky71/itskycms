@@ -17,6 +17,7 @@ use Think\Model;
  */
 class DatabaseController extends AdminController{
     public function index() {
+        if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
         $db = new Model();
         $list = $db->query('SHOW TABLE STATUS LIKE \''.C('DB_PREFIX').'%\'');
         foreach ($list as $row){
@@ -114,7 +115,7 @@ class DatabaseController extends AdminController{
             $sql .= '-- http://www.itsky.com'.PHP_EOL.'-- '.PHP_EOL;
             $sql .= '-- Host: '.$_SERVER["HTTP_HOST"].PHP_EOL;
             $sql .= '-- Generation Time: '.date('Y-m-d H:i:s').PHP_EOL;
-            $sql .= '-- 服务器版本： '.$mysql_version[0]['version()'].PHP_EOL;
+            $sql .= '-- '.L('SERVER_VERSION').': '.$mysql_version[0]['version()'].PHP_EOL;
             $sql .= '-- PHP Version: '.phpversion().PHP_EOL.PHP_EOL;
             $sql .= 'SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";'.PHP_EOL;
             $sql .= 'SET time_zone = "'.date('P').'";'.PHP_EOL.PHP_EOL;
@@ -127,10 +128,10 @@ class DatabaseController extends AdminController{
             $sql .= 'USE `'.C('DB_NAME').'`;'.PHP_EOL.PHP_EOL;
             foreach ($datalist as $row){
                 $sql .= '-- --------------------------------------------------------'.PHP_EOL.PHP_EOL;
-                $sql .= '-- '.PHP_EOL.'-- 表的结构 `'.$row['name'].'`'.PHP_EOL.'-- '.PHP_EOL;
-                $sql .= '-- 创建时间： '.$row['create_time'].PHP_EOL;
-                if($row['update_time']) $sql .= '-- 最后更新： '.$row['update_time'].PHP_EOL;
-                $check_time = $row['check_time'] ? '-- 最后检查： '.$row['check_time'].PHP_EOL : '';
+                $sql .= '-- '.PHP_EOL.'-- '.L('TABLE_STRUCTURE').' `'.$row['name'].'`'.PHP_EOL.'-- '.PHP_EOL;
+                $sql .= '-- '.L('CREATE_TIME').': '.$row['create_time'].PHP_EOL;
+                if($row['update_time']) $sql .= '-- '.L('UPDATE_TIME').': '.$row['update_time'].PHP_EOL;
+                $check_time = $row['check_time'] ? '-- '.L('CHECK_TIME').': '.$row['check_time'].PHP_EOL : '';
                 $sql .= $check_time.'-- '.PHP_EOL.PHP_EOL;
                 $sql .= 'DROP TABLE IF EXISTS `'.$row['name'].'`;'.PHP_EOL;
                 $create_table = $db->query('SHOW CREATE TABLE '.$row['name']);
@@ -144,7 +145,7 @@ class DatabaseController extends AdminController{
                 $fieldstr = implode('`, `', $field);
                 $table_data = $db->query('SELECT * FROM `'.$row['name'].'`');
                 if(count($table_data) != 0){
-                    $sql .= '-- '.PHP_EOL.'-- 转存表中的数据 `'.$row['name'].'`'.PHP_EOL.'-- '.PHP_EOL.PHP_EOL;
+                    $sql .= '-- '.PHP_EOL.'-- '.L('SAVE_TABLE_DATA').' `'.$row['name'].'`'.PHP_EOL.'-- '.PHP_EOL.PHP_EOL;
                     $sql .= 'INSERT INTO `'.$row['name'].'` (`'.$fieldstr.'`) VALUES'.PHP_EOL;
                     foreach ($table_data as $rowdata){
                         foreach ($rowdata as $k=>$f){
@@ -190,23 +191,44 @@ class DatabaseController extends AdminController{
     }
     //下载
     public function download(){
-        if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
         if(I('get.file')){
             $filename = base64_decode(I('get.file'));
             $file = C('BACKUP_PATH').$filename;
             $res = \Org\Net\Http::download($file);
             if($res){
-//                $data = array(
-//                    'info' => $res,
-//                    'status' => 0
-//                );
-//                $this->ajaxReturn($data);
                 $this->error($res);
-            }else{
-                $this->backup();
             }
         }else{
             $this->error(L('_ERROR_ACTION_'));
+        }
+    }
+    //删除
+    public function del(){
+        if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
+        if(IS_POST){
+            $files_info = get_dir_file_info(C('BACKUP_PATH'));
+            $files_md5 = explode(',', I('post.ids'));
+            foreach ($files_info as $item){
+                if(pathinfo($item['name'], PATHINFO_EXTENSION) == 'sql'){
+                    if(in_array(md5($item['name']), $files_md5)){
+                        $delres = \Think\Storage\Driver\File::unlink($item['relative_path'].$item['name']);
+                        if($delres === FALSE){
+                            $this->error(L('DEL_ERROR'));
+                            exit();
+                        }
+                    }
+                }
+            }
+            $this->success(L('DEL_OK'),U('Database/recover',$this->vl));
+        }else{
+            $filename = base64_decode(I('get.file'));
+            $file = C('BACKUP_PATH').$filename;
+            $delres = \Think\Storage\Driver\File::unlink($file);
+            if($delres){
+                $this->success(L('DEL_OK'),U('Database/recover',$this->vl));
+            }else{
+                $this->error(L('DEL_ERROR'));
+            }
         }
     }
 }

@@ -13,8 +13,7 @@
                     <th>{:L('NAME')}</th>
                     <th class="center">{:L('SIZE')}</th>
                     <th class="center">{:L('TIME')}</th>
-                    <th class="center">{:L('DOWN')}</th>
-                    <th class="center">{:L('IMPORT')}</th>
+                    <th class="center">{:L('MANOPE')}</th>
                 </tr>
             </thead>
             <tbody>
@@ -22,7 +21,7 @@
                 <tr>
                     <td class="center">
                         <label>
-                            <input class="ace" type="checkbox" value="{$vo.name|md5}" name="file"/>
+                            <input class="ace" type="checkbox" value="{$vo.name|md5}" name="id"/>
                             <span class="lbl"></span>
                         </label>
                     </td>
@@ -31,23 +30,35 @@
                     <td class="center">{$vo.date|date='Y-m-d H:i:s',###}</td>
                     <td class="center">
                         <php>$file = $vl.'&file='.base64_encode($vo['name']);</php>
-                        <a href="{:U('Database/download',$file)}" onclick="load(event,this)">{:L('DOWN')}</a>
+                        <a class="btn btn-info btn-xs no-border" href="{:U('Database/download',$file)}" target="_bank">
+                            <span class="glyphicon glyphicon-download-alt"></span> {:L('DOWN')}
+                        </a>
+                        <a class="btn btn-purple btn-xs no-border" href="#">
+                            <span class="glyphicon glyphicon-log-in"></span> {:L('IMPORT')}
+                        </a>
+                        <a class="btn btn-danger btn-xs no-border" href="{:U('Database/del',$file)}" onclick="del(event,this,'c')">
+                            <span class="glyphicon glyphicon-trash"></span> {:L('DELETE')}
+                        </a>
                     </td>
-                    <td class="center"><a href="#">{:L('IMPORT')}</a></td>
                 </tr>
             </foreach>
+            <if condition="!$list">
+                <tr>
+                    <td class="center red" colspan="5">{:L('EMPTY_DATA')}</td>
+                </tr>
+            </if>
             </tbody>
             <tfoot>
                 <tr>
-                    <td class="bg-grey pl20" colspan="6">
+                    <td class="bg-grey pl20" colspan="5">
                         <label>
                             <input class="ace" type="checkbox"/>
                             <span class="lbl">{:L('ALL_SELECT')}</span>
                         </label>
-                        <button class="btn btn-danger btn-xs ml10">
+                        <a class="btn btn-danger btn-xs ml10" href="{:U('Database/del',$vl)}" onclick="delcheck(event,this)">
                             <span class="glyphicon glyphicon-trash"></span>
-                            {:L('DELETE')}
-                        </button>
+                            {:L('DELETE_SELECT')}
+                        </a>
                     </td>
                 </tr>
             </tfoot>

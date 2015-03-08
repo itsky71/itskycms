@@ -46,5 +46,13 @@ return array(
     'SIZE'          =>  '大小',
     'TIME'          =>  '時間',
     'DOWN'          =>  '下載',
-    'IMPORT'        =>  '導入'
+    'IMPORT'        =>  '導入',
+    'MANOPE'        =>  '操作',
+    'DELETE_SELECT' =>  '刪除所選',
+    'SERVER_VERSION'=>  '服務器版本',
+    'TABLE_STRUCTURE'=> '表的結構',
+    'SAVE_TABLE_DATA'=> '轉存表中的數據',
+    'DEL_ERROR'     =>  '文件刪除失敗！',
+    'DEL_OK'        =>  '文件刪除成功！',
+    'EMPTY_DATA'    =>  '暫 無 數 據 ！'
 );
