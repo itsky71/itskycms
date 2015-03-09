@@ -54,5 +54,11 @@ return array(
     'SAVE_TABLE_DATA'=> '轉存表中的數據',
     'DEL_ERROR'     =>  '文件刪除失敗！',
     'DEL_OK'        =>  '文件刪除成功！',
-    'EMPTY_DATA'    =>  '暫 無 數 據 ！'
+    'EMPTY_DATA'    =>  '暫 無 數 據 ！',
+    'IMPORT_ERROR'  =>  '導入失敗！',
+    'IMPORT_OK'     =>  '導入成功！',
+    'ACTION'        =>  '執行',
+    'EXC_SQL_MSG_1' =>  '1.請輸入SQL語句，可同時執行多條語句，每行一條',
+    'EXC_SQL_MSG_2' =>  '2.SQL執行后影響到的結果不可恢復，請謹慎使用此功能',
+    'EXC_SQL_MSG_3' =>  '3.若有重要數據，請在執行SQL語句前備份數據庫，以免數據丟失'
 );

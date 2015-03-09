@@ -176,6 +176,38 @@ class DatabaseController extends AdminController{
             $this->error(L('_ERROR_ACTION_'));
         }
     }
+    //执行SQL
+    public function sql(){
+        if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
+        if(IS_POST){
+            $sqls = explode(PHP_EOL,stripcslashes(I('post.sql')));
+            $queryType = 'INSERT|UPDATE|DELETE|REPLACE|CREATE|DROP|LOAD DATA|SELECT .* INTO|';
+            $queryType .= 'COPY|ALTER|GRANT|TRUNCATE|REVOKE|LOCK|UNLOCK';
+            $db = new Model();
+            $i = 0;
+            foreach ((array)$sqls as $sql){
+                if(!empty(trim($sql))){
+                    $i++;
+                    if(preg_match('/^\s*"?('.$queryType.')\s+/i',$sql)){
+                        $db->execute($sql);
+                        $res[$i]['result'] = $db->getError();
+                        $res[$i]['type'] = 'execute';
+                    }else{
+                        $res[$i]['result'] = $db->query($sql);
+                        $res[$i]['type'] = 'query';
+                    }
+                }
+            }
+            print_r($res);
+            print_r($i);
+//            dump($sqls);
+//            $db = new Model();
+//            $res = $db->query(I('post.sql'));
+//            dump($res);
+        }else{
+            $this->display();
+        }
+    }
     //恢复数据库
     public function recover(){
         if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
@@ -197,6 +229,24 @@ class DatabaseController extends AdminController{
             $res = \Org\Net\Http::download($file);
             if($res){
                 $this->error($res);
+            }
+        }else{
+            $this->error(L('_ERROR_ACTION_'));
+        }
+    }
+    //导入
+    public function import(){
+        if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
+        if(I('get.file')){
+            $filename = base64_decode(I('get.file'));
+            $file = C('BACKUP_PATH').$filename;
+            $sql = read_file($file);
+            $db = new Model();
+            $res = $db->execute($sql);
+            if($res === FALSE){
+                $this->error(L('IMPORT_ERROR'));
+            }else{
+                $this->success(L('IMPORT_OK'),U('Database/recover',$this->vl));
             }
         }else{
             $this->error(L('_ERROR_ACTION_'));

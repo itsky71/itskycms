@@ -65,4 +65,5 @@ $rule_title = array(
     'R_DATABASE_DATABASE' => '下載',
     'R_DATABASE_DOWNLOAD' => '下載',
     'R_DATABASE_DEL' => '刪除',
+    'R_DATABASE_IMPORT' => '導入',
 );

@@ -227,3 +227,25 @@ function manope(e,t,o){
         $('.bootbox .modal-dialog').addClass('modal-sm');
     }
 }
+//导入数据库
+function sqlimport(e,t){
+    e.preventDefault();
+    var msg = ITskyLang.SQL_IMPORT_MSG_CONFIRM;
+    bootbox.confirm('<span class="glyphicon glyphicon-question-sign yellow bigger-120"></span>'+msg,function(result){
+        if(result){
+            $.ajax({
+                type:'get',
+                url:$(t).attr('href'),
+                global:true,
+                success:function(data){
+                    if($.isPlainObject(data)){
+                        show_msg(data);
+                    }else{
+                        $('#new_content').html(data);
+                        $(document.body).scrollator('refresh');
+                    }
+                }
+            });
+        }
+    });
+}

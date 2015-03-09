@@ -33,7 +33,7 @@
                         <a class="btn btn-info btn-xs no-border" href="{:U('Database/download',$file)}" target="_bank">
                             <span class="glyphicon glyphicon-download-alt"></span> {:L('DOWN')}
                         </a>
-                        <a class="btn btn-purple btn-xs no-border" href="#">
+                        <a class="btn btn-purple btn-xs no-border" href="{:U('Database/import',$file)}" onclick="sqlimport(event,this)">
                             <span class="glyphicon glyphicon-log-in"></span> {:L('IMPORT')}
                         </a>
                         <a class="btn btn-danger btn-xs no-border" href="{:U('Database/del',$file)}" onclick="del(event,this,'c')">

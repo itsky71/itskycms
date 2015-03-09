@@ -15,14 +15,15 @@ return array(
     'USER_STOP'     =>  '用户被禁用',
     'ALREADY_OUT'   =>  '已经登出',
     /** JS 文件中的语言 **/
-    'DEL_MSG_ONE'               =>  ' 确定要删除吗？',
-    'DEL_MSG_ALL'               =>  ' 确定要删除该栏目及其所有子栏目吗？',
-    'CHECK_MSG'                 =>  '请选择至少一项！',
-    'DEL_CHECK_MSG_CONFIRM'     =>  ' 确定要删除所选吗？',
-    'REPAIR_CHECK_MSG_CONFIRM'  =>  ' 确定要修复所选表吗？',
+    'DEL_MSG_ONE'                       =>  ' 确定要删除吗？',
+    'DEL_MSG_ALL'                       =>  ' 确定要删除该栏目及其所有子栏目吗？',
+    'CHECK_MSG'                         =>  '请选择至少一项！',
+    'DEL_CHECK_MSG_CONFIRM'             =>  ' 确定要删除所选吗？',
+    'REPAIR_CHECK_MSG_CONFIRM'          =>  ' 确定要修复所选表吗？',
     'OPTIMIZATION_CHECK_MSG_CONFIRM'    =>  ' 确定要优化所选表吗？',
-    'CHECK_CHECK_MSG_CONFIRM'   =>  ' 确定要检查所选表吗？',
-    'ANALYZE_CHECK_MSG_CONFIRM' =>  ' 确定要分析所选表吗？',
-    'STRUCTURE_CHECK_MSG_CONFIRM'   =>  ' 确定要显示所选表的结构吗？',
-    'ORTHER_CHECK_MSG_CONFIRM'      =>  ' 确定要继续吗？'
+    'CHECK_CHECK_MSG_CONFIRM'           =>  ' 确定要检查所选表吗？',
+    'ANALYZE_CHECK_MSG_CONFIRM'         =>  ' 确定要分析所选表吗？',
+    'STRUCTURE_CHECK_MSG_CONFIRM'       =>  ' 确定要显示所选表的结构吗？',
+    'ORTHER_CHECK_MSG_CONFIRM'          =>  ' 确定要继续吗？',
+    'SQL_IMPORT_MSG_CONFIRM'            =>  ' 导入该数据库文件，会将现有的数据全部删除，确定要导入该数据库吗？'
 );

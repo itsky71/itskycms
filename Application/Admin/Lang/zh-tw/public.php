@@ -15,14 +15,15 @@ return array(
     'USER_STOP'     =>  '用戶被禁用',
     'ALREADY_OUT'   =>  '已經登出',
     /** JS 文件中的語言 **/
-    'DEL_MSG_ONE'               =>  ' 確定要刪除嗎？',
-    'DEL_MSG_ALL'               =>  ' 確定要刪除該欄目及其所有子欄目嗎？',
-    'CHECK_MSG'                 =>  ' 請選擇至少一項！',
-    'DEL_CHECK_MSG_CONFIRM'     =>  ' 確定要刪除所選嗎？',
-    'REPAIR_CHECK_MSG_CONFIRM'  =>  ' 確定要修復所選表嗎？',
+    'DEL_MSG_ONE'                       =>  ' 確定要刪除嗎？',
+    'DEL_MSG_ALL'                       =>  ' 確定要刪除該欄目及其所有子欄目嗎？',
+    'CHECK_MSG'                         =>  ' 請選擇至少一項！',
+    'DEL_CHECK_MSG_CONFIRM'             =>  ' 確定要刪除所選嗎？',
+    'REPAIR_CHECK_MSG_CONFIRM'          =>  ' 確定要修復所選表嗎？',
     'OPTIMIZATION_CHECK_MSG_CONFIRM'    =>  ' 確定要優化所選表嗎？',
-    'CHECK_CHECK_MSG_CONFIRM'   =>  ' 確定要檢查所選表嗎？',
-    'ANALYZE_CHECK_MSG_CONFIRM' =>  ' 確定要分析所選表嗎？',
-    'STRUCTURE_CHECK_MSG_CONFIRM'   =>  ' 確定要顯示所選表的結構嗎？',
-    'ORTHER_CHECK_MSG_CONFIRM'      =>  ' 確定要繼續嗎？'
+    'CHECK_CHECK_MSG_CONFIRM'           =>  ' 確定要檢查所選表嗎？',
+    'ANALYZE_CHECK_MSG_CONFIRM'         =>  ' 確定要分析所選表嗎？',
+    'STRUCTURE_CHECK_MSG_CONFIRM'       =>  ' 確定要顯示所選表的結構嗎？',
+    'ORTHER_CHECK_MSG_CONFIRM'          =>  ' 確定要繼續嗎？',
+    'SQL_IMPORT_MSG_CONFIRM'            =>  ' 導入該數據庫文件，會將現有的數據全部刪除，確定要導入該數據庫嗎？'
 );

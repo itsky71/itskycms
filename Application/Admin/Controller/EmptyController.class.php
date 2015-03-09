@@ -8,16 +8,16 @@
 // +----------------------------------------------------------------------
 // | Author: itsky <itsky71@foxmail.com>
 // +----------------------------------------------------------------------
-namespace Admin\Controller;
+//namespace Admin\Controller;
 /**
  * Description of EmptyController
  * 后台空控制器
  * @author itsky
  */
-class EmptyController extends AdminController{
-    public function index() {
-        $e['message'] = C('ERROR_MESSAGE');
-        $this->assign('e', $e);
-        $this->display('Empty:index');
-    }
-}
+//class EmptyController extends AdminController{
+//    public function index() {
+//        $e['message'] = C('ERROR_MESSAGE');
+//        $this->assign('e', $e);
+//        $this->display('Empty:index');
+//    }
+//}
