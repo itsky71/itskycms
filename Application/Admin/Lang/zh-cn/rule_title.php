@@ -69,4 +69,5 @@ $rule_title = array(
     'R_DATABASE_DOWNLOAD' => '下载',
     'R_DATABASE_DEL' => '删除',
     'R_DATABASE_IMPORT' => '导入',
+    'R_TYPE_ADD' => '添加',
 );

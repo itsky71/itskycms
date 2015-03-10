@@ -1,5 +1,6 @@
 <?php
 return array(
+    'ADD'           =>  '添加數據源',
     'NUMBER'        =>  '編號',
     'INDEX_NAME'    =>  '名稱',
     'MANOPE'        =>  '操作',
