@@ -26,6 +26,11 @@
                     </td>
                 </tr>
             </foreach>
+            <if condition="!$list">
+                <tr>
+                    <td class="red text-center" colspan="3">{:L('EMPTY_DATA')}</td>
+                </tr>
+            </if>
             </tbody>
         </table>
     </div>

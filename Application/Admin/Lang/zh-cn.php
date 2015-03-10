@@ -43,6 +43,7 @@ $common = array(
     'FONT_INDEX'        =>  '前台主页',
     'ADD_ERROR'         =>  '数据添加失败！',
     'ADD_OK'            =>  '数据添加成功！',
+    'EMPTY_DATA'        =>  '暂无数据！',
 
 
     'DOWNLOAD_FILE_NOT_EXIST'   =>  '下载文件不存在！'

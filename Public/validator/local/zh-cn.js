@@ -41,6 +41,7 @@
             ,password: [/^[0-9a-zA-Z]{6,20}$/, "密码由6-20位数字、字母组成"]
             ,verify: [/^[0-9a-zA-Z]{4}$/, "验证码由4位数字、字母组成"]
             ,zhendig:[/^[\u0391-\uFFE5a-zA-Z\d]+$/, "请输入中文、英文字母、数字"]
+            ,enname:[/^\w+$/, "请输入字母、数字、下划线"]
             ,unchar:function(element){
                 if(/[`~!@#$%^&*()_+<>?:"{},.\/;'[\]]+/g.test(element.value)){
                     return '包含非法字符';
