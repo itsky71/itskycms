@@ -1,0 +1,35 @@
+<div class="col-lg-12">
+    <a class="btn btn-primary btn-xs ml10 mb10" href="{:U('Database/sql',$vl)}" onclick="load(event,this)">
+        <span class="glyphicon glyphicon-console"></span>{:L('SQL')}
+    </a>
+    <a class="btn btn-primary btn-xs ml10 mb10" href="{:U('Database/recover',$vl)}" onclick="load(event,this)">
+        <span class="glyphicon glyphicon-console"></span>{:L('RECOVER')}
+    </a>
+    <div class="table-responsive">
+        <foreach name="res" item="vo">
+        <div class="well well-sm mb5">
+            <b class="green">S Q L:</b> <b>{$vo.sqlstr}</b><br/>
+            <b class="red">TYPE:</b> <b>{$vo.type}</b>
+        </div>
+        <table class="table table-striped table-hover table-bordered">
+            <thead>
+                <tr>
+                <sky:assign name="fields" value="$vo.result|reset"/>
+                <foreach name="fields" item="v" key="k">
+                    <th>{$k}</th>
+                </foreach>
+                </tr>
+            </thead>
+            <tbody>
+            <foreach name="vo.result" item="vv">
+                <tr>
+                <foreach name="vv" item="vc">
+                    <td>{$vc}</td>
+                </foreach>
+                </tr>
+            </foreach>
+            </tbody>
+        </table>
+        </foreach>
+    </div>
+</div>

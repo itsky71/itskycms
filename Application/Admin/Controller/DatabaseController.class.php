@@ -189,21 +189,18 @@ class DatabaseController extends AdminController{
                 if(!empty(trim($sql))){
                     $i++;
                     if(preg_match('/^\s*"?('.$queryType.')\s+/i',$sql)){
-                        $db->execute($sql);
-                        $res[$i]['result'] = $db->getError();
+                        $res[$i]['sqlstr'] = $sql;
                         $res[$i]['type'] = 'execute';
+                        $res[$i]['result'] = $db->execute($sql);
                     }else{
-                        $res[$i]['result'] = $db->query($sql);
+                        $res[$i]['sqlstr'] = $sql;
                         $res[$i]['type'] = 'query';
+                        $res[$i]['result'] = $db->query($sql);
                     }
                 }
             }
-            print_r($res);
-            print_r($i);
-//            dump($sqls);
-//            $db = new Model();
-//            $res = $db->query(I('post.sql'));
-//            dump($res);
+            $this->assign('res', $res);
+            $this->display('result');
         }else{
             $this->display();
         }

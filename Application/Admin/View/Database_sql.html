@@ -39,7 +39,8 @@ var pan = '<li><a onclick="load(event,this)" href="{:U(CONTROLLER_NAME.'/index',
                 url: '{:U('Database/sql',$vl)}',
                 data:$(form).serialize(),
                 success: function(data){
-                    show_msg(data);
+                    $('#new_content').html(data);
+                    $(document.body).scrollator('refresh');
                 }
             });
         }
