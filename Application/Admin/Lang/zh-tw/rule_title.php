@@ -67,4 +67,7 @@ $rule_title = array(
     'R_DATABASE_DEL' => '刪除',
     'R_DATABASE_IMPORT' => '導入',
     'R_DBSOURCE_ADD' => '添加',
+    'R_TYPE_ADD' => '添加',
+    'R_DBSOURCE_EDIT' => '編輯',
+    'R_DBSOURCE_DEL' => '刪除',
 );

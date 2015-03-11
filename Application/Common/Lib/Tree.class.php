@@ -73,6 +73,20 @@ class Tree {
         return $newarr;
     }
 
+    public function get_top($id){
+        foreach ($this->arr as $item){
+            if($item['id'] == $id){
+                $newthis = $item;
+            }
+        }
+        if(!$newthis) return FALSE;
+        if($newthis['pid'] == 0){
+            return $newthis;
+        }else{
+            return $this->get_top($newthis['pid']);
+        }
+    }
+
     /**
      * 得到子级数组
      * @param int

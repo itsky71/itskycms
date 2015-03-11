@@ -43,34 +43,25 @@
     $('#access .table td').each(function(){
         $(this).find('.line-height-1:first').hide();
         var checkbox = $(this).find('input[type="checkbox"]');
-        if(checkbox.attr('checked')){
+        if(checkbox.is(':checked')){
             $('input[type="checkbox"][data-key="'+checkbox.attr('data-var')+'"]').attr('checked',true);
         }
     });
     if($('#access .table input[type="checkbox"]').attr('checked')){
         $('input[type="checkbox"][data-key="0"]').attr('checked',true);
     }
-    $('#access input:checkbox').click(function(){
-        var top = $('input[data-key="0"]:checkbox');
-        if($(this).attr('data-key') == 0){
-            if($(this).attr('checked')){
-                $('#access .table input:checkbox').attr('checked',true);
-            }else{
-                $('#access .table input:checkbox').attr('checked',false);
-            }
-        }
-        if($(this).attr('data-key')>0){
-            if($(this).attr('checked')){
-                $('#access .table input[data-var="'+$(this).attr('data-key')+'"]:checkbox').attr('checked',true);
-                if(!top.attr('checked')) top.attr('checked',true);
-            }else{
-                $('#access .table input[data-var="'+$(this).attr('data-key')+'"]:checkbox').attr('checked',false);
-            }
-        }
-        if($(this).attr('data-var')>0 && $(this).attr('checked')){
-            var par = $('#access .table input[data-key="'+$(this).attr('data-var')+'"]:checkbox');
-            if(!par.attr('checked')) par.attr('checked',true);
-            if(!top.attr('checked')) top.attr('checked',true);
+    $('#access input:checkbox').on('click',function(){
+        var that = this;
+        var key = $(this).attr('data-key');
+        var vars = $(this).attr('data-var');
+        if(key == 0){
+            $(this).closest('#access').find('tr > td input:checkbox').each(function(){
+                this.checked = that.checked;
+            });
+        }else if(key > 0){
+            $(this).closest('#access').find('tr > td input[data-var="'+key+'"]:checkbox').each(function(){
+                this.checked = that.checked;
+            });
         }
     });
     $('form[role="form"]').validator({

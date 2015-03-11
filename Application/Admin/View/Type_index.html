@@ -2,6 +2,20 @@
     <a class="btn btn-primary btn-xs ml10 mb10" href="{:U('Type/add',$vl)}" onclick="load(event,this)">
         <span class="glyphicon glyphicon-plus"></span>{:L('ADD')}
     </a>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <td class="center w80">{:L('ORDER')}</td>
+                    <td class="center">{:L('NUMBER')}</td>
+                    <td>{:L('NAME')}</td>
+                    <td>{:L('DESCRIPTION')}</td>
+                    <td>{:L('STATUS')}</td>
+                    <td>{:L('MANOPE')}</td>
+                </tr>
+            </thead>
+        </table>
+    </div>
 </div>
 <script type="text/javascript">
     var pan = '<li><a onclick="load(event,this)" href="{:U(CONTROLLER_NAME.'/'.ACTION_NAME,$vl)}">{:L('M_'.$Think.CONTROLLER_NAME.'_'.$Think.ACTION_NAME)}</a></li>\n\

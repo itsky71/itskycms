@@ -149,3 +149,11 @@ height: 16px;line-height: normal;vertical-align: baseline;background-image: none
 .latota + .btn-group{margin-top: 5px;}
 /*-- tip --*/
 .tip{padding-left: 3px;padding-top: 3px;color: #888;}
+/*-- validator --*/
+input.n-invalid[data-inputstatus="error"] + span.msg-box + div.select-input{
+    border-left: 1px solid red;
+    border-top: 1px solid red;
+    border-bottom: 1px solid red;
+}
+input.n-invalid[data-inputstatus="error"] + span.msg-box + div.select-input + span.input-group-addon
+{border: 1px solid red;border-left: none;}

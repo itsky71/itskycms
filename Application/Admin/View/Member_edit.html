@@ -37,12 +37,23 @@
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right">{:L('USERGROUP')}:</label>
             <div class="col-sm-5">
-                <select class="form-control" name="group">
-                    <option value="">{:L('SELECT')}</option>
-                    <foreach name="glist" item="vo">
-                    <option value="{$vo.id}"{$gid==$vo['id']?' selected="selected"':''}>{:L($vo['title'])}</option>
-                    </foreach>
-                </select>
+                <div class="input-group col-xs-12 select-click">
+                    <input class="hide" type="text" name="group" value="{$gid}"/>
+                    <div class="form-control select-input cude"></div>
+                    <span class="input-group-addon cude">
+                        <i class="glyphicon glyphicon-menu-down"></i>
+                    </span>
+                </div>
+                <div class="col-xs-12">
+                    <div class="select-choices">
+                        <ul class="list-unstyled select-option" data-name="group">
+                            <li data-val="">{:L('SELECT')}</li>
+                            <foreach name="glist" item="vo">
+                            <li data-val="{$vo.id}">{:L($vo['title'])}</li>
+                            </foreach>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="form-group">
@@ -82,7 +93,10 @@
             password:'{:ACTION_NAME=='add'?'required;':''}password',
             realname:'realname;length[2~20]',
             email:'required;email;remote[{:U('Check/email',$vl)}, id]',
-            group:'required',
+            group:{
+                rule:'required',
+                msgStyle:'position:relative;left:40px;'
+            },
             question:'length[3~30]',
             answer:'length[3~30]'
         },
@@ -98,3 +112,4 @@
         }
     });
 </script>
+<import type="js" file="js.select"/>

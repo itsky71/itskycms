@@ -80,7 +80,7 @@ class MenuController extends AdminController{
     }
 
     public function edit(){
-        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
         $Menu = D('Menu');
         if(IS_GET){
             $vo = $Menu->where('id='.I('get.id'))->find();
