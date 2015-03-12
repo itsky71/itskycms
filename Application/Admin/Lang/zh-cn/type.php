@@ -9,5 +9,7 @@ return array(
     'ADD_OK'        =>  '类别添加成功！',
     'ORDER'         =>  '排序',
     'NUMBER'        =>  '编号',
-    'MANOPE'        =>  '管理操作'
+    'MANOPE'        =>  '管理操作',
+    'SAVE_ERROR'    =>  '类别保存失败！',
+    'SAVE_OK'       =>  '类别保存成功！'
 );

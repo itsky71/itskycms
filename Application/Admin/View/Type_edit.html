@@ -1,10 +1,12 @@
 <div class="col-lg-6">
     <form class="form-horizontal" role="form">
+        <input type="hidden" name="id" value="{$vo.id}"/>
+        <input type="hidden" name="lang" value="{:I('get.lang')?I('get.lang'):($clang?$clang:LANG_SET)}"/>
         <div class="form-group">
             <label class="col-lg-3 control-label no-padding-right">{:L('PID')}:</label>
             <div class="col-lg-9">
                 <div class="input-group col-xs-9 select-click">
-                    <input class="hide" type="text" name="pid" value="0"/>
+                    <input class="hide" type="text" name="pid" value="{:ACTION_NAME=='add'?(isset($pid)?$pid:0):$vo['pid']}"/>
                     <div class="form-control select-input cude"></div>
                     <span class="input-group-addon cude">
                         <i class="glyphicon glyphicon-menu-down"></i>
@@ -22,20 +24,20 @@
         <div class="form-group">
             <label class="col-lg-3 control-label no-padding-right">{:L('NAME')}:</label>
             <div class="col-lg-9">
-                <input class="col-lg-9" type="text" name="name"/>
+                <input class="col-lg-9" type="text" name="name" value="{$vo.name}" placeholder="{:I('get.lang')?I('get.lang'):($clang?$clang:LANG_SET)}"/>
             </div>
         </div>
         <div class="form-group">
             <label class="col-lg-3 control-label no-padding-right">{:L('DESCRIPTION')}:</label>
             <div class="col-lg-9">
-                <textarea class="col-lg-9" name="description"></textarea>
+                <textarea class="col-lg-9" name="description">{$vo.description}</textarea>
             </div>
         </div>
         <div class="form-group">
             <label class="col-lg-3 control-label no-padding-right">{:L('STATUS')}:</label>
             <div class="col-lg-9">
                 <label>
-                    <input class="ace ace-switch ace-switch-7" type="checkbox" name="status" checked="checked" value="1"/>
+                    <input class="ace ace-switch ace-switch-7" type="checkbox" name="status"{:ACTION_NAME=='add'?' checked="checked"':($vo['status']?' checked="checked"':'')} value="1"/>
                     <span class="lbl"></span>
                 </label>
             </div>
@@ -48,6 +50,7 @@
         </div>
     </form>
 </div>
+{$langs}
 <script type="text/javascript">
     var pan = '<li><a onclick="load(event,this)" href="{:U(CONTROLLER_NAME.'/index',$vl)}">{:L('M_'.$Think.CONTROLLER_NAME.'_INDEX')}</a></li>\n\
 <li class="active">{:L($Think.ACTION_NAME)}</li>';

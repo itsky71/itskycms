@@ -117,7 +117,7 @@ class AdminController extends Controller{
      */
     public function edit(){
         if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
-        $name = D(CONTROLLER_NAME);
+        $name = M(CONTROLLER_NAME);
         if(IS_POST){
             if($name->create()){
                 $result = $name->where('id='.I('post.id'))->save(I('post.'));
@@ -143,7 +143,7 @@ class AdminController extends Controller{
         if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
         $name = M(CONTROLLER_NAME);
         if(IS_GET){
-            $result = $name->where('id='.I('get.id'))->delete();
+            $result = $name->where('id IN ('.I('get.id').')')->delete();
         }elseif(IS_POST){
             $map['id'] = array('in',I('post.ids'));
             $result = $name->where($map)->delete();
@@ -164,7 +164,7 @@ class AdminController extends Controller{
                 $data['listorder'] = $value;
                 $name->where('id='.$key)->save($data);
             }
-            $this->success(L('ORDER_OK'), U(CONTROLLER_NAME.'/index',$this->vl));
+            $this->success(L('ORDER_OK'),U(CONTROLLER_NAME.'/index',$this->vl));
         }else{
             $this->error(L('_ERROR_ACTION_'));
         }

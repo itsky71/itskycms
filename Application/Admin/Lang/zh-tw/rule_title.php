@@ -70,4 +70,8 @@ $rule_title = array(
     'R_TYPE_ADD' => '添加',
     'R_DBSOURCE_EDIT' => '編輯',
     'R_DBSOURCE_DEL' => '刪除',
+    'R_TYPE_STATUS' => '狀態',
+    'R_TYPE_EDIT' => '編輯',
+    'R_TYPE_DEL' => '刪除',
+    'R_TYPE_ORDER' => '排序',
 );
