@@ -371,8 +371,14 @@
                 rule:'required;letters;length[3~20];mremote[action]',
                 must:true
             },
-            action:'letters;length[3~20];remote[{:U('Check/action',$vl)}, model, id]',
-            data:'length[~50]',
+            action:{
+                rule:'letters;length[3~20];remote[{:U('Check/action',$vl)}, model, id, data]',
+                must:true
+            },
+            data:{
+                rule:'length[~50]',
+                must:true
+            },
             remark:'length[~100]'
         },
         valid:function(form){

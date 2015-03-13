@@ -40,7 +40,8 @@ class MenuModel extends Model{
     protected function checkAction(){
         $map = array(
             'model' => ucfirst(I('post.model')),
-            'action' => I('post.action') ? strtolower(I('post.action')) : 'index'
+            'action' => I('post.action') ? strtolower(I('post.action')) : 'index',
+            'data' => trim(I('post.data'))
         );
         if(I('post.id')){
             $map['id'] = array('neq',I('post.id'));

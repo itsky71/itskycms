@@ -43,9 +43,13 @@ class MenuController extends AdminController{
         $Menu = D('Menu');
         if(IS_POST){
             if($Menu->create()){
+                $mstr = strtoupper(I('post.model'));
+                $astr = strtoupper(I('post.action') ? I('post.action') : 'index');
+                $pstr = I('post.data') ? '_'.strtoupper(I('post.data')) : '';
+                $name = 'M_'.$mstr.'_'.$astr.$pstr;
                 $data = array(
                     'pid' => I('post.pid'),
-                    'name' => 'M_'.strtoupper(I('post.model')).'_'.strtoupper(I('post.action') ? I('post.action') : 'index'),
+                    'name' => $name,
                     'icon' => I('post.icon'),
                     'model' => ucfirst(I('post.model')),
                     'action' => I('post.action') ? strtolower(I('post.action')) : 'index',
@@ -97,9 +101,13 @@ class MenuController extends AdminController{
             $this->display();
         }elseif(IS_POST){
             if($Menu->create()){
+                $mstr = strtoupper(I('post.model'));
+                $astr = strtoupper(I('post.action') ? I('post.action') : 'index');
+                $pstr = I('post.data') ? '_'.strtoupper(I('post.data')) : '';
+                $name = 'M_'.$mstr.'_'.$astr.$pstr;
                 $data = array(
                     'pid' => I('post.pid'),
-                    'name' => 'M_'.strtoupper(I('post.model')).'_'.strtoupper(I('post.action') ? I('post.action') : 'index'),
+                    'name' => $name,
                     'icon' => I('post.icon'),
                     'model' => ucfirst(I('post.model')),
                     'action' => I('post.action') ? strtolower(I('post.action')) : 'index',

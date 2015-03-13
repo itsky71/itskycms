@@ -28,7 +28,7 @@ $menu_common = array(
     'M_PRODUCT_INDEX' => '產品模型',
     'M_PICTURE_INDEX' => '圖片模型',
     'M_DOWNLOAD_INDEX' => '下載模型',
-    'M_MODULE_INDEX' => '模塊管理',
+    'M_MODULE_INDEX' => '模型管理',
     'M_MODEL_INDEX' => '模型管理',
     'M_MODULES_INDEX' => '模塊管理',
     'M_LINK_INDEX' => '友情鏈接',
@@ -62,4 +62,6 @@ $menu_common = array(
     'M_JDIPE_INDEX' => '肯德基',
     'M_SITESET_USER' => '用戶中心設置',
     'M_DATABASE_INDEX' => '數據庫管理',
+    'M_MODULE_INDEX_TYPE=2' => '模塊管理',
+    'M_MODULE_INDEX_TYPE=1' => '模型管理',
 );

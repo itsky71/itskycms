@@ -18,7 +18,7 @@ class RuleController extends AdminController{
     public function index(){
         if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
         $Rule = D('AuthRule');
-        $rules = $Rule->order('listorder,id')->select();
+        $rules = $Rule->order('tid,listorder,id')->select();
         foreach ($rules as $value){
             $staop = $this->vl.'&status='.$value['status'].'&id='.$value['id'];
             $allow = '<a class="btn btn-success btn-minier" href="'.U('Rule/status',$staop).'" onclick="load(event,this)"><span class="glyphicon glyphicon-ok"></span></a>';
@@ -64,18 +64,18 @@ class RuleController extends AdminController{
             }
         }else{
             $map['name'] = array('like','%/index');
-            $group = $Rule->where($map)->order('listorder,id')->select();
+            $group = $Rule->where($map)->order('tid,listorder,id')->select();
             $this->assign('group', $group);
             $this->display('edit');
         }
     }
 
     public function edit(){
-        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
         $Rule = D('AuthRule');
         if(IS_GET){
             $map['name'] = array('like','%/index');
-            $group = $Rule->where($map)->select();
+            $group = $Rule->where($map)->order('tid,listorder,id')->select();
             $v = $Rule->where('id='.I('get.id'))->find();
             $groupname = explode('/', $v['name']);
             $v['group'] = $groupname[0];

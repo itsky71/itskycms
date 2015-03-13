@@ -23,7 +23,7 @@ class IndexController extends AdminController {
         foreach ($list as $item){
             $item['name'] = L($item['name']);
             $item['icon'] = $item['icon'] ? '<span class="'.$item['icon'].'"></span>':'';
-            $item['url'] = U($item['model'].'/'.$item['action'],$this->vl);
+            $item['url'] = U($item['model'].'/'.$item['action'],$item['data'].'&'.$this->vl);
             $item['tar'] = $item['id'] == 1 ? 'noa' : 'tarmain';
             $newarr[] = $item;
         }

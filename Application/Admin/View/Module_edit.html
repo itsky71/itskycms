@@ -1,0 +1,48 @@
+<div class="col-lg-6">
+    <form class="form-horizontal" role="form">
+        <div class="form-group">
+            <label class="col-lg-3 control-label no-padding-right">{:L('TITLE_'.I('get.type'))}:</label>
+            <div class="col-lg-9">
+                <input class="col-lg-9" type="text" name="title"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-3 control-label no-padding-right">{:L('NAME_'.I('get.type'))}:</label>
+            <div class="col-lg-9">
+                <input class="col-lg-9" type="text" name="name"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-3 control-label no-padding-right">{:L('DESCRIPTION_'.I('get.type'))}:</label>
+            <div class="col-lg-9">
+                <textarea class="col-lg-9" name="description"></textarea>
+            </div>
+        </div>
+        <div class="clearfix form-actions">
+            <div class="col-md-offset-3 col-md-9">
+                <button class="btn btn-info" type="submit"><i class="glyphicon glyphicon-ok"></i>{:L('SUBMIT')}</button>
+                <button class="btn" type="reset"><i class="glyphicon glyphicon-repeat"></i>{:L('RESET')}</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    var pan = '<li><a onclick="load(event,this)" href="{:U(CONTROLLER_NAME.'/index','type='.I('get.type').'&'.$vl)}">{:L('M_'.$Think.CONTROLLER_NAME.'_INDEX'.'_TYPE='.I('get.type'))}</a></li>\n\
+<li class="active">{:L($Think.ACTION_NAME)}</li>';
+    $('#breadcrumbs .breadcrumb li:gt(0)').remove();
+    $('#breadcrumbs .breadcrumb').append(pan);
+    $('.page-header h1').empty();
+    $('.page-header h1').append('{:L('M_'.$Think.CONTROLLER_NAME.'_INDEX'.'_TYPE='.I('get.type'))}<small class="glyphicon glyphicon-menu-right"> {:L($Think.ACTION_NAME)}</small>');
+    $('form[role="form"]').validator({
+        valid:function(form){
+            $.ajax({
+                type: 'POST',
+                url: '{:U('Module/'.ACTION_NAME,$vl)}',
+                data:$(form).serialize(),
+                success: function(data){
+                    show_msg(data);
+                }
+            });
+        }
+    });
+</script>
