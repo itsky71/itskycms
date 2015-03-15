@@ -1,9 +1,13 @@
 <div class="col-lg-6">
     <form class="form-horizontal" role="form">
+        <input type="hidden" name="type" value="{:I('get.type')}"/>
+        <if condition="((ACTION_NAME eq 'add') AND (I('get.type') neq 2)) OR ((ACTION_NAME eq 'edit') AND $vo['issystem'])">
+        <input type="hidden" name="issystem" value="1"/>
+        </if>
         <div class="form-group">
             <label class="col-lg-3 control-label no-padding-right">{:L('TITLE_'.I('get.type'))}:</label>
             <div class="col-lg-9">
-                <input class="col-lg-9" type="text" name="title"/>
+                <input class="col-lg-9" type="text" name="title" placeholder="{:I('get.lang')?I('get.lang'):($clang?$clang:LANG_SET)}"/>
             </div>
         </div>
         <div class="form-group">
