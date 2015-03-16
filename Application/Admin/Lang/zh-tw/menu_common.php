@@ -64,4 +64,5 @@ $menu_common = array(
     'M_DATABASE_INDEX' => '數據庫管理',
     'M_MODULE_INDEX_TYPE=2' => '模塊管理',
     'M_MODULE_INDEX_TYPE=1' => '模型管理',
+    'M_PAGE_INDEX' => '單頁模型',
 );

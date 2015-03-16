@@ -31,6 +31,11 @@ class MenuController extends AdminController{
             $narr[] = $value;
         }
         $tree = new \Common\Lib\Tree($narr);
+        $tree->icon = array(
+            '<span class="text-muted">&ensp;│&ensp;</span>',
+            '<span class="text-muted">&ensp;├─</span>',
+            '<span class="text-muted">&ensp;└─</span>'
+        );
         $str = "<tr><td class='center'><input type='text' maxlength='3' name='listorder[\$id]' value='\$listorder' data-rule='integer[+0]'/></td>";
         $str .= "<td class='center'>\$id</td><td>\$spacer \$name</td><td>\$model</td><td>\$action</td>";
         $str .= "<td class='center'>\$status</td><td class='center'>\$oper</td></tr>";
@@ -75,6 +80,11 @@ class MenuController extends AdminController{
                 $newmap[] = $r;
             }
             $tree = new \Common\Lib\Tree($newmap);
+            $tree->icon = array(
+                '<span class="text-muted">&ensp;│</span>',
+                '<span class="text-muted">&ensp;├─</span>',
+                '<span class="text-muted">&ensp;└─</span>'
+            );
             $str  = "<li data-val='\$id'>\$spacer\$name</li>";
             $pid = I('get.id') ? I('get.id') : 0;
             $this->assign('pid', $pid);
@@ -94,6 +104,11 @@ class MenuController extends AdminController{
                 $newmap[] = $r;
             }
             $tree = new \Common\Lib\Tree($newmap);
+            $tree->icon = array(
+                '<span class="text-muted">&ensp;│</span>',
+                '<span class="text-muted">&ensp;├─</span>',
+                '<span class="text-muted">&ensp;└─</span>'
+            );
             $str  = "<li data-val='\$id'>\$spacer\$name</li>";
             $this->assign('pid', $vo['pid']);
             $this->assign('map', $tree->get_tree(0, $str));

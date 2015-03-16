@@ -4,6 +4,7 @@
         <if condition="((ACTION_NAME eq 'add') AND (I('get.type') neq 2)) OR ((ACTION_NAME eq 'edit') AND $vo['issystem'])">
         <input type="hidden" name="issystem" value="1"/>
         </if>
+        <input type="hidden" name="lang" value="{:I('get.lang')?I('get.lang'):($clang?$clang:LANG_SET)}"/>
         <div class="form-group">
             <label class="col-lg-3 control-label no-padding-right">{:L('TITLE_'.I('get.type'))}:</label>
             <div class="col-lg-9">
