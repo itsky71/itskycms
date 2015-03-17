@@ -17,9 +17,12 @@ namespace Admin\Controller;
 class ModuleController extends AdminController{
     public function index() {
         if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
-        $db = \Think\Db::getInstance();
-        $tables = $db->getTables();
-        dump($tables);
+//        $db = \Think\Db::getInstance();
+//        $tables = $db->getTables();
+//        dump($tables);
+        $Module = D('Module');
+        $list = $Module->where('type='.I('get.type'))->select();
+        $this->assign('list', $list);
         $this->display();
     }
 
@@ -122,5 +125,50 @@ class ModuleController extends AdminController{
         }else{
             $this->display('edit');
         }
+    }
+
+    public function edit() {
+        if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
+        $Module = D('Module');
+        if(IS_POST){
+            
+        }else{
+            $vo = $Module->where('id='.I('get.id'))->find();
+            $this->assign('vo', $vo);
+            $this->display();
+        }
+    }
+
+    public function status(){
+        if(IS_AJAX && IS_GET){
+            $Module = D('Module');
+            $data['status'] = I('get.status') ? 0 : 1;
+            $result = $Module->where('id='.I('get.id'))->save($data);
+            if($result !== FALSE){
+                $this->redirect('Module/index','type='.I('get.type').'&'.$this->vl);
+            }else{
+                $this->error(L('STATUS_ERROR'));
+            }
+        }else{
+            $this->error(L('_ERROR_ACTION_'));
+        }
+    }
+
+    public function del(){
+        if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
+        $id = I('get.id');
+        $Module = D('Module');
+        $modata = $Module->where('id='.$id)->find();
+        $delmo = $Module->where('id='.$id)->delete();
+        if($delmo === FALSE) $this->error($Module->getDbError());
+        $tablename = C('DB_PREFIX').$modata['name'];
+        $db = new \Think\Model();
+        $db->execute('DROP TABLE IF EXISTS `'.$tablename.'`;');
+        M('Menu')->where('model=\''.ucfirst($modata['name']).'\'')->delete();
+        M('Field')->where('mid='.$modata['id'])->delete();
+        M('Content')->where('mid='.$modata['id'])->delete();
+        $map['name'] = array('like',ucfirst($modata['name']).'%');
+        M('AuthRule')->where($map)->select();
+        $this->success(L('DEL_OK'),U('Module/index','type='.$modata['type'].'&'.$this->vl));
     }
 }

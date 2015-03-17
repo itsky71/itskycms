@@ -94,4 +94,6 @@ $rule_title = array(
     'R_MODULE_DEL' => '刪除',
     'R_PAGE_INDEX' => '單頁模型',
     'R_ARTICLE_INDEX' => '文章模型',
+    'R_MODULE_STATUS' => '狀態',
+    'R_FIELD_INDEX' => '模型字段',
 );

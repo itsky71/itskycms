@@ -2,6 +2,46 @@
     <a class="btn btn-primary btn-xs ml10 mb10" href="{:U('Module/add','type='.I('get.type').'&'.$vl)}" onclick="load(event,this)">
         <span class="glyphicon glyphicon-plus"></span>{:L('ADD_'.I('get.type'))}
     </a>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th class="center w60">{:L('NUMBER')}</th>
+                    <th>{:L('TITLE_'.I('get.type'))}</th>
+                    <th>{:L('NAME_'.I('get.type'))}</th>
+                    <th>{:L('DESCRIPTION_'.I('get.type'))}</th>
+                    <th class="center w80">{:L('STATUS')}</th>
+                    <th class="center w225">{:L('MANOPE')}</th>
+                </tr>
+            </thead>
+            <tbody>
+            <foreach name="list" item="vo">
+                <tr>
+                    <td class="center">{$vo.id}</td>
+                    <td>{:L($vo['title'])}</td>
+                    <td>{$vo.name}</td>
+                    <td>{:L($vo['description'])}</td>
+                    <td class="center">
+                        <a class="btn btn-{$vo['status']?'success':'danger'} btn-minier" href="{:U('Module/status','type='.I('get.type').'&status='.$vo['status'].'&id='.$vo['id'].'&'.$vl)}" onclick="load(event,this)">
+                            <span class="glyphicon glyphicon-{$vo['status']?'ok':'ban-circle'}"></span>
+                        </a>
+                    </td>
+                    <td class="center">
+                        <a class="btn btn-minier btn-purple" href="{:U('Field/index',$vl.'&mid='.$vo['id'])}" onclick="load(event,this)">
+                            <span class="glyphicon glyphicon-oil"></span>模型字段
+                        </a>
+                        <a class="btn btn-minier btn-info" href="{:U('Module/edit',$vl.'&type='.I('get.type').'&id='.$vo['id'])}" onclick="load(event,this)">
+                            <span class="glyphicon glyphicon-edit"></span>{:L('EDIT')}
+                        </a>
+                        <a class="btn btn-minier btn-danger" href="{:U('Module/del',$vl.'&type='.I('get.type').'&id='.$vo['id'])}" onclick="del(event,this,'c')">
+                            <span class="glyphicon glyphicon-trash"></span>{:L('DELETE')}
+                        </a>
+                    </td>
+                </tr>
+            </foreach>
+            </tbody>
+        </table>
+    </div>
 </div>
 <script type="text/javascript">
     var pan = '<li><a onclick="load(event,this)" href="{:U(CONTROLLER_NAME.'/'.ACTION_NAME,'type='.I('get.type').'&'.$vl)}">{:L('M_'.$Think.CONTROLLER_NAME.'_'.$Think.ACTION_NAME.'_TYPE='.I('get.type'))}</a></li>\n\

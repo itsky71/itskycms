@@ -4,7 +4,7 @@ return array(
     'TMPL_FILE_DEPR'    => '_',    //模板文件CONTROLLER_NAME与ACTION_NAME之间的分割符
     'MODULE_ALLOW_LIST' => array('Admin','Home','Error'), // 允许的模块列表
 //    'URL_MODULE_MAP'  => array('test'=>'admin'), //模块映射
-//    'MODULE_DENY_LIST'=> array('ThinkPHP'),
+//    'MODULE_DENY_LIST'=> array('ThinkPHP','Common','Runtime','Api'),
     'DEFAULT_MODULE'    => 'Home', // 默认模块
     'TAGLIB_PRE_LOAD'   =>  'Common\Lib\Sky',
     'LANG_SWITCH_ON'    => TRUE,   // 开启语言包功能
