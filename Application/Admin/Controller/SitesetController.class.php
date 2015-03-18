@@ -17,7 +17,7 @@ namespace Admin\Controller;
 class SitesetController extends AdminController{
     //站点设置
     public function index(){
-        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
         $Siteset = D('Siteset');
         if(IS_POST){
             $post = I('post.');
@@ -95,7 +95,7 @@ class SitesetController extends AdminController{
     }
     //核心设置
     public function ospro(){
-        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
         $Siteset = D('Siteset');
         if(I('get.lang')){
             $l = I('get.lang');
@@ -131,7 +131,7 @@ class SitesetController extends AdminController{
     }
     //系统邮箱
     public function osemail(){
-        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
         $Siteset = D('Siteset');
         if(I('get.lang')){
             $l = I('get.lang');
@@ -146,7 +146,7 @@ class SitesetController extends AdminController{
     }
     //添加系统变量
     public function addvar(){
-        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
         if(IS_POST){
             $Siteset = D('Siteset');
             if($Siteset->create()){
@@ -175,7 +175,7 @@ class SitesetController extends AdminController{
     }
     //附件配置
     public function attach(){
-        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
         $Siteset = D('Siteset');
         if(I('get.lang')){
             $l = I('get.lang');
@@ -190,7 +190,7 @@ class SitesetController extends AdminController{
     }
     //用户中心设置
     public function user(){
-        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
         $Siteset = D('Siteset');
         if(I('get.lang')){
             $l = I('get.lang');

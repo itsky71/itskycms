@@ -16,7 +16,7 @@ namespace Admin\Controller;
  */
 class MemberController extends AdminController{
     public function index(){
-        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
         $Member = D('Member');
         $Group = D('AuthGroup');
         if(I('get.groupid')){
@@ -47,7 +47,7 @@ class MemberController extends AdminController{
     }
 
     public function add(){
-        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
         $Member = D('Member');
         if(IS_POST){
             if($Member->create()){
@@ -81,7 +81,7 @@ class MemberController extends AdminController{
     }
 
     public function edit(){
-        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
         $Member = D('Member');
         if(IS_POST){
             if($Member->create()){
@@ -119,7 +119,7 @@ class MemberController extends AdminController{
     }
 
     public function del(){
-        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
         $Member = D('Member');
         $AuthGroupAccess = M('AuthGroupAccess');
         if(IS_GET){

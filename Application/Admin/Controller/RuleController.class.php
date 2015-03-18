@@ -16,7 +16,7 @@ namespace Admin\Controller;
  */
 class RuleController extends AdminController{
     public function index(){
-        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
         $Rule = D('AuthRule');
         $rules = $Rule->order('tid,listorder,id')->select();
         foreach ($rules as $value){
@@ -41,7 +41,7 @@ class RuleController extends AdminController{
     }
 
     public function add(){
-        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
         $Rule = D('AuthRule');
         if(IS_POST){
             if($Rule->create()){

@@ -60,7 +60,7 @@ class IndexController extends AdminController {
     }
     //个人信息
     public function profile(){
-        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
         if(IS_POST){
             $Member = D('Member');
             if($Member->create()){

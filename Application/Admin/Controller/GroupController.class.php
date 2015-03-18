@@ -33,7 +33,7 @@ class GroupController extends AdminController{
     }
 
     public function add(){
-        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
         if(IS_POST){
             $Group = D('AuthGroup');
             if($Group->create()){
@@ -62,7 +62,7 @@ class GroupController extends AdminController{
     }
 
     public function edit(){
-        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
         $Group = D('AuthGroup');
         if(IS_POST){
             if($Group->create()){
@@ -120,7 +120,7 @@ class GroupController extends AdminController{
     }
 
     public function access(){
-        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
         $Group = D('AuthGroup');
         if(IS_POST){
             $rules = I('post.id') ? I('post.id') : array();

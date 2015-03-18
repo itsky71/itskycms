@@ -12,7 +12,7 @@ $module = array(
     'DESCRIPTION_'      =>  '簡介',
     'ADD_ERROR_'        =>  '添加失敗！',
     'ADD_OK_'           =>  '添加成功！',
-
+    'SAVE_ERROR_'       =>  '保存失败！',
 
     'ADD_1'             =>  '添加模型',
     'TITLE_1'           =>  '模型名稱',
@@ -20,7 +20,7 @@ $module = array(
     'DESCRIPTION_1'     =>  '模型簡介',
     'ADD_ERROR_1'       =>  '模型添加失敗！',
     'ADD_OK_1'          =>  '模型添加成功！',
-
+    'SAVE_ERROR_1'      =>  '模型保存失敗！',
 
     'ADD_2'             =>  '添加模塊',
     'TITLE_2'           =>  '模塊名稱',
@@ -28,6 +28,7 @@ $module = array(
     'DESCRIPTION_2'     =>  '模塊簡介',
     'ADD_ERROR_2'       =>  '模塊添加失敗！',
     'ADD_OK_2'          =>  '模塊添加成功！',
+    'SAVE_ERROR_2'      =>  '模塊保存失敗！',
 
     'NUMBER'            =>  '編號',
     'MANOPE'            =>  '管理操作',

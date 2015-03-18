@@ -16,7 +16,7 @@ namespace Admin\Controller;
  */
 class MenuController extends AdminController{
     public function index() {
-        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
         $Menu = D('Menu');
         $allmenu = $Menu->order('listorder,id')->select();
         foreach ($allmenu as $value){
@@ -44,7 +44,7 @@ class MenuController extends AdminController{
     }
 
     public function add(){
-        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
         $Menu = D('Menu');
         if(IS_POST){
             if($Menu->create()){

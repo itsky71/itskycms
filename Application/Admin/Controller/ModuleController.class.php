@@ -36,8 +36,7 @@ class ModuleController extends AdminController{
                     'issystem' => I('post.issystem') ? 1 : 0,
                     'title' => strtoupper(I('post.name')).'_TITLE',
                     'name'  =>  ucfirst(I('post.name')),
-                    'description' => strtoupper(I('post.name')).'_DESCRIPTION',
-                    'lang' => I('post.lang')
+                    'description' => strtoupper(I('post.name')).'_DESCRIPTION'
                 );
                 $moduleid = $Module->add($data);
                 if($moduleid){
@@ -131,7 +130,55 @@ class ModuleController extends AdminController{
         if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
         $Module = D('Module');
         if(IS_POST){
-            
+            if($Module->create()){
+                $data = array(
+                    'type' => I('post.type'),
+                    'issystem' => I('post.issystem') ? 1 : 0,
+                    'title' => strtoupper(I('post.name')).'_TITLE',
+                    'name'  =>  ucfirst(I('post.name')),
+                    'description' => strtoupper(I('post.name')).'_DESCRIPTION'
+                );
+                $befor = $Module->where('id='.I('post.id'))->find();
+                $resedit = $Module->where('id='.I('post.id'))->save($data);
+                if($resedit === FALSE) $this->error(L('SAVE_ERROR_'.$data['type']));
+                $arrlang = array(
+                    $data['title'] => I('post.title'),
+                    $data['description'] => I('post.description')
+                );
+                write_lang($arrlang,'module_info');
+                if($data['name'] != $befor['name']){
+                    $db = new \Think\Model();
+                    $befortable = C('DB_PREFIX').strtolower($befor['name']);
+                    $aftertable = C('DB_PREFIX').strtolower($data['name']);
+                    $db->execute('RENAME TABLE `'.C('DB_NAME').'`.`'.$befortable.'` TO `'.C('DB_NAME').'`.`'.$aftertable.'`;');
+                    $Menu = D('Menu');
+                    $menudata = array(
+                        'model' => $data['name'],
+                        'name' => 'M_'.strtoupper($data['name']).'_INDEX'
+                    );
+                    $menuedit = $Menu->where('model=\''.$befor['name'].'\'')->save($menudata);
+                    if($menuedit === FALSE) $this->error($Menu->getDbError());
+                    $menulang = array($menudata['name'] => $arrlang[$data['title']]);
+                    write_lang($menulang,'menu_common');
+                    $Rule = D('AuthRule');
+                    $ruledata = array(
+                        'name' => $data['name'].'/index',
+                        'title' => 'R_'.strtoupper($data['name']).'_INDEX'
+                    );
+                    $map['name'] = array('like',$befor['name'].'%');
+                    $ruleedit = $Rule->where($map)->save($ruledata);
+                    if($ruleedit === FALSE) $this->error($Rule->getDbError());
+                    $rulelang = array($ruledata['title']=>$arrlang[$data['title']]);
+                    write_lang($rulelang,'rule_title');
+                }else{
+                    
+                    write_lang(array('M_'.strtoupper($data['name']).'_INDEX'=>$arrlang[$data['title']]),'menu_common');
+                    write_lang(array('R_'.strtoupper($data['name']).'_INDEX'=>$arrlang[$data['title']]),'rule_title');
+                }
+                $this->success(L('SAVE_OK'),U('Module/index','type='.$data['type'].'&'.$this->vl));
+            }else{
+                $this->error($Module->getError());
+            }
         }else{
             $vo = $Module->where('id='.I('get.id'))->find();
             $this->assign('vo', $vo);

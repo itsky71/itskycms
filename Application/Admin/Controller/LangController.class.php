@@ -16,7 +16,7 @@ namespace Admin\Controller;
  */
 class LangController extends AdminController{
     public function index() {
-        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
         $Lang = D('Lang');
         $lists = $Lang->order('listorder,id')->select();
         foreach ($lists as $value){
@@ -31,7 +31,7 @@ class LangController extends AdminController{
     }
 
     public function add(){
-        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
         $Lang = D('Lang');
         if(IS_POST){
             if($Lang->create()){
@@ -49,7 +49,7 @@ class LangController extends AdminController{
     }
 
     public function edit(){
-        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
         $Lang = D('Lang');
         if(IS_POST){
             if($Lang->create()){

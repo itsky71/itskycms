@@ -96,4 +96,7 @@ $rule_title = array(
     'R_ARTICLE_INDEX' => '文章模型',
     'R_MODULE_STATUS' => '狀態',
     'R_FIELD_INDEX' => '模型字段',
+    'R_ARTICLESSS_INDEX' => '文章模型呵呵',
+    'R_ARTICLEJJJ_INDEX' => '文章模型呵呵',
+    'R_ARTICLEJDD_INDEX' => '文章模型dd',
 );

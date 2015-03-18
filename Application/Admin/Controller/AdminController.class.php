@@ -70,7 +70,7 @@ class AdminController extends Controller{
      * 列表显示
      */
     public function index(){
-        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
         $Model = new Model();
         $islang = $Model->query('Describe __'.strtoupper(CONTROLLER_NAME).'__ lang');
         if($islang[0]['field'] == 'lang'){
@@ -96,7 +96,7 @@ class AdminController extends Controller{
      * 添加
      */
     public function add(){
-        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
         if(IS_POST){
             $name = M(CONTROLLER_NAME);
             if($name->create()){
@@ -116,7 +116,7 @@ class AdminController extends Controller{
      * 编辑
      */
     public function edit(){
-        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
         $name = M(CONTROLLER_NAME);
         if(IS_POST){
             if($name->create()){
@@ -140,7 +140,7 @@ class AdminController extends Controller{
      * 删除
      */
     public function del(){
-        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
         $name = M(CONTROLLER_NAME);
         if(IS_GET){
             $result = $name->where('id IN ('.I('get.id').')')->delete();

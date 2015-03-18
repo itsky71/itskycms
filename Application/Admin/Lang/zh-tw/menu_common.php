@@ -65,4 +65,7 @@ $menu_common = array(
     'M_MODULE_INDEX_TYPE=2' => '模塊管理',
     'M_MODULE_INDEX_TYPE=1' => '模型管理',
     'M_PAGE_INDEX' => '單頁模型',
+    'M_ARTICLESSS_INDEX' => '文章模型呵呵',
+    'M_ARTICLEJJJ_INDEX' => '文章模型呵呵',
+    'M_ARTICLEJDD_INDEX' => '文章模型dd',
 );

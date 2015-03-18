@@ -16,7 +16,7 @@ namespace Admin\Controller;
  */
 class UpdateController extends AdminController{
     public function index() {
-        if(!IS_AJAX) $this->error (L('_ERROR_ACTION_'));
+        if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
         if(IS_POST){
             if(I('showmod')){
                 $module = C('DEFAULT_MODULE');
