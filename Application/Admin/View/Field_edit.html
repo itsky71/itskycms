@@ -1,0 +1,111 @@
+<div class="col-lg-8">
+    <form class="form-horizontal" role="form">
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right">{:L('FIELDS_TYPE')}:</label>
+            <div class="col-lg-9">
+                <div class="input-group col-lg-8 select-click">
+                    <input class="hide" type="text" name="type" value=""/>
+                    <div class="form-control select-input cude"></div>
+                    <span class="input-group-addon cude">
+                        <i class="glyphicon glyphicon-menu-down"></i>
+                    </span>
+                </div>
+                <div class="col-lg-8">
+                    <div class="select-choices">
+                        <ul class="list-unstyled select-option" data-name="type">
+                            <li data-val="">{:L('SELECT_FIELD_TYPE')}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-3 control-label no-padding-right">{:L('FIELD_NAME')}:</label>
+            <div class="col-lg-9">
+                <input class="col-lg-8" type="text" name="field" value=""/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-3 control-label no-padding-right">{:L('FIELD_ALIAS')}:</label>
+            <div class="col-lg-9">
+                <input class="col-lg-8" type="text" name="name" value="" placeholder="{$Think.LANG_SET}"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-3 control-label no-padding-right">{:L('FIELD_SETUP')}:</label>
+            <div class="col-lg-9">
+                
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-3 control-label no-padding-right">{:L('CLASS_NAME')}:</label>
+            <div class="col-lg-9">
+                <input class="col-lg-5" type="text" name="class" value=""/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-3 control-label no-padding-right">{:L('REQUIRED')}:</label>
+            <div class="col-lg-9">
+                <input class="ace ace-switch ace-switch-7" type="checkbox" value="1" name="required"/>
+                <span class="lbl"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-3 control-label no-padding-right">{:L('PATTERN')}:</label>
+            <div class="col-lg-9">
+                <div class="input-group col-lg-8 select-click">
+                    <input class="hide" type="text" name="pattern" value=""/>
+                    <div class="form-control select-input cude"></div>
+                    <span class="input-group-addon cude">
+                        <i class="glyphicon glyphicon-menu-down"></i>
+                    </span>
+                </div>
+                <div class="col-lg-8">
+                    <div class="select-choices" data-height="300" style="max-height: 300px">
+                        <ul class="list-unstyled select-option" data-name="pattern">
+                            <li data-val="">{:L('SELECT_PATTERN')}</li>
+                            <foreach name="field_pattern" item="p" key="f">
+                            <li data-val="{$f}">{$p}</li>
+                            </foreach>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-3 control-label no-padding-right">{:L('STR_LENGTH')}:</label>
+            <div class="col-lg-9">
+                <span class="pull-left pt5">{:L('MIN_LENGTH')}</span>
+                <input class="col-lg-2 pull-left ml10" type="text" name="minlength" value=""/>
+                <span class="pull-left pt5 ml10">{:L('MAX_LENGTH')}</span>
+                <input class="col-lg-2 pull-left ml10" type="text" name="maxlength" value=""/>
+                <span class="pull-left pt5 ml10">{:L('NUM_STR')}</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-3 control-label no-padding-right">{:L('ERROR_MSG')}:</label>
+            <div class="col-lg-9">
+                <input class="col-lg-8" type="text" name="errormsg" value=""/>
+            </div>
+        </div>
+        <div class="clearfix form-actions">
+            <div class="col-lg-offset-3 col-lg-9">
+                <button class="btn btn-info" type="submit">
+                    <i class="glyphicon glyphicon-ok"></i> {:L('SUBMIT')}
+                </button>
+                <button class="btn" type="reset">
+                    <i class="glyphicon glyphicon-repeat"></i> {:L('RESET')}
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    var pan = '<li><a onclick="load(event,this)" href="{:U('Module/index','type='.I('get.type').'&'.$vl)}">{:L('M_MODULE_INDEX_TYPE='.I('get.type'))}</a></li>\n\
+<li class="active"><a onclick="load(event,this)" href="{:U('Field/index',$vl.'&type='.I('get.type').'&mid='.I('get.mid'))}">{:L('FIELD_MANAGEMENT')}</a></li><li class="active">{:L('ADD')}</li>';
+    $('#breadcrumbs .breadcrumb li:gt(0)').remove();
+    $('#breadcrumbs .breadcrumb').append(pan);
+    $('.page-header h1').empty();
+    $('.page-header h1').append('{:L('M_MODULE_INDEX_TYPE='.I('get.type'))}<small class="glyphicon glyphicon-menu-right"> {:L('FIELD_MANAGEMENT')}</small><small class="glyphicon glyphicon-menu-right"> {:L('ADD')}</small>');
+</script>
+<import type="js" file="js.select"/>

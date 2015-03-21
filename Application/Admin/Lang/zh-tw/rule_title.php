@@ -99,4 +99,7 @@ $rule_title = array(
     'R_ARTICLESSS_INDEX' => '文章模型呵呵',
     'R_ARTICLEJJJ_INDEX' => '文章模型呵呵',
     'R_ARTICLEJDD_INDEX' => '文章模型dd',
+    'R_FIELD_ORDER' => '排序',
+    'R_FIELD_STATUS' => '狀態',
+    'R_FIELD_ADD' => '添加',
 );

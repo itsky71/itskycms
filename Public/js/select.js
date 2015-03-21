@@ -19,7 +19,12 @@ $('.select-click').click(function(e){
         ul.show();
         if(defval != ''){
             var lt = there.position();
-            if(lt.top>420) ul.scrollTop(lt.top-400);
+            var maxheight = parseInt($('.select-choices').attr('data-height'));
+            if(maxheight){
+                if(lt.top>(maxheight-10)) ul.scrollTop(lt.top-(maxheight-25));
+            }else{
+                if(lt.top>420) ul.scrollTop(lt.top-400);
+            }
         }
     }else{
         ul.scrollTop(0);

@@ -13,6 +13,7 @@ $module = array(
     'ADD_ERROR_'        =>  '添加失敗！',
     'ADD_OK_'           =>  '添加成功！',
     'SAVE_ERROR_'       =>  '保存失败！',
+    'MODULE_FIELD_'     =>  '字段管理',
 
     'ADD_1'             =>  '添加模型',
     'TITLE_1'           =>  '模型名稱',
@@ -21,6 +22,7 @@ $module = array(
     'ADD_ERROR_1'       =>  '模型添加失敗！',
     'ADD_OK_1'          =>  '模型添加成功！',
     'SAVE_ERROR_1'      =>  '模型保存失敗！',
+    'MODULE_FIELD_1'    =>  '模型字段',
 
     'ADD_2'             =>  '添加模塊',
     'TITLE_2'           =>  '模塊名稱',
@@ -29,10 +31,10 @@ $module = array(
     'ADD_ERROR_2'       =>  '模塊添加失敗！',
     'ADD_OK_2'          =>  '模塊添加成功！',
     'SAVE_ERROR_2'      =>  '模塊保存失敗！',
+    'MODULE_FIELD_2'    =>  '模塊字段',
 
     'NUMBER'            =>  '編號',
     'MANOPE'            =>  '管理操作',
-    'MODULE_FIELD'      =>  '模型字段',
     'TITLEL'            =>  '名稱長度必須為2-30個字符！',
     'NAMEL'             =>  '表名長度必須為2-30個字符！',
     'TITLEF'            =>  '名稱只能包含中文、英文字母、數字和下劃線！',
