@@ -4,7 +4,7 @@
             <label class="col-sm-3 control-label no-padding-right">{:L('FIELDS_TYPE')}:</label>
             <div class="col-lg-9">
                 <div class="input-group col-lg-8 select-click">
-                    <input class="hide" type="text" name="type" value=""/>
+                    <input id="field_type" class="hide" type="text" name="type" value=""/>
                     <div class="form-control select-input cude"></div>
                     <span class="input-group-addon cude">
                         <i class="glyphicon glyphicon-menu-down"></i>
@@ -14,6 +14,27 @@
                     <div class="select-choices">
                         <ul class="list-unstyled select-option" data-name="type">
                             <li data-val="">{:L('SELECT_FIELD_TYPE')}</li>
+                            <li data-val="catid">{:L('FIELD_CATID')}</li>
+                            <li data-val="title">{:L('FIELD_TITLE')}</li>
+                            <li data-val="typeid">{:L('FIELD_TYPEID')}</li>
+                            <li data-val="text">{:L('FIELD_TEXT')}</li>
+                            <li data-val="textarea">{:L('FIELD_TEXTAREA')}</li>
+                            <li data-val="editor">{:L('FIELD_EDITOR')}</li>
+                            <li data-val="select">{:L('FIELD_SELECT')}</li>
+                            <li data-val="radio">{:L('FIELD_RADIO')}</li>
+                            <li data-val="checkbox">{:L('FIELD_CHECKBOX')}</li>
+                            <li data-val="image">{:L('FIELD_IMAGE')}</li>
+                            <li data-val="images">{:L('FIELD_IMAGES')}</li>
+                            <li data-val="file">{:L('FIELD_FILE')}</li>
+                            <li data-val="files">{:L('FIELD_FILES')}</li>
+                            <li data-val="number">{:L('FIELD_NUMBER')}</li>
+                            <li data-val="datetime">{:L('FIELD_DATETIME')}</li>
+                            <li data-val="posid">{:L('FIELD_POSID')}</li>
+                            <li data-val="groupid">{:L('FIELD_GROUPID')}</li>
+                            <li data-val="linkage">{:L('FIELD_LINKAGE')}</li>
+                            <li data-val="template">{:L('FIELD_TEMPLATE')}</li>
+                            <li data-val="verify">{:L('FIELD_VERIFY')}</li>
+                            <li data-val="attr">{:L('FIELD_ATTR')}</li>
                         </ul>
                     </div>
                 </div>
@@ -33,9 +54,7 @@
         </div>
         <div class="form-group">
             <label class="col-lg-3 control-label no-padding-right">{:L('FIELD_SETUP')}:</label>
-            <div class="col-lg-9">
-                
-            </div>
+            <div id="field_setup" class="col-lg-9"></div>
         </div>
         <div class="form-group">
             <label class="col-lg-3 control-label no-padding-right">{:L('CLASS_NAME')}:</label>
@@ -46,7 +65,7 @@
         <div class="form-group">
             <label class="col-lg-3 control-label no-padding-right">{:L('REQUIRED')}:</label>
             <div class="col-lg-9">
-                <input class="ace ace-switch ace-switch-7" type="checkbox" value="1" name="required"/>
+                <input class="ace ace-switch ace-switch-7" type="checkbox" value="1" name="required" checked="checked"/>
                 <span class="lbl"></span>
             </div>
         </div>
@@ -100,6 +119,7 @@
         </div>
     </form>
 </div>
+<style>.tooltip-inner{white-space:nowrap;max-width: 300px;}</style>
 <script type="text/javascript">
     var pan = '<li><a onclick="load(event,this)" href="{:U('Module/index','type='.I('get.type').'&'.$vl)}">{:L('M_MODULE_INDEX_TYPE='.I('get.type'))}</a></li>\n\
 <li class="active"><a onclick="load(event,this)" href="{:U('Field/index',$vl.'&type='.I('get.type').'&mid='.I('get.mid'))}">{:L('FIELD_MANAGEMENT')}</a></li><li class="active">{:L('ADD')}</li>';
@@ -107,5 +127,22 @@
     $('#breadcrumbs .breadcrumb').append(pan);
     $('.page-header h1').empty();
     $('.page-header h1').append('{:L('M_MODULE_INDEX_TYPE='.I('get.type'))}<small class="glyphicon glyphicon-menu-right"> {:L('FIELD_MANAGEMENT')}</small><small class="glyphicon glyphicon-menu-right"> {:L('ADD')}</small>');
+    function field_setting(type){
+        $.ajax({
+            type:'POST',
+            url:'{:U('Field/index',$vl.'&isajax=1&mid='.I('get.mid'))}',
+            data:'type='+type,
+            beforeSend:function(){
+                $('#field_setup').html('<img style="margin-left:50px;" src="__PUBLIC__/validator/images/loading.gif" alt="loading"/>');
+            },
+            success:function(msg){
+                $('#field_setup').html(msg);
+            }
+        });
+    }
+    field_setting('');
+    $('ul[data-name="type"] li').click(function(){
+        field_setting($(this).attr('data-val'));
+    });
 </script>
 <import type="js" file="js.select"/>

@@ -42,16 +42,22 @@ class FieldController extends AdminController{
 
     public function index(){
         if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
-        $Field = D('Field');
-        $list = $Field->where('mid='.I('get.mid'))->order('listorder,id ASC')->select();
-        $this->assign('list', $list);
-        $this->display();
+        if(I('get.isajax')){
+            $this->assign(I('get.'));
+            $this->assign(I('post.'));
+            $this->display('type');
+        }else{
+            $Field = D('Field');
+            $list = $Field->where('mid='.I('get.mid'))->order('listorder,id ASC')->select();
+            $this->assign('list', $list);
+            $this->display();
+        }
     }
 
     public function add(){
         if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
         if(IS_POST){
-            
+            echo 'aaa';
         }else{
             $this->display('edit');
         }
