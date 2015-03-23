@@ -14,7 +14,7 @@
             <span class="lbl"></span>
         </div>
     </div>
-    <div class="form-group mb0">
+    <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_SIZE')}:</label>
         <div class="col-lg-9">
             <input class="col-lg-3" type="text" name="setup[size]" value=""/>
@@ -34,7 +34,7 @@
             <input class="col-lg-12" type="text" name="setup[default]" value=""/>
         </div>
     </div>
-    <div class="form-group mb0">
+    <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_IS_PASSWORD')}:</label>
         <div class="col-lg-9">
             <input class="ace ace-switch ace-switch-7" type="checkbox" name="setup[ispassword]" value="1"/>
@@ -78,7 +78,7 @@
             <span class="pull-left pt5 ml10 text-muted">px</span>
         </div>
     </div>
-    <div class="form-group mb0">
+    <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_DEFAULT')}:</label>
         <div class="col-lg-9">
             <textarea class="col-lg-9" name="setup[default]"></textarea>
@@ -86,13 +86,180 @@
     </div>
     <import type="js" file="js.select"/>
 </case>
+<case value="select">
+    <div class="form-group">
+        <label class="col-lg-3 control-label no-padding-right">
+            <span class="block">{:L('SETUP_SELECT_LIST')}:</span>
+            <span class="text-muted block">{:L('SETUP_SELECT_INFO')}</span>
+        </label>
+        <div class="col-lg-9">
+            <textarea class="col-lg-10" style="height: 120px;" name="setup[options]"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_SELECT_TYPE')}:</label>
+        <div class="col-lg-9">
+            <label>
+                <input class="ace" type="radio" name="setup[multiple]" value="0"/>
+                <span class="lbl"> {:L('SETUP_SELECT_TYPE_1')}</span>
+            </label>
+            <label class="ml10">
+                <input class="ace" type="radio" name="setup[multiple]" value="1"/>
+                <span class="lbl"> {:L('SETUP_SELECT_TYPE_2')}</span>
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_FIELD_TYPE')}:</label>
+        <div class="col-lg-9">
+            <div class="col-lg-6 pull-left no-padding-left">
+                <div class="input-group col-lg-12 select-click">
+                    <input class="hide" type="text" name="setup[fieldtype]" value="varchar"/>
+                    <div class="form-control select-input cude text-nowrap overflow-hidden"></div>
+                    <span class="input-group-addon cude">
+                        <i class="glyphicon glyphicon-menu-down"></i>
+                    </span>
+                </div>
+                <div class="col-lg-12">
+                    <div class="select-choices">
+                        <ul class="list-unstyled select-option" data-name="setup[fieldtype]">
+                            <li data-val="varchar">{:L('SETUP_VARCHAR')} VARCHAR</li>
+                            <li data-val="tinyint">{:L('SETUP_INT')} TINYINT(3)</li>
+                            <li data-val="smallint">{:L('SETUP_INT')} SMALLINT(5)</li>
+                            <li data-val="mediumint">{:L('SETUP_INT')} MEDIUMINT(8)</li>
+                            <li data-val="int">{:L('SETUP_INT')} INT(10)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <label id="numbertype" class="pull-left mt5 hide">
+                <input class="ace" type="checkbox" name="" value="1" checked="checked"/>
+                <span class="lbl"> {:L('SETUP_NO_NEGATIVE')}</span>
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_SHOW_ITEM')}:</label>
+        <div class="col-lg-9">
+            <input class="col-lg-3" type="text" name="setup[size]" value=""/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_DEFAULT')}:</label>
+        <div class="col-lg-9">
+            <input class="col-lg-8" type="text" name="setup[default]"/>
+        </div>
+    </div>
+    <import type="js" file="js.select"/>
+</case>
+<case value="editor">
+    <div class="form-group">
+        <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_EDITOR_TYPE')}:</label>
+        <div class="col-lg-9">
+            <div class="input-group col-lg-5 select-click">
+                <input class="hide" type="text" name="setup[edittype]" value="ueditor"/>
+                <div class="form-control select-input cude text-nowrap overflow-hidden"></div>
+                <span class="input-group-addon cude">
+                    <i class="glyphicon glyphicon-menu-down"></i>
+                </span>
+            </div>
+            <div class="col-lg-5">
+                <div class="select-choices">
+                    <ul class="list-unstyled select-option" data-name="setup[edittype]">
+                        <li data-val="ueditor">UEditor</li>
+                        <li data-val="kindeditor">KindEditor</li>
+                        <li data-val="ckeditor">CKEditor</li>
+                        <li data-val="markdown">Markdown</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_EDITOR_STYLE')}:</label>
+        <div class="col-lg-9">
+            <label>
+                <input class="ace" type="radio" name="setup[toolbar]" value="basic"/>
+                <span class="lbl"> {:L('SETUP_EDITOR_STYLE_BASIC')}</span>
+            </label>
+            <label class="ml10">
+                <input class="ace" type="radio" name="setup[toolbar]" value="full"  checked="checked"/>
+                <span class="lbl"> {:L('SETUP_EDITOR_STYLE_FULL')}</span>
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_DEFAULT')}:</label>
+        <div class="col-lg-9">
+            <textarea class="col-lg-12" name="setup[default]"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_EDITOR_HEIGHT')}:</label>
+        <div class="col-lg-9">
+            <input class="col-lg-3" type="text" name="setup[height]" value=""/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_IS_PAGE')}:</label>
+        <div class="col-lg-9">
+            <input class="ace ace-switch ace-switch-7" type="checkbox" value="1" name="setup[showpage]" checked="checked"/>
+            <span class="lbl"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_SHOW_ABSTRACT')}:</label>
+        <div class="col-lg-9">
+            <input class="ace ace-switch ace-switch-7" type="checkbox" value="1" name="setup[show_add_description]"  checked="checked"/>
+            <span class="lbl"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_SHOW_GET_TITLE_THUMB')}:</label>
+        <div class="col-lg-9">
+            <input class="ace ace-switch ace-switch-7" type="checkbox" value="1" name="setup[show_auto_thumb]"  checked="checked"/>
+            <span class="lbl"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_SHOW_SAVE_REMOTE_PIC')}:</label>
+        <div class="col-lg-9">
+            <input class="ace ace-switch ace-switch-7" type="checkbox" value="1" name="setup[show_auto_thumb]"  checked="checked"/>
+            <span class="lbl"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_IS_UPLOAD_PIC')}:</label>
+        <div class="col-lg-9">
+            <input class="ace ace-switch ace-switch-7" type="checkbox" value="1" name="setup[picupload]"  checked="checked"/>
+            <span class="lbl"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_UPLOAD_PIC_FORMAT')}:</label>
+        <div class="col-lg-9">
+            <input class="col-lg-10" type="text" name="setup[alowuploadexts]" value="" placeholder="{:L('SUCH')}: jpg,jpeg,png,gif"/>
+        </div>
+    </div>
+    <import type="js" file="js.select"/>
+</case>
 <default/>
+</switch>
     <div class="form-group mb0">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_FILTER')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-10 pull-left" type="text" name="" value=""/>
+            <input class="col-lg-10 pull-left" type="text" name="setup[safefun]" value=""/>
             <span class="glyphicon glyphicon-info-sign text-info pull-left mt5 ml10 bigger-125 cude tooltip-info" data-placement="right" data-rel="tooltip" data-original-title="{:L('SETUP_FILTER_TIP')}"></span>
         </div>
     </div>
-    <script type="text/javascript">$('[data-rel=tooltip]').tooltip();</script>
-</switch>
+    <script type="text/javascript">
+        $('[data-rel=tooltip]').tooltip();
+        $('.select-option li').bind('click',function(){
+            var val = $(this).attr('data-val');
+            if(val=='varchar'){
+                $('#numbertype').addClass('hide');
+            }else{
+                $('#numbertype').removeClass('hide');
+            }
+        });
+    </script>
