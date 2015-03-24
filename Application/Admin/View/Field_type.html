@@ -100,7 +100,7 @@
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_SELECT_TYPE')}:</label>
         <div class="col-lg-9">
             <label>
-                <input class="ace" type="radio" name="setup[multiple]" value="0"/>
+                <input class="ace" type="radio" name="setup[multiple]" value="0" checked="checked"/>
                 <span class="lbl"> {:L('SETUP_SELECT_TYPE_1')}</span>
             </label>
             <label class="ml10">
@@ -183,7 +183,7 @@
                 <span class="lbl"> {:L('SETUP_EDITOR_STYLE_BASIC')}</span>
             </label>
             <label class="ml10">
-                <input class="ace" type="radio" name="setup[toolbar]" value="full"  checked="checked"/>
+                <input class="ace" type="radio" name="setup[toolbar]" value="full" checked="checked"/>
                 <span class="lbl"> {:L('SETUP_EDITOR_STYLE_FULL')}</span>
             </label>
         </div>
@@ -243,6 +243,149 @@
     </div>
     <import type="js" file="js.select"/>
 </case>
+<case value="datetime">
+    <div class="form-group">
+        <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_DEFAULT')}:</label>
+        <div class="col-lg-9">
+            <input class="col-lg-8" type="text" name="setup[default]" value=""/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_DATE_FORMAT')}:</label>
+        <div class="col-lg-9">
+            <input class="col-lg-8 pull-left" type="text" name="setup[dateformat]" value=""/>
+            <span class="glyphicon glyphicon-info-sign text-info pull-left mt5 ml10 bigger-125 cude tooltip-info" data-placement="right" data-rel="tooltip" data-original-title="{:L('SETUP_DATE_TIP')}"></span>
+        </div>
+    </div>
+</case>
+<case value="attr">
+    <div class="form-group">
+        <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_SELECT_TYPE')}:</label>
+        <div class="col-lg-9">
+            <label>
+                <input class="ace" type="radio" name="setup[inputtype]" value="radio" checked="checked"/>
+                <span class="lbl"> {:L('SETUP_SELECT_RADIO')}</span>
+            </label>
+            <label class="ml10">
+                <input class="ace" type="radio" name="setup[inputtype]" value="checkbox"/>
+                <span class="lbl"> {:L('SETUP_SELECT_CHECKBOX')}</span>
+            </label>
+            <label class="ml10">
+                <input class="ace" type="radio" name="setup[inputtype]" value="select"/>
+                <span class="lbl"> {:L('SETUP_SELECT_SELECT')}</span>
+            </label>
+            <label class="ml10">
+                <input class="ace" type="radio" name="setup[inputtype]" value="images"/>
+                <span class="lbl"> {:L('SETUP_SELECT_IMAGES')}</span>
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_DEFAULT')}:</label>
+        <div class="col-lg-9">
+            <textarea class="col-lg-8 pull-left" name="setup[default]"></textarea>
+            <span class="glyphicon glyphicon-info-sign text-info pull-left mt5 ml10 bigger-125 cude tooltip-info" data-placement="right" data-rel="tooltip" data-original-title="{:L('SETUP_ATTR_TIP')}"></span>
+        </div>
+    </div>
+</case>
+<case value="groupid">
+    <div class="form-group">
+        <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_SELECT_TYPE')}:</label>
+        <div class="col-lg-9">
+            <label>
+                <input class="ace" type="radio" name="setup[inputtype]" value="radio" checked="checked"/>
+                <span class="lbl"> {:L('SETUP_SELECT_RADIO_FRAME')}</span>
+            </label>
+            <label class="ml10">
+                <input class="ace" type="radio" name="setup[inputtype]" value="checkbox"/>
+                <span class="lbl"> {:L('SETUP_SELECT_CHECKBOX_FRAME')}</span>
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_FIELD_TYPE')}:</label>
+        <div class="col-lg-9">
+            <div class="col-lg-6 pull-left no-padding-left">
+                <div class="input-group col-lg-12 select-click">
+                    <input class="hide" type="text" name="setup[fieldtype]" value="varchar"/>
+                    <div class="form-control select-input cude text-nowrap overflow-hidden"></div>
+                    <span class="input-group-addon cude">
+                        <i class="glyphicon glyphicon-menu-down"></i>
+                    </span>
+                </div>
+                <div class="col-lg-12">
+                    <div class="select-choices">
+                        <ul class="list-unstyled select-option" data-name="setup[fieldtype]">
+                            <li data-val="varchar">{:L('SETUP_VARCHAR')} VARCHAR</li>
+                            <li data-val="tinyint">{:L('SETUP_INT')} TINYINT(3)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <label id="numbertype" class="pull-left mt5 hide">
+                <input class="ace" type="checkbox" name="" value="1" checked="checked"/>
+                <span class="lbl"> {:L('SETUP_NO_NEGATIVE')}</span>
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_DEFAULT')}:</label>
+        <div class="col-lg-9">
+            <input class="col-lg-5" type="text" name="setup[default]" value=""/>
+        </div>
+    </div>
+    <import type="js" file="js.select"/>
+</case>
+<case value="typeid">
+    <div class="form-group">
+        <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_SELECT_TYPE')}:</label>
+        <div class="col-lg-9">
+            <label>
+                <input class="ace" type="radio" name="setup[inputtype]" value="radio" checked="checked"/>
+                <span class="lbl"> {:L('SETUP_SELECT_RADIO_FRAME')}</span>
+            </label>
+            <label class="ml10">
+                <input class="ace" type="radio" name="setup[inputtype]" value="checkbox"/>
+                <span class="lbl"> {:L('SETUP_SELECT_CHECKBOX_FRAME')}</span>
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_FIELD_TYPE')}:</label>
+        <div class="col-lg-9">
+            <div class="col-lg-6 pull-left no-padding-left">
+                <div class="input-group col-lg-12 select-click">
+                    <input class="hide" type="text" name="setup[fieldtype]" value="varchar"/>
+                    <div class="form-control select-input cude text-nowrap overflow-hidden"></div>
+                    <span class="input-group-addon cude">
+                        <i class="glyphicon glyphicon-menu-down"></i>
+                    </span>
+                </div>
+                <div class="col-lg-12">
+                    <div class="select-choices">
+                        <ul class="list-unstyled select-option" data-name="setup[fieldtype]">
+                            <li data-val="varchar">{:L('SETUP_VARCHAR')} VARCHAR</li>
+                            <li data-val="tinyint">{:L('SETUP_INT')} TINYINT(3)</li>
+                            <li data-val="smallint">{:L('SETUP_INT')} SMALLINT(3)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <label id="numbertype" class="pull-left mt5 hide">
+                <input class="ace" type="checkbox" name="" value="1" checked="checked"/>
+                <span class="lbl"> {:L('SETUP_NO_NEGATIVE')}</span>
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_DEFAULT')}:</label>
+        <div class="col-lg-9">
+            <input class="col-lg-5" type="text" name="setup[default]" value=""/>
+        </div>
+    </div>
+    <import type="js" file="js.select"/>
+</case>
+<case value="posid|radio">呵呵</case>
 <default/>
 </switch>
     <div class="form-group mb0">

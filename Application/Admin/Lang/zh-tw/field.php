@@ -74,6 +74,15 @@ return array(
     'SETUP_SHOW_SAVE_REMOTE_PIC'=>  '顯示保存遠程圖選項',
     'SETUP_IS_UPLOAD_PIC'       =>  '是否允許圖片上傳',
     'SETUP_UPLOAD_PIC_FORMAT'   =>  '允許上傳圖片類型',
+    'SETUP_DATE_FORMAT'         =>  '時間格式',
+    'SETUP_DATE_TIP'            =>  '例：Y-m-d H:i:s',
+    'SETUP_SELECT_RADIO'        =>  '單選',
+    'SETUP_SELECT_CHECKBOX'     =>  '複選',
+    'SETUP_SELECT_SELECT'       =>  '下拉列表',
+    'SETUP_SELECT_IMAGES'       =>  '圖組',
+    'SETUP_ATTR_TIP'            =>  '格式：名稱 | 價格',
+    'SETUP_SELECT_RADIO_FRAME'  =>  '單選框',
+    'SETUP_SELECT_CHECKBOX_FRAME'=> '複選框',
 
 
     'PATTERN_EMAIL'             =>  '電子郵件地址',
