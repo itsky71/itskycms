@@ -20,6 +20,7 @@ return array(
     'MAX_LENGTH'                =>  '最大',
     'NUM_STR'                   =>  '個字符',
     'ERROR_MSG'                 =>  '驗證失敗錯誤信息',
+    'CUSTOM_REGEX'              =>  '正則表達式',
 
     'FIELD_CATID'               =>  '欄目',
     'FIELD_TITLE'               =>  '標題',
@@ -55,7 +56,7 @@ return array(
     'SETUP_HEIGHT'              =>  '文本框高度',
     'SETUP_WIDTH'               =>  '文本框寬度',
     'SETUP_SELECT_LIST'         =>  '選項列表',
-    'SETUP_SELECT_INFO'         =>  '例：選項名稱|值',
+    'SETUP_SELECT_INFO'         =>  '例：選項名稱 | 值',
     'SETUP_SELECT_TYPE'         =>  '選項類型',
     'SETUP_SELECT_TYPE_1'       =>  '下拉框',
     'SETUP_SELECT_TYPE_2'       =>  '多選列表框',
@@ -83,6 +84,14 @@ return array(
     'SETUP_ATTR_TIP'            =>  '格式：名稱 | 價格',
     'SETUP_SELECT_RADIO_FRAME'  =>  '單選框',
     'SETUP_SELECT_CHECKBOX_FRAME'=> '複選框',
+    'SETUP_IS_NEGATIVE'         =>  '是否包括負數',
+    'SETUP_DECIMAL_NUMBER'      =>  '小數位數',
+    'SETUP_UPLOAD_TYPE'         =>  '允許上傳的文件類型',
+    'SETUP_UPLOAD_WATERMARK'    =>  '是否添加水印',
+    'SETUP_UPLOAD_ALREADY'      =>  '是否從已上傳中選擇',
+    'SETUP_UPLOAD_MAX_NUM'      =>  '允許上傳上限數量',
+    'SETUP_UPLOAD_MAX_SIZE'     =>  '允許上傳單張大小',
+    'SETUP_UPLOAD_FILE_MAX_SIZE'=>  '允許上傳文件大小',
 
 
     'PATTERN_EMAIL'             =>  '電子郵件地址',
