@@ -16,6 +16,12 @@ use Think\Controller;
  * @author itsky
  */
 class CheckController extends Controller{
+    protected function _initialize(){
+        //检查用户登入
+        if(!session('?'.C('USER_AUTH_KEY'))){
+            $this->redirect('Public/login');
+        }
+    }
     /** 验证菜单名称 */
     public function action(){
         if(IS_AJAX && IS_POST){
@@ -116,5 +122,10 @@ class CheckController extends Controller{
         if($fields['id']) $map['id'] = array('neq',$fields['id']);
         $res = $Name->where($map)->find();
         if($res) echo json_encode(array('error'=>L('UNIQUE')));
+    }
+    /** 验证字段唯一 */
+    public function field(){
+        if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
+        echo json_encode(array('error'=>'hehe'));
     }
 }

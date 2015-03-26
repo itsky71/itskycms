@@ -111,5 +111,11 @@ return array(
     'PATTERN_CN_USERNAME'       =>  '中文、英文、數字和下劃線',
     'PATTERN_ENGLISH'           =>  '英文字母',
     'PATTERN_EN_NUM'            =>  '英文、數字和下劃線',
-    'PATTERN_REGEX'             =>  '自定義正則表達式'
+    'PATTERN_REGEX'             =>  '自定義正則表達式',
+    
+    'TYPER'                     =>  '請選擇字段類型！',
+    'FIELDL'                    =>  '字段名長度必須為2-20個字符！',
+    'FIELDE'                    =>  '字段名必須為英文字母！',
+    'FIELDC'                    =>  '該字段名已存在！',
+    'NAMEL'                     =>  '別名長度必須為2-20個字符！'
 );
