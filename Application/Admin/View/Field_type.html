@@ -15,9 +15,10 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_SIZE')}:</label>
+        <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_WIDTH')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-3" type="text" name="setup[size]" value=""/>
+            <input class="col-lg-3 pull-left" type="text" name="setup[size]" value=""/>
+            <span class="pull-left pt5 ml10">px</span>
         </div>
     </div>
 </case>
@@ -25,7 +26,8 @@
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_SIZE')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-3" type="text" name="setup[size]" value=""/>
+            <input class="col-lg-3 pull-left" type="text" name="setup[size]" value=""/>
+            <span class="pull-left pt5 ml10">px</span>
         </div>
     </div>
     <div class="form-group">
@@ -68,14 +70,14 @@
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_HEIGHT')}:</label>
         <div class="col-lg-9">
             <input class="col-lg-3 pull-left" type="text" name="setup[height]" value=""/>
-            <span class="pull-left pt5 ml10 text-muted">px</span>
+            <span class="pull-left pt5 ml10">px</span>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_WIDTH')}:</label>
         <div class="col-lg-9">
             <input class="col-lg-3 pull-left" type="text" name="setup[width]" value=""/>
-            <span class="pull-left pt5 ml10 text-muted">px</span>
+            <span class="pull-left pt5 ml10">px</span>
         </div>
     </div>
     <div class="form-group">
@@ -133,7 +135,7 @@
                 </div>
             </div>
             <label id="numbertype" class="pull-left mt5 hide">
-                <input class="ace" type="checkbox" name="" value="1" checked="checked"/>
+                <input class="ace" type="checkbox" name="numbertype" value="1" checked="checked"/>
                 <span class="lbl"> {:L('SETUP_NO_NEGATIVE')}</span>
             </label>
         </div>
@@ -197,7 +199,8 @@
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_EDITOR_HEIGHT')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-3" type="text" name="setup[height]" value=""/>
+            <input class="col-lg-3 pull-left" type="text" name="setup[height]" value=""/>
+            <span class="pull-left pt5 ml10">px</span>
         </div>
     </div>
     <div class="form-group">
@@ -323,7 +326,7 @@
                 </div>
             </div>
             <label id="numbertype" class="pull-left mt5 hide">
-                <input class="ace" type="checkbox" name="" value="1" checked="checked"/>
+                <input class="ace" type="checkbox" name="numbertype" value="1" checked="checked"/>
                 <span class="lbl"> {:L('SETUP_NO_NEGATIVE')}</span>
             </label>
         </div>
@@ -366,13 +369,13 @@
                         <ul class="list-unstyled select-option" data-name="setup[fieldtype]">
                             <li data-val="varchar">{:L('SETUP_VARCHAR')} VARCHAR</li>
                             <li data-val="tinyint">{:L('SETUP_INT')} TINYINT(3)</li>
-                            <li data-val="smallint">{:L('SETUP_INT')} SMALLINT(3)</li>
+                            <li data-val="smallint">{:L('SETUP_INT')} SMALLINT(5)</li>
                         </ul>
                     </div>
                 </div>
             </div>
             <label id="numbertype" class="pull-left mt5 hide">
-                <input class="ace" type="checkbox" name="" value="1" checked="checked"/>
+                <input class="ace" type="checkbox" name="numbertype" value="1" checked="checked"/>
                 <span class="lbl"> {:L('SETUP_NO_NEGATIVE')}</span>
             </label>
         </div>
@@ -419,7 +422,7 @@
                 </div>
             </div>
             <label id="numbertype" class="pull-left mt5 hide">
-                <input class="ace" type="checkbox" name="" value="1" checked="checked"/>
+                <input class="ace" type="checkbox" name="numbertype" value="1" checked="checked"/>
                 <span class="lbl"> {:L('SETUP_NO_NEGATIVE')}</span>
             </label>
         </div>
@@ -466,7 +469,7 @@
                 </div>
             </div>
             <label id="numbertype" class="pull-left mt5 hide">
-                <input class="ace" type="checkbox" name="" value="1" checked="checked"/>
+                <input class="ace" type="checkbox" name="numbertype" value="1" checked="checked"/>
                 <span class="lbl"> {:L('SETUP_NO_NEGATIVE')}</span>
             </label>
         </div>
@@ -530,7 +533,8 @@
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_WIDTH')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-3" type="text" name="setup[size]" value=""/>
+            <input class="col-lg-3 pull-left" type="text" name="setup[size]" value=""/>
+            <span class="pull-left pt5 ml10">px</span>
         </div>
     </div>
     <div class="form-group">
@@ -612,7 +616,8 @@
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_WIDTH')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-3" type="text" name="setup[size]" value=""/>
+            <input class="col-lg-3 pull-left" type="text" name="setup[size]" value=""/>
+            <span class="pull-left pt5 ml10">px</span>
         </div>
     </div>
     <div class="form-group">
@@ -680,7 +685,8 @@
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_WIDTH')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-3" type="text" name="setup[size]" value=""/>
+            <input class="col-lg-3 pull-left" type="text" name="setup[size]" value=""/>
+            <span class="pull-left pt5 ml10">px</span>
         </div>
     </div>
 </case>
