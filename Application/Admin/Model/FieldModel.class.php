@@ -121,14 +121,120 @@ class FieldModel extends RelationModel{
                 }
                 break;
             case 'select':
-                $res[] = $this->check($setup['options'],'require');
-                $options = explode(PHP_EOL,$setup['options']);
-                if (count($options) < 2) $res[] = FALSE;
-                foreach ($options as $item){
-                    if((!empty(trim($item))) && strpos('|',trim($item))){
-                        $res[] = FALSE;
+                $res[] = $this->checkOpt($setup['options']);
+                if(!empty($setup['size'])){
+                    $res[] = $this->check($setup['size'], 'number');
+                    $res[] = $this->check($setup['size'], '1,2','length');
+                }
+                break;
+            case 'radio':
+                $res[] = $this->checkOpt($setup['options']);
+                break;
+            case 'checkbox':
+                $res[] = $this->checkOpt($setup['options']);
+                break;
+            case 'image':
+                if(!empty($setup['size'])){
+                    $res[] = $this->check($setup['size'], 'number');
+                    $res[] = $this->check($setup['size'],'2,4','length');
+                }
+                if(!empty($setup['upload_maxsize'])){
+                    $res[] = $this->check($setup['upload_maxsize'], 'number');
+                    $res[] = $this->check($setup['upload_maxsize'],'1,7','length');
+                }
+                if(!empty($setup['upload_allowext'])){
+                    $res[] = $this->check($setup['upload_allowext'], '/^[A-Za-z,]+$/');
+                    $res[] = $this->check($setup['upload_allowext'], '2,200', 'length');
+                }
+                if(!empty($setup['default'])){
+                    $res[] = $this->check($setup['default'], '5,200', 'length');
+                }
+                break;
+            case 'images':
+                if(!empty($setup['upload_maxnum'])){
+                    $res[] = $this->check($setup['upload_maxnum'], 'number');
+                    $res[] = $this->check($setup['upload_maxnum'], '1,10', 'length');
+                }
+                if(!empty($setup['upload_maxsize'])){
+                    $res[] = $this->check($setup['upload_maxsize'], 'number');
+                    $res[] = $this->check($setup['upload_maxsize'],'1,7','length');
+                }
+                if(!empty($setup['upload_allowext'])){
+                    $res[] = $this->check($setup['upload_allowext'], '/^[A-Za-z,]+$/');
+                    $res[] = $this->check($setup['upload_allowext'], '2,200', 'length');
+                }
+                if(!empty($setup['default'])){
+                    $res[] = $this->check($setup['default'], '5,200', 'length');
+                }
+                break;
+            case 'file':
+                if(!empty($setup['size'])){
+                    $res[] = $this->check($setup['size'], 'number');
+                    $res[] = $this->check($setup['size'],'2,4','length');
+                }
+                if(!empty($setup['default'])){
+                    $res[] = $this->check($setup['default'], '5,200', 'length');
+                }
+                if(!empty($setup['upload_maxsize'])){
+                    $res[] = $this->check($setup['upload_maxsize'], 'number');
+                    $res[] = $this->check($setup['upload_maxsize'],'1,7','length');
+                }
+                if(!empty($setup['upload_allowext'])){
+                    $res[] = $this->check($setup['upload_allowext'], '/^[A-Za-z,]+$/');
+                    $res[] = $this->check($setup['upload_allowext'], '2,200', 'length');
+                }
+                break;
+            case 'files':
+                if(!empty($setup['default'])){
+                    $res[] = $this->check($setup['default'], '5,200', 'length');
+                }
+                if(!empty($setup['upload_maxnum'])){
+                    $res[] = $this->check($setup['upload_maxnum'], 'number');
+                    $res[] = $this->check($setup['upload_maxnum'], '1,10', 'length');
+                }
+                if(!empty($setup['upload_maxsize'])){
+                    $res[] = $this->check($setup['upload_maxsize'], 'number');
+                    $res[] = $this->check($setup['upload_maxsize'],'1,7','length');
+                }
+                if(!empty($setup['upload_allowext'])){
+                    $res[] = $this->check($setup['upload_allowext'], '/^[A-Za-z,]+$/');
+                    $res[] = $this->check($setup['upload_allowext'], '2,200', 'length');
+                }
+                break;
+            case 'number':
+                if(!empty($setup['size'])){
+                    $res[] = $this->check($setup['size'], 'number');
+                    $res[] = $this->check($setup['size'],'2,4','length');
+                }
+                if(!empty($setup['default'])){
+                    if($setup['numbertype'] == 1){
+                        $res[] = $this->check($setup['default'], '/^[\+]?\d+(\.\d{1,5})?$/');
+                    }else{
+                        $res[] = $this->check($setup['default'], '/^[-\+]?\d+(\.\d{1,5})?$/');
                     }
                 }
+                break;
+            case 'datetime':
+                if(!empty($setup['default'])){
+                    $res[] = $this->check($setup['default'], '/^\d{10}$/');
+                }
+                if(!empty($setup['dateformat'])){
+                    $res[] = $this->check($setup['dateformat'], '3,20', 'length');
+                }
+                break;
+            case 'groupid':
+                if(!empty($setup['default'])){
+                    $res[] = $this->check($setup['default'], '1,20','length');
+                }
+                break;
+            case 'verify':
+                if(!empty($setup['size'])){
+                    $res[] = $this->check($setup['size'], 'number');
+                    $res[] = $this->check($setup['size'],'2,4','length');
+                }
+                break;
+            case 'attr':
+                $res[] = $this->checkOpt($setup['default']);
                 break;
             default:
                 break;
@@ -141,17 +247,21 @@ class FieldModel extends RelationModel{
         }
         return TRUE;
     }
-    public function test(){
-//        $type = I('post.type');
-        $setup = I('post.setup');
-        $res[] = $this->check($setup['options'],'require');
-        $options = explode(PHP_EOL,$setup['options']);
-        if (count($options) < 2) $res[] = 'FALSE';
+    protected function checkOpt($opts){
+        $require = $this->check($opts,'require');
+        if(!$require) return FALSE;
+        $options = explode(PHP_EOL,$opts);
+        if (count($options) < 2) return FALSE;
         foreach ($options as $item){
-            if(!empty(trim($item)) && strpos('|',trim($item))){
-                $res[] = FALSE;
+            $trim = trim($item);
+            if((!empty($trim)) && (!stripos($trim,'|'))){
+                return FALSE;
+            }
+            if((!empty($trim)) && (stripos($trim,'|'))){
+                $opt[] = $trim;
             }
         }
-        return $res;
+        if(count($opt) < 2) return FALSE;
+        return TRUE;
     }
 }

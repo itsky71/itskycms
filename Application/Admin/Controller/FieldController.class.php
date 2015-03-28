@@ -58,9 +58,9 @@ class FieldController extends AdminController{
         if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
         if(IS_POST){
             $Field = D('Field');
-            $res = $Field->test();
+//            $res = $Field->test();
 //            settype($res, 'integer');
-            print_r($res);exit;
+//            print_r($res);exit;
             if($Field->create()){
                 print_r(I('post.'));
             }else{
