@@ -5,6 +5,7 @@ return array(
     'ORDER'                     =>  '排序',
     'FIELD_NAME'                =>  '字段名',
     'FIELD_ALIAS'               =>  '別名',
+    'FIELD_TIPS'                =>  '提示信息',
     'FIELD_TYPE'                =>  '類型',
     'FIELD_SYSTEM'              =>  '系統字段',
     'REQUIRED'                  =>  '必填',

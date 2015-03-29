@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2015-03-17 10:51:13
+-- Generation Time: 2015-03-28 15:13:31
 -- 服务器版本： 5.6.20
 -- PHP Version: 5.5.15
 
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `ta_auth_group` (
 
 INSERT INTO `ta_auth_group` (`id`, `title`, `remark`, `status`, `rules`) VALUES
 (1, 'A_G_T_1', 'A_G_R_1', 1, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75'),
-(2, 'A_G_T_2', 'A_G_R_2', 1, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,82,83'),
+(2, 'A_G_T_2', 'A_G_R_2', 1, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,82,83,84,85,86'),
 (3, 'A_G_T_3', 'A_G_R_3', 1, '');
 
 -- --------------------------------------------------------
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `ta_auth_rule` (
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '状态：为1正常，为0禁用',
   `listorder` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
   `condition` char(100) NOT NULL DEFAULT '' COMMENT '规则表达式，为空表示存在就验证，不为空表示按照条件验证'
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='规则表' AUTO_INCREMENT=84 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='规则表' AUTO_INCREMENT=87 ;
 
 --
 -- 转存表中的数据 `ta_auth_rule`
@@ -177,7 +177,10 @@ INSERT INTO `ta_auth_rule` (`id`, `tid`, `name`, `title`, `type`, `status`, `lis
 (80, 4, 'Page/index', 'R_PAGE_INDEX', 1, 1, 0, ''),
 (81, 3, 'Article/index', 'R_ARTICLE_INDEX', 1, 1, 0, ''),
 (82, 3, 'Module/status', 'R_MODULE_STATUS', 1, 1, 0, ''),
-(83, 3, 'Field/index', 'R_FIELD_INDEX', 1, 1, 0, '');
+(83, 3, 'Field/index', 'R_FIELD_INDEX', 1, 1, 0, ''),
+(84, 3, 'Field/order', 'R_FIELD_ORDER', 1, 1, 0, ''),
+(85, 3, 'Field/status', 'R_FIELD_STATUS', 1, 1, 0, ''),
+(86, 3, 'Field/add', 'R_FIELD_ADD', 1, 1, 0, '');
 
 -- --------------------------------------------------------
 
@@ -296,10 +299,10 @@ INSERT INTO `ta_field` (`id`, `mid`, `field`, `name`, `tips`, `required`, `minle
 (3, 5, 'catid', 'ARTICLE_CATID', '', 1, 0, 0, '', '', '', 'catid', '', 0, 1, 1),
 (4, 5, 'typeid', 'ARTICLE_TYPEID', '', 1, 0, 0, '', '', '', 'typeid', '', 0, 1, 1),
 (5, 5, 'title', 'ARTICLE_TITLE', '', 1, 0, 0, '', '', '', 'title', '', 0, 1, 1),
-(6, 5, 'keywords', 'ARTICLE_KEYWORDS', '', 1, 0, 0, '', '', '', 'text', '', 0, 1, 1),
-(7, 5, 'description', 'ARTICLE_DESCRIPTION', '', 1, 0, 0, '', '', '', 'textarea', '', 0, 1, 1),
-(8, 5, 'createtime', 'ARTICLE_CREATETIME', '', 1, 0, 0, '', '', '', 'datetime', '', 0, 1, 1),
-(9, 5, 'recommend', 'ARTICLE_RECOMMEND', '', 1, 0, 0, '', '', '', 'radio', '', 0, 1, 1),
+(6, 5, 'keywords', 'ARTICLE_KEYWORDS', '', 0, 0, 0, '', '', '', 'text', '', 0, 1, 1),
+(7, 5, 'description', 'ARTICLE_DESCRIPTION', '', 1, 0, 0, '', '', '', 'textarea', '', 0, 1, 0),
+(8, 5, 'createtime', 'ARTICLE_CREATETIME', '', 1, 0, 0, '', '', '', 'datetime', '', 0, 0, 1),
+(9, 5, 'recommend', 'ARTICLE_RECOMMEND', '', 1, 0, 0, '', '', '', 'radio', '', 0, 0, 1),
 (10, 5, 'hits', 'ARTICLE_HITS', '', 1, 0, 0, '', '', '', 'number', '', 0, 1, 1),
 (11, 5, 'posid', 'ARTICLE_POSID', '', 1, 0, 0, '', '', '', 'posid', '', 0, 1, 1),
 (12, 5, 'template', 'ARTICLE_TEMPLATE', '', 1, 0, 0, '', '', '', 'template', '', 0, 1, 1),
@@ -357,7 +360,7 @@ CREATE TABLE IF NOT EXISTS `ta_member` (
 
 INSERT INTO `ta_member` (`id`, `password`, `username`, `realname`, `email`, `question`, `answer`, `status`, `regtime`, `login_ip`, `last_login_time`, `login_count`) VALUES
 (1, '30bc103d85df152c8c703bcbbcc7fd4d', 'admin', '你买单我就来', 'itsky71@foxmail.com', '我还会回来的...', '灰太狼？呵呵。。。', 1, 1419068912, '127.0.0.1', 1425907232, 33),
-(2, '30bc103d85df152c8c703bcbbcc7fd4d', 'itsky', '你地盘我做主', 'zmh0515005@163.com', '你是谁?', '呵呵...', 1, 1419587881, '127.0.0.1', 1426560664, 178),
+(2, '30bc103d85df152c8c703bcbbcc7fd4d', 'itsky', '你地盘我做主', 'zmh0515005@163.com', '你是谁?', '呵呵...', 1, 1419587881, '127.0.0.1', 1427509827, 188),
 (6, '30bc103d85df152c8c703bcbbcc7fd4d', 'yourphp', '111111', 'zmh0515005@163.me', '', '', 0, 1424952659, '', 0, 0);
 
 -- --------------------------------------------------------
@@ -432,9 +435,7 @@ INSERT INTO `ta_menu` (`id`, `pid`, `icon`, `name`, `model`, `action`, `data`, `
 (45, 38, '', 'M_UPDATE_LANG', 'Update', 'lang', '', '', 0, 1, 99),
 (46, 38, '', 'M_UPDATE_COLHTML', 'Update', 'colhtml', '', '', 0, 1, 99),
 (47, 38, '', 'M_UPDATE_CONHTML', 'Update', 'conhtml', '', '', 0, 1, 99),
-(49, 4, '', 'M_DATABASE_INDEX', 'Database', 'index', '', '', 0, 1, 0),
-(50, 25, '', 'M_PAGE_INDEX', 'Page', 'index', '', '', 0, 1, 9),
-(51, 18, '', 'M_ARTICLE_INDEX', 'Article', 'index', '', '', 0, 1, 9);
+(49, 4, '', 'M_DATABASE_INDEX', 'Database', 'index', '', '', 0, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -750,7 +751,7 @@ MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户组id',
 -- AUTO_INCREMENT for table `ta_auth_rule`
 --
 ALTER TABLE `ta_auth_rule`
-MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=84;
+MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=87;
 --
 -- AUTO_INCREMENT for table `ta_category`
 --

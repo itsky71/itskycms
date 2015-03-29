@@ -32,6 +32,7 @@ class FieldModel extends RelationModel{
         array('field','english','{%FIELDE}'),
         array('field','checkField','{%FIELDC}',self::EXISTS_VALIDATE,'callback'),
         array('name','2,20','{%NAMEL}',self::EXISTS_VALIDATE,'length'),
+        array('tips','2,20','{%TIPSL}',self::VALUE_VALIDATE,'length'),
         array('setup','checkSetup','{%SETUPALL}',self::EXISTS_VALIDATE,'callback'),
         array('class','2,20','{%CLASSL}',self::VALUE_VALIDATE,'length'),
         array('class','/^[A-Za-z0-9_\-]+$/','{%CLASSC}',self::VALUE_VALIDATE,'regex'),
@@ -247,6 +248,7 @@ class FieldModel extends RelationModel{
         }
         return TRUE;
     }
+    //字段相关设置中多选项设置的格式验证
     protected function checkOpt($opts){
         $require = $this->check($opts,'require');
         if(!$require) return FALSE;
