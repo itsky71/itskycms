@@ -1,0 +1,20 @@
+<?php
+$field_common = array(
+    'ARTICLE_DGE' => '哥哥',
+    'ARTICLE_TIPS_DGE' => '的哥哥',
+    'ARTICLE_GEG' => '二凤',
+    'ARTICLE_TIPS_GEG' => '二哥哥干活',
+    'ARTICLE_ERRORMSG_GEG' => '二哥哥饿疯骨灰',
+    'ARTICLE_EGEG' => '別名',
+    'ARTICLE_TIPS_EGEG' => '提示信息',
+    'ARTICLE_ERRORMSG_EGEG' => '输入错误',
+    'ARTICLE_DFEG' => '额哥哥',
+    'ARTICLE_TIPS_DFEG' => '户人家和人合伙',
+    'ARTICLE_ERRORMSG_DFEG' => 'ehg4ehr4hjh',
+    'ARTICLE_DFDFE' => '松岛枫',
+    'ARTICLE_TIPS_DFDFE' => '说疯话',
+    'ARTICLE_ERRORMSG_DFDFE' => 'egeg',
+    'ARTICLE_CATIDID' => '栏目栏目',
+    'ARTICLE_TIPS_CATIDID' => '提示信息栏目',
+    'ARTICLE_ERRORMSG_CATIDID' => 'hhh',
+);

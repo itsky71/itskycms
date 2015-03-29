@@ -22,6 +22,8 @@ return array(
     'NUM_STR'                   =>  '个字符',
     'ERROR_MSG'                 =>  '验证失败错误信息',
     'CUSTOM_REGEX'              =>  '正则表达式',
+    'ADD_ERROR'                 =>  '字段添加失败！',
+    'ADD_OK'                    =>  '字段添加成功！',
 
     'FIELD_CATID'               =>  '栏目',
     'FIELD_TITLE'               =>  '标题',
