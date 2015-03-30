@@ -101,7 +101,7 @@ class AdminController extends Controller{
             $name = M(CONTROLLER_NAME);
             if($name->create()){
                 if($name->add(I('post.'))){
-                    $this->success(L('ADD_OK'),U(CONTROLLER_NAME.'/index',  $this->vl));
+                    $this->success(L('ADD_OK'),U(CONTROLLER_NAME.'/index',$this->vl));
                 }else{
                     $this->error(L('ADD_ERROR'));
                 }

@@ -93,7 +93,29 @@ class FieldModel extends RelationModel{
                 }
                 break;
             case 'typeid':
-                if(!empty($setup['default'])) $res[] = $this->check($setup['default'],'2,20','length');
+                if($setup['fieldtype'] == 'varchar'){
+                    if(!empty($setup['default'])) $res[] = $this->check($setup['default'],'2,20','length');
+                }elseif($setup['fieldtype'] == 'tinyint'){
+                    if(!empty($setup['default'])){
+                        if($setup['numbertype'] == 1){
+                            $res[] = $this->check($setup['default'],'number');
+                            $res[] = $this->check($setup['default'],'1,3','length');
+                        }else{
+                            $res[] = $this->check($setup['default'],'integer');
+                            $res[] = $this->check($setup['default'],'1,4','length');
+                        }
+                    }
+                }else{
+                    if(!empty($setup['default'])){
+                        if($setup['numbertype'] == 1){
+                            $res[] = $this->check($setup['default'],'number');
+                            $res[] = $this->check($setup['default'],'1,5','length');
+                        }else{
+                            $res[] = $this->check($setup['default'],'integer');
+                            $res[] = $this->check($setup['default'],'1,6','length');
+                        }
+                    }
+                }
                 break;
             case 'text':
                 if(!empty($setup['size'])){
@@ -209,9 +231,17 @@ class FieldModel extends RelationModel{
                 }
                 if(!empty($setup['default'])){
                     if($setup['numbertype'] == 1){
-                        $res[] = $this->check($setup['default'], '/^[\+]?\d+(\.\d{1,5})?$/');
+                        if($setup['decimaldigits'] > 0){
+                            $res[] = $this->check($setup['default'], '/^\d+(\.\d{1,'.$setup['decimaldigits'].'})?$/');
+                        }else{
+                            $res[] = $this->check($setup['default'], '/^\d+$/');
+                        }
                     }else{
-                        $res[] = $this->check($setup['default'], '/^[-\+]?\d+(\.\d{1,5})?$/');
+                        if($setup['decimaldigits'] > 0){
+                            $res[] = $this->check($setup['default'], '/^[-\+]?\d+(\.\d{1,'.$setup['decimaldigits'].'})?$/');
+                        }else{
+                            $res[] = $this->check($setup['default'], '/^[-\+]?\d+$/');
+                        }
                     }
                 }
                 break;

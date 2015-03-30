@@ -84,14 +84,14 @@ class FieldController extends AdminController{
                         $data['errormsg'] => trim(I('post.errormsg'))
                     );
                     write_lang($langs, 'field_common');
-                    $addFieldSql = $test = $this->execute_sql(I('post.'),'add');
+                    $addFieldSql =  $this->execute_sql(I('post.'),'add');
                     $model = new \Think\Model();
                     if(is_array($addFieldSql)){
                         foreach ($addFieldSql as $sql){
                             $model->execute($sql);
                         }
                     }else{
-                        if($addFieldSql) $model->execute ($addFieldSql);
+                        if($addFieldSql) $model->execute($addFieldSql);
                     }
                     $this->success(L('ADD_OK'),U('Field/index',$this->vl.'&type='.I('post.mtype').'&mid='.$mid));
                 }else{
@@ -141,27 +141,110 @@ class FieldController extends AdminController{
         $moduleid = $info['mid'];
         $default = $info['setup']['default'];
         $field = $info['field'];
-        $comment = $info['name'];
+        $comment = ' COMMENT \''.$info['name'].'\' ;';
         $tablename = C('DB_PREFIX').strtolower(M('Module')->getFieldById($moduleid,'name'));
-        $minlength = intval($info['minlength']);
         $maxlength = intval($info['maxlength']);
         $numbertype = $info['setup']['numbertype'];
+        $ispassword = $info['setup']['ispassword'];
         $oldfield = $info['oldfield'];
         $do = $doing == 'add' ? ' ADD ' : ' CHANGE `'.$oldfield.'` ';
 
         switch($fieldtype){
             case 'varchar':
-                
+                if(!$maxlength) $maxlength = 255;
+                $maxlength = empty($ispassword) ? min($maxlength,255) : 40;
+                $sql = 'ALTER TABLE `'.$tablename.'`'.$do.'`'.$field.'` VARCHAR('.$maxlength.') NOT NULL DEFAULT \'\''.$comment;
                 break;
             case 'title':
                 if(!$maxlength) $maxlength = 255;
                 $maxlength = min($maxlength,255);
-                $sql[] = 'ALTER TABLE `'.$tablename.'`'.$do.'`title` VARCHAR('.$maxlength.') NOT NULL DEFAULT \'\' COMMENT \''.$comment.'\' ;';
+                $sql[] = 'ALTER TABLE `'.$tablename.'`'.$do.'`title` VARCHAR('.$maxlength.') NOT NULL DEFAULT \'\''.$comment;
                 $sql[] = 'ALTER TABLE `'.$tablename.'`'.$do.'`title_style` VARCHAR(40) NOT NULL DEFAULT \'\' COMMENT \'样式\' ;';
                 $sql[] = 'ALTER TABLE `'.$tablename.'`'.$do.'`thumb` VARCHAR(100) NOT NULL DEFAULT \'\' COMMENT \'缩略图\' ;';
                 break;
             case 'catid':
-                $sql = 'ALTER TABLE `'.$tablename.'`'.$do.'`'.$field.'` SMALLINT(5) UNSIGNED NOT NULL DEFAULT \'0\' COMMENT \''.$comment.'\' ;';
+                $sql = 'ALTER TABLE `'.$tablename.'`'.$do.'`'.$field.'` SMALLINT(5) UNSIGNED NOT NULL DEFAULT \'0\''.$comment;
+                break;
+            case 'number':
+                $decimaldigits = $info['setup']['decimaldigits'];
+                $default = $decimaldigits == 0 ? intval($default) : floatval($default);
+                $numtypesql = $decimaldigits == 0 ? ' INT(10) ' : ' DECIMAL(10,'.$decimaldigits.') ';
+                $numtysql = $numtypesql.($numbertype == 1 ? ' UNSIGNED ' : '');
+                $sql = 'ALTER TABLE `'.$tablename.'`'.$do.'`'.$field.'`'.$numtysql.'NOT NULL DEFAULT \''.$default.'\''.$comment;
+                break;
+            case 'tinyint':
+                if(!$maxlength) $maxlength = 3;
+                $maxlength = min($maxlength,3);
+                if($numbertype == 1){
+                    $default = min(intval($default),255);
+                }else{
+                    $default = intval($default) > 0 ? min(intval($default),127) : max(intval($default),-128);
+                }
+                $sql = 'ALTER TABLE `'.$tablename.'`'.$do.'`'.$field.'`'.' TINYINT('.$maxlength.')';
+                $sql .= ($numbertype == 1 ? ' UNSIGNED' : '').' NOT NULL DEFAULT \''.$default.'\''.$comment;
+                break;
+            case 'smallint':
+                if(!$maxlength) $maxlength = 5;
+                $maxlength = min($maxlength,5);
+                if($numbertype == 1){
+                    $default = min(intval($default),65535);
+                }else{
+                    $default = intval($default) > 0 ? min(intval($default),32767) : max(intval($default),-32768);
+                }
+                $sql = 'ALTER TABLE `'.$tablename.'`'.$do.'`'.$field.'`'.' SMALLINT('.$maxlength.')';
+                $sql .= ($numbertype == 1 ? ' UNSIGNED' : '').' NOT NULL DEFAULT \''.$default.'\''.$comment;
+                break;
+            case 'mediumint':
+                if(!$maxlength) $maxlength = 8;
+                $maxlength = min($maxlength,8);
+                if($numbertype == 1){
+                    $default = min(intval($default),16777215);
+                }else{
+                    $default = intval($default) > 0 ? min(intval($default),8388607) : max(intval($default),-8388608);
+                }
+                $sql = 'ALTER TABLE `'.$tablename.'`'.$do.'`'.$field.'`'.' MEDIUMINT('.$maxlength.')';
+                $sql .= ($numbertype == 1 ? ' UNSIGNED' : '').' NOT NULL DEFAULT \''.$default.'\''.$comment;
+                break;
+            case 'int':
+                if(!$maxlength) $maxlength = 10;
+                $maxlength = min($maxlength,10);
+                if($numbertype == 1){
+                    $default = min(intval($default),4294967295);
+                }else{
+                    $default = intval($default) > 0 ? min(intval($default),2147483647) : max(intval($default),-2147483648);
+                }
+                $sql = 'ALTER TABLE `'.$tablename.'`'.$do.'`'.$field.'`'.' INT('.$maxlength.')';
+                $sql .= ($numbertype == 1 ? ' UNSIGNED' : '').' NOT NULL DEFAULT \''.$default.'\''.$comment;
+                break;
+            case 'attr':
+                $sql = 'ALTER TABLE `'.$tablename.'`'.$do.'`'.$field.'` MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT \'0\''.$comment;
+                break;
+            case 'mediumtext':
+                $sql = 'ALTER TABLE `'.$tablename.'`'.$do.'`'.$field.'` MEDIUMTEXT NOT NULL DEFAULT \''.$default.'\''.$comment;
+                break;
+            case 'text':
+                $sql = 'ALTER TABLE `'.$tablename.'`'.$do.'`'.$field.'` TEXT NOT NULL DEFAULT \''.$default.'\''.$comment;
+                break;
+            case 'datetime':
+                $sql = 'ALTER TABLE `'.$tablename.'`'.$do.'`'.$field.'` INT(10) UNSIGNED NOT NULL DEFAULT \''.$default.'\''.$comment;
+                break;
+            case 'image':
+                $sql = 'ALTER TABLE `'.$tablename.'`'.$do.'`'.$field.'` VARCHAR(100) NOT NULL DEFAULT \''.$default.'\''.$comment;
+                break;
+            case 'images':
+                $sql = 'ALTER TABLE `'.$tablename.'`'.$do.'`'.$field.'` MEDIUMTEXT NOT NULL DEFAULT \'\''.$comment;
+                break;
+            case 'file':
+                $sql = 'ALTER TABLE `'.$tablename.'`'.$do.'`'.$field.'` VARCHAR(100) NOT NULL DEFAULT \''.$default.'\''.$comment;
+                break;
+            case 'files':
+                $sql = 'ALTER TABLE `'.$tablename.'`'.$do.'`'.$field.'` MEDIUMTEXT NOT NULL DEFAULT \'\''.$comment;
+                break;
+            case 'editor':
+                $sql = 'ALTER TABLE `'.$tablename.'`'.$do.'`'.$field.'` TEXT NOT NULL DEFAULT \'\''.$comment;
+                break;
+            case 'posid':
+                $sql = 'ALTER TABLE `'.$tablename.'`'.$do.'`'.$field.'` TINYINT(3) UNSIGNED NOT NULL DEFAULT \'0\''.$comment;
                 break;
             default:
                 break;
