@@ -100,6 +100,9 @@ abstract class Driver {
                     // 禁用模拟预处理语句
                     $this->options[PDO::ATTR_EMULATE_PREPARES]  =   false;
                 }
+                if(!$this->config['debug']){
+                    $this->options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_SILENT;
+                }
                 $this->linkID[$linkNum] = new PDO( $config['dsn'], $config['username'], $config['password'],$this->options);
             }catch (\PDOException $e) {
                 if($autoConnection){

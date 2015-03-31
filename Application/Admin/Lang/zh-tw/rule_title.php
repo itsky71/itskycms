@@ -102,4 +102,6 @@ $rule_title = array(
     'R_FIELD_ORDER' => '排序',
     'R_FIELD_STATUS' => '狀態',
     'R_FIELD_ADD' => '添加',
+    'R_FIELD_DEL' => '刪除',
+    'R_FIELD_EDIT' => '編輯',
 );

@@ -20,3 +20,9 @@ line 154 to 155
         lang 'DOWNLOAD_FILE_NOT_EXIST' => '下载文件不存在！'
 line 198
     去掉 ';'
+
+4、/ThinkPHP/Library/Think/Db/Driver.class.php
+line 102 后面加入：
+    if(!$this->config['debug']){
+        $this->options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_SILENT;
+    }

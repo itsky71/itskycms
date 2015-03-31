@@ -1,6 +1,7 @@
 <?php
 return array(
     //'配置项'=>'配置值'
+//    'DB_DEBUG' => TRUE,
     'TAGLIB_BEGIN' => '{',
     'TAGLIB_END' => '}',
     'HTML_CACHE_ON' => FALSE, //开启静态缓存

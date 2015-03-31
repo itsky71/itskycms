@@ -40,5 +40,9 @@ $module = array(
     'TITLEF'            =>  '名稱只能包含中文、英文字母、數字和下劃線！',
     'NAMEF'             =>  '表名只能包含英文字母！',
     'NAMEU'             =>  '表名已存在！',
+    'RULE_ADD_ERROR'    =>  '權限節點添加失敗！',
+    'RULE_EDIT_ERROR'   =>  '權限節點編輯失敗！',
+    'MENU_ADD_ERROR'    =>  '菜單添加失敗！',
+    'MENU_EDIT_ERROR'   =>  '菜單編輯失敗！'
 );
 return array_merge($module, $module_info);

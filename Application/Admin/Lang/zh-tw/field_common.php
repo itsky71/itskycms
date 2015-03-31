@@ -39,4 +39,7 @@ $field_common = array(
     'ARTICLE_ERRORMSG_DFDF' => '',
     'ARTICLE_DFEFE' => '股份二个人',
     'ARTICLE_ERRORMSG_DFEFE' => '',
+    'ARTICLE_AAVV' => '打广告',
+    'ARTICLE_TIPS_AAVV' => '但是风格',
+    'ARTICLE_ERRORMSG_AAVV' => '',
 );

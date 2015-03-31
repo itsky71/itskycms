@@ -1,12 +1,13 @@
 <div class="col-lg-8">
     <form class="form-horizontal" role="form" autocomplete="off">
+        <input type="hidden" name="id" value="{$vo.id}"/>
         <input type="hidden" name="mid" value="{$Think.get.mid}"/>
         <input type="hidden" name="mtype" value="{$Think.get.type}"/>
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right">{:L('FIELDS_TYPE')}:</label>
             <div class="col-lg-9">
                 <div class="input-group col-lg-8 select-click">
-                    <input id="field_type" class="hide" type="text" name="type" value=""/>
+                    <input id="field_type" class="hide" type="text" name="type" value="{$vo.type}"/>
                     <div class="form-control select-input cude"></div>
                     <span class="input-group-addon cude">
                         <i class="glyphicon glyphicon-menu-down"></i>
@@ -45,19 +46,19 @@
         <div id="field_tr" class="form-group">
             <label class="col-lg-3 control-label no-padding-right">{:L('FIELD_NAME')}:</label>
             <div class="col-lg-9">
-                <input class="col-lg-8" type="text" name="field" value=""/>
+                <input class="col-lg-8" type="text" name="field" value="{$vo.field}"/>
             </div>
         </div>
         <div class="form-group">
             <label class="col-lg-3 control-label no-padding-right">{:L('FIELD_ALIAS')}:</label>
             <div class="col-lg-9">
-                <input class="col-lg-8" type="text" name="name" value="" placeholder="{$Think.LANG_SET}"/>
+                <input class="col-lg-8" type="text" name="name" value="{$vo.name|L}" placeholder="{$Think.LANG_SET}"/>
             </div>
         </div>
         <div class="form-group">
             <label class="col-lg-3 control-label no-padding-right">{:L('FIELD_TIPS')}:</label>
             <div class="col-lg-9">
-                <input class="col-lg-12" type="text" name="tips" value=""/>
+                <input class="col-lg-12" type="text" name="tips" value="{:$vo['tips']?L($vo['tips']):''}"/>
             </div>
         </div>
         <div class="form-group">
@@ -163,7 +164,7 @@
         }
         $.ajax({
             type:'POST',
-            url:'{:U('Field/index',$vl.'&isajax=1&mid='.I('get.mid'))}',
+            url:'{:U('Field/index',$vl.'&isajax=1&action='.ACTION_NAME.'&mid='.I('get.mid'))}',
             data:'type='+type,
             beforeSend:function(){
                 $('#field_setup').html('<img style="margin-left:50px;" src="__PUBLIC__/validator/images/loading.gif" alt="loading"/>');
@@ -173,7 +174,7 @@
             }
         });
     }
-    field_setting('');
+    field_setting('{$vo.type}');
     $('ul[data-name="type"] li').click(function(){
         field_setting($(this).attr('data-val'));
     });

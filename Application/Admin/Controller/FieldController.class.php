@@ -45,6 +45,9 @@ class FieldController extends AdminController{
         if(I('get.isajax')){
             $this->assign(I('get.'));
             $this->assign(I('post.'));
+            if(I('get.action') == 'edit'){
+                
+            }
             $this->display('type');
         }else{
             $Field = D('Field');
@@ -77,7 +80,8 @@ class FieldController extends AdminController{
                     'type' => I('post.type'),
                     'setup' => json_encode(I('post.setup'))
                 );
-                if($Field->add($data)){
+                $fid = $Field->add($data);
+                if($fid){
                     $langs = array(
                         $data['name'] => trim(I('post.name')),
                         $data['tips'] => trim(I('post.tips')),
@@ -88,10 +92,20 @@ class FieldController extends AdminController{
                     $model = new \Think\Model();
                     if(is_array($addFieldSql)){
                         foreach ($addFieldSql as $sql){
-                            $model->execute($sql);
+                            $res = $model->execute($sql);
+                            if($res === FALSE){
+                                $Field->where('id='.$fid)->delete();
+                                $this->error(L('SQL_ERROR'));
+                            }
                         }
                     }else{
-                        if($addFieldSql) $model->execute($addFieldSql);
+                        if($addFieldSql){
+                            $result = $model->execute($addFieldSql);
+                            if($result === FALSE){
+                                $Field->where('id='.$fid)->delete();
+                                $this->error(L('SQL_ERROR'));
+                            }
+                        }
                     }
                     $this->success(L('ADD_OK'),U('Field/index',$this->vl.'&type='.I('post.mtype').'&mid='.$mid));
                 }else{
@@ -103,6 +117,34 @@ class FieldController extends AdminController{
         }else{
             $this->display('edit');
         }
+    }
+
+    public function edit(){
+        if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
+        $Field = D('Field');
+        if(IS_POST){
+            print_r(I('post.'));
+        }else{
+            $vo = $Field->where('id='.I('get.id'))->find();
+//            $vo['setup'] = json_decode($vo['setup']);
+            $this->assign('vo', $vo);
+            $this->display();
+        }
+    }
+
+    public function del(){
+        if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
+        $Field = D('Field');
+        $delitem = $Field->where('id='.I('get.id'))->find();
+        $module = M('Module')->getFieldById($delitem['mid'],'name');
+        if(in_array($delitem['field'], M($module)->getDbFields())){
+            $sql = 'ALTER TABLE `'.C('DB_PREFIX').strtolower($module).'` DROP `'.$delitem['field'].'`;';
+            $model = new \Think\Model();
+            $res = $model->execute($sql);
+            if($res === FALSE) $this->error(L('DEL_ERROR'));
+        }
+        $Field->where('id='.$delitem['id'])->delete();
+        $this->success(L('DEL_OK'),U('Field/index',$this->vl.'&type='.I('get.type').'&mid='.I('get.mid')));
     }
 
     public function order(){
@@ -132,7 +174,12 @@ class FieldController extends AdminController{
             $this->error(L('_ERROR_ACTION_'));
         }
     }
-
+    /**
+     * 产生添加字段的SQL语句
+     * @param array $info 信息数组
+     * @param string $doing 执行操作 add edit
+     * @return string 返回SQL语句
+     */
     private function execute_sql($info,$doing){
         $fieldtype = $info['type'];
         if($info['setup']['fieldtype']){
@@ -145,14 +192,13 @@ class FieldController extends AdminController{
         $tablename = C('DB_PREFIX').strtolower(M('Module')->getFieldById($moduleid,'name'));
         $maxlength = intval($info['maxlength']);
         $numbertype = $info['setup']['numbertype'];
-        $ispassword = $info['setup']['ispassword'];
         $oldfield = $info['oldfield'];
         $do = $doing == 'add' ? ' ADD ' : ' CHANGE `'.$oldfield.'` ';
 
         switch($fieldtype){
             case 'varchar':
                 if(!$maxlength) $maxlength = 255;
-                $maxlength = empty($ispassword) ? min($maxlength,255) : 40;
+                $maxlength = min($maxlength,255);
                 $sql = 'ALTER TABLE `'.$tablename.'`'.$do.'`'.$field.'` VARCHAR('.$maxlength.') NOT NULL DEFAULT \'\''.$comment;
                 break;
             case 'title':

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2015-03-30 15:59:20
+-- Generation Time: 2015-03-31 16:28:43
 -- 服务器版本： 5.6.20
 -- PHP Version: 5.5.15
 
@@ -37,19 +37,15 @@ CREATE TABLE IF NOT EXISTS `ta_article` (
   `ffegeg` varchar(40) NOT NULL DEFAULT '' COMMENT '但是风格',
   `bb` int(11) unsigned NOT NULL,
   `eeg` decimal(10,3) unsigned NOT NULL DEFAULT '2.000' COMMENT '二哥五个',
-  `egeg` decimal(10,1) NOT NULL DEFAULT '2.0' COMMENT 'egegeg',
-  `gehhht` int(10) unsigned NOT NULL DEFAULT '25' COMMENT '飞哥哥',
-  `defegfeg` int(11) NOT NULL DEFAULT '652' COMMENT '飞飞哥哥发',
-  `dfefge` tinyint(4) NOT NULL DEFAULT '0' COMMENT '飞哥哥哥',
-  `dfefe` mediumint(5) unsigned NOT NULL DEFAULT '99999' COMMENT '股份二个人'
+  `gehhht` int(10) unsigned NOT NULL DEFAULT '25' COMMENT '飞哥哥'
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='文章模型' AUTO_INCREMENT=2 ;
 
 --
 -- 转存表中的数据 `ta_article`
 --
 
-INSERT INTO `ta_article` (`id`, `aa`, `title`, `title_style`, `thumb`, `catidid`, `djfij`, `ffegeg`, `bb`, `eeg`, `egeg`, `gehhht`, `defegfeg`, `dfefge`, `dfefe`) VALUES
-(1, '', '', '', '', 0, '', '', 0, '2.000', '2.0', 25, 652, -128, 0);
+INSERT INTO `ta_article` (`id`, `aa`, `title`, `title_style`, `thumb`, `catidid`, `djfij`, `ffegeg`, `bb`, `eeg`, `gehhht`) VALUES
+(1, '', '', '', '', 0, '', '', 0, '2.000', 25);
 
 -- --------------------------------------------------------
 
@@ -71,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `ta_auth_group` (
 
 INSERT INTO `ta_auth_group` (`id`, `title`, `remark`, `status`, `rules`) VALUES
 (1, 'A_G_T_1', 'A_G_R_1', 1, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75'),
-(2, 'A_G_T_2', 'A_G_R_2', 1, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,82,83,84,85,86'),
+(2, 'A_G_T_2', 'A_G_R_2', 1, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,82,83,84,85,86,87,88'),
 (3, 'A_G_T_3', 'A_G_R_3', 1, '');
 
 -- --------------------------------------------------------
@@ -109,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `ta_auth_rule` (
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '状态：为1正常，为0禁用',
   `listorder` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
   `condition` char(100) NOT NULL DEFAULT '' COMMENT '规则表达式，为空表示存在就验证，不为空表示按照条件验证'
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='规则表' AUTO_INCREMENT=87 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='规则表' AUTO_INCREMENT=89 ;
 
 --
 -- 转存表中的数据 `ta_auth_rule`
@@ -201,7 +197,9 @@ INSERT INTO `ta_auth_rule` (`id`, `tid`, `name`, `title`, `type`, `status`, `lis
 (83, 3, 'Field/index', 'R_FIELD_INDEX', 1, 1, 0, ''),
 (84, 3, 'Field/order', 'R_FIELD_ORDER', 1, 1, 0, ''),
 (85, 3, 'Field/status', 'R_FIELD_STATUS', 1, 1, 0, ''),
-(86, 3, 'Field/add', 'R_FIELD_ADD', 1, 1, 0, '');
+(86, 3, 'Field/add', 'R_FIELD_ADD', 1, 1, 0, ''),
+(87, 3, 'Field/del', 'R_FIELD_DEL', 1, 1, 0, ''),
+(88, 3, 'Field/edit', 'R_FIELD_EDIT', 1, 1, 0, '');
 
 -- --------------------------------------------------------
 
@@ -307,9 +305,9 @@ CREATE TABLE IF NOT EXISTS `ta_field` (
   `type` varchar(20) NOT NULL DEFAULT '' COMMENT '字段类型',
   `setup` mediumtext NOT NULL COMMENT '字段相关设置',
   `listorder` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
-  `status` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '状态',
+  `status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '状态',
   `issystem` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否为系统字段'
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='字段' AUTO_INCREMENT=30 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='字段' AUTO_INCREMENT=40 ;
 
 --
 -- 转存表中的数据 `ta_field`
@@ -338,13 +336,7 @@ INSERT INTO `ta_field` (`id`, `mid`, `field`, `name`, `tips`, `required`, `minle
 (20, 5, 'djfij', 'ARTICLE_DJFIJ', 'ARTICLE_TIPS_DJFIJ', 1, 6, 20, '', '', 'ARTICLE_ERRORMSG_DJFIJ', '', 'text', '{"size":"200","default":"\\u5927\\u98de\\u54e5\\u54e5\\u54e5","ispassword":"1","fieldtype":"varchar","safefun":"dgfeg"}', 0, 0, 0),
 (21, 5, 'ffegeg', 'ARTICLE_FFEGEG', 'ARTICLE_TIPS_FFEGEG', 1, 6, 20, 'en_num', '', 'ARTICLE_ERRORMSG_FFEGEG', 'dgrhre', 'text', '{"size":"200","default":"\\u7684\\u98ce\\u683c","ispassword":"1","fieldtype":"varchar","safefun":"dgerh"}', 0, 0, 0),
 (22, 5, 'eeg', 'ARTICLE_EEG', 'ARTICLE_TIPS_EEG', 1, 2, 10, 'url', '', 'ARTICLE_ERRORMSG_EEG', 'sdfwgf', 'number', '{"size":"200","numbertype":"1","decimaldigits":"5","default":"2","safefun":"sdgedgegwe"}', 0, 0, 0),
-(23, 5, 'egeg', 'ARTICLE_EGEG', 'ARTICLE_TIPS_EGEG', 1, 0, 0, '', '', 'ARTICLE_ERRORMSG_EGEG', '', 'number', '{"size":"200","decimaldigits":"1","default":"2","safefun":""}', 0, 0, 0),
-(24, 5, 'gehhht', 'ARTICLE_GEHHHT', '', 1, 0, 0, '', '', 'ARTICLE_ERRORMSG_GEHHHT', 'ddfefg', 'number', '{"size":"200","numbertype":"1","decimaldigits":"0","default":"25","safefun":""}', 0, 0, 0),
-(25, 5, 'defegfeg', 'ARTICLE_DEFEGFEG', '', 1, 0, 0, '', '', 'ARTICLE_ERRORMSG_DEFEGFEG', '', 'number', '{"size":"200","decimaldigits":"0","default":"652","safefun":""}', 0, 0, 0),
-(26, 5, 'dfefge', 'ARTICLE_DFEFGE', 'ARTICLE_TIPS_DFEFGE', 1, 0, 0, '', '', 'ARTICLE_ERRORMSG_DFEFGE', 'fegeg', 'typeid', '{"inputtype":"radio","fieldtype":"tinyint","default":"\\u54e5\\u54e5ege\\u6076\\u641e","safefun":"dfd"}', 0, 0, 0),
-(27, 5, 'dfdf', 'ARTICLE_DFDF', 'ARTICLE_TIPS_DFDF', 1, 0, 0, '', '', 'ARTICLE_ERRORMSG_DFDF', 'efefefef', 'typeid', '{"inputtype":"radio","fieldtype":"smallint","default":"-54545","safefun":""}', 0, 0, 0),
-(28, 5, 'dfefe', 'ARTICLE_DFEFE', '', 1, 0, 0, '', '', 'ARTICLE_ERRORMSG_DFEFE', '', 'typeid', '{"inputtype":"radio","fieldtype":"tinyint","default":"-365","safefun":""}', 0, 0, 0),
-(29, 5, 'dfefe', 'ARTICLE_DFEFE', '', 1, 0, 0, '', '', 'ARTICLE_ERRORMSG_DFEFE', '', 'typeid', '{"inputtype":"radio","fieldtype":"tinyint","default":"-365","safefun":""}', 0, 0, 0);
+(24, 5, 'gehhht', 'ARTICLE_GEHHHT', '', 1, 0, 0, '', '', 'ARTICLE_ERRORMSG_GEHHHT', 'ddfefg', 'number', '{"size":"200","numbertype":"1","decimaldigits":"0","default":"25","safefun":""}', 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -398,7 +390,7 @@ CREATE TABLE IF NOT EXISTS `ta_member` (
 
 INSERT INTO `ta_member` (`id`, `password`, `username`, `realname`, `email`, `question`, `answer`, `status`, `regtime`, `login_ip`, `last_login_time`, `login_count`) VALUES
 (1, '30bc103d85df152c8c703bcbbcc7fd4d', 'admin', '你买单我就来', 'itsky71@foxmail.com', '我还会回来的...', '灰太狼？呵呵。。。', 1, 1419068912, '127.0.0.1', 1425907232, 33),
-(2, '30bc103d85df152c8c703bcbbcc7fd4d', 'itsky', '你地盘我做主', 'zmh0515005@163.com', '你是谁?', '呵呵...', 1, 1419587881, '127.0.0.1', 1427679245, 190),
+(2, '30bc103d85df152c8c703bcbbcc7fd4d', 'itsky', '你地盘我做主', 'zmh0515005@163.com', '你是谁?', '呵呵...', 1, 1419587881, '127.0.0.1', 1427768982, 191),
 (6, '30bc103d85df152c8c703bcbbcc7fd4d', 'yourphp', '111111', 'zmh0515005@163.me', '', '', 0, 1424952659, '', 0, 0);
 
 -- --------------------------------------------------------
@@ -789,7 +781,7 @@ MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户组id',
 -- AUTO_INCREMENT for table `ta_auth_rule`
 --
 ALTER TABLE `ta_auth_rule`
-MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=87;
+MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=89;
 --
 -- AUTO_INCREMENT for table `ta_category`
 --
@@ -809,7 +801,7 @@ MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCRE
 -- AUTO_INCREMENT for table `ta_field`
 --
 ALTER TABLE `ta_field`
-MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=30;
+MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=40;
 --
 -- AUTO_INCREMENT for table `ta_lang`
 --

@@ -110,10 +110,10 @@ class ModuleController extends AdminController{
                             write_lang($rulelang,'rule_title');
                             $this->success(L('ADD_OK_'.$data['type']),U('Module/index','type='.$data['type'].'&'.$this->vl));
                         }else{
-                            $this->error($Rule->getDbError());
+                            $this->error(L('RULE_ADD_ERROR'));
                         }
                     }else{
-                        $this->error($Menu->getDbError());
+                        $this->error(L('MENU_ADD_ERROR'));
                     }
                 }else{
                     $this->error(L('ADD_ERROR_'.$data['type']));
@@ -157,7 +157,7 @@ class ModuleController extends AdminController{
                         'name' => 'M_'.strtoupper($data['name']).'_INDEX'
                     );
                     $menuedit = $Menu->where('model=\''.$befor['name'].'\'')->save($menudata);
-                    if($menuedit === FALSE) $this->error($Menu->getDbError());
+                    if($menuedit === FALSE) $this->error(L('MENU_EDIT_ERROR'));
                     $menulang = array($menudata['name'] => $arrlang[$data['title']]);
                     write_lang($menulang,'menu_common');
                     $Rule = D('AuthRule');
@@ -167,7 +167,7 @@ class ModuleController extends AdminController{
                     );
                     $map['name'] = array('like',$befor['name'].'%');
                     $ruleedit = $Rule->where($map)->save($ruledata);
-                    if($ruleedit === FALSE) $this->error($Rule->getDbError());
+                    if($ruleedit === FALSE) $this->error(L('RULE_EDIT_ERROR'));
                     $rulelang = array($ruledata['title']=>$arrlang[$data['title']]);
                     write_lang($rulelang,'rule_title');
                 }else{
@@ -207,7 +207,7 @@ class ModuleController extends AdminController{
         $Module = D('Module');
         $modata = $Module->where('id='.$id)->find();
         $delmo = $Module->where('id='.$id)->delete();
-        if($delmo === FALSE) $this->error($Module->getDbError());
+        if($delmo === FALSE) $this->error(L('DEL_ERROR'));
         $tablename = C('DB_PREFIX').$modata['name'];
         $db = new \Think\Model();
         $db->execute('DROP TABLE IF EXISTS `'.$tablename.'`;');

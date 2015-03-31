@@ -1,5 +1,11 @@
 <?php
-return array(
+$fieldpath = MODULE_PATH.'Lang/'.LANG_SET.'/field_common.php';
+if(file_exists($fieldpath)){
+    require_once $fieldpath;
+}else{
+    $field_common = array();
+}
+$field = array(
     'FIELD_MANAGEMENT'          =>  '字段管理',
     'ADD'                       =>  '添加字段',
     'ORDER'                     =>  '排序',
@@ -24,6 +30,8 @@ return array(
     'CUSTOM_REGEX'              =>  '正则表达式',
     'ADD_ERROR'                 =>  '字段添加失败！',
     'ADD_OK'                    =>  '字段添加成功！',
+    'DEL_ERROR'                 =>  '字段删除失败！',
+    'DEL_OK'                    =>  '字段删除成功！',
 
     'FIELD_CATID'               =>  '栏目',
     'FIELD_TITLE'               =>  '标题',
@@ -131,3 +139,4 @@ return array(
     'ERRORMSGL'                 =>  '验证失败错误信息必须为2-250个字符！',
     'SETUPALL'                  =>  '字段相关设置中存在输入错误！'
 );
+return array_merge($field, $field_common);

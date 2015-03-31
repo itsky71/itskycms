@@ -25,6 +25,7 @@ return array(
     'DB_PORT'   => '3306', // 端口
     'DB_PREFIX' => 'ta_', // 数据库表前缀
     'DB_CHARSET'=>  'utf8', //数据库编码
-    
+    'DB_DEBUG' => FALSE,
+
     'VERSION'   =>  '1.0.0'
 );
