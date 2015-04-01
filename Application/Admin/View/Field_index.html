@@ -26,7 +26,7 @@
                             <input type="text" value="{$vo.listorder}" name="listorder[{$vo.id}]" maxlength="3" notimely="true"/>
                         </td>
                         <td>{$vo.field}</td>
-                        <td>{$vo.name}</td>
+                        <td>{$vo.name|L}</td>
                         <td>{$vo.type}</td>
                         <td class="center">
                         <if condition="$vo['issystem']">

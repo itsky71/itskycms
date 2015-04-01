@@ -3,21 +3,21 @@
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_THUMB')}:</label>
         <div class="col-lg-9">
-            <input class="ace ace-switch ace-switch-7" type="checkbox" name="setup[thumb]" value="1"/>
+            <input class="ace ace-switch ace-switch-7" type="checkbox" name="setup[thumb]" value="1" <if condition="($vo['type'] eq 'title') && ($vo['setup']['thumb'] eq 1)">checked="checked"</if>/>
             <span class="lbl"></span>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_STYLE')}:</label>
         <div class="col-lg-9">
-            <input class="ace ace-switch ace-switch-7" type="checkbox" name="setup[style]" value="1"/>
+            <input class="ace ace-switch ace-switch-7" type="checkbox" name="setup[style]" value="1" <if condition="($vo['type'] eq 'title') && ($vo['setup']['style'] eq 1)">checked="checked"</if>/>
             <span class="lbl"></span>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_WIDTH')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-3 pull-left" type="text" name="setup[size]" value=""/>
+            <input class="col-lg-3 pull-left" type="text" name="setup[size]" value="{$vo['type']=='title'?$vo['setup']['size']:''}"/>
             <span class="pull-left pt5 ml10">px</span>
         </div>
     </div>
@@ -26,20 +26,20 @@
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_SIZE')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-3 pull-left" type="text" name="setup[size]" value=""/>
+            <input class="col-lg-3 pull-left" type="text" name="setup[size]" value="{$vo['type']=='text'?$vo['setup']['size']:''}"/>
             <span class="pull-left pt5 ml10">px</span>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_DEFAULT')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-12" type="text" name="setup[default]" value=""/>
+            <input class="col-lg-12" type="text" name="setup[default]" value="{$vo['type']=='text'?$vo['setup']['default']:''}"/>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_IS_PASSWORD')}:</label>
         <div class="col-lg-9">
-            <input class="ace ace-switch ace-switch-7" type="checkbox" name="setup[ispassword]" value="1"/>
+            <input class="ace ace-switch ace-switch-7" type="checkbox" name="setup[ispassword]" value="1" <if condition="($vo['type'] eq 'text') && ($vo['setup']['ispassword'] eq 1)">checked="checked"</if>/>
             <span class="lbl"></span>
             <input type="hidden" name="setup[fieldtype]" value="varchar"/>
         </div>
@@ -50,7 +50,7 @@
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_FIELD_TYPE')}:</label>
         <div class="col-lg-9">
             <div class="input-group col-lg-5 select-click">
-                <input class="hide" type="text" name="setup[fieldtype]" value="mediumtext"/>
+                <input class="hide" type="text" name="setup[fieldtype]" value="{$vo['type']=='textarea'?$vo['setup']['fieldtype']:'mediumtext'}"/>
                 <div class="form-control select-input cude"></div>
                 <span class="input-group-addon cude">
                     <i class="glyphicon glyphicon-menu-down"></i>
@@ -69,21 +69,21 @@
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_HEIGHT')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-3 pull-left" type="text" name="setup[height]" value=""/>
+            <input class="col-lg-3 pull-left" type="text" name="setup[height]" value="{$vo['type']=='textarea'?$vo['setup']['height']:''}"/>
             <span class="pull-left pt5 ml10">px</span>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_WIDTH')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-3 pull-left" type="text" name="setup[width]" value=""/>
+            <input class="col-lg-3 pull-left" type="text" name="setup[width]" value="{$vo['type']=='textarea'?$vo['setup']['width']:''}"/>
             <span class="pull-left pt5 ml10">px</span>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_DEFAULT')}:</label>
         <div class="col-lg-9">
-            <textarea class="col-lg-9" name="setup[default]"></textarea>
+            <textarea class="col-lg-9" name="setup[default]">{$vo['type']=='textarea'?$vo['setup']['default']:''}</textarea>
         </div>
     </div>
     <import type="js" file="js.select"/>
@@ -95,18 +95,20 @@
             <span class="text-muted block">{:L('SETUP_SELECT_INFO')}</span>
         </label>
         <div class="col-lg-9">
-            <textarea class="col-lg-10" style="height: 120px;" name="setup[options]"></textarea>
+            <textarea class="col-lg-10" style="height: 120px;" name="setup[options]">{$vo['type']=='select'?$vo['setup']['options']:''}</textarea>
         </div>
     </div>
     <div class="form-group">
+        <php>$a = (($vo['type'] == 'select' && $vo['setup']['multiple'] == 0) || !isset($vo)) ? 'checked="checked"' : '';
+        $b = ($vo['type'] == 'select' && $vo['setup']['multiple'] == 1) ? 'checked="checked"' : '';</php>
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_SELECT_TYPE')}:</label>
         <div class="col-lg-9">
             <label>
-                <input class="ace" type="radio" name="setup[multiple]" value="0" checked="checked"/>
+                <input class="ace" type="radio" name="setup[multiple]" value="0" {$a}/>
                 <span class="lbl"> {:L('SETUP_SELECT_TYPE_1')}</span>
             </label>
             <label class="ml10">
-                <input class="ace" type="radio" name="setup[multiple]" value="1"/>
+                <input class="ace" type="radio" name="setup[multiple]" value="1" {$b}/>
                 <span class="lbl"> {:L('SETUP_SELECT_TYPE_2')}</span>
             </label>
         </div>
@@ -116,7 +118,7 @@
         <div class="col-lg-9">
             <div class="col-lg-6 pull-left no-padding-left">
                 <div class="input-group col-lg-12 select-click">
-                    <input class="hide" type="text" name="setup[fieldtype]" value="varchar"/>
+                    <input class="hide" type="text" name="setup[fieldtype]" value="{$vo['type']=='select'?$vo['setup']['fieldtype']:'varchar'}"/>
                     <div class="form-control select-input cude text-nowrap overflow-hidden"></div>
                     <span class="input-group-addon cude">
                         <i class="glyphicon glyphicon-menu-down"></i>
@@ -134,8 +136,8 @@
                     </div>
                 </div>
             </div>
-            <label id="numbertype" class="pull-left mt5 hide">
-                <input class="ace" type="checkbox" name="numbertype" value="1" checked="checked"/>
+            <label id="numbertype" class="pull-left mt5{:(($vo['type']=='select'&&$vo['setup']['numbertype']=='varchar')||!isset($vo))?' hide':''}">
+                <input class="ace" type="checkbox" name="setup[numbertype]" value="1" <if condition="(($vo['type'] eq 'select') && ($vo['setup']['numbertype'] eq 1)) || (!isset($vo))">checked="checked"</if>/>
                 <span class="lbl"> {:L('SETUP_NO_NEGATIVE')}</span>
             </label>
         </div>
@@ -143,13 +145,13 @@
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_SHOW_ITEM')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-3" type="text" name="setup[size]" value=""/>
+            <input class="col-lg-3" type="text" name="setup[size]" value="{$vo['type']=='select'?$vo['setup']['size']:''}"/>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_DEFAULT')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-8" type="text" name="setup[default]"/>
+            <input class="col-lg-8" type="text" name="setup[default]" value="{$vo['type']=='select'?$vo['setup']['default']:''}"/>
         </div>
     </div>
     <import type="js" file="js.select"/>
@@ -159,7 +161,7 @@
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_EDITOR_TYPE')}:</label>
         <div class="col-lg-9">
             <div class="input-group col-lg-5 select-click">
-                <input class="hide" type="text" name="setup[edittype]" value="ueditor"/>
+                <input class="hide" type="text" name="setup[edittype]" value="{$vo['type']=='editor'?$vo['setup']['edittype']:'ueditor'}"/>
                 <div class="form-control select-input cude text-nowrap overflow-hidden"></div>
                 <span class="input-group-addon cude">
                     <i class="glyphicon glyphicon-menu-down"></i>
@@ -181,11 +183,13 @@
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_EDITOR_STYLE')}:</label>
         <div class="col-lg-9">
             <label>
-                <input class="ace" type="radio" name="setup[toolbar]" value="basic"/>
+                <php>$basic = ($vo['type'] == 'editor' && $vo['setup']['toolbar'] == 'basic') ? 'checked="checked"' : '';
+                $full = (($vo['type'] == 'editor' && $vo['setup']['toolbar'] == 'full') || !isset($vo)) ? 'checked="checked"' : '';</php>
+                <input class="ace" type="radio" name="setup[toolbar]" value="basic" {$basic}/>
                 <span class="lbl"> {:L('SETUP_EDITOR_STYLE_BASIC')}</span>
             </label>
             <label class="ml10">
-                <input class="ace" type="radio" name="setup[toolbar]" value="full" checked="checked"/>
+                <input class="ace" type="radio" name="setup[toolbar]" value="full" {$full}/>
                 <span class="lbl"> {:L('SETUP_EDITOR_STYLE_FULL')}</span>
             </label>
         </div>
@@ -193,55 +197,55 @@
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_DEFAULT')}:</label>
         <div class="col-lg-9">
-            <textarea class="col-lg-12" name="setup[default]"></textarea>
+            <textarea class="col-lg-12" name="setup[default]">{$vo['type']=='editor'?$vo['setup']['default']:''}</textarea>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_EDITOR_HEIGHT')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-3 pull-left" type="text" name="setup[height]" value=""/>
+            <input class="col-lg-3 pull-left" type="text" name="setup[height]" value="{$vo['type']=='editor'?$vo['setup']['height']:''}"/>
             <span class="pull-left pt5 ml10">px</span>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_IS_PAGE')}:</label>
         <div class="col-lg-9">
-            <input class="ace ace-switch ace-switch-7" type="checkbox" value="1" name="setup[showpage]" checked="checked"/>
+            <input class="ace ace-switch ace-switch-7" type="checkbox" value="1" name="setup[showpage]" <if condition="(($vo['type'] eq 'editor') && ($vo['setup']['showpage'] eq 1) || !isset($vo))">checked="checked"</if>/>
             <span class="lbl"></span>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_SHOW_ABSTRACT')}:</label>
         <div class="col-lg-9">
-            <input class="ace ace-switch ace-switch-7" type="checkbox" value="1" name="setup[show_add_description]"  checked="checked"/>
+            <input class="ace ace-switch ace-switch-7" type="checkbox" value="1" name="setup[show_add_description]" <if condition="(($vo['type'] eq 'editor') && ($vo['setup']['show_add_description'] eq 1) || !isset($vo))">checked="checked"</if>/>
             <span class="lbl"></span>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_SHOW_GET_TITLE_THUMB')}:</label>
         <div class="col-lg-9">
-            <input class="ace ace-switch ace-switch-7" type="checkbox" value="1" name="setup[show_auto_thumb]"  checked="checked"/>
+            <input class="ace ace-switch ace-switch-7" type="checkbox" value="1" name="setup[show_auto_thumb]" <if condition="(($vo['type'] eq 'editor') && ($vo['setup']['show_auto_thumb'] eq 1) || !isset($vo))">checked="checked"</if>/>
             <span class="lbl"></span>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_SHOW_SAVE_REMOTE_PIC')}:</label>
         <div class="col-lg-9">
-            <input class="ace ace-switch ace-switch-7" type="checkbox" value="1" name="setup[show_auto_thumb]"  checked="checked"/>
+            <input class="ace ace-switch ace-switch-7" type="checkbox" value="1" name="setup[show_remote_pic]" <if condition="(($vo['type'] eq 'editor') && ($vo['setup']['show_remote_pic'] eq 1) || !isset($vo))">checked="checked"</if>/>
             <span class="lbl"></span>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_IS_UPLOAD_PIC')}:</label>
         <div class="col-lg-9">
-            <input class="ace ace-switch ace-switch-7" type="checkbox" value="1" name="setup[picupload]"  checked="checked"/>
+            <input class="ace ace-switch ace-switch-7" type="checkbox" value="1" name="setup[picupload]" <if condition="(($vo['type'] eq 'editor') && ($vo['setup']['picupload'] eq 1) || !isset($vo))">checked="checked"</if>/>
             <span class="lbl"></span>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_UPLOAD_PIC_FORMAT')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-10" type="text" name="setup[alowuploadexts]" value="" placeholder="{:L('SUCH')}: jpg,jpeg,png,gif"/>
+            <input class="col-lg-10" type="text" name="setup[alowuploadexts]" value="{$vo['type']=='editor'?$vo['setup']['alowuploadexts']:''}" placeholder="{:L('SUCH')}: jpg,jpeg,png,gif"/>
         </div>
     </div>
     <import type="js" file="js.select"/>
@@ -250,35 +254,41 @@
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_DEFAULT')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-8" type="text" name="setup[default]" value=""/>
+            <input class="col-lg-8" type="text" name="setup[default]" value="{$vo['type']=='datetime'?$vo['setup']['default']:''}"/>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_DATE_FORMAT')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-8 pull-left" type="text" name="setup[dateformat]" value=""/>
+            <input class="col-lg-8 pull-left" type="text" name="setup[dateformat]" value="{$vo['type']=='datetime'?$vo['setup']['dateformat']:''}"/>
             <span class="glyphicon glyphicon-info-sign text-info pull-left mt5 ml10 bigger-125 cude tooltip-info" data-placement="right" data-rel="tooltip" data-original-title="{:L('SETUP_DATE_TIP')}"></span>
         </div>
     </div>
 </case>
 <case value="attr">
     <div class="form-group">
+        <php>
+            $radio = ($vo['type'] == 'attr' && $vo['setup']['inputtype'] == 'radio') ? 'checked="checked"' : '';
+            $checkbox = ($vo['type'] == 'attr' && $vo['setup']['inputtype'] == 'checkbox') ? 'checked="checked"' : '';
+            $select = ($vo['type'] == 'attr' && $vo['setup']['inputtype'] == 'select') ? 'checked="checked"' : '';
+            $images = ($vo['type'] == 'attr' && $vo['setup']['inputtype'] == 'images') ? 'checked="checked"' : '';
+        </php>
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_SELECT_TYPE')}:</label>
         <div class="col-lg-9">
             <label>
-                <input class="ace" type="radio" name="setup[inputtype]" value="radio" checked="checked"/>
+                <input class="ace" type="radio" name="setup[inputtype]" value="radio" {$radio}/>
                 <span class="lbl"> {:L('SETUP_SELECT_RADIO')}</span>
             </label>
             <label class="ml10">
-                <input class="ace" type="radio" name="setup[inputtype]" value="checkbox"/>
+                <input class="ace" type="radio" name="setup[inputtype]" value="checkbox" {$checkbox}/>
                 <span class="lbl"> {:L('SETUP_SELECT_CHECKBOX')}</span>
             </label>
             <label class="ml10">
-                <input class="ace" type="radio" name="setup[inputtype]" value="select"/>
+                <input class="ace" type="radio" name="setup[inputtype]" value="select" {$select}/>
                 <span class="lbl"> {:L('SETUP_SELECT_SELECT')}</span>
             </label>
             <label class="ml10">
-                <input class="ace" type="radio" name="setup[inputtype]" value="images"/>
+                <input class="ace" type="radio" name="setup[inputtype]" value="images" {$images}/>
                 <span class="lbl"> {:L('SETUP_SELECT_IMAGES')}</span>
             </label>
         </div>
@@ -286,21 +296,25 @@
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_DEFAULT')}:</label>
         <div class="col-lg-9">
-            <textarea class="col-lg-8 pull-left" name="setup[default]"></textarea>
+            <textarea class="col-lg-8 pull-left" name="setup[default]">{$vo['type']=='attr'?$vo['setup']['default']:''}</textarea>
             <span class="glyphicon glyphicon-info-sign text-info pull-left mt5 ml10 bigger-125 cude tooltip-info" data-placement="right" data-rel="tooltip" data-original-title="{:L('SETUP_ATTR_TIP')}"></span>
         </div>
     </div>
 </case>
 <case value="groupid">
     <div class="form-group">
+        <php>
+            $radio = (($vo['type'] == 'groupid' && $vo['setup']['inputtype'] == 'radio') || !isset($vo)) ? 'checked="checked"' : '';
+            $checkbox = ($vo['type'] == 'groupid' && $vo['setup']['inputtype'] == 'checkbox') ? 'checked="checked"' : '';
+        </php>
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_SELECT_TYPE')}:</label>
         <div class="col-lg-9">
             <label>
-                <input class="ace" type="radio" name="setup[inputtype]" value="radio" checked="checked"/>
+                <input class="ace" type="radio" name="setup[inputtype]" value="radio"{$radio}/>
                 <span class="lbl"> {:L('SETUP_SELECT_RADIO_FRAME')}</span>
             </label>
             <label class="ml10">
-                <input class="ace" type="radio" name="setup[inputtype]" value="checkbox"/>
+                <input class="ace" type="radio" name="setup[inputtype]" value="checkbox"{$checkbox}/>
                 <span class="lbl"> {:L('SETUP_SELECT_CHECKBOX_FRAME')}</span>
             </label>
         </div>
@@ -310,7 +324,7 @@
         <div class="col-lg-9">
             <div class="col-lg-6 pull-left no-padding-left">
                 <div class="input-group col-lg-12 select-click">
-                    <input class="hide" type="text" name="setup[fieldtype]" value="varchar"/>
+                    <input class="hide" type="text" name="setup[fieldtype]" value="{$vo['type']=='groupid'?$vo['setup']['fieldtype']:'varchar'}"/>
                     <div class="form-control select-input cude text-nowrap overflow-hidden"></div>
                     <span class="input-group-addon cude">
                         <i class="glyphicon glyphicon-menu-down"></i>
@@ -325,8 +339,8 @@
                     </div>
                 </div>
             </div>
-            <label id="numbertype" class="pull-left mt5 hide">
-                <input class="ace" type="checkbox" name="numbertype" value="1" checked="checked"/>
+            <label id="numbertype" class="pull-left mt5{:(($vo['type']=='groupid'&&$vo['setup']['numbertype']=='varchar')||!isset($vo))?' hide':''}">
+                <input class="ace" type="checkbox" name="setup[numbertype]" value="1" <if condition="(($vo['type'] eq 'groupid') && ($vo['setup']['numbertype'] eq 1)) || (!isset($vo))">checked="checked"</if>/>
                 <span class="lbl"> {:L('SETUP_NO_NEGATIVE')}</span>
             </label>
         </div>
@@ -334,21 +348,25 @@
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_DEFAULT')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-5" type="text" name="setup[default]" value=""/>
+            <input class="col-lg-5" type="text" name="setup[default]" value="{$vo['type']=='groupid'?$vo['setup']['default']:''}"/>
         </div>
     </div>
     <import type="js" file="js.select"/>
 </case>
 <case value="typeid">
     <div class="form-group">
+        <php>
+            $radio = (($vo['type'] == 'typeid' && $vo['setup']['inputtype'] == 'radio') || !isset($vo)) ? 'checked="checked"' : '';
+            $checkbox = ($vo['type'] == 'typeid' && $vo['setup']['inputtype'] == 'checkbox') ? 'checked="checked"' : '';
+        </php>
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_SELECT_TYPE')}:</label>
         <div class="col-lg-9">
             <label>
-                <input class="ace" type="radio" name="setup[inputtype]" value="radio" checked="checked"/>
+                <input class="ace" type="radio" name="setup[inputtype]" value="radio"{$radio}/>
                 <span class="lbl"> {:L('SETUP_SELECT_RADIO_FRAME')}</span>
             </label>
             <label class="ml10">
-                <input class="ace" type="radio" name="setup[inputtype]" value="checkbox"/>
+                <input class="ace" type="radio" name="setup[inputtype]" value="checkbox"{$checkbox}/>
                 <span class="lbl"> {:L('SETUP_SELECT_CHECKBOX_FRAME')}</span>
             </label>
         </div>
@@ -358,7 +376,7 @@
         <div class="col-lg-9">
             <div class="col-lg-6 pull-left no-padding-left">
                 <div class="input-group col-lg-12 select-click">
-                    <input class="hide" type="text" name="setup[fieldtype]" value="varchar"/>
+                    <input class="hide" type="text" name="setup[fieldtype]" value="{$vo['type']=='typeid'?$vo['setup']['fieldtype']:'varchar'}"/>
                     <div class="form-control select-input cude text-nowrap overflow-hidden"></div>
                     <span class="input-group-addon cude">
                         <i class="glyphicon glyphicon-menu-down"></i>
@@ -374,8 +392,8 @@
                     </div>
                 </div>
             </div>
-            <label id="numbertype" class="pull-left mt5 hide">
-                <input class="ace" type="checkbox" name="numbertype" value="1" checked="checked"/>
+            <label id="numbertype" class="pull-left mt5{:(($vo['type']=='typeid'&&$vo['setup']['fieldtype']=='varchar')||!isset($vo))?'hide':''}">
+                <input class="ace" type="checkbox" name="setup[numbertype]" value="1"{:(($vo['type']=='typeid'&&$vo['setup']['']==1)||!isset($vo))?' checked="checked"':''}/>
                 <span class="lbl"> {:L('SETUP_NO_NEGATIVE')}</span>
             </label>
         </div>
@@ -383,7 +401,7 @@
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_DEFAULT')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-5" type="text" name="setup[default]" value=""/>
+            <input class="col-lg-5" type="text" name="setup[default]" value="{$vo['type']=='typeid'?$vo['setup']['default']:''}"/>
         </div>
     </div>
     <import type="js" file="js.select"/>
@@ -395,7 +413,7 @@
             <span class="text-muted block">{:L('SETUP_SELECT_INFO')}</span>
         </label>
         <div class="col-lg-9">
-            <textarea class="col-lg-10" style="height: 120px;" name="setup[options]"></textarea>
+            <textarea class="col-lg-10" style="height: 120px;" name="setup[options]">{$vo['type']=='radio'?$vo['setup']['options']:''}</textarea>
         </div>
     </div>
     <div class="form-group">
@@ -403,7 +421,7 @@
         <div class="col-lg-9">
             <div class="col-lg-6 pull-left no-padding-left">
                 <div class="input-group col-lg-12 select-click">
-                    <input class="hide" type="text" name="setup[fieldtype]" value="varchar"/>
+                    <input class="hide" type="text" name="setup[fieldtype]" value="{$vo['type']=='radio'?$vo['setup']['fieldtype']:'varchar'}"/>
                     <div class="form-control select-input cude text-nowrap overflow-hidden"></div>
                     <span class="input-group-addon cude">
                         <i class="glyphicon glyphicon-menu-down"></i>
@@ -421,8 +439,8 @@
                     </div>
                 </div>
             </div>
-            <label id="numbertype" class="pull-left mt5 hide">
-                <input class="ace" type="checkbox" name="numbertype" value="1" checked="checked"/>
+            <label id="numbertype" class="pull-left mt5{:(($vo['type']=='radio'&&$vo['setup']['fieldtype']=='varchar')||!isset($vo))?' hide':''}">
+                <input class="ace" type="checkbox" name="setup[numbertype]" value="1"{:(($vo['type']=='radio'&&$vo['setup']['numbertype']==1)||!isset($vo))?' checked="checked"':''}/>
                 <span class="lbl"> {:L('SETUP_NO_NEGATIVE')}</span>
             </label>
         </div>
@@ -430,7 +448,7 @@
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_DEFAULT')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-5" type="text" name="setup[default]" value=""/>
+            <input class="col-lg-5" type="text" name="setup[default]" value="{$vo['type']=='radio'?$vo['setup']['default']:''}"/>
         </div>
     </div>
     <import type="js" file="js.select"/>
@@ -442,7 +460,7 @@
             <span class="text-muted block">{:L('SETUP_SELECT_INFO')}</span>
         </label>
         <div class="col-lg-9">
-            <textarea class="col-lg-10" style="height: 120px;" name="setup[options]"></textarea>
+            <textarea class="col-lg-10" style="height: 120px;" name="setup[options]">{$vo['type']=='checkbox'?$vo['setup']['options']:''}</textarea>
         </div>
     </div>
     <div class="form-group">
@@ -450,7 +468,7 @@
         <div class="col-lg-9">
             <div class="col-lg-6 pull-left no-padding-left">
                 <div class="input-group col-lg-12 select-click">
-                    <input class="hide" type="text" name="setup[fieldtype]" value="varchar"/>
+                    <input class="hide" type="text" name="setup[fieldtype]" value="{$vo['type']=='checkbox'?$vo['setup']['fieldtype']:'varchar'}"/>
                     <div class="form-control select-input cude text-nowrap overflow-hidden"></div>
                     <span class="input-group-addon cude">
                         <i class="glyphicon glyphicon-menu-down"></i>
@@ -468,8 +486,8 @@
                     </div>
                 </div>
             </div>
-            <label id="numbertype" class="pull-left mt5 hide">
-                <input class="ace" type="checkbox" name="numbertype" value="1" checked="checked"/>
+            <label id="numbertype" class="pull-left mt5{:(($vo['type']=='checkbox'&&$vo['setup']['fieldtype']=='varchar')||!isset($vo))?' hide':''}">
+                <input class="ace" type="checkbox" name="setup[numbertype]" value="1"{:(($vo['type']=='checkbox'&&$vo['setup']['numbertype']==1)||!isset($vo))?' checked="checked"':''}/>
                 <span class="lbl"> {:L('SETUP_NO_NEGATIVE')}</span>
             </label>
         </div>
@@ -477,7 +495,7 @@
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_DEFAULT')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-5" type="text" name="setup[default]" value=""/>
+            <input class="col-lg-5" type="text" name="setup[default]" value="{$vo['type']=='checkbox'?$vo['setup']['default']:''}"/>
         </div>
     </div>
     <import type="js" file="js.select"/>
@@ -486,7 +504,7 @@
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_WIDTH')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-3 pull-left" type="text" name="setup[size]" value="{$vo.setup.size}"/>
+            <input class="col-lg-3 pull-left" type="text" name="setup[size]" value="{$vo['type']=='number'?$vo['setup']['size']:''}"/>
             <span class="pull-left pt5 ml10 text-muted">px</span>
         </div>
     </div>
@@ -494,7 +512,7 @@
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_IS_NEGATIVE')}:</label>
         <div class="col-lg-9">
             <label class="pull-left">
-                <input class="ace ace-switch ace-switch-7" type="checkbox" name="setup[numbertype]" value="1" checked="checked"/>
+                <input class="ace ace-switch ace-switch-7" type="checkbox" name="setup[numbertype]" value="1" <if condition="(($vo['type'] eq 'number') && ($vo['setup']['numbertype'] eq 1)) || (!isset($vo))">checked="checked"</if>/>
                 <span class="lbl"></span>
             </label>
             <span class="pull-left pt5">{:L('SETUP_NO_NEGATIVE')}</span>
@@ -509,14 +527,14 @@
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_DEFAULT')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-5" type="text" name="setup[default]" value=""/>
+            <input class="col-lg-5" type="text" name="setup[default]" value="{$vo['type']=='number'?$vo['setup']['default']:''}"/>
         </div>
     </div>
     <import type="js" file="js.jquery#ui#touch-punch#min"/>
     <import type="js" file="js.fuelux#spinner#min"/>
     <script type="text/javascript">
         $('#spinner1').ace_spinner({
-            value:0,
+            value:{$vo['type']=='number'?$vo['setup']['decimaldigits']:0},
             min:0,
             max:5,
             step:1,
@@ -533,40 +551,40 @@
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_WIDTH')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-3 pull-left" type="text" name="setup[size]" value=""/>
+            <input class="col-lg-3 pull-left" type="text" name="setup[size]" value="{$vo['type']=='image'?$vo['setup']['size']:''}"/>
             <span class="pull-left pt5 ml10">px</span>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_DEFAULT')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-12" type="text" name="setup[default]" value=""/>
+            <input class="col-lg-12" type="text" name="setup[default]" value="{$vo['type']=='image'?$vo['setup']['default']:''}"/>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_UPLOAD_MAX_SIZE')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-3 pull-left" type="text" name="setup[upload_maxsize]" value=""/>
+            <input class="col-lg-3 pull-left" type="text" name="setup[upload_maxsize]" value="{$vo['type']=='image'?$vo['setup']['upload_maxsize']:''}"/>
             <span class="pull-left pt5 pl5"> KB</span>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_UPLOAD_TYPE')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-9" type="text" name="setup[upload_allowext]" value="" placeholder="{:L('SUCH')}: jpg,jpeg,png,gif"/>
+            <input class="col-lg-9" type="text" name="setup[upload_allowext]" value="{$vo['type']=='image'?$vo['setup']['upload_allowext']:''}" placeholder="{:L('SUCH')}: jpg,jpeg,png,gif"/>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_UPLOAD_WATERMARK')}:</label>
         <div class="col-lg-9">
-            <input class="ace ace-switch ace-switch-7" type="checkbox" name="setup[watermark]" value="1" checked="checked"/>
+            <input class="ace ace-switch ace-switch-7" type="checkbox" name="setup[watermark]" value="1" <if condition="(($vo['type'] eq 'image') && ($vo['setup']['watermark'] eq 1)) || (!isset($vo))">checked="checked"</if>/>
             <span class="lbl"></span>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_UPLOAD_ALREADY')}:</label>
         <div class="col-lg-9">
-            <input class="ace ace-switch ace-switch-7" type="checkbox" name="setup[more]" value="1"/>
+            <input class="ace ace-switch ace-switch-7" type="checkbox" name="setup[more]" value="1" <if condition="($vo['type'] eq 'image') && ($vo['setup']['more'] eq 1)">checked="checked"</if>/>
             <span class="lbl"></span>
         </div>
     </div>
@@ -575,39 +593,39 @@
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_DEFAULT')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-12" type="text" name="setup[default]" value=""/>
+            <input class="col-lg-12" type="text" name="setup[default]" value="{$vo['type']=='images'?$vo['setup']['default']:''}"/>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_UPLOAD_MAX_NUM')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-3" type="text" name="setup[upload_maxnum]" value=""/>
+            <input class="col-lg-3" type="text" name="setup[upload_maxnum]" value="{$vo['type']=='images'?$vo['setup']['upload_maxnum']:''}"/>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_UPLOAD_MAX_SIZE')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-3 pull-left" type="text" name="setup[upload_maxsize]" value=""/>
+            <input class="col-lg-3 pull-left" type="text" name="setup[upload_maxsize]" value="{$vo['type']=='images'?$vo['setup']['upload_maxsize']:''}"/>
             <span class="pull-left pt5 pl5"> KB</span>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_UPLOAD_TYPE')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-9" type="text" name="setup[upload_allowext]" value="" placeholder="{:L('SUCH')}: jpg,jpeg,png,gif"/>
+            <input class="col-lg-9" type="text" name="setup[upload_allowext]" value="{$vo['type']=='images'?$vo['setup']['upload_allowext']:''}" placeholder="{:L('SUCH')}: jpg,jpeg,png,gif"/>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_UPLOAD_WATERMARK')}:</label>
         <div class="col-lg-9">
-            <input class="ace ace-switch ace-switch-7" type="checkbox" name="setup[watermark]" value="1" checked="checked"/>
+            <input class="ace ace-switch ace-switch-7" type="checkbox" name="setup[watermark]" value="1" <if condition="(($vo['type'] eq 'images') && ($vo['setup']['watermark'] eq 1)) || (!isset($vo))">checked="checked"</if>/>
             <span class="lbl"></span>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_UPLOAD_ALREADY')}:</label>
         <div class="col-lg-9">
-            <input class="ace ace-switch ace-switch-7" type="checkbox" name="setup[more]" value="1"/>
+            <input class="ace ace-switch ace-switch-7" type="checkbox" name="setup[more]" value="1" <if condition="($vo['type'] eq 'images') && ($vo['setup']['more'] eq 1)">checked="checked"</if>/>
             <span class="lbl"></span>
         </div>
     </div>
@@ -616,33 +634,33 @@
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_WIDTH')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-3 pull-left" type="text" name="setup[size]" value=""/>
+            <input class="col-lg-3 pull-left" type="text" name="setup[size]" value="{$vo['type']=='file'?$vo['setup']['size']:''}"/>
             <span class="pull-left pt5 ml10">px</span>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_DEFAULT')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-12" type="text" name="setup[default]" value=""/>
+            <input class="col-lg-12" type="text" name="setup[default]" value="{$vo['type']=='file'?$vo['setup']['default']:''}"/>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_UPLOAD_FILE_MAX_SIZE')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-3 pull-left" type="text" name="setup[upload_maxsize]" value=""/>
+            <input class="col-lg-3 pull-left" type="text" name="setup[upload_maxsize]" value="{$vo['type']=='file'?$vo['setup']['upload_maxsize']:''}"/>
             <span class="pull-left pt5 pl5"> KB</span>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_UPLOAD_TYPE')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-9" type="text" name="setup[upload_allowext]" value="" placeholder="{:L('SUCH')}: zip,rar,txt,pdf"/>
+            <input class="col-lg-9" type="text" name="setup[upload_allowext]" value="{$vo['type']=='file'?$vo['setup']['upload_allowext']:''}" placeholder="{:L('SUCH')}: zip,rar,txt,pdf"/>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_UPLOAD_ALREADY')}:</label>
         <div class="col-lg-9">
-            <input class="ace ace-switch ace-switch-7" type="checkbox" name="setup[more]" value="1"/>
+            <input class="ace ace-switch ace-switch-7" type="checkbox" name="setup[more]" value="1" <if condition="($vo['type'] eq 'file') && ($vo['setup']['more'] eq 1)">checked="checked"</if>/>
             <span class="lbl"></span>
         </div>
     </div>
@@ -651,32 +669,32 @@
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_DEFAULT')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-12" type="text" name="setup[default]" value=""/>
+            <input class="col-lg-12" type="text" name="setup[default]" value="{$vo['type']=='files'?$vo['setup']['default']:''}"/>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_UPLOAD_MAX_NUM')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-3" type="text" name="setup[upload_maxnum]" value=""/>
+            <input class="col-lg-3" type="text" name="setup[upload_maxnum]" value="{$vo['type']=='files'?$vo['setup']['upload_maxnum']:''}"/>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_UPLOAD_FILE_MAX_SIZE')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-3 pull-left" type="text" name="setup[upload_maxsize]" value=""/>
+            <input class="col-lg-3 pull-left" type="text" name="setup[upload_maxsize]" value="{$vo['type']=='files'?$vo['setup']['upload_maxsize']:''}"/>
             <span class="pull-left pt5 pl5"> KB</span>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_UPLOAD_TYPE')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-9" type="text" name="setup[upload_allowext]" value="" placeholder="{:L('SUCH')}: zip,rar,txt,pdf"/>
+            <input class="col-lg-9" type="text" name="setup[upload_allowext]" value="{$vo['type']=='files'?$vo['setup']['upload_allowext']:''}" placeholder="{:L('SUCH')}: zip,rar,txt,pdf"/>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_UPLOAD_ALREADY')}:</label>
         <div class="col-lg-9">
-            <input class="ace ace-switch ace-switch-7" type="checkbox" name="setup[more]" value="1"/>
+            <input class="ace ace-switch ace-switch-7" type="checkbox" name="setup[more]" value="1" <if condition="($vo['type'] eq 'files') && ($vo['setup']['more'] eq 1)">checked="checked"</if>/>
             <span class="lbl"></span>
         </div>
     </div>
@@ -685,7 +703,7 @@
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_WIDTH')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-3 pull-left" type="text" name="setup[size]" value=""/>
+            <input class="col-lg-3 pull-left" type="text" name="setup[size]" value="{$vo['type']=='verify'?$vo['setup']['size']:''}"/>
             <span class="pull-left pt5 ml10">px</span>
         </div>
     </div>
@@ -695,7 +713,7 @@
     <div class="form-group mb0">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_FILTER')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-10 pull-left" type="text" name="setup[safefun]" value=""/>
+            <input id="safefun" class="col-lg-10 pull-left" type="text" name="setup[safefun]" value="{$type==$vo['type']?$vo['setup']['safefun']:''}"/>
             <span class="glyphicon glyphicon-info-sign text-info pull-left mt5 ml10 bigger-125 cude tooltip-info" data-placement="right" data-rel="tooltip" data-original-title="{:L('SETUP_FILTER_TIP')}"></span>
         </div>
     </div>

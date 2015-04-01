@@ -52,13 +52,13 @@
         <div class="form-group">
             <label class="col-lg-3 control-label no-padding-right">{:L('FIELD_ALIAS')}:</label>
             <div class="col-lg-9">
-                <input class="col-lg-8" type="text" name="name" value="{$vo.name|L}" placeholder="{$Think.LANG_SET}"/>
+                <input class="col-lg-8" type="text" name="name" value="{:$vo['name']?L($vo['name']):''}" placeholder="{$Think.LANG_SET}"/>
             </div>
         </div>
         <div class="form-group">
             <label class="col-lg-3 control-label no-padding-right">{:L('FIELD_TIPS')}:</label>
             <div class="col-lg-9">
-                <input class="col-lg-12" type="text" name="tips" value="{:$vo['tips']?L($vo['tips']):''}"/>
+                <input class="col-lg-12" type="text" name="tips" value="{:$vo['tips']?L($vo['tips']):''}" placeholder="{$Think.LANG_SET}"/>
             </div>
         </div>
         <div class="form-group">
@@ -119,7 +119,7 @@
         <div class="form-group">
             <label class="col-lg-3 control-label no-padding-right">{:L('ERROR_MSG')}:</label>
             <div class="col-lg-9">
-                <input class="col-lg-12" type="text" name="errormsg" value=""/>
+                <input class="col-lg-12" type="text" name="errormsg" value="" placeholder="{$Think.LANG_SET}"/>
             </div>
         </div>
         <div class="clearfix form-actions">
@@ -137,11 +137,11 @@
 <style>.tooltip-inner{white-space:nowrap;max-width: 300px;}</style>
 <script type="text/javascript">
     var pan = '<li><a onclick="load(event,this)" href="{:U('Module/index','type='.I('get.type').'&'.$vl)}">{:L('M_MODULE_INDEX_TYPE='.I('get.type'))}</a></li>\n\
-<li class="active"><a onclick="load(event,this)" href="{:U('Field/index',$vl.'&type='.I('get.type').'&mid='.I('get.mid'))}">{:L('FIELD_MANAGEMENT')}</a></li><li class="active">{:L('ADD')}</li>';
+<li class="active"><a onclick="load(event,this)" href="{:U('Field/index',$vl.'&type='.I('get.type').'&mid='.I('get.mid'))}">{:L('FIELD_MANAGEMENT')}</a></li><li class="active">{:L(ACTION_NAME)}</li>';
     $('#breadcrumbs .breadcrumb li:gt(0)').remove();
     $('#breadcrumbs .breadcrumb').append(pan);
     $('.page-header h1').empty();
-    $('.page-header h1').append('{:L('M_MODULE_INDEX_TYPE='.I('get.type'))}<small class="glyphicon glyphicon-menu-right"> {:L('FIELD_MANAGEMENT')}</small><small class="glyphicon glyphicon-menu-right"> {:L('ADD')}</small>');
+    $('.page-header h1').append('{:L('M_MODULE_INDEX_TYPE='.I('get.type'))}<small class="glyphicon glyphicon-menu-right"> {:L('FIELD_MANAGEMENT')}</small><small class="glyphicon glyphicon-menu-right"> {:L(ACTION_NAME)}</small>');
     function field_setting(type){
         if(type == 'verify'){
             $('#field_tr').hide();
@@ -164,7 +164,7 @@
         }
         $.ajax({
             type:'POST',
-            url:'{:U('Field/index',$vl.'&isajax=1&action='.ACTION_NAME.'&mid='.I('get.mid'))}',
+            url:'{:U('Field/index',$vl.'&isajax=1&action='.ACTION_NAME.'&id='.$vo['id'].'&mid='.I('get.mid'))}',
             data:'type='+type,
             beforeSend:function(){
                 $('#field_setup').html('<img style="margin-left:50px;" src="__PUBLIC__/validator/images/loading.gif" alt="loading"/>');

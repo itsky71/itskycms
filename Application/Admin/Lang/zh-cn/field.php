@@ -8,6 +8,7 @@ if(file_exists($fieldpath)){
 $field = array(
     'FIELD_MANAGEMENT'          =>  '字段管理',
     'ADD'                       =>  '添加字段',
+    'EDIT'                      =>  '编辑字段',
     'ORDER'                     =>  '排序',
     'FIELD_NAME'                =>  '字段名',
     'FIELD_ALIAS'               =>  '别名',

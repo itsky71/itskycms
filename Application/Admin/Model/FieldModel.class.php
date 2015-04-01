@@ -247,10 +247,11 @@ class FieldModel extends RelationModel{
                 break;
             case 'datetime':
                 if(!empty($setup['default'])){
-                    $res[] = $this->check($setup['default'], '/^\d{10}$/');
+                    //$res[] = $this->check($setup['default'], '/^\d{10}$/');
+                    $res[] = $this->check($setup['dateformat'], '1,50', 'length');
                 }
                 if(!empty($setup['dateformat'])){
-                    $res[] = $this->check($setup['dateformat'], '3,20', 'length');
+                    $res[] = $this->check($setup['dateformat'], '1,20', 'length');
                 }
                 break;
             case 'groupid':

@@ -42,15 +42,17 @@ class FieldController extends AdminController{
 
     public function index(){
         if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
+        $Field = D('Field');
         if(I('get.isajax')){
             $this->assign(I('get.'));
             $this->assign(I('post.'));
             if(I('get.action') == 'edit'){
-                
+                $vo = $Field->where('id='.I('get.id'))->field('id,type,setup')->find();
+                $vo['setup'] = json_decode($vo['setup'],TRUE);
+                $this->assign('vo', $vo);
             }
             $this->display('type');
         }else{
-            $Field = D('Field');
             $list = $Field->where('mid='.I('get.mid'))->order('listorder,id ASC')->select();
             $this->assign('list', $list);
             $this->display();
@@ -126,7 +128,6 @@ class FieldController extends AdminController{
             print_r(I('post.'));
         }else{
             $vo = $Field->where('id='.I('get.id'))->find();
-//            $vo['setup'] = json_decode($vo['setup']);
             $this->assign('vo', $vo);
             $this->display();
         }
@@ -266,22 +267,22 @@ class FieldController extends AdminController{
                 $sql = 'ALTER TABLE `'.$tablename.'`'.$do.'`'.$field.'` MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT \'0\''.$comment;
                 break;
             case 'mediumtext':
-                $sql = 'ALTER TABLE `'.$tablename.'`'.$do.'`'.$field.'` MEDIUMTEXT NOT NULL DEFAULT \''.$default.'\''.$comment;
+                $sql = 'ALTER TABLE `'.$tablename.'`'.$do.'`'.$field.'` MEDIUMTEXT NOT NULL DEFAULT \'\''.$comment;
                 break;
             case 'text':
-                $sql = 'ALTER TABLE `'.$tablename.'`'.$do.'`'.$field.'` TEXT NOT NULL DEFAULT \''.$default.'\''.$comment;
+                $sql = 'ALTER TABLE `'.$tablename.'`'.$do.'`'.$field.'` TEXT NOT NULL DEFAULT \'\''.$comment;
                 break;
             case 'datetime':
-                $sql = 'ALTER TABLE `'.$tablename.'`'.$do.'`'.$field.'` INT(10) UNSIGNED NOT NULL DEFAULT \''.$default.'\''.$comment;
+                $sql = 'ALTER TABLE `'.$tablename.'`'.$do.'`'.$field.'` INT(10) UNSIGNED NOT NULL DEFAULT \'0\''.$comment;
                 break;
             case 'image':
-                $sql = 'ALTER TABLE `'.$tablename.'`'.$do.'`'.$field.'` VARCHAR(100) NOT NULL DEFAULT \''.$default.'\''.$comment;
+                $sql = 'ALTER TABLE `'.$tablename.'`'.$do.'`'.$field.'` VARCHAR(100) NOT NULL DEFAULT \'\''.$comment;
                 break;
             case 'images':
                 $sql = 'ALTER TABLE `'.$tablename.'`'.$do.'`'.$field.'` MEDIUMTEXT NOT NULL DEFAULT \'\''.$comment;
                 break;
             case 'file':
-                $sql = 'ALTER TABLE `'.$tablename.'`'.$do.'`'.$field.'` VARCHAR(100) NOT NULL DEFAULT \''.$default.'\''.$comment;
+                $sql = 'ALTER TABLE `'.$tablename.'`'.$do.'`'.$field.'` VARCHAR(100) NOT NULL DEFAULT \'\''.$comment;
                 break;
             case 'files':
                 $sql = 'ALTER TABLE `'.$tablename.'`'.$do.'`'.$field.'` MEDIUMTEXT NOT NULL DEFAULT \'\''.$comment;
