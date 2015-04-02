@@ -125,7 +125,60 @@ class FieldController extends AdminController{
         if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
         $Field = D('Field');
         if(IS_POST){
-            print_r(I('post.'));
+            $mid = I('post.mid');
+            settype($mid, 'integer');
+            $module = M('Module')->getFieldById($mid,'name');
+            if($Field->create()){
+                $data = array(
+                    'mid' => $mid,
+                    'field' => I('post.field'),
+                    'name' => strtoupper($module).'_'.strtoupper(I('post.field')),
+                    'tips' => empty(trim(I('post.tips'))) ? '' : strtoupper($module).'_TIPS_'.strtoupper(I('post.field')),
+                    'required' => empty(I('post.required')) ? 0 : 1,
+                    'minlength' => I('post.minlength'),
+                    'maxlength' => I('post.maxlength'),
+                    'pattern' => I('post.pattern'),
+                    'regex' => trim(I('post.regex')),
+                    'errormsg' => strtoupper($module).'_ERRORMSG_'.strtoupper(I('post.field')),
+                    'class' => I('post.class'),
+                    'type' => I('post.type'),
+                    'setup' => json_encode(I('post.setup'))
+                );
+                $fid = I('post.id');
+                $result = $Field->where('id='.$fid)->save($data);
+                if($result !== FALSE){
+                    $langs = array(
+                        $data['name'] => trim(I('post.name')),
+                        $data['tips'] => trim(I('post.tips')),
+                        $data['errormsg'] => trim(I('post.errormsg'))
+                    );
+                    write_lang($langs, 'field_common');
+                    if(!I('post.issystem')){
+                        $addFieldSql =  $this->execute_sql(I('post.'),'edit');
+                        $model = new \Think\Model();
+                        if(is_array($addFieldSql)){
+                            foreach ($addFieldSql as $sql){
+                                $res = $model->execute($sql);
+                                if($res === FALSE){
+                                    $this->error(L('SQL_ERROR'));
+                                }
+                            }
+                        }else{
+                            if($addFieldSql){
+                                $result = $model->execute($addFieldSql);
+                                if($result === FALSE){
+                                    $this->error(L('SQL_ERROR'));
+                                }
+                            }
+                        }
+                    }
+                    $this->success(L('EDIT_OK'),U('Field/index',$this->vl.'&type='.I('post.mtype').'&mid='.$mid));
+                }else{
+                    $this->error(L('EDIT_ERROR'));
+                }
+            }else{
+                $this->error($Field->getError());
+            }
         }else{
             $vo = $Field->where('id='.I('get.id'))->find();
             $this->assign('vo', $vo);
@@ -138,8 +191,14 @@ class FieldController extends AdminController{
         $Field = D('Field');
         $delitem = $Field->where('id='.I('get.id'))->find();
         $module = M('Module')->getFieldById($delitem['mid'],'name');
-        if(in_array($delitem['field'], M($module)->getDbFields())){
-            $sql = 'ALTER TABLE `'.C('DB_PREFIX').strtolower($module).'` DROP `'.$delitem['field'].'`;';
+        $fields = M($module)->getDbFields();
+        if(in_array($delitem['field'], $fields)){
+            $style = $thumb = '';
+            if($delitem['type'] == 'title'){
+                $style = in_array($delitem['field'].'_style', $fields) ? ', DROP `'.$delitem['field'].'_style`' : '';
+                $thumb = in_array('thumb', $fields) ? ', DROP `thumb`' : '';
+            }
+            $sql = 'ALTER TABLE `'.C('DB_PREFIX').strtolower($module).'` DROP `'.$delitem['field'].'`'.$style.$thumb.';';
             $model = new \Think\Model();
             $res = $model->execute($sql);
             if($res === FALSE) $this->error(L('DEL_ERROR'));
@@ -205,8 +264,8 @@ class FieldController extends AdminController{
             case 'title':
                 if(!$maxlength) $maxlength = 255;
                 $maxlength = min($maxlength,255);
-                $sql[] = 'ALTER TABLE `'.$tablename.'`'.$do.'`title` VARCHAR('.$maxlength.') NOT NULL DEFAULT \'\''.$comment;
-                $sql[] = 'ALTER TABLE `'.$tablename.'`'.$do.'`title_style` VARCHAR(40) NOT NULL DEFAULT \'\' COMMENT \'样式\' ;';
+                $sql[] = 'ALTER TABLE `'.$tablename.'`'.$do.'`'.$field.'` VARCHAR('.$maxlength.') NOT NULL DEFAULT \'\''.$comment;
+                $sql[] = 'ALTER TABLE `'.$tablename.'`'.$do.'`'.$field.'_style` VARCHAR(40) NOT NULL DEFAULT \'\' COMMENT \'样式\' ;';
                 $sql[] = 'ALTER TABLE `'.$tablename.'`'.$do.'`thumb` VARCHAR(100) NOT NULL DEFAULT \'\' COMMENT \'缩略图\' ;';
                 break;
             case 'catid':

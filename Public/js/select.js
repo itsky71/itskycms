@@ -2,6 +2,9 @@
 $(function(){
     $('.select-click').off();
     $('[type="reset"]').off();
+    //禁用
+    $('.select-click.readonly input').attr('readonly',true);
+    $('.select-click.readonly .select-input').css('background-color','#f5f5f5');
     aabb();
 });
 function aabb(){
@@ -14,6 +17,7 @@ function aabb(){
    });
    //点击显示选项
    $('.select-click').on('click',function(e){
+       if($(this).hasClass('readonly')) return false;
        $('.select-input').removeClass('no-border-right-color').next().removeClass('no-border-left-color');
        $(this).children('.select-input').addClass('no-border-right-color').next().addClass('no-border-left-color');
        var ul = $('.select-option[data-name="'+$(this).children('input').attr('name')+'"]').parent('.select-choices');

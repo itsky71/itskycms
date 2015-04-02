@@ -3,10 +3,11 @@
         <input type="hidden" name="id" value="{$vo.id}"/>
         <input type="hidden" name="mid" value="{$Think.get.mid}"/>
         <input type="hidden" name="mtype" value="{$Think.get.type}"/>
+        <input type="hidden" name="issystem" value="{$vo.issystem}"/>
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right">{:L('FIELDS_TYPE')}:</label>
             <div class="col-lg-9">
-                <div class="input-group col-lg-8 select-click">
+                <div class="input-group col-lg-8 select-click{$vo['issystem']?' readonly':''}">
                     <input id="field_type" class="hide" type="text" name="type" value="{$vo.type}"/>
                     <div class="form-control select-input cude"></div>
                     <span class="input-group-addon cude">
@@ -46,7 +47,8 @@
         <div id="field_tr" class="form-group">
             <label class="col-lg-3 control-label no-padding-right">{:L('FIELD_NAME')}:</label>
             <div class="col-lg-9">
-                <input class="col-lg-8" type="text" name="field" value="{$vo.field}"/>
+                <input class="col-lg-8" type="text" name="field" value="{$vo.field}"{$vo['issystem']?' readonly="readonly"':''}"/>
+                <input type="hidden" name="oldfield" value="{$vo.field}"/>
             </div>
         </div>
         <div class="form-group">
@@ -68,13 +70,13 @@
         <div class="form-group">
             <label class="col-lg-3 control-label no-padding-right">{:L('CLASS_NAME')}:</label>
             <div class="col-lg-9">
-                <input class="col-lg-5" type="text" name="class" value=""/>
+                <input class="col-lg-5" type="text" name="class" value="{$vo.class}"/>
             </div>
         </div>
         <div class="form-group">
             <label class="col-lg-3 control-label no-padding-right">{:L('REQUIRED')}:</label>
             <div class="col-lg-9">
-                <input class="ace ace-switch ace-switch-7" type="checkbox" value="1" name="required" checked="checked"/>
+                <input class="ace ace-switch ace-switch-7" type="checkbox" value="1" name="required"{:($vo['required']||!isset($vo))?' checked="checked"':''}/>
                 <span class="lbl"></span>
             </div>
         </div>
@@ -82,7 +84,7 @@
             <label class="col-lg-3 control-label no-padding-right">{:L('PATTERN')}:</label>
             <div class="col-lg-9">
                 <div class="input-group col-lg-8 select-click">
-                    <input class="hide" type="text" name="pattern" value=""/>
+                    <input class="hide" type="text" name="pattern" value="{$vo.pattern}"/>
                     <div class="form-control select-input cude"></div>
                     <span class="input-group-addon cude">
                         <i class="glyphicon glyphicon-menu-down"></i>
@@ -103,23 +105,23 @@
         <div id="cusreg" class="form-group hide">
             <label class="col-lg-3 control-label no-padding-right">{:L('CUSTOM_REGEX')}:</label>
             <div class="col-lg-9">
-                <input class="col-lg-12" type="text" name="regex" value=""/>
+                <input class="col-lg-12" type="text" name="regex" value="{$vo.regex}"/>
             </div>
         </div>
         <div class="form-group">
             <label class="col-lg-3 control-label no-padding-right">{:L('STR_LENGTH')}:</label>
             <div class="col-lg-9">
                 <span class="pull-left pt5">{:L('MIN_LENGTH')}</span>
-                <input class="col-lg-2 pull-left ml10" type="text" name="minlength" value=""/>
+                <input class="col-lg-2 pull-left ml10" type="text" name="minlength" value="{$vo.minlength}"/>
                 <span class="pull-left pt5 ml10">{:L('MAX_LENGTH')}</span>
-                <input class="col-lg-2 pull-left ml10" type="text" name="maxlength" value=""/>
+                <input class="col-lg-2 pull-left ml10" type="text" name="maxlength" value="{$vo.maxlength}"/>
                 <span class="pull-left pt5 ml10">{:L('NUM_STR')}</span>
             </div>
         </div>
         <div class="form-group">
             <label class="col-lg-3 control-label no-padding-right">{:L('ERROR_MSG')}:</label>
             <div class="col-lg-9">
-                <input class="col-lg-12" type="text" name="errormsg" value="" placeholder="{$Think.LANG_SET}"/>
+                <input class="col-lg-12" type="text" name="errormsg" value="{$vo['errormsg']?L($vo['errormsg']):''}" placeholder="{$Think.LANG_SET}"/>
             </div>
         </div>
         <div class="clearfix form-actions">

@@ -48,8 +48,10 @@ class FieldModel extends RelationModel{
         $data = array(
             'mid' => I('post.mid'),
             'mtype' => I('post.mtype'),
-            'field' => I('post.field')
+            'field' => I('post.field'),
+            'oldfield' => I('post.oldfield')
         );
+        if(!empty($data['oldfield']) && $data['oldfield'] == $data['field']) return TRUE;
         if($data['mtype'] == 1){
             $Content = M('Content');
             $fields = $Content->getDbFields();

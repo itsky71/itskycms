@@ -33,6 +33,9 @@ $field = array(
     'ADD_OK'                    =>  '字段添加成功！',
     'DEL_ERROR'                 =>  '字段刪除失敗！',
     'DEL_OK'                    =>  '字段刪除成功！',
+    'EDIT_ERROR'                =>  '字段編輯失敗！',
+    'EDIT_OK'                   =>  '字段編輯成功！',
+    'SQL_ERROR'                 =>  'SQL 語句錯誤！',
 
     'FIELD_CATID'               =>  '欄目',
     'FIELD_TITLE'               =>  '標題',

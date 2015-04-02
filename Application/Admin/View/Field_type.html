@@ -99,7 +99,7 @@
         </div>
     </div>
     <div class="form-group">
-        <php>$a = (($vo['type'] == 'select' && $vo['setup']['multiple'] == 0) || !isset($vo)) ? 'checked="checked"' : '';
+        <php>$a = (($vo['type'] == 'select' && $vo['setup']['multiple'] == 0) || $vo['type'] != 'select') ? 'checked="checked"' : '';
         $b = ($vo['type'] == 'select' && $vo['setup']['multiple'] == 1) ? 'checked="checked"' : '';</php>
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_SELECT_TYPE')}:</label>
         <div class="col-lg-9">
@@ -136,8 +136,8 @@
                     </div>
                 </div>
             </div>
-            <label id="numbertype" class="pull-left mt5{:(($vo['type']=='select'&&$vo['setup']['numbertype']=='varchar')||!isset($vo))?' hide':''}">
-                <input class="ace" type="checkbox" name="setup[numbertype]" value="1" <if condition="(($vo['type'] eq 'select') && ($vo['setup']['numbertype'] eq 1)) || (!isset($vo))">checked="checked"</if>/>
+            <label id="numbertype" class="pull-left mt5{:(($vo['type']=='select'&&$vo['setup']['numbertype']=='varchar')||$vo['type']!='select')?' hide':''}">
+                <input class="ace" type="checkbox" name="setup[numbertype]" value="1" <if condition="(($vo['type'] eq 'select') && ($vo['setup']['numbertype'] eq 1)) || ($vo['type'] neq 'select')">checked="checked"</if>/>
                 <span class="lbl"> {:L('SETUP_NO_NEGATIVE')}</span>
             </label>
         </div>
@@ -184,7 +184,7 @@
         <div class="col-lg-9">
             <label>
                 <php>$basic = ($vo['type'] == 'editor' && $vo['setup']['toolbar'] == 'basic') ? 'checked="checked"' : '';
-                $full = (($vo['type'] == 'editor' && $vo['setup']['toolbar'] == 'full') || !isset($vo)) ? 'checked="checked"' : '';</php>
+                $full = (($vo['type'] == 'editor' && $vo['setup']['toolbar'] == 'full') || $vo['type'] != 'editor') ? 'checked="checked"' : '';</php>
                 <input class="ace" type="radio" name="setup[toolbar]" value="basic" {$basic}/>
                 <span class="lbl"> {:L('SETUP_EDITOR_STYLE_BASIC')}</span>
             </label>
@@ -210,35 +210,35 @@
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_IS_PAGE')}:</label>
         <div class="col-lg-9">
-            <input class="ace ace-switch ace-switch-7" type="checkbox" value="1" name="setup[showpage]" <if condition="(($vo['type'] eq 'editor') && ($vo['setup']['showpage'] eq 1) || !isset($vo))">checked="checked"</if>/>
+            <input class="ace ace-switch ace-switch-7" type="checkbox" value="1" name="setup[showpage]" <if condition="(($vo['type'] eq 'editor') && ($vo['setup']['showpage'] eq 1) || ($vo['type'] neq 'editor'))">checked="checked"</if>/>
             <span class="lbl"></span>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_SHOW_ABSTRACT')}:</label>
         <div class="col-lg-9">
-            <input class="ace ace-switch ace-switch-7" type="checkbox" value="1" name="setup[show_add_description]" <if condition="(($vo['type'] eq 'editor') && ($vo['setup']['show_add_description'] eq 1) || !isset($vo))">checked="checked"</if>/>
+            <input class="ace ace-switch ace-switch-7" type="checkbox" value="1" name="setup[show_add_description]" <if condition="(($vo['type'] eq 'editor') && ($vo['setup']['show_add_description'] eq 1) || ($vo['type'] neq 'editor'))">checked="checked"</if>/>
             <span class="lbl"></span>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_SHOW_GET_TITLE_THUMB')}:</label>
         <div class="col-lg-9">
-            <input class="ace ace-switch ace-switch-7" type="checkbox" value="1" name="setup[show_auto_thumb]" <if condition="(($vo['type'] eq 'editor') && ($vo['setup']['show_auto_thumb'] eq 1) || !isset($vo))">checked="checked"</if>/>
+            <input class="ace ace-switch ace-switch-7" type="checkbox" value="1" name="setup[show_auto_thumb]" <if condition="(($vo['type'] eq 'editor') && ($vo['setup']['show_auto_thumb'] eq 1) || ($vo['type'] neq 'editor'))">checked="checked"</if>/>
             <span class="lbl"></span>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_SHOW_SAVE_REMOTE_PIC')}:</label>
         <div class="col-lg-9">
-            <input class="ace ace-switch ace-switch-7" type="checkbox" value="1" name="setup[show_remote_pic]" <if condition="(($vo['type'] eq 'editor') && ($vo['setup']['show_remote_pic'] eq 1) || !isset($vo))">checked="checked"</if>/>
+            <input class="ace ace-switch ace-switch-7" type="checkbox" value="1" name="setup[show_remote_pic]" <if condition="(($vo['type'] eq 'editor') && ($vo['setup']['show_remote_pic'] eq 1) || ($vo['type'] neq 'editor'))">checked="checked"</if>/>
             <span class="lbl"></span>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_IS_UPLOAD_PIC')}:</label>
         <div class="col-lg-9">
-            <input class="ace ace-switch ace-switch-7" type="checkbox" value="1" name="setup[picupload]" <if condition="(($vo['type'] eq 'editor') && ($vo['setup']['picupload'] eq 1) || !isset($vo))">checked="checked"</if>/>
+            <input class="ace ace-switch ace-switch-7" type="checkbox" value="1" name="setup[picupload]" <if condition="(($vo['type'] eq 'editor') && ($vo['setup']['picupload'] eq 1) || ($vo['type'] neq 'editor'))">checked="checked"</if>/>
             <span class="lbl"></span>
         </div>
     </div>
@@ -304,7 +304,7 @@
 <case value="groupid">
     <div class="form-group">
         <php>
-            $radio = (($vo['type'] == 'groupid' && $vo['setup']['inputtype'] == 'radio') || !isset($vo)) ? 'checked="checked"' : '';
+            $radio = (($vo['type'] == 'groupid' && $vo['setup']['inputtype'] == 'radio') || $vo['type'] != 'groupid') ? 'checked="checked"' : '';
             $checkbox = ($vo['type'] == 'groupid' && $vo['setup']['inputtype'] == 'checkbox') ? 'checked="checked"' : '';
         </php>
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_SELECT_TYPE')}:</label>
@@ -339,8 +339,8 @@
                     </div>
                 </div>
             </div>
-            <label id="numbertype" class="pull-left mt5{:(($vo['type']=='groupid'&&$vo['setup']['numbertype']=='varchar')||!isset($vo))?' hide':''}">
-                <input class="ace" type="checkbox" name="setup[numbertype]" value="1" <if condition="(($vo['type'] eq 'groupid') && ($vo['setup']['numbertype'] eq 1)) || (!isset($vo))">checked="checked"</if>/>
+            <label id="numbertype" class="pull-left mt5{:(($vo['type']=='groupid'&&$vo['setup']['numbertype']=='varchar')||$vo['type']!='groupid')?' hide':''}">
+                <input class="ace" type="checkbox" name="setup[numbertype]" value="1" <if condition="((($vo['type'] eq 'groupid') && $vo['setup']['numbertype']) || ($vo['type'] neq 'groupid'))">checked="checked"</if>/>
                 <span class="lbl"> {:L('SETUP_NO_NEGATIVE')}</span>
             </label>
         </div>
@@ -356,7 +356,7 @@
 <case value="typeid">
     <div class="form-group">
         <php>
-            $radio = (($vo['type'] == 'typeid' && $vo['setup']['inputtype'] == 'radio') || !isset($vo)) ? 'checked="checked"' : '';
+            $radio = (($vo['type'] == 'typeid' && $vo['setup']['inputtype'] == 'radio') || $vo['type'] != 'typeid') ? 'checked="checked"' : '';
             $checkbox = ($vo['type'] == 'typeid' && $vo['setup']['inputtype'] == 'checkbox') ? 'checked="checked"' : '';
         </php>
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_SELECT_TYPE')}:</label>
@@ -392,8 +392,8 @@
                     </div>
                 </div>
             </div>
-            <label id="numbertype" class="pull-left mt5{:(($vo['type']=='typeid'&&$vo['setup']['fieldtype']=='varchar')||!isset($vo))?'hide':''}">
-                <input class="ace" type="checkbox" name="setup[numbertype]" value="1"{:(($vo['type']=='typeid'&&$vo['setup']['']==1)||!isset($vo))?' checked="checked"':''}/>
+            <label id="numbertype" class="pull-left mt5{:(($vo['type']=='typeid'&&$vo['setup']['fieldtype']=='varchar')||$vo['type']!='typeid')?' hide':''}">
+                <input class="ace" type="checkbox" name="setup[numbertype]" value="1"{:(($vo['type']=='typeid'&&$vo['setup']['numbertype']==1)||$vo['type']!='typeid')?' checked="checked"':''}/>
                 <span class="lbl"> {:L('SETUP_NO_NEGATIVE')}</span>
             </label>
         </div>
@@ -439,8 +439,8 @@
                     </div>
                 </div>
             </div>
-            <label id="numbertype" class="pull-left mt5{:(($vo['type']=='radio'&&$vo['setup']['fieldtype']=='varchar')||!isset($vo))?' hide':''}">
-                <input class="ace" type="checkbox" name="setup[numbertype]" value="1"{:(($vo['type']=='radio'&&$vo['setup']['numbertype']==1)||!isset($vo))?' checked="checked"':''}/>
+            <label id="numbertype" class="pull-left mt5{:(($vo['type']=='radio'&&$vo['setup']['fieldtype']=='varchar')||$vo['type']!='radio')?' hide':''}">
+                <input class="ace" type="checkbox" name="setup[numbertype]" value="1"{:(($vo['type']=='radio'&&$vo['setup']['numbertype']==1)||$vo['type']!='radio')?' checked="checked"':''}/>
                 <span class="lbl"> {:L('SETUP_NO_NEGATIVE')}</span>
             </label>
         </div>
@@ -486,8 +486,8 @@
                     </div>
                 </div>
             </div>
-            <label id="numbertype" class="pull-left mt5{:(($vo['type']=='checkbox'&&$vo['setup']['fieldtype']=='varchar')||!isset($vo))?' hide':''}">
-                <input class="ace" type="checkbox" name="setup[numbertype]" value="1"{:(($vo['type']=='checkbox'&&$vo['setup']['numbertype']==1)||!isset($vo))?' checked="checked"':''}/>
+            <label id="numbertype" class="pull-left mt5{:(($vo['type']=='checkbox'&&$vo['setup']['fieldtype']=='varchar')||$vo['type']!='checkbox')?' hide':''}">
+                <input class="ace" type="checkbox" name="setup[numbertype]" value="1"{:(($vo['type']=='checkbox'&&$vo['setup']['numbertype']==1)||$vo['type']!='checkbox')?' checked="checked"':''}/>
                 <span class="lbl"> {:L('SETUP_NO_NEGATIVE')}</span>
             </label>
         </div>
@@ -512,7 +512,7 @@
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_IS_NEGATIVE')}:</label>
         <div class="col-lg-9">
             <label class="pull-left">
-                <input class="ace ace-switch ace-switch-7" type="checkbox" name="setup[numbertype]" value="1" <if condition="(($vo['type'] eq 'number') && ($vo['setup']['numbertype'] eq 1)) || (!isset($vo))">checked="checked"</if>/>
+                <input class="ace ace-switch ace-switch-7" type="checkbox" name="setup[numbertype]" value="1" <if condition="(($vo['type'] eq 'number') && ($vo['setup']['numbertype'] eq 1)) || ($vo['type'] neq 'number')">checked="checked"</if>/>
                 <span class="lbl"></span>
             </label>
             <span class="pull-left pt5">{:L('SETUP_NO_NEGATIVE')}</span>
@@ -534,7 +534,7 @@
     <import type="js" file="js.fuelux#spinner#min"/>
     <script type="text/javascript">
         $('#spinner1').ace_spinner({
-            value:{$vo['type']=='number'?$vo['setup']['decimaldigits']:0},
+            value:{:($vo['type']=='number'&&$vo['setup']['decimaldigits'])?$vo['setup']['decimaldigits']:'0'},
             min:0,
             max:5,
             step:1,
@@ -577,7 +577,7 @@
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_UPLOAD_WATERMARK')}:</label>
         <div class="col-lg-9">
-            <input class="ace ace-switch ace-switch-7" type="checkbox" name="setup[watermark]" value="1" <if condition="(($vo['type'] eq 'image') && ($vo['setup']['watermark'] eq 1)) || (!isset($vo))">checked="checked"</if>/>
+            <input class="ace ace-switch ace-switch-7" type="checkbox" name="setup[watermark]" value="1" <if condition="(($vo['type'] eq 'image') && ($vo['setup']['watermark'] eq 1)) || ($vo['type'] neq 'image')">checked="checked"</if>/>
             <span class="lbl"></span>
         </div>
     </div>
@@ -618,7 +618,7 @@
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_UPLOAD_WATERMARK')}:</label>
         <div class="col-lg-9">
-            <input class="ace ace-switch ace-switch-7" type="checkbox" name="setup[watermark]" value="1" <if condition="(($vo['type'] eq 'images') && ($vo['setup']['watermark'] eq 1)) || (!isset($vo))">checked="checked"</if>/>
+            <input class="ace ace-switch ace-switch-7" type="checkbox" name="setup[watermark]" value="1" <if condition="(($vo['type'] eq 'images') && ($vo['setup']['watermark'] eq 1)) || ($vo['type'] neq 'images')">checked="checked"</if>/>
             <span class="lbl"></span>
         </div>
     </div>
