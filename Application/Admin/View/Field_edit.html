@@ -1,5 +1,5 @@
 <div class="col-lg-8">
-    <form class="form-horizontal" role="form" autocomplete="off">
+    <form id="form_1" class="form-horizontal" role="form" autocomplete="off">
         <input type="hidden" name="id" value="{$vo.id}"/>
         <input type="hidden" name="mid" value="{$Think.get.mid}"/>
         <input type="hidden" name="mtype" value="{$Think.get.type}"/>
@@ -179,6 +179,10 @@
     field_setting('{$vo.type}');
     $('ul[data-name="type"] li').click(function(){
         field_setting($(this).attr('data-val'));
+        var id = $('form[role="form"]').attr('id');
+        var num = id.substring(5);
+        var newform = 'form_'+(parseInt(num)+1).toString();
+        $('form[role="form"]').attr('id',newform);
     });
     $('ul[data-name="pattern"] li').click(function(){
         if($(this).attr('data-val') == 'regex'){
@@ -187,15 +191,24 @@
             $('#cusreg').addClass('hide');
         }
     });
-    $('form[role="form"]').validator({
-//        fields:{
-//            type:{
-//                rule:'required',
-//                msgStyle:'position:relative;left:40px;'
-//            },
-//            field:'required;letters;length[2~20];remote[{:U('Check/field',$vl)}, mid, mtype, id]',
-//            name:'required;length[2~20]'
-//        },
+    $('#form_2').validator({
+        rules:{
+            fun:[/^[a-zA-Z]\w+/,'{:L('FUN_NAME')}']
+        },
+        fields:{
+            type:{
+                rule:'required',
+                msgStyle:'position:relative;left:40px;'
+            },
+            field:'required;letters;length[2~20];remote[{:U('Check/field',$vl)}, mid, mtype, id]',
+            name:'required;length[2~20];zhendig',
+            tips:'length[2~50];zhendig',
+            'setup[safefun]':'length[2~50];enname;fun',
+            class:'length[2~20];enname',
+            regex:'length[5~100]',
+            minlength:'digits',
+            maxlength:'digits'
+        },
         valid:function(form){
             $.ajax({
                 type: 'POST',

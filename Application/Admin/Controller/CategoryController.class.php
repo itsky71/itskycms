@@ -15,7 +15,17 @@ namespace Admin\Controller;
  * @author itsky
  */
 class CategoryController extends AdminController{
-    public function _initialize() {
-        parent::_initialize();
+    public function index(){
+        if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
+        $this->display();
+    }
+
+    public function add(){
+        if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
+        if(IS_POST){
+            print_r(I('post.'));
+        }else{
+            $this->display('edit');
+        }
     }
 }

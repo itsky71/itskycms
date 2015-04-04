@@ -142,7 +142,7 @@ class FieldModel extends RelationModel{
                 }
                 if(!empty($setup['alowuploadexts'])){
                     $res[] = $this->check($setup['alowuploadexts'], '/^[A-Za-z,]+$/');
-                    $res[] = $this->check($setup['alowuploadexts'], '2,200','length');
+                    $res[] = $this->check($setup['alowuploadexts'], '1,200','length');
                 }
                 break;
             case 'select':
@@ -253,7 +253,7 @@ class FieldModel extends RelationModel{
                     $res[] = $this->check($setup['dateformat'], '1,50', 'length');
                 }
                 if(!empty($setup['dateformat'])){
-                    $res[] = $this->check($setup['dateformat'], '1,20', 'length');
+                    $res[] = $this->check($setup['dateformat'], '1,50', 'length');
                 }
                 break;
             case 'groupid':

@@ -17,7 +17,8 @@
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_WIDTH')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-3 pull-left" type="text" name="setup[size]" value="{$vo['type']=='title'?$vo['setup']['size']:''}"/>
+            <input class="col-lg-3 pull-left" type="text" name="setup[size]"
+                   value="{$vo['type']=='title'?$vo['setup']['size']:''}" data-rule="digits" maxlength="3"/>
             <span class="pull-left pt5 ml10">px</span>
         </div>
     </div>
@@ -26,14 +27,16 @@
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_SIZE')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-3 pull-left" type="text" name="setup[size]" value="{$vo['type']=='text'?$vo['setup']['size']:''}"/>
+            <input class="col-lg-3 pull-left" type="text" name="setup[size]"
+                   value="{$vo['type']=='text'?$vo['setup']['size']:''}" data-rule="digits" maxlength="3"/>
             <span class="pull-left pt5 ml10">px</span>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_DEFAULT')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-12" type="text" name="setup[default]" value="{$vo['type']=='text'?$vo['setup']['default']:''}"/>
+            <input class="col-lg-12" type="text" name="setup[default]"
+                   value="{$vo['type']=='text'?$vo['setup']['default']:''}" data-rule="length[2~100]"/>
         </div>
     </div>
     <div class="form-group">
@@ -69,14 +72,16 @@
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_HEIGHT')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-3 pull-left" type="text" name="setup[height]" value="{$vo['type']=='textarea'?$vo['setup']['height']:''}"/>
+            <input class="col-lg-3 pull-left" type="text" name="setup[height]"
+                   value="{$vo['type']=='textarea'?$vo['setup']['height']:''}" data-rule="digits" maxlength="3"/>
             <span class="pull-left pt5 ml10">px</span>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_WIDTH')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-3 pull-left" type="text" name="setup[width]" value="{$vo['type']=='textarea'?$vo['setup']['width']:''}"/>
+            <input class="col-lg-3 pull-left" type="text" name="setup[width]"
+                   value="{$vo['type']=='textarea'?$vo['setup']['width']:''}" data-rule="digits" maxlength="3"/>
             <span class="pull-left pt5 ml10">px</span>
         </div>
     </div>
@@ -145,13 +150,15 @@
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_SHOW_ITEM')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-3" type="text" name="setup[size]" value="{$vo['type']=='select'?$vo['setup']['size']:''}"/>
+            <input class="col-lg-3" type="text" name="setup[size]"
+                   value="{$vo['type']=='select'?$vo['setup']['size']:''}" data-rule="digits" maxlength="3"/>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_DEFAULT')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-8" type="text" name="setup[default]" value="{$vo['type']=='select'?$vo['setup']['default']:''}"/>
+            <input class="col-lg-8" type="text" name="setup[default]"
+                   value="{$vo['type']=='select'?$vo['setup']['default']:''}" data-rule="length[~20]"/>
         </div>
     </div>
     <import type="js" file="js.select"/>
@@ -203,7 +210,8 @@
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_EDITOR_HEIGHT')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-3 pull-left" type="text" name="setup[height]" value="{$vo['type']=='editor'?$vo['setup']['height']:''}"/>
+            <input class="col-lg-3 pull-left" type="text" name="setup[height]"
+                   value="{$vo['type']=='editor'?$vo['setup']['height']:''}" data-rule="digits" maxlength="3"/>
             <span class="pull-left pt5 ml10">px</span>
         </div>
     </div>
@@ -245,7 +253,11 @@
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_UPLOAD_PIC_FORMAT')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-10" type="text" name="setup[alowuploadexts]" value="{$vo['type']=='editor'?$vo['setup']['alowuploadexts']:''}" placeholder="{:L('SUCH')}: jpg,jpeg,png,gif"/>
+            <input class="col-lg-10" type="text" name="setup[alowuploadexts]"
+                   value="{$vo['type']=='editor'?$vo['setup']['alowuploadexts']:''}"
+                   placeholder="{:L('SUCH')}: jpg,jpeg,png,gif"
+                   data-rule="length[~200];exts"
+                   data-rule-exts="[/^[A-Za-z,]+$/,'{:L('PIC_EXTS')}']"/>
         </div>
     </div>
     <import type="js" file="js.select"/>
@@ -254,21 +266,24 @@
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_DEFAULT')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-8" type="text" name="setup[default]" value="{$vo['type']=='datetime'?$vo['setup']['default']:''}"/>
+            <input class="col-lg-8" type="text" name="setup[default]"
+                   value="{$vo['type']=='datetime'?$vo['setup']['default']:''}" data-rule="length[~50]"/>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_DATE_FORMAT')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-8 pull-left" type="text" name="setup[dateformat]" value="{$vo['type']=='datetime'?$vo['setup']['dateformat']:''}"/>
-            <span class="glyphicon glyphicon-info-sign text-info pull-left mt5 ml10 bigger-125 cude tooltip-info" data-placement="right" data-rel="tooltip" data-original-title="{:L('SETUP_DATE_TIP')}"></span>
+            <input class="col-lg-8 pull-left" type="text" name="setup[dateformat]"
+                   value="{$vo['type']=='datetime'?$vo['setup']['dateformat']:''}"  data-rule="length[~50]"/>
+            <span class="glyphicon glyphicon-info-sign text-info pull-left mt5 ml10 bigger-125 cude tooltip-info"
+                  data-placement="right" data-rel="tooltip" data-original-title="{:L('SETUP_DATE_TIP')}"></span>
         </div>
     </div>
 </case>
 <case value="attr">
     <div class="form-group">
         <php>
-            $radio = ($vo['type'] == 'attr' && $vo['setup']['inputtype'] == 'radio') ? 'checked="checked"' : '';
+            $radio = (($vo['type'] == 'attr' && $vo['setup']['inputtype'] == 'radio') || $vo['type'] != 'select') ? 'checked="checked"' : '';
             $checkbox = ($vo['type'] == 'attr' && $vo['setup']['inputtype'] == 'checkbox') ? 'checked="checked"' : '';
             $select = ($vo['type'] == 'attr' && $vo['setup']['inputtype'] == 'select') ? 'checked="checked"' : '';
             $images = ($vo['type'] == 'attr' && $vo['setup']['inputtype'] == 'images') ? 'checked="checked"' : '';
@@ -348,7 +363,8 @@
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_DEFAULT')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-5" type="text" name="setup[default]" value="{$vo['type']=='groupid'?$vo['setup']['default']:''}"/>
+            <input class="col-lg-5" type="text" name="setup[default]"
+                   value="{$vo['type']=='groupid'?$vo['setup']['default']:''}" data-rule="required"/>
         </div>
     </div>
     <import type="js" file="js.select"/>
