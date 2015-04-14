@@ -1,5 +1,5 @@
 <div class="col-lg-8">
-    <form id="form_1" class="form-horizontal" role="form" autocomplete="off">
+    <form class="form-horizontal" role="form" autocomplete="off">
         <input type="hidden" name="id" value="{$vo.id}"/>
         <input type="hidden" name="mid" value="{$Think.get.mid}"/>
         <input type="hidden" name="mtype" value="{$Think.get.type}"/>
@@ -179,10 +179,6 @@
     field_setting('{$vo.type}');
     $('ul[data-name="type"] li').click(function(){
         field_setting($(this).attr('data-val'));
-        var id = $('form[role="form"]').attr('id');
-        var num = id.substring(5);
-        var newform = 'form_'+(parseInt(num)+1).toString();
-        $('form[role="form"]').attr('id',newform);
     });
     $('ul[data-name="pattern"] li').click(function(){
         if($(this).attr('data-val') == 'regex'){
@@ -191,7 +187,7 @@
             $('#cusreg').addClass('hide');
         }
     });
-    $('#form_2').validator({
+    $('form[role="form"]').validator({
         rules:{
             fun:[/^[a-zA-Z]\w+/,'{:L('FUN_NAME')}']
         },

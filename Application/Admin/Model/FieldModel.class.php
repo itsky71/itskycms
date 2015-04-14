@@ -123,6 +123,7 @@ class FieldModel extends RelationModel{
                 if(!empty($setup['size'])){
                     $res[] = $this->check($setup['size'], 'number');
                     $res[] = $this->check($setup['size'],'2,4','length');
+                    $res[] = $this->check($setup['default'],'0,200','length');
                 }
                 break;
             case 'textarea':
@@ -141,7 +142,7 @@ class FieldModel extends RelationModel{
                     $res[] = $this->check($setup['height'], '2,4','length');
                 }
                 if(!empty($setup['alowuploadexts'])){
-                    $res[] = $this->check($setup['alowuploadexts'], '/^[A-Za-z,]+$/');
+                    $res[] = $this->check($setup['alowuploadexts'], '/^[A-Za-z0-9,]+$/');
                     $res[] = $this->check($setup['alowuploadexts'], '1,200','length');
                 }
                 break;

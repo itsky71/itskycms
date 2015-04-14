@@ -15,6 +15,6 @@ return array(
     ),
     'USER_AUTH_KEY'     =>  'authId',   //用户认证SESSION标记
     'ADMIN_AUTH_KEY'    =>  'admin',    //管理员认证SESSION标记
-    
+
     'BACKUP_PATH'       =>  DATA_PATH.'Backup/'
 );

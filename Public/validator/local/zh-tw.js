@@ -42,6 +42,63 @@
             ,verify: [/^[0-9a-zA-Z]{4}$/, "驗證碼由4位數字、字母組成"]
             ,zhendig:[/^[\u0391-\uFFE5a-zA-Z\d]+$/, "請輸入中文、英文字母、數字"]
             ,enname:[/^\w+$/, "請輸入字母、數字、下劃線"]
+            ,unchar:function(element){
+                if(/[`~!@#$%^&*()_+<>?:"{},.\/;'[\]]+/g.test(element.value)){
+                    return '包含非法字符';
+                }
+            }
+            ,field: function (element, params){
+                var type = $('[name="'+params[0]+'"]').val();
+                var name = element.name.slice(6,-1);
+                switch(type){
+                    case 'title':
+                        if(name == 'size'){
+                            var res = /^\d+$/.test(element.value) || '請輸入數字';
+                        }
+                        break;
+                    case 'text':
+                        if(name == 'size'){
+                            var res = /^\d+$/.test(element.value) || '請輸入數字';
+                        }else if(name == 'default'){
+                            var leng = element.value.length;
+                            var res = leng < 200 || '請最多輸入200個字符';
+                        }
+                        break;
+                    case 'textarea':
+                        if(name == 'height' || name == 'width'){
+                            var res = /^\d+$/.test(element.value) || '請輸入數字';
+                        }
+                        break;
+                    case 'select':
+                        if(name == 'options'){
+                            var res = checkOpt(element.value);
+                        }else if(name == 'size'){
+                            var res = /^\d+$/.test(element.value) || '請輸入數字';
+                        }else if(name == 'default'){
+                            var leng = element.value.length;
+                            var res = leng < 20 || '請最多輸入20個字符';
+                        }
+                        break;
+                    case 'editor':
+                        if(name == 'height'){
+                            var res = /^\d+$/.test(element.value) || '請輸入數字';
+                        }else if(name == 'alowuploadexts'){
+                            var res = /^[0-9a-zA-Z,]{1,100}$/.test(element.value) || '格式不正確';
+                        }
+                        break;
+                    case 'datetime':
+                        if(name == 'default'){
+                            var res = /^\d{10}$/.test(element.value) || '格式不正確';
+                        }
+                        break;
+                    case 'number':
+                        var res = /^\d+$/.test(element.value) || '請輸入數字';
+                        break;
+                    default:
+                        break;
+                }
+                return res;
+            }
             ,accept: function (element, params){
                 if (!params) return true;
                 var ext = params[0];
@@ -52,6 +109,41 @@
         }
     });
 
+    function checkOpt(data){
+        if($.trim(data) == ''){
+            var res = '不能為空';
+        }else{
+            var lines = data.split("\n");
+            var num = 0;
+            var newarr = new Array;
+            $.each(lines,function(index,value){
+                if($.trim(value) != ''){
+                    newarr[num] = $.trim(value);
+                    num = num + 1;
+                }
+            });
+            if(num < 2){
+                var res = '請輸入至少2個選項';
+            }else{
+                var numb = 0,numc = 0;
+                $.each(newarr,function(index,value){
+                    if(value.indexOf('|') < 1){
+                        numc = numc + 1;
+                    }else{
+                        numb = numb + 1;
+                    }
+                });
+                if(numc > 0){
+                    var res = '格式不正確';
+                }else{
+                    if(numb < 0){
+                        var res = '請輸入至少2個選項';
+                    }
+                }
+            }
+        }
+        return res;
+    }
     /* Default error messages
      */
     $.validator.config({

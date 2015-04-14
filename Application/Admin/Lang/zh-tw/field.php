@@ -142,7 +142,6 @@ $field = array(
     'MAXLENGTHC'                =>  '限制字符串長度範圍最大值必須大於或等於最小值！',
     'ERRORMSGL'                 =>  '驗證失敗錯誤信息必須為2-250個字符！',
     'SETUPALL'                  =>  '字段相關設置中存在錯誤輸入！',
-    'FUN_NAME'                  =>  '函數名的第一個字符必須是英文字母！',
-    'PIC_EXTS'                  =>  '請檢查圖片類型格式！'
+    'FUN_NAME'                  =>  '函數名的第一個字符必須是英文字母！'
 );
 return array_merge($field, $field_common);
