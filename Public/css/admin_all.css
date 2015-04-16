@@ -7,6 +7,7 @@ button.btn:active{position:relative;top:1px;left:1px;}.mtb0a{margin:0 auto !impo
 .pl5{padding-left: 5px}.pl10{padding-left: 10px}.pl15{padding-left: 15px !important}.pl20{padding-left: 20px !important}
 .pt5{padding-top: 5px !important}.pt10{padding-top: 10px !important;}.pt13{padding-top: 13px !important;}
 .p1-8{padding:1px 8px !important}.p5-4{padding: 5px 4px !important}.bg-light{background-color: #f9f9f9 !important}
+input[readonly]{background: none repeat scroll 0 0 #f9f9f9 !important;color: #666666;}
 .table tfoot tr{
     font-weight:normal;
     background:#f2f2f2;

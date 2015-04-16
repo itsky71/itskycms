@@ -12,7 +12,7 @@
 
 //全局配置，如果采用默认均不需要改动
 var config =  {
-    path: '', //laydate所在路径
+    path: laydate_path, //laydate所在路径
     defSkin: 'default', //初始化皮肤
     format: 'Y-m-d', //日期格式
     min: '1900-01-01 00:00:00', //最小日期
@@ -50,7 +50,7 @@ Dates.use = function(lib, id){
     link.rel = 'stylesheet';
     link.href = Dates.getPath + lib + as[5];
     id && (link.id = id);
-    doc[tags]('head')[0].appendChild(link);
+    doc[byid]('laydate').appendChild(link);
     link = null;
 };
 
@@ -268,7 +268,6 @@ Dates.check = function(){
     var isphp = typeof(Dates.options.isphp) == 'undefined' ? config.isphp : Dates.options.isphp;
     if(isphp) return 1;
     var reg = Dates.options.format.replace(/YYYY|MM|DD|hh|mm|ss/g,'\\d+\\').replace(/\\$/g, '');
-    // alert(reg);
     var exp = new RegExp(reg), value = Dates.elem[as.elemv];
     var arr = value.match(/\d+/g) || [], isvoid = Dates.checkVoid(arr[0], arr[1], arr[2]);
     if(value.replace(/\s/g, '') !== ''){
@@ -407,34 +406,34 @@ Dates.viewDate = function(Y, M, D){
 };
 
 //节日
-// Dates.festival = function(td, md){
-//     var str;
-//     switch(md){
-//         case '1.1':
-//             str = '元旦';
-//         break;
-//         case '3.8':
-//             str = '妇女';
-//         break;
-//         case '4.5':
-//             str = '清明';
-//         break;
-//         case '5.1':
-//             str = '劳动';
-//         break;
-//         case '6.1':
-//             str = '儿童';
-//         break;
-//         case '9.10':
-//             str = '教师';
-//         break;
-//         case '10.1':
-//             str = '国庆';
-//         break;
-//     };
-//     str && (td.innerHTML = str);
-//     str = null;
-// };
+/* Dates.festival = function(td, md){
+     var str;
+     switch(md){
+         case '1.1':
+             str = '元旦';
+         break;
+         case '3.8':
+             str = '妇女';
+         break;
+         case '4.5':
+             str = '清明';
+         break;
+         case '5.1':
+             str = '劳动';
+         break;
+         case '6.1':
+             str = '儿童';
+         break;
+         case '9.10':
+             str = '教师';
+         break;
+         case '10.1':
+             str = '国庆';
+         break;
+     };
+     str && (td.innerHTML = str);
+     str = null;
+ };*/
 
 //生成年列表
 Dates.viewYears = function(YY){
@@ -464,7 +463,7 @@ Dates.initDate = function(){
     var S = Dates.query, log = {}, De = new Date();
     var isphp = typeof(Dates.options.isphp) == 'undefined' ? config.isphp : Dates.options.isphp;
     if(isphp){
-        var timestamp = Dates.elem.nextSibling.value;
+        var timestamp = Dates.elem.previousSibling.value;
         De.setTime(timestamp+'000');
         ymd = [De.getFullYear(), De.getMonth()+1, De.getDate(),De.getHours(),De.getMinutes(),De.getSeconds()];
     }else{
@@ -551,8 +550,6 @@ Dates.viewtb = (function(){
 }());
 //显示时间戳input
 Dates.timestamp = function(elem,options){
-    var elemid = document.getElementById('J-xl');
-    // alert(elemid.value);
     Dates.options = options;
     Dates.options.format || (Dates.options.format = config.format);
     var istimestamp = typeof(Dates.options.istimestamp) == 'undefined' ? config.istimestamp : Dates.options.istimestamp;
@@ -589,7 +586,7 @@ Dates.timestamp = function(elem,options){
             var getDates = Dates.parse(ymd, hms);
             elem.value = elem.value == '' ? '' : getDates;
         }
-        elem.parentNode.insertBefore(elt,elem.nextSibling);
+        elem.parentNode.insertBefore(elt,elem.previousSibling);
     }
 }
 
@@ -657,8 +654,9 @@ Dates.view = function(elem, options){
           +'</div>'
           +(config.isv ? '<a href="http://sentsin.com/layui/laydate/" class="laydate_v" target="_blank">laydate-v'+ laydate.v +'</a>' : '')
         +'</div>';
-        doc.body.appendChild(div); 
-        Dates.box = S('#'+as[0]);        
+//        doc[byid]('laydate_view').appendChild(div);
+        doc.body.appendChild(div);
+        Dates.box = S('#'+as[0]);
         Dates.events();
         div = null;
     } else {
@@ -712,7 +710,6 @@ Dates.creation = function(ymd, hide){
                         ymd[4]||hms[1].value,
                         ymd[5]||hms[2].value
                     ];
-        // alert(datearr.join());
         var client = new hprose.HttpClient("http://www.itsky71.me/Server", ['date']);
         client.date(
             Dates.options.format,
@@ -721,7 +718,6 @@ Dates.creation = function(ymd, hide){
             datearr.join(),
             function(result) {
                 var resobj = JSON.parse(result);
-                // alert(resobj.elem);
                 var elemid = document.getElementById(resobj.elem);
                 elemid.value = resobj.date == 'false' ? '' : resobj.date;
                 // Dates.elem[as.elemv] = resobj.date;
@@ -861,8 +857,11 @@ Dates.events = function(){
     as.oclear = S('#laydate_clear');
     Dates.on(as.oclear, 'click', function(){
         Dates.elem[as.elemv] = '';
-        var stamp = document.getElementsByClassName('fl_timestamp '+Dates.elem.id)[0];
-        stamp.value = '';
+        var istimestamp = typeof(Dates.options.istimestamp) == 'undefined' ? config.istimestamp : Dates.options.istimestamp;
+        if(istimestamp){
+            var stamp = document.getElementsByClassName('fl_timestamp '+Dates.elem.id)[0];
+            stamp.value = '';
+        }
         Dates.close();
     });
     
@@ -989,5 +988,4 @@ laydate.now = function(timestamp, format){
 laydate.skin = function(lib){
     Dates.skinLink.href = Dates.getPath + as[4] + lib + as[5];
 };
-
 }(window);

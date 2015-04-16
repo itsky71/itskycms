@@ -264,7 +264,7 @@
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_DEFAULT')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-8" type="text" name="setup[default]"
+            <input class="col-lg-8 datepicker" type="text" name="setup[default]"
                    value="{$vo['type']=='datetime'?$vo['setup']['default']:''}" data-rule="length[~50]"/>
         </div>
     </div>
@@ -277,6 +277,12 @@
                   data-placement="right" data-rel="tooltip" data-original-title="{:L('SETUP_DATE_TIP')}"></span>
         </div>
     </div>
+    <import type="css" file="datepicker.datepicker"/>
+    <import type="js" file="datepicker.datepicker"/>
+    <import type="js" file="datepicker.i18n.datepicker#{:LANG_SET}"/>
+    <script type="text/javascript">
+        $('.datepicker').datepicker();
+    </script>
 </case>
 <case value="attr">
     <div class="form-group">
