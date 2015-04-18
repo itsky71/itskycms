@@ -86,13 +86,69 @@
                             var res = /^[0-9a-zA-Z,]{1,100}$/.test(element.value) || '格式不正確';
                         }
                         break;
+                    case 'radio':
+                        if(name == 'options'){
+                            var res = checkOpt(element.value);
+                        }
+                        break;
+                    case 'checkbox':
+                        if(name == 'options'){
+                            var res = checkOpt(element.value);
+                        }
+                        break;
+                    case 'image':
+                        if(name == 'size'){
+                            var res = /^\d+$/.test(element.value) || '請輸入數字';
+                        }else if(name == 'default'){
+                            var leng = element.value.length;
+                            var res = leng < 50 || '請最多輸入20個字符';
+                        }else if(name == 'upload_maxsize'){
+                            var res = /^\d+$/.test(element.value) || '請輸入數字';
+                        }else if(name == 'upload_allowext'){
+                            var res = /^[0-9a-zA-Z,]{1,100}$/.test(element.value) || '格式不正確';
+                        }
+                        break;
+                    case 'images':
+                        if(name == 'upload_maxnum'){
+                            var res = /^\d+$/.test(element.value) || '請輸入數字';
+                        }else if(name == 'upload_maxsize'){
+                            var res = /^\d+$/.test(element.value) || '請輸入數字';
+                        }else if(name == 'upload_allowext'){
+                            var leng = element.value.length;
+                            if(leng > 50 ){
+                                var res = '請最多輸入5個字符';
+                            }else{
+                                var res = /^[0-9a-zA-Z,]{1,100}$/.test(element.value) || '格式不正確';
+                            }
+                        }
+                        break;
+                    case 'file':
+                        if(name == 'size'){
+                            if(element.value.length > 1 && element.value.length < 5){
+                                var res = '請輸入2到4個字符';
+                            }else{
+                                var res = /^\d+$/.test(element.value) || '請輸入數字';
+                            }
+                        }else if(name == 'default'){
+                            if(element.value.length > 5 && element.value.length < 150){
+                                var res = '請輸入5到150個字符';
+                            }
+                        }else if(name == 'upload_maxsize'){
+                            var res = /^\d+$/.test(element.value) || '請輸入數字';
+                        }
+                        break;
                     case 'datetime':
                         if(name == 'default'){
-                            var res = /^\d{10}$/.test(element.value) || '格式不正確';
+                            // var res = /\S+/.test(element.value) || '呵呵...';
+                            var leng = element.value.length;
+                            var res = leng < 50 || '請最多輸入50個字符';
+                        }else if(name == 'dateformat'){
+                            var leng = element.value.length;
+                            var res = leng < 50 || '請最多輸入50個字符';
                         }
                         break;
                     case 'number':
-                        var res = /^\d+$/.test(element.value) || '請輸入數字';
+                        // var res = /^\d+$/.test(element.value) || '請輸入數字';
                         break;
                     default:
                         break;
