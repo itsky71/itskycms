@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2015-03-31 16:28:43
+-- Generation Time: 2015-04-19 11:42:24
 -- 服务器版本： 5.6.20
 -- PHP Version: 5.5.15
 
@@ -28,24 +28,15 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `ta_article` (
 `id` int(10) unsigned NOT NULL COMMENT '主键',
-  `aa` varchar(255) NOT NULL DEFAULT '' COMMENT '标题',
-  `title` varchar(200) NOT NULL DEFAULT '' COMMENT '松岛枫',
-  `title_style` varchar(40) NOT NULL DEFAULT '' COMMENT '样式',
-  `thumb` varchar(100) NOT NULL DEFAULT '' COMMENT '缩略图',
-  `catidid` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '栏目栏目',
-  `djfij` varchar(20) NOT NULL DEFAULT '' COMMENT '的分解',
-  `ffegeg` varchar(40) NOT NULL DEFAULT '' COMMENT '但是风格',
-  `bb` int(11) unsigned NOT NULL,
-  `eeg` decimal(10,3) unsigned NOT NULL DEFAULT '2.000' COMMENT '二哥五个',
-  `gehhht` int(10) unsigned NOT NULL DEFAULT '25' COMMENT '飞哥哥'
+  `bbc` tinyint(3) unsigned NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='文章模型' AUTO_INCREMENT=2 ;
 
 --
 -- 转存表中的数据 `ta_article`
 --
 
-INSERT INTO `ta_article` (`id`, `aa`, `title`, `title_style`, `thumb`, `catidid`, `djfij`, `ffegeg`, `bb`, `eeg`, `gehhht`) VALUES
-(1, '', '', '', '', 0, '', '', 0, '2.000', 25);
+INSERT INTO `ta_article` (`id`, `bbc`) VALUES
+(1, 0);
 
 -- --------------------------------------------------------
 
@@ -299,7 +290,7 @@ CREATE TABLE IF NOT EXISTS `ta_field` (
   `minlength` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '允许最小字符数',
   `maxlength` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '允许最大字符数',
   `pattern` varchar(20) NOT NULL DEFAULT '' COMMENT '验证规则',
-  `regex` varchar(20) NOT NULL DEFAULT '' COMMENT '自定义规则样式',
+  `regex` varchar(100) NOT NULL DEFAULT '' COMMENT '自定义规则样式',
   `errormsg` varchar(255) NOT NULL DEFAULT '' COMMENT '错误信息',
   `class` varchar(20) NOT NULL DEFAULT '' COMMENT '字段class样式',
   `type` varchar(20) NOT NULL DEFAULT '' COMMENT '字段类型',
@@ -307,36 +298,26 @@ CREATE TABLE IF NOT EXISTS `ta_field` (
   `listorder` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
   `status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '状态',
   `issystem` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否为系统字段'
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='字段' AUTO_INCREMENT=40 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='字段' AUTO_INCREMENT=15 ;
 
 --
 -- 转存表中的数据 `ta_field`
 --
 
 INSERT INTO `ta_field` (`id`, `mid`, `field`, `name`, `tips`, `required`, `minlength`, `maxlength`, `pattern`, `regex`, `errormsg`, `class`, `type`, `setup`, `listorder`, `status`, `issystem`) VALUES
-(1, 4, 'createtime', 'PAGE_CREATETIME', '', 1, 0, 0, '', '', '', '', 'datetime', '', 0, 1, 1),
-(2, 4, 'status', 'PAGE_STATUS', '', 1, 0, 0, '', '', '', '', 'radio', '', 0, 1, 1),
-(3, 5, 'catid', 'ARTICLE_CATID', '', 1, 0, 0, '', '', '', '', 'catid', '', 0, 1, 1),
-(4, 5, 'typeid', 'ARTICLE_TYPEID', '', 1, 0, 0, '', '', '', '', 'typeid', '', 0, 1, 1),
-(5, 5, 'title', 'ARTICLE_TITLE', '', 1, 0, 0, '', '', '', '', 'title', '', 0, 1, 1),
-(6, 5, 'keywords', 'ARTICLE_KEYWORDS', '', 0, 0, 0, '', '', '', '', 'text', '', 0, 1, 1),
-(7, 5, 'description', 'ARTICLE_DESCRIPTION', '', 1, 0, 0, '', '', '', '', 'textarea', '', 0, 1, 0),
-(8, 5, 'createtime', 'ARTICLE_CREATETIME', '', 1, 0, 0, '', '', '', '', 'datetime', '', 0, 0, 1),
-(9, 5, 'recommend', 'ARTICLE_RECOMMEND', '', 1, 0, 0, '', '', '', '', 'radio', '', 0, 0, 1),
-(10, 5, 'hits', 'ARTICLE_HITS', '', 1, 0, 0, '', '', '', '', 'number', '', 0, 1, 1),
-(11, 5, 'posid', 'ARTICLE_POSID', '', 1, 0, 0, '', '', '', '', 'posid', '', 0, 1, 1),
-(12, 5, 'template', 'ARTICLE_TEMPLATE', '', 1, 0, 0, '', '', '', '', 'template', '', 0, 1, 1),
-(13, 5, 'status', 'ARTICLE_STATUS', '', 1, 0, 0, '', '', '', '', 'radio', '', 0, 1, 1),
-(14, 5, 'dge', 'ARTICLE_DGE', 'ARTICLE_TIPS_DGE', 1, 0, 20, 'url', '', '大风暴', 'hfghgf', 'title', '{"thumb":"1","style":"1","size":"200","safefun":"dgh"}', 0, 0, 0),
-(15, 5, 'geg', 'ARTICLE_GEG', 'ARTICLE_TIPS_GEG', 1, 2, 20, 'regex', 'dfgege', 'ARTICLE_ERRORMSG_GEG', 'sfgeg', 'title', '{"thumb":"1","style":"1","size":"200","safefun":"dfege"}', 0, 0, 0),
-(16, 5, 'egeg', 'ARTICLE_EGEG', 'ARTICLE_TIPS_EGEG', 1, 2, 20, 'regex', 'degegeghrhjr', 'ARTICLE_ERRORMSG_EGEG', 'dsgfeg', 'title', '{"thumb":"1","style":"1","size":"200","safefun":"gfeghege"}', 0, 0, 0),
-(17, 5, 'dfeg', 'ARTICLE_DFEG', 'ARTICLE_TIPS_DFEG', 1, 3, 45, 'regex', 'egegegeg', 'ARTICLE_ERRORMSG_DFEG', 'dgrghe', 'title', '{"thumb":"1","style":"1","size":"230","safefun":"feegfhrfh"}', 0, 0, 0),
-(18, 5, 'dfdfe', 'ARTICLE_DFDFE', 'ARTICLE_TIPS_DFDFE', 1, 2, 200, 'url', '', 'ARTICLE_ERRORMSG_DFDFE', 'dfgegh', 'title', '{"thumb":"1","style":"1","size":"200","safefun":"dfeg"}', 0, 0, 0),
-(19, 5, 'catidid', 'ARTICLE_CATIDID', 'ARTICLE_TIPS_CATIDID', 1, 0, 5, 'digits', '', 'ARTICLE_ERRORMSG_CATIDID', 'dgege', 'catid', '{"safefun":"dsfdfge"}', 0, 0, 0),
-(20, 5, 'djfij', 'ARTICLE_DJFIJ', 'ARTICLE_TIPS_DJFIJ', 1, 6, 20, '', '', 'ARTICLE_ERRORMSG_DJFIJ', '', 'text', '{"size":"200","default":"\\u5927\\u98de\\u54e5\\u54e5\\u54e5","ispassword":"1","fieldtype":"varchar","safefun":"dgfeg"}', 0, 0, 0),
-(21, 5, 'ffegeg', 'ARTICLE_FFEGEG', 'ARTICLE_TIPS_FFEGEG', 1, 6, 20, 'en_num', '', 'ARTICLE_ERRORMSG_FFEGEG', 'dgrhre', 'text', '{"size":"200","default":"\\u7684\\u98ce\\u683c","ispassword":"1","fieldtype":"varchar","safefun":"dgerh"}', 0, 0, 0),
-(22, 5, 'eeg', 'ARTICLE_EEG', 'ARTICLE_TIPS_EEG', 1, 2, 10, 'url', '', 'ARTICLE_ERRORMSG_EEG', 'sdfwgf', 'number', '{"size":"200","numbertype":"1","decimaldigits":"5","default":"2","safefun":"sdgedgegwe"}', 0, 0, 0),
-(24, 5, 'gehhht', 'ARTICLE_GEHHHT', '', 1, 0, 0, '', '', 'ARTICLE_ERRORMSG_GEHHHT', 'ddfefg', 'number', '{"size":"200","numbertype":"1","decimaldigits":"0","default":"25","safefun":""}', 0, 0, 0);
+(1, 4, 'createtime', 'PAGE_CREATETIME', '', 1, 0, 0, '', '', 'PAGE_ERRORMSG_CREATETIME', '', 'datetime', '{"default":"","dateformat":"Y-m-d H:i:s","safefun":""}', 0, 1, 1),
+(2, 4, 'status', 'PAGE_STATUS', '', 1, 0, 0, '', '', 'PAGE_ERRORMSG_STATUS', '', 'radio', '{"options":"ON|1\\r\\nOFF|0","fieldtype":"tinyint","numbertype":"1","default":"1","safefun":""}', 0, 1, 1),
+(3, 5, 'catid', 'ARTICLE_CATID', '', 1, 0, 0, 'digits', '', 'ARTICLE_ERRORMSG_CATID', '', 'catid', '{"safefun":""}', 0, 1, 1),
+(4, 5, 'typeid', 'ARTICLE_TYPEID', '', 0, 0, 0, 'digits', '', 'ARTICLE_ERRORMSG_TYPEID', '', 'typeid', '{"inputtype":"radio","fieldtype":"smallint","numbertype":"1","default":"","safefun":""}', 0, 1, 1),
+(5, 5, 'title', 'ARTICLE_TITLE', '', 1, 2, 50, 'cn_username', '', 'ARTICLE_ERRORMSG_TITLE', '', 'title', '{"size":"","safefun":""}', 0, 1, 1),
+(6, 5, 'keywords', 'ARTICLE_KEYWORDS', '', 0, 0, 200, '', '', 'ARTICLE_ERRORMSG_KEYWORDS', '', 'text', '{"size":"","default":"","fieldtype":"varchar","safefun":""}', 0, 1, 1),
+(7, 5, 'description', 'ARTICLE_DESCRIPTION', '', 0, 0, 250, '', '', 'ARTICLE_ERRORMSG_DESCRIPTION', '', 'textarea', '{"fieldtype":"varchar","height":"","width":"","default":"","safefun":""}', 0, 1, 1),
+(8, 5, 'createtime', 'ARTICLE_CREATETIME', '', 1, 0, 0, 'date', '', 'ARTICLE_ERRORMSG_CREATETIME', '', 'datetime', '{"default":"","dateformat":"Y-m-d H:i:s","safefun":""}', 0, 1, 1),
+(9, 5, 'recommend', 'ARTICLE_RECOMMEND', '', 1, 0, 0, '', '', 'ARTICLE_ERRORMSG_RECOMMEND', '', 'radio', '{"options":"ON|1\\r\\nOFF|0","fieldtype":"tinyint","numbertype":"1","default":"1","safefun":""}', 0, 1, 1),
+(10, 5, 'hits', 'ARTICLE_HITS', '', 0, 0, 0, '', '', 'ARTICLE_ERRORMSG_HITS', '', 'number', '{"size":"","numbertype":"1","decimaldigits":"0","default":"0","safefun":""}', 0, 1, 1),
+(11, 5, 'posid', 'ARTICLE_POSID', '', 1, 0, 0, '', '', 'ARTICLE_ERRORMSG_POSID', '', 'posid', '{"safefun":""}', 0, 1, 1),
+(12, 5, 'template', 'ARTICLE_TEMPLATE', '', 0, 2, 20, 'en_num', '', 'ARTICLE_ERRORMSG_TEMPLATE', '', 'template', '{"safefun":""}', 0, 1, 1),
+(13, 5, 'status', 'ARTICLE_STATUS', '', 1, 0, 0, '', '', 'ARTICLE_ERRORMSG_STATUS', '', 'radio', '{"options":"ON|1\\r\\nOFF|0","fieldtype":"tinyint","numbertype":"1","default":"1","safefun":""}', 0, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -389,8 +370,8 @@ CREATE TABLE IF NOT EXISTS `ta_member` (
 --
 
 INSERT INTO `ta_member` (`id`, `password`, `username`, `realname`, `email`, `question`, `answer`, `status`, `regtime`, `login_ip`, `last_login_time`, `login_count`) VALUES
-(1, '30bc103d85df152c8c703bcbbcc7fd4d', 'admin', '你买单我就来', 'itsky71@foxmail.com', '我还会回来的...', '灰太狼？呵呵。。。', 1, 1419068912, '127.0.0.1', 1425907232, 33),
-(2, '30bc103d85df152c8c703bcbbcc7fd4d', 'itsky', '你地盘我做主', 'zmh0515005@163.com', '你是谁?', '呵呵...', 1, 1419587881, '127.0.0.1', 1427768982, 191),
+(1, '30bc103d85df152c8c703bcbbcc7fd4d', 'admin', '你买单我就来', 'itsky71@foxmail.com', '我还会回来的...', '灰太狼？呵呵。。。', 1, 1419068912, '127.0.0.1', 1429340117, 35),
+(2, '30bc103d85df152c8c703bcbbcc7fd4d', 'itsky', '你地盘我做主', 'zmh0515005@163.com', '你是谁?', '呵呵...', 1, 1419587881, '127.0.0.1', 1429411859, 205),
 (6, '30bc103d85df152c8c703bcbbcc7fd4d', 'yourphp', '111111', 'zmh0515005@163.me', '', '', 0, 1424952659, '', 0, 0);
 
 -- --------------------------------------------------------
@@ -801,7 +782,7 @@ MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCRE
 -- AUTO_INCREMENT for table `ta_field`
 --
 ALTER TABLE `ta_field`
-MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=40;
+MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `ta_lang`
 --

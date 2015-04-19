@@ -121,4 +121,10 @@ $field_common = array(
     'ARTICLE_ERRORMSG_DGG' => '',
     'ARTICLE_BIAOTI' => '标题',
     'ARTICLE_ERRORMSG_BIAOTI' => '',
+    'ARTICLE_DFEFEF' => '额哥哥',
+    'ARTICLE_TIPS_DFEFEF' => '哥哥特意看',
+    'ARTICLE_ERRORMSG_DFEFEF' => '',
+    'ARTICLE_DGR' => '额哥哥',
+    'ARTICLE_TIPS_DGR' => '哥哥特意看',
+    'ARTICLE_ERRORMSG_DGR' => '',
 );

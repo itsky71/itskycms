@@ -53,7 +53,8 @@
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_FIELD_TYPE')}:</label>
         <div class="col-lg-9">
             <div class="input-group col-lg-5 select-click">
-                <input class="hide" type="text" name="setup[fieldtype]" value="{$vo['type']=='textarea'?$vo['setup']['fieldtype']:'mediumtext'}"/>
+                <input class="hide" type="text" name="setup[fieldtype]"
+                       value="{$vo['type']=='textarea'?$vo['setup']['fieldtype']:'varchar'}" maxlength="3"/>
                 <div class="form-control select-input cude"></div>
                 <span class="input-group-addon cude">
                     <i class="glyphicon glyphicon-menu-down"></i>
@@ -62,6 +63,7 @@
             <div class="col-lg-5">
                 <div class="select-choices">
                     <ul class="list-unstyled select-option" data-name="setup[fieldtype]">
+                        <li data-val="varchar">VARCHAR</li>
                         <li data-val="mediumtext">MEDIUMTEXT</li>
                         <li data-val="text">TEXT</li>
                     </ul>
@@ -524,7 +526,8 @@
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_WIDTH')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-3 pull-left" type="text" name="setup[size]" value="{$vo['type']=='number'?$vo['setup']['size']:''}"/>
+            <input class="col-lg-3 pull-left" type="text" name="setup[size]" data-rule="field[type]"
+                   value="{$vo['type']=='number'?$vo['setup']['size']:''}" maxlength="3"/>
             <span class="pull-left pt5 ml10 text-muted">px</span>
         </div>
     </div>
@@ -547,7 +550,8 @@
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_DEFAULT')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-5" type="text" name="setup[default]" value="{$vo['type']=='number'?$vo['setup']['default']:''}"/>
+            <input class="col-lg-5" type="text" name="setup[default]" data-rule="field[type, decimaldigits, numbertype]"
+                   value="{$vo['type']=='number'?$vo['setup']['default']:''}"/>
         </div>
     </div>
     <import type="js" file="js.jquery#ui#touch-punch#min"/>
@@ -686,7 +690,8 @@
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_UPLOAD_TYPE')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-9" type="text" name="setup[upload_allowext]" value="{$vo['type']=='file'?$vo['setup']['upload_allowext']:''}" placeholder="{:L('SUCH')}: zip,rar,txt,pdf"/>
+            <input class="col-lg-9" type="text" name="setup[upload_allowext]" data-rule="field[type]"
+                   value="{$vo['type']=='file'?$vo['setup']['upload_allowext']:''}" placeholder="{:L('SUCH')}: zip,rar,txt,pdf"/>
         </div>
     </div>
     <div class="form-group">
@@ -707,20 +712,23 @@
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_UPLOAD_MAX_NUM')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-3" type="text" name="setup[upload_maxnum]" value="{$vo['type']=='files'?$vo['setup']['upload_maxnum']:''}"/>
+            <input class="col-lg-3" type="text" name="setup[upload_maxnum]" data-rule="field[type]"
+                   value="{$vo['type']=='files'?$vo['setup']['upload_maxnum']:''}" maxlength="3"/>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_UPLOAD_FILE_MAX_SIZE')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-3 pull-left" type="text" name="setup[upload_maxsize]" value="{$vo['type']=='files'?$vo['setup']['upload_maxsize']:''}"/>
+            <input class="col-lg-3 pull-left" type="text" name="setup[upload_maxsize]" data-rule="field[type]"
+                   value="{$vo['type']=='files'?$vo['setup']['upload_maxsize']:''}" maxlength="6"/>
             <span class="pull-left pt5 pl5"> KB</span>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_UPLOAD_TYPE')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-9" type="text" name="setup[upload_allowext]" value="{$vo['type']=='files'?$vo['setup']['upload_allowext']:''}" placeholder="{:L('SUCH')}: zip,rar,txt,pdf"/>
+            <input class="col-lg-9" type="text" name="setup[upload_allowext]" data-rule="field[type]"
+                   value="{$vo['type']=='files'?$vo['setup']['upload_allowext']:''}" placeholder="{:L('SUCH')}: zip,rar,txt,pdf"/>
         </div>
     </div>
     <div class="form-group">
@@ -735,7 +743,8 @@
     <div class="form-group">
         <label class="col-lg-3 control-label no-padding-right">{:L('SETUP_WIDTH')}:</label>
         <div class="col-lg-9">
-            <input class="col-lg-3 pull-left" type="text" name="setup[size]" value="{$vo['type']=='verify'?$vo['setup']['size']:''}"/>
+            <input class="col-lg-3 pull-left" type="text" name="setup[size]" data-rule="field[type]"
+                   value="{$vo['type']=='verify'?$vo['setup']['size']:''}" maxlength="3"/>
             <span class="pull-left pt5 ml10">px</span>
         </div>
     </div>

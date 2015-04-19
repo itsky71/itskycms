@@ -130,16 +130,20 @@ class CheckController extends Controller{
         if($data['mtype'] == 1){
             $Content = M('Content');
             $fields = $Content->getDbFields();
-            if(in_array($data['field'], $fields)){
-                echo json_encode(array('error'=>L('UNIQUE')));
+            if($data['field'] != $data['oldfield']){
+                if(in_array($data['field'], $fields)){
+                    echo json_encode(array('error'=>L('UNIQUE')));
+                }
             }
         }
         $Module = D('Module');
         $res = $Module->where('id='.$data['mid'])->find();
         $Table = M($res['name']);
         $tablefields = $Table->getDbFields();
-        if(in_array($data['field'], $tablefields)){
-            echo json_encode(array('error'=>L('UNIQUE')));
+        if($data['field'] != $data['oldfield']){
+            if(in_array($data['field'], $tablefields)){
+                echo json_encode(array('error'=>L('UNIQUE')));
+            }
         }
     }
 }

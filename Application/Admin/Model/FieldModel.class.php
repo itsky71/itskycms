@@ -206,7 +206,7 @@ class FieldModel extends RelationModel{
                     $res[] = $this->check($setup['upload_maxsize'],'1,7','length');
                 }
                 if(!empty($setup['upload_allowext'])){
-                    $res[] = $this->check($setup['upload_allowext'], '/^[A-Za-z,]+$/');
+                    $res[] = $this->check($setup['upload_allowext'], '/^[A-Za-z,*]+$/');
                     $res[] = $this->check($setup['upload_allowext'], '2,200', 'length');
                 }
                 break;
@@ -223,7 +223,7 @@ class FieldModel extends RelationModel{
                     $res[] = $this->check($setup['upload_maxsize'],'1,7','length');
                 }
                 if(!empty($setup['upload_allowext'])){
-                    $res[] = $this->check($setup['upload_allowext'], '/^[A-Za-z,]+$/');
+                    $res[] = $this->check($setup['upload_allowext'], '/^[A-Za-z,*]+$/');
                     $res[] = $this->check($setup['upload_allowext'], '2,200', 'length');
                 }
                 break;

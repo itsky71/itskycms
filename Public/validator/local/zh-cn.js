@@ -47,6 +47,158 @@
                     return '包含非法字符';
                 }
             }
+            ,field: function (element, params){
+                var type = $('[name="'+params[0]+'"]').val();
+                var name = element.name.slice(6,-1);
+                switch(type){
+                    case 'title':
+                        if(name == 'size'){
+                            var res = /^\d+$/.test(element.value) || '请输入数字';
+                        }
+                        break;
+                    case 'text':
+                        if(name == 'size'){
+                            var res = /^\d+$/.test(element.value) || '请输入数字';
+                        }else if(name == 'default'){
+                            var leng = element.value.length;
+                            var res = leng < 200 || '请最多输入200个字符';
+                        }
+                        break;
+                    case 'textarea':
+                        if(name == 'height' || name == 'width'){
+                            var res = /^\d+$/.test(element.value) || '请输入数字';
+                        }
+                        break;
+                    case 'select':
+                        if(name == 'options'){
+                            var res = checkOpt(element.value);
+                        }else if(name == 'size'){
+                            var res = /^\d+$/.test(element.value) || '请输入数字';
+                        }else if(name == 'default'){
+                            var leng = element.value.length;
+                            var res = leng < 20 || '请最多输入20个字符';
+                        }
+                        break;
+                    case 'editor':
+                        if(name == 'height'){
+                            var res = /^\d+$/.test(element.value) || '请输入数字';
+                        }else if(name == 'alowuploadexts'){
+                            var res = /^[0-9a-zA-Z,]{1,100}$/.test(element.value) || '格式不正确';
+                        }
+                        break;
+                    case 'radio':
+                        if(name == 'options'){
+                            var res = checkOpt(element.value);
+                        }
+                        break;
+                    case 'checkbox':
+                        if(name == 'options'){
+                            var res = checkOpt(element.value);
+                        }
+                        break;
+                    case 'image':
+                        if(name == 'size'){
+                            var res = /^\d+$/.test(element.value) || '请输入数字';
+                        }else if(name == 'default'){
+                            var leng = element.value.length;
+                            var res = leng < 50 || '请最多输入20个字符';
+                        }else if(name == 'upload_maxsize'){
+                            var res = /^\d+$/.test(element.value) || '请输入数字';
+                        }else if(name == 'upload_allowext'){
+                            var res = /^[0-9a-zA-Z,]{1,100}$/.test(element.value) || '格式不正确';
+                        }
+                        break;
+                    case 'images':
+                        if(name == 'upload_maxnum'){
+                            var res = /^\d+$/.test(element.value) || '请输入数字';
+                        }else if(name == 'upload_maxsize'){
+                            var res = /^\d+$/.test(element.value) || '请输入数字';
+                        }else if(name == 'upload_allowext'){
+                            var leng = element.value.length;
+                            if(leng > 50 ){
+                                var res = '请最多输入5个字符';
+                            }else{
+                                var res = /^[0-9a-zA-Z,]{1,100}$/.test(element.value) || '格式不正确';
+                            }
+                        }
+                        break;
+                    case 'file':
+                        if(name == 'size'){
+                            if(element.value.length > 1 && element.value.length < 5){
+                                var res = '请输入2到4个字符';
+                            }else{
+                                var res = /^\d+$/.test(element.value) || '请输入数字';
+                            }
+                        }else if(name == 'default'){
+                            if(element.value.length > 5 && element.value.length < 150){
+                                var res = '请输入5到150个字符';
+                            }
+                        }else if(name == 'upload_maxsize'){
+                            var res = /^\d+$/.test(element.value) || '请输入数字';
+                        }else if(name == 'upload_allowext'){
+                            if(leng > 50 ){
+                                var res = '请最多输入50个字符';
+                            }else{
+                                var res = element.value == '*' || /^[0-9a-zA-Z,]{1,100}$/.test(element.value) || '格式不正确';
+                            }
+                        }
+                        break;
+                    case 'files':
+                        if(name == 'upload_maxnum'){
+                            var res = /^\d+$/.test(element.value) || '请输入数字';
+                        }else if(name == 'upload_maxsize'){
+                            var res = /^\d+$/.test(element.value) || '请输入数字';
+                        }else if(name == 'upload_allowext'){
+                            if(leng > 50 ){
+                                var res = '请最多输入50个字符';
+                            }else{
+                                var res = element.value == '*' || /^[0-9a-zA-Z,]{1,100}$/.test(element.value) || '格式不正确';
+                            }
+                        }
+                        break;
+                    case 'datetime':
+                        if(name == 'default'){
+                            // var res = /\S+/.test(element.value) || '呵呵...';
+                            var leng = element.value.length;
+                            var res = leng < 50 || '请最多输入50个字符';
+                        }else if(name == 'dateformat'){
+                            var leng = element.value.length;
+                            var res = leng < 50 || '请最多输入50个字符';
+                        }
+                        break;
+                    case 'number':
+                        if(name == 'size'){
+                            var res = /^\d+$/.test(element.value) || '请输入数字';
+                        }else if(name == 'default'){
+                            var numtype = $('[name="setup['+params[2]+']"]:checked').val();
+                            var dec = $('[name="setup['+params[1]+']"]').val();
+                            if(numtype == 1){
+                                if(dec > 0){
+                                    var decs = dec == 1 ? '' : ','+dec;
+                                    var res = eval('/^\\d+(\\.\\d{1'+decs+'})?$/').test(element.value) || '格式不正确';
+                                }else{
+                                    var res = /^\d+$/.test(element.value) || '格式不正确';
+                                }
+                            }else{
+                                if(dec > 0){
+                                    var decs = dec == 1 ? '' : ','+dec;
+                                    var res = eval('/^(-?)\\d+(\\.\\d{1'+decs+'})?$/').test(element.value) || '格式不正确';
+                                }else{
+                                    var res = /^(-?)\d+$/.test(element.value) || '格式不正确';
+                                }
+                            }
+                        }
+                        break;
+                    case 'verify':
+                        if(name == 'size'){
+                            var res = /^\d+$/.test(element.value) || '请输入数字';
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                return res;
+            }
             ,accept: function (element, params){
                 if (!params) return true;
                 var ext = params[0];
@@ -57,6 +209,41 @@
         }
     });
 
+    function checkOpt(data){
+        if($.trim(data) == ''){
+            var res = '不能为空';
+        }else{
+            var lines = data.split("\n");
+            var num = 0;
+            var newarr = new Array;
+            $.each(lines,function(index,value){
+                if($.trim(value) != ''){
+                    newarr[num] = $.trim(value);
+                    num = num + 1;
+                }
+            });
+            if(num < 2){
+                var res = '请输入至少2个选项';
+            }else{
+                var numb = 0,numc = 0;
+                $.each(newarr,function(index,value){
+                    if(value.indexOf('|') < 1){
+                        numc = numc + 1;
+                    }else{
+                        numb = numb + 1;
+                    }
+                });
+                if(numc > 0){
+                    var res = '格式不正确';
+                }else{
+                    if(numb < 0){
+                        var res = '请输入至少2个选项';
+                    }
+                }
+            }
+        }
+        return res;
+    }
     /* Default error messages
      */
     $.validator.config({

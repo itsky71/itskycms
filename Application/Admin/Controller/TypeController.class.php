@@ -35,7 +35,8 @@ class TypeController extends AdminController{
     public function add(){
         if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
         $Type = M('Type');
-        $list = $Type->field('id,pid,name')->where('status=1')->select();
+        $lang = I('get.lang') ? I('get.lang') : $this->clang;
+        $list = $Type->field('id,pid,name')->where('status=1 AND lang=\''.$lang.'\'')->select();
         $tree = new \Common\Lib\Tree($list);
         if(IS_POST){
             if($Type->create()){
@@ -70,7 +71,8 @@ class TypeController extends AdminController{
     public function edit(){
         if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
         $Type = M('Type');
-        $list = $Type->field('id,pid,name')->where('status=1')->select();
+        $lang = I('get.lang') ? I('get.lang') : $this->clang;
+        $list = $Type->field('id,pid,name')->where('status=1 AND lang=\''.$lang.'\'')->select();
         $tree = new \Common\Lib\Tree($list);
         if(IS_POST){
             if($Type->create()){

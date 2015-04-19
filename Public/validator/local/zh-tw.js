@@ -135,6 +135,25 @@
                             }
                         }else if(name == 'upload_maxsize'){
                             var res = /^\d+$/.test(element.value) || '請輸入數字';
+                        }else if(name == 'upload_allowext'){
+                            if(leng > 50 ){
+                                var res = '請最多輸入5個字符';
+                            }else{
+                                var res = element.value == '*' || /^[0-9a-zA-Z,]{1,100}$/.test(element.value) || '格式不正確';
+                            }
+                        }
+                        break;
+                    case 'files':
+                        if(name == 'upload_maxnum'){
+                            var res = /^\d+$/.test(element.value) || '請輸入數字';
+                        }else if(name == 'upload_maxsize'){
+                            var res = /^\d+$/.test(element.value) || '請輸入數字';
+                        }else if(name == 'upload_allowext'){
+                            if(leng > 50 ){
+                                var res = '請最多輸入5個字符';
+                            }else{
+                                var res = element.value == '*' || /^[0-9a-zA-Z,]{1,100}$/.test(element.value) || '格式不正確';
+                            }
                         }
                         break;
                     case 'datetime':
@@ -148,7 +167,32 @@
                         }
                         break;
                     case 'number':
-                        // var res = /^\d+$/.test(element.value) || '請輸入數字';
+                        if(name == 'size'){
+                            var res = /^\d+$/.test(element.value) || '請輸入數字';
+                        }else if(name == 'default'){
+                            var numtype = $('[name="setup['+params[2]+']"]:checked').val();
+                            var dec = $('[name="setup['+params[1]+']"]').val();
+                            if(numtype == 1){
+                                if(dec > 0){
+                                    var decs = dec == 1 ? '' : ','+dec;
+                                    var res = eval('/^\\d+(\\.\\d{1'+decs+'})?$/').test(element.value) || '格式不正確';
+                                }else{
+                                    var res = /^\d+$/.test(element.value) || '格式不正確';
+                                }
+                            }else{
+                                if(dec > 0){
+                                    var decs = dec == 1 ? '' : ','+dec;
+                                    var res = eval('/^(-?)\\d+(\\.\\d{1'+decs+'})?$/').test(element.value) || '格式不正確';
+                                }else{
+                                    var res = /^(-?)\d+$/.test(element.value) || '格式不正確';
+                                }
+                            }
+                        }
+                        break;
+                    case 'verify':
+                        if(name == 'size'){
+                            var res = /^\d+$/.test(element.value) || '請輸入數字';
+                        }
                         break;
                     default:
                         break;
