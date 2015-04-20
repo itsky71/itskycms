@@ -25,6 +25,8 @@ class CategoryController extends AdminController{
         if(IS_POST){
             print_r(I('post.'));
         }else{
+            $Module = M('Module');
+            $modules = $Module->where('status=1 AND type=1')->select();
             $this->display('edit');
         }
     }
