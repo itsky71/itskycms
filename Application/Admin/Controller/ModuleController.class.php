@@ -21,7 +21,12 @@ class ModuleController extends AdminController{
 //        $tables = $db->getTables();
 //        dump($tables);
         $Module = D('Module');
-        $list = $Module->where('type='.I('get.type'))->select();
+        if(I('get.type') == 2) {
+            $map['issystem'] = 0;
+        } else {
+            $map['issystem'] = 1;
+        }
+        $list = $Module->where($map)->select();
         $this->assign('list', $list);
         $this->display();
     }
@@ -53,20 +58,179 @@ class ModuleController extends AdminController{
                         $sql .= 'PRIMARY KEY (`id`)';
                         $sql .= ') ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT=\''.$arrlang[$data['title']].'\';';
                         $db->execute($sql);
-                        $ftable = C('DB_PREFIX').'field';
-                        $langvar = strtoupper($data['name']).'_';
-                        $insertsql = "INSERT INTO `".$ftable."` VALUES ";
-                        $db->execute($insertsql."('',".$moduleid.",'catid','".$langvar."CATID','',1,0,0,'','','','catid','',0,1,1);");
-                        $db->execute($insertsql."('',".$moduleid.",'typeid','".$langvar."TYPEID','',1,0,0,'','','','typeid','',0,1,1);");
-                        $db->execute($insertsql."('',".$moduleid.",'title','".$langvar."TITLE','',1,0,0,'','','','title','',0,1,1);");
-                        $db->execute($insertsql."('',".$moduleid.",'keywords','".$langvar."KEYWORDS','',1,0,0,'','','','text','',0,1,1);");
-                        $db->execute($insertsql."('',".$moduleid.",'description','".$langvar."DESCRIPTION','',1,0,0,'','','','textarea','',0,1,1);");
-                        $db->execute($insertsql."('',".$moduleid.",'createtime','".$langvar."CREATETIME','',1,0,0,'','','','datetime','',0,1,1);");
-                        $db->execute($insertsql."('',".$moduleid.",'recommend','".$langvar."RECOMMEND','',1,0,0,'','','','radio','',0,1,1);");
-                        $db->execute($insertsql."('',".$moduleid.",'hits','".$langvar."HITS','',1,0,0,'','','','number','',0,1,1);");
-                        $db->execute($insertsql."('',".$moduleid.",'posid','".$langvar."POSID','',1,0,0,'','','','posid','',0,1,1);");
-                        $db->execute($insertsql."('',".$moduleid.",'template','".$langvar."TEMPLATE','',1,0,0,'','','','template','',0,1,1);");
-                        $db->execute($insertsql."('',".$moduleid.",'status','".$langvar."STATUS','',1,0,0,'','','','radio','',0,1,1);");
+                        $fieldlist = array(
+                            array(
+                                'mid' => $moduleid,
+                                'field' => 'catid',
+                                'name' => strtoupper($data['name']).'_'.'CATID',
+                                'required' => 1,
+                                'minlength' => NULL,
+                                'maxlength' => NULL,
+                                'pattern' => 'digits',
+                                'type' => 'catid',
+                                'setup' => '',
+                                'status' => 1,
+                                'issystem' => 1
+                            ),
+                            array(
+                                'mid' => $moduleid,
+                                'field' => 'typeid',
+                                'name' => strtoupper($data['name']).'_'.'TYPEID',
+                                'required' => 0,
+                                'minlength' => NULL,
+                                'maxlength' => NULL,
+                                'pattern' => 'digits',
+                                'type' => 'typeid',
+                                'setup' => json_encode(array(
+                                                                'inputtype' => 'radio',
+                                                                'fieldtype' => 'smallint',
+                                                                'numbertype' => 1,
+                                                                'default' => ''
+                                                            )),
+                                'status' => 1,
+                                'issystem' => 1
+                            ),
+                            array(
+                                'mid' => $moduleid,
+                                'field' => 'title',
+                                'name' => strtoupper($data['name']).'_'.'TITLE',
+                                'required' => 1,
+                                'minlength' => 2,
+                                'maxlength' => 50,
+                                'pattern' => 'cn_username',
+                                'type' => 'title',
+                                'setup' => '',
+                                'status' => 1,
+                                'issystem' => 1
+                            ),
+                            array(
+                                'mid' => $moduleid,
+                                'field' => 'keywords',
+                                'name' => strtoupper($data['name']).'_'.'KEYWORDS',
+                                'required' => 0,
+                                'minlength' => 0,
+                                'maxlength' => 200,
+                                'pattern' => '',
+                                'type' => 'text',
+                                'setup' => json_encode(array(
+                                                                'fieldtype' => 'varchar',
+                                                                'default' => ''
+                                                            )),
+                                'status' => 1,
+                                'issystem' => 1
+                            ),
+                            array(
+                                'mid' => $moduleid,
+                                'field' => 'description',
+                                'name' => strtoupper($data['name']).'_'.'DESCRIPTION',
+                                'required' => 0,
+                                'minlength' => 0,
+                                'maxlength' => 250,
+                                'pattern' => '',
+                                'type' => 'textarea',
+                                'setup' => '',
+                                'status' => 1,
+                                'issystem' => 1
+                            ),
+                            array(
+                                'mid' => $moduleid,
+                                'field' => 'createtime',
+                                'name' => strtoupper($data['name']).'_'.'CREATETIME',
+                                'required' => 1,
+                                'minlength' => 0,
+                                'maxlength' => 20,
+                                'pattern' => 'date',
+                                'type' => 'datetime',
+                                'setup' => json_encode(array(
+                                                                'dateformat' => 'yyyy-mm-dd hh:ii:ss',
+                                                                'default' => ''
+                                                            )),
+                                'status' => 1,
+                                'issystem' => 1
+                            ),
+                            array(
+                                'mid' => $moduleid,
+                                'field' => 'recommend',
+                                'name' => strtoupper($data['name']).'_'.'RECOMMEND',
+                                'required' => 1,
+                                'minlength' => NULL,
+                                'maxlength' => NULL,
+                                'pattern' => '',
+                                'type' => 'radio',
+                                'setup' => json_encode(array(
+                                                                'options' => 'ON|1'.PHP_EOL.'OFF|0',
+                                                                'fieldtype' => 'tinyint',
+                                                                'numbertype' => '1',
+                                                                'default' => '1'
+                                                            )),
+                                'status' => 1,
+                                'issystem' => 1
+                            ),
+                            array(
+                                'mid' => $moduleid,
+                                'field' => 'hits',
+                                'name' => strtoupper($data['name']).'_'.'HITS',
+                                'required' => 0,
+                                'minlength' => 0,
+                                'maxlength' => 10,
+                                'pattern' => 'digits',
+                                'type' => 'radio',
+                                'setup' => json_encode(array(
+                                                                'numbertype' => '1',
+                                                                'decimaldigits' => '0',
+                                                                'default' => '0'
+                                                            )),
+                                'status' => 1,
+                                'issystem' => 1
+                            ),
+                            array(
+                                'mid' => $moduleid,
+                                'field' => 'posid',
+                                'name' => strtoupper($data['name']).'_'.'POSID',
+                                'required' => 0,
+                                'minlength' => NULL,
+                                'maxlength' => NULL,
+                                'pattern' => '',
+                                'type' => 'posid',
+                                'setup' => '',
+                                'status' => 1,
+                                'issystem' => 1
+                            ),
+                            array(
+                                'mid' => $moduleid,
+                                'field' => 'template',
+                                'name' => strtoupper($data['name']).'_'.'TEMPLATE',
+                                'required' => 1,
+                                'minlength' => 2,
+                                'maxlength' => 20,
+                                'pattern' => 'en_num',
+                                'type' => 'template',
+                                'setup' => '',
+                                'status' => 1,
+                                'issystem' => 1
+                            ),
+                            array(
+                                'mid' => $moduleid,
+                                'field' => 'status',
+                                'name' => strtoupper($data['name']).'_'.'STATUS',
+                                'required' => 1,
+                                'minlength' => NULL,
+                                'maxlength' => NULL,
+                                'pattern' => '',
+                                'type' => 'radio',
+                                'setup' => json_encode(array(
+                                                                'options' => 'ON|1'.PHP_EOL.'OFF|0',
+                                                                'fieldtype' => 'tinyint',
+                                                                'numbertype' => '1',
+                                                                'default' => '1'
+                                                            )),
+                                'status' => 1,
+                                'issystem' => 1
+                            )
+                        );
+                        $Field = M('Field');
+                        $addres = $Field->addAll($fieldlist);
+                        if(!$addres) $this->error(L('FIELD_ADD_ERROR'));
                     }else{
                         $sql = 'CREATE TABLE `'.$tablename.'` (';
                         $sql .= '`id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT \'主键\',';
@@ -80,11 +244,45 @@ class ModuleController extends AdminController{
                         $sql .= 'PRIMARY KEY (`id`)';
                         $sql .= ') ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT=\''.$arrlang[$data['title']].'\';';
                         $db->execute($sql);
-                        $ftable = C('DB_PREFIX').'field';
-                        $langvar = strtoupper($data['name']).'_';
-                        $insertsql = "INSERT INTO `".$ftable."` VALUES ";
-                        $db->execute($insertsql."('',".$moduleid.",'createtime','".$langvar."CREATETIME','',1,0,0,'','','','datetime','',0,1,1);");
-                        $db->execute($insertsql."('',".$moduleid.",'status','".$langvar."STATUS','',1,0,0,'','','','radio','',0,1,1);");
+                        $fieldlist = array(
+                            array(
+                                'mid' => $moduleid,
+                                'field' => 'createtime',
+                                'name' => strtoupper($data['name']).'_'.'CREATETIME',
+                                'required' => 1,
+                                'minlength' => 0,
+                                'maxlength' => 20,
+                                'pattern' => 'date',
+                                'type' => 'datetime',
+                                'setup' => json_encode(array(
+                                                                'dateformat' => 'yyyy-mm-dd hh:ii:ss',
+                                                                'default' => ''
+                                                            )),
+                                'status' => 1,
+                                'issystem' => 1
+                            ),
+                            array(
+                                'mid' => $moduleid,
+                                'field' => 'status',
+                                'name' => strtoupper($data['name']).'_'.'STATUS',
+                                'required' => 1,
+                                'minlength' => NULL,
+                                'maxlength' => NULL,
+                                'pattern' => '',
+                                'type' => 'radio',
+                                'setup' => json_encode(array(
+                                                                'options' => 'ON|1'.PHP_EOL.'OFF|0',
+                                                                'fieldtype' => 'tinyint',
+                                                                'numbertype' => '1',
+                                                                'default' => '1'
+                                                            )),
+                                'status' => 1,
+                                'issystem' => 1
+                            )
+                        );
+                        $Field = M('Field');
+                        $addres = $Field->addAll($fieldlist);
+                        if(!$addres) $this->error(L('FIELD_ADD_ERROR'));
                     }
                     $Menu = D('Menu');
                     $menudata = array(

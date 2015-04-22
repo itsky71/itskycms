@@ -33,6 +33,7 @@ $module = array(
     'SAVE_ERROR_2'      =>  '模塊保存失敗！',
     'MODULE_FIELD_2'    =>  '模塊字段',
 
+    'MODULE_TYPE'       =>  '是否為內容模塊',
     'NUMBER'            =>  '編號',
     'MANOPE'            =>  '管理操作',
     'TITLEL'            =>  '名稱長度必須為2-30個字符！',
@@ -43,6 +44,7 @@ $module = array(
     'RULE_ADD_ERROR'    =>  '權限節點添加失敗！',
     'RULE_EDIT_ERROR'   =>  '權限節點編輯失敗！',
     'MENU_ADD_ERROR'    =>  '菜單添加失敗！',
-    'MENU_EDIT_ERROR'   =>  '菜單編輯失敗！'
+    'MENU_EDIT_ERROR'   =>  '菜單編輯失敗！',
+    'FIELD_ADD_ERROR'   =>  '字段添加失敗！'
 );
 return array_merge($module, $module_info);

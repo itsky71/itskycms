@@ -104,4 +104,9 @@ $rule_title = array(
     'R_FIELD_ADD' => '添加',
     'R_FIELD_DEL' => '刪除',
     'R_FIELD_EDIT' => '編輯',
+    'R_EEE_INDEX' => 'eee',
+    'R_PPP_INDEX' => 'ppp',
+    'R_QQQ_INDEX' => 'qqq',
+    'R_RRR_INDEX' => 'rrr',
+    'R_AAA_INDEX' => 'aaa',
 );

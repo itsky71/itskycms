@@ -33,6 +33,7 @@ $module = array(
     'SAVE_ERROR_2'      =>  '模块保存失败！',
     'MODULE_FIELD_2'    =>  '模块字段',
 
+    'MODULE_TYPE'       =>  '是否为内容模块',
     'NUMBER'            =>  '编号',
     'MANOPE'            =>  '管理操作',
     'TITLEL'            =>  '名称长度必须为2-30个字符！',
@@ -43,6 +44,7 @@ $module = array(
     'RULE_ADD_ERROR'    =>  '权限节点添加失败！',
     'RULE_EDIT_ERROR'   =>  '权限节点编辑失败！',
     'MENU_ADD_ERROR'    =>  '菜单添加失败！',
-    'MENU_EDIT_ERROR'   =>  '菜单编辑失败！'
+    'MENU_EDIT_ERROR'   =>  '菜单编辑失败！',
+    'FIELD_ADD_ERROR'   =>  '字段添加失败！'
 );
 return array_merge($module, $module_info);

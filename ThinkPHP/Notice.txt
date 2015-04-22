@@ -26,3 +26,8 @@ line 102 后面加入：
     if(!$this->config['debug']){
         $this->options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_SILENT;
     }
+
+5、/ThinkPHP/Library/Think/Db/Driver/Mysql.class.php
+line 123 之前添加：
+                }elseif(is_null($val)){
+                    $value[]   =   'NULL';

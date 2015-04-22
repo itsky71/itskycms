@@ -1,9 +1,9 @@
 <div class="col-lg-6">
     <form class="form-horizontal" role="form">
         <input type="hidden" name="id" value="{$vo.id}"/>
-        <input type="hidden" name="type" value="{:I('get.type')}"/>
         <if condition="((ACTION_NAME eq 'add') AND (I('get.type') neq 2)) OR ((ACTION_NAME eq 'edit') AND $vo['issystem'])">
         <input type="hidden" name="issystem" value="1"/>
+        <input type="hidden" name="type" value="{:I('get.type')}"/>
         </if>
         <div class="form-group">
             <label class="col-lg-3 control-label no-padding-right">{:L('TITLE_'.I('get.type'))}:</label>
@@ -17,6 +17,21 @@
                 <input class="col-lg-9" type="text" name="name" value="{$vo.name}"/>
             </div>
         </div>
+        <if condition="((ACTION_NAME eq 'add') AND (I('get.type') eq 2)) OR ((ACTION_NAME eq 'edit') AND !$vo['issystem'])">
+        <div class="form-group">
+            <label class="col-lg-3 control-label no-padding-right">{:L('MODULE_TYPE')}:</label>
+            <div class="col-lg-9">
+                <label class="ml10">
+                    <input class="ace" type="radio" name="type" value="1"/>
+                    <span class="lbl"> {:L('YES')} </span>
+                </label>
+                <label class="ml10">
+                    <input class="ace" type="radio" name="type" value="2" checked="checked"/>
+                    <span class="lbl"> {:L('NO')} </span>
+                </label>
+            </div>
+        </div>
+        </if>
         <div class="form-group">
             <label class="col-lg-3 control-label no-padding-right">{:L('DESCRIPTION_'.I('get.type'))}:</label>
             <div class="col-lg-9">

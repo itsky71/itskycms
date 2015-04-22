@@ -68,4 +68,9 @@ $menu_common = array(
     'M_ARTICLESSS_INDEX' => '文章模型呵呵',
     'M_ARTICLEJJJ_INDEX' => '文章模型呵呵',
     'M_ARTICLEJDD_INDEX' => '文章模型dd',
+    'M_EEE_INDEX' => 'eee',
+    'M_PPP_INDEX' => 'ppp',
+    'M_QQQ_INDEX' => 'qqq',
+    'M_RRR_INDEX' => 'rrr',
+    'M_AAA_INDEX' => 'aaa',
 );
