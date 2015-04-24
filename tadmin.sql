@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2015-04-19 11:42:24
+-- Generation Time: 2015-04-24 11:27:51
 -- 服务器版本： 5.6.20
 -- PHP Version: 5.5.15
 
@@ -28,15 +28,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `ta_article` (
 `id` int(10) unsigned NOT NULL COMMENT '主键',
-  `bbc` tinyint(3) unsigned NOT NULL DEFAULT '0'
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='文章模型' AUTO_INCREMENT=2 ;
-
---
--- 转存表中的数据 `ta_article`
---
-
-INSERT INTO `ta_article` (`id`, `bbc`) VALUES
-(1, 0);
+  `content` text NOT NULL COMMENT '編輯器'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='文章模型' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -96,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `ta_auth_rule` (
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '状态：为1正常，为0禁用',
   `listorder` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
   `condition` char(100) NOT NULL DEFAULT '' COMMENT '规则表达式，为空表示存在就验证，不为空表示按照条件验证'
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='规则表' AUTO_INCREMENT=89 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='规则表' AUTO_INCREMENT=90 ;
 
 --
 -- 转存表中的数据 `ta_auth_rule`
@@ -183,14 +176,14 @@ INSERT INTO `ta_auth_rule` (`id`, `tid`, `name`, `title`, `type`, `status`, `lis
 (78, 3, 'Module/edit', 'R_MODULE_EDIT', 1, 1, 0, ''),
 (79, 3, 'Module/del', 'R_MODULE_DEL', 1, 1, 0, ''),
 (80, 4, 'Page/index', 'R_PAGE_INDEX', 1, 1, 0, ''),
-(81, 3, 'Article/index', 'R_ARTICLE_INDEX', 1, 1, 0, ''),
 (82, 3, 'Module/status', 'R_MODULE_STATUS', 1, 1, 0, ''),
 (83, 3, 'Field/index', 'R_FIELD_INDEX', 1, 1, 0, ''),
 (84, 3, 'Field/order', 'R_FIELD_ORDER', 1, 1, 0, ''),
 (85, 3, 'Field/status', 'R_FIELD_STATUS', 1, 1, 0, ''),
 (86, 3, 'Field/add', 'R_FIELD_ADD', 1, 1, 0, ''),
 (87, 3, 'Field/del', 'R_FIELD_DEL', 1, 1, 0, ''),
-(88, 3, 'Field/edit', 'R_FIELD_EDIT', 1, 1, 0, '');
+(88, 3, 'Field/edit', 'R_FIELD_EDIT', 1, 1, 0, ''),
+(89, 3, 'Article/index', 'R_ARTICLE_INDEX', 1, 1, 0, '');
 
 -- --------------------------------------------------------
 
@@ -286,9 +279,9 @@ CREATE TABLE IF NOT EXISTS `ta_field` (
   `field` varchar(20) NOT NULL DEFAULT '' COMMENT '字段名',
   `name` varchar(50) NOT NULL DEFAULT '' COMMENT '字段别名',
   `tips` varchar(150) NOT NULL DEFAULT '' COMMENT '提示信息',
-  `required` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否必填',
-  `minlength` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '允许最小字符数',
-  `maxlength` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '允许最大字符数',
+  `required` tinyint(1) unsigned DEFAULT '0' COMMENT '是否必填',
+  `minlength` int(10) unsigned DEFAULT '0' COMMENT '允许最小字符数',
+  `maxlength` int(10) unsigned DEFAULT '0' COMMENT '允许最大字符数',
   `pattern` varchar(20) NOT NULL DEFAULT '' COMMENT '验证规则',
   `regex` varchar(100) NOT NULL DEFAULT '' COMMENT '自定义规则样式',
   `errormsg` varchar(255) NOT NULL DEFAULT '' COMMENT '错误信息',
@@ -305,19 +298,20 @@ CREATE TABLE IF NOT EXISTS `ta_field` (
 --
 
 INSERT INTO `ta_field` (`id`, `mid`, `field`, `name`, `tips`, `required`, `minlength`, `maxlength`, `pattern`, `regex`, `errormsg`, `class`, `type`, `setup`, `listorder`, `status`, `issystem`) VALUES
-(1, 4, 'createtime', 'PAGE_CREATETIME', '', 1, 0, 0, '', '', 'PAGE_ERRORMSG_CREATETIME', '', 'datetime', '{"default":"","dateformat":"Y-m-d H:i:s","safefun":""}', 0, 1, 1),
-(2, 4, 'status', 'PAGE_STATUS', '', 1, 0, 0, '', '', 'PAGE_ERRORMSG_STATUS', '', 'radio', '{"options":"ON|1\\r\\nOFF|0","fieldtype":"tinyint","numbertype":"1","default":"1","safefun":""}', 0, 1, 1),
-(3, 5, 'catid', 'ARTICLE_CATID', '', 1, 0, 0, 'digits', '', 'ARTICLE_ERRORMSG_CATID', '', 'catid', '{"safefun":""}', 0, 1, 1),
-(4, 5, 'typeid', 'ARTICLE_TYPEID', '', 0, 0, 0, 'digits', '', 'ARTICLE_ERRORMSG_TYPEID', '', 'typeid', '{"inputtype":"radio","fieldtype":"smallint","numbertype":"1","default":"","safefun":""}', 0, 1, 1),
-(5, 5, 'title', 'ARTICLE_TITLE', '', 1, 2, 50, 'cn_username', '', 'ARTICLE_ERRORMSG_TITLE', '', 'title', '{"size":"","safefun":""}', 0, 1, 1),
-(6, 5, 'keywords', 'ARTICLE_KEYWORDS', '', 0, 0, 200, '', '', 'ARTICLE_ERRORMSG_KEYWORDS', '', 'text', '{"size":"","default":"","fieldtype":"varchar","safefun":""}', 0, 1, 1),
-(7, 5, 'description', 'ARTICLE_DESCRIPTION', '', 0, 0, 250, '', '', 'ARTICLE_ERRORMSG_DESCRIPTION', '', 'textarea', '{"fieldtype":"varchar","height":"","width":"","default":"","safefun":""}', 0, 1, 1),
-(8, 5, 'createtime', 'ARTICLE_CREATETIME', '', 1, 0, 0, 'date', '', 'ARTICLE_ERRORMSG_CREATETIME', '', 'datetime', '{"default":"","dateformat":"Y-m-d H:i:s","safefun":""}', 0, 1, 1),
-(9, 5, 'recommend', 'ARTICLE_RECOMMEND', '', 1, 0, 0, '', '', 'ARTICLE_ERRORMSG_RECOMMEND', '', 'radio', '{"options":"ON|1\\r\\nOFF|0","fieldtype":"tinyint","numbertype":"1","default":"1","safefun":""}', 0, 1, 1),
-(10, 5, 'hits', 'ARTICLE_HITS', '', 0, 0, 0, '', '', 'ARTICLE_ERRORMSG_HITS', '', 'number', '{"size":"","numbertype":"1","decimaldigits":"0","default":"0","safefun":""}', 0, 1, 1),
-(11, 5, 'posid', 'ARTICLE_POSID', '', 1, 0, 0, '', '', 'ARTICLE_ERRORMSG_POSID', '', 'posid', '{"safefun":""}', 0, 1, 1),
-(12, 5, 'template', 'ARTICLE_TEMPLATE', '', 0, 2, 20, 'en_num', '', 'ARTICLE_ERRORMSG_TEMPLATE', '', 'template', '{"safefun":""}', 0, 1, 1),
-(13, 5, 'status', 'ARTICLE_STATUS', '', 1, 0, 0, '', '', 'ARTICLE_ERRORMSG_STATUS', '', 'radio', '{"options":"ON|1\\r\\nOFF|0","fieldtype":"tinyint","numbertype":"1","default":"1","safefun":""}', 0, 1, 1);
+(1, 1, 'createtime', 'PAGE_CREATETIME', '', 1, NULL, NULL, '', '', 'PAGE_ERRORMSG_CREATETIME', '', 'datetime', '{"default":"","dateformat":"Y-m-d H:i:s","safefun":""}', 0, 1, 1),
+(2, 1, 'status', 'PAGE_STATUS', '', 1, NULL, NULL, '', '', 'PAGE_ERRORMSG_STATUS', '', 'radio', '{"options":"ON|1\\r\\nOFF|0","fieldtype":"tinyint","numbertype":"1","default":"1","safefun":""}', 0, 1, 1),
+(3, 2, 'catid', 'ARTICLE_CATID', '', 1, NULL, NULL, 'digits', '', '', '', 'catid', '', 0, 1, 1),
+(4, 2, 'typeid', 'ARTICLE_TYPEID', '', 0, NULL, NULL, 'digits', '', '', '', 'typeid', '{"inputtype":"radio","fieldtype":"smallint","numbertype":1,"default":""}', 0, 1, 1),
+(5, 2, 'title', 'ARTICLE_TITLE', '', 1, 2, 50, 'cn_username', '', '', '', 'title', '', 0, 1, 1),
+(6, 2, 'keywords', 'ARTICLE_KEYWORDS', '', 0, 0, 200, '', '', '', '', 'text', '{"fieldtype":"varchar","default":""}', 0, 1, 1),
+(7, 2, 'description', 'ARTICLE_DESCRIPTION', '', 0, 0, 250, '', '', '', '', 'textarea', '', 0, 1, 1),
+(8, 2, 'createtime', 'ARTICLE_CREATETIME', '', 1, 0, 20, 'date', '', '', '', 'datetime', '{"dateformat":"yyyy-mm-dd hh:ii:ss","default":""}', 99, 1, 1),
+(9, 2, 'recommend', 'ARTICLE_RECOMMEND', '', 1, NULL, NULL, '', '', '', '', 'radio', '{"options":"ON|1\\r\\nOFF|0","fieldtype":"tinyint","numbertype":"1","default":"1"}', 99, 1, 1),
+(10, 2, 'hits', 'ARTICLE_HITS', '', 0, 0, 10, 'digits', '', '', '', 'radio', '{"numbertype":"1","decimaldigits":"0","default":"0"}', 99, 1, 1),
+(11, 2, 'posid', 'ARTICLE_POSID', '', 0, NULL, NULL, '', '', '', '', 'posid', '', 99, 1, 1),
+(12, 2, 'template', 'ARTICLE_TEMPLATE', '', 1, 2, 20, 'en_num', '', '', '', 'template', '', 99, 1, 1),
+(13, 2, 'status', 'ARTICLE_STATUS', '', 1, NULL, NULL, '', '', '', '', 'radio', '{"options":"ON|1\\r\\nOFF|0","fieldtype":"tinyint","numbertype":"1","default":"1"}', 99, 1, 1),
+(14, 2, 'content', 'ARTICLE_CONTENT', '', 1, 0, 0, '', '', 'ARTICLE_ERRORMSG_CONTENT', '', 'editor', '{"edittype":"ueditor","toolbar":"full","default":"","height":"","showpage":"1","show_add_description":"1","show_auto_thumb":"1","show_remote_pic":"1","picupload":"1","alowuploadexts":"jpg,png,gif","safefun":""}', 0, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -371,7 +365,7 @@ CREATE TABLE IF NOT EXISTS `ta_member` (
 
 INSERT INTO `ta_member` (`id`, `password`, `username`, `realname`, `email`, `question`, `answer`, `status`, `regtime`, `login_ip`, `last_login_time`, `login_count`) VALUES
 (1, '30bc103d85df152c8c703bcbbcc7fd4d', 'admin', '你买单我就来', 'itsky71@foxmail.com', '我还会回来的...', '灰太狼？呵呵。。。', 1, 1419068912, '127.0.0.1', 1429340117, 35),
-(2, '30bc103d85df152c8c703bcbbcc7fd4d', 'itsky', '你地盘我做主', 'zmh0515005@163.com', '你是谁?', '呵呵...', 1, 1419587881, '127.0.0.1', 1429411859, 205),
+(2, '30bc103d85df152c8c703bcbbcc7fd4d', 'itsky', '你地盘我做主', 'zmh0515005@163.com', '你是谁?', '呵呵...', 1, 1419587881, '127.0.0.1', 1429845517, 211),
 (6, '30bc103d85df152c8c703bcbbcc7fd4d', 'yourphp', '111111', 'zmh0515005@163.me', '', '', 0, 1424952659, '', 0, 0);
 
 -- --------------------------------------------------------
@@ -392,7 +386,7 @@ CREATE TABLE IF NOT EXISTS `ta_menu` (
   `isos` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否为系统菜单',
   `status` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '状态',
   `listorder` tinyint(3) unsigned NOT NULL DEFAULT '99' COMMENT '排序'
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='后台菜单' AUTO_INCREMENT=52 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='后台菜单' AUTO_INCREMENT=51 ;
 
 --
 -- 转存表中的数据 `ta_menu`
@@ -418,10 +412,6 @@ INSERT INTO `ta_menu` (`id`, `pid`, `icon`, `name`, `model`, `action`, `data`, `
 (17, 4, '', 'M_MENU_INDEX', 'Menu', 'index', '', '', 1, 1, 99),
 (18, 0, 'glyphicon glyphicon-list-alt', 'M_CONTENT_INDEX', 'Content', 'index', '', '', 1, 1, 0),
 (19, 18, '', 'M_CATEGORY_INDEX', 'Category', 'index', '', '', 1, 1, 0),
-(20, 18, '', 'M_ARTICLE_INDEX', 'Article', 'index', '', '', 1, 1, 0),
-(21, 18, '', 'M_PRODUCT_INDEX', 'Product', 'index', '', '', 1, 1, 0),
-(22, 18, '', 'M_PICTURE_INDEX', 'Picture', 'index', '', '', 1, 1, 0),
-(23, 18, '', 'M_DOWNLOAD_INDEX', 'Download', 'index', '', '', 1, 1, 0),
 (24, 18, '', 'M_MODULE_INDEX_TYPE=1', 'Module', 'index', 'type=1', '', 1, 1, 99),
 (25, 0, 'glyphicon glyphicon-th-large', 'M_MODULES_INDEX', 'Modules', 'index', '', '', 1, 1, 0),
 (26, 25, '', 'M_MODULE_INDEX_TYPE=2', 'Module', 'index', 'type=2', '', 1, 1, 0),
@@ -446,7 +436,8 @@ INSERT INTO `ta_menu` (`id`, `pid`, `icon`, `name`, `model`, `action`, `data`, `
 (45, 38, '', 'M_UPDATE_LANG', 'Update', 'lang', '', '', 0, 1, 99),
 (46, 38, '', 'M_UPDATE_COLHTML', 'Update', 'colhtml', '', '', 0, 1, 99),
 (47, 38, '', 'M_UPDATE_CONHTML', 'Update', 'conhtml', '', '', 0, 1, 99),
-(49, 4, '', 'M_DATABASE_INDEX', 'Database', 'index', '', '', 0, 1, 0);
+(49, 4, '', 'M_DATABASE_INDEX', 'Database', 'index', '', '', 0, 1, 0),
+(50, 18, '', 'M_ARTICLE_INDEX', 'Article', 'index', '', '', 0, 1, 9);
 
 -- --------------------------------------------------------
 
@@ -462,15 +453,15 @@ CREATE TABLE IF NOT EXISTS `ta_module` (
   `type` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '类型',
   `issystem` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否为系统模型',
   `status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '状态'
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='模型' AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='模型' AUTO_INCREMENT=3 ;
 
 --
 -- 转存表中的数据 `ta_module`
 --
 
 INSERT INTO `ta_module` (`id`, `title`, `name`, `description`, `type`, `issystem`, `status`) VALUES
-(4, 'PAGE_TITLE', 'Page', 'PAGE_DESCRIPTION', 2, 1, 1),
-(5, 'ARTICLE_TITLE', 'Article', 'ARTICLE_DESCRIPTION', 1, 1, 1);
+(1, 'PAGE_TITLE', 'Page', 'PAGE_DESCRIPTION', 1, 0, 1),
+(2, 'ARTICLE_TITLE', 'Article', 'ARTICLE_DESCRIPTION', 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -752,7 +743,7 @@ ALTER TABLE `ta_urlrule`
 -- AUTO_INCREMENT for table `ta_article`
 --
 ALTER TABLE `ta_article`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=2;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键';
 --
 -- AUTO_INCREMENT for table `ta_auth_group`
 --
@@ -762,7 +753,7 @@ MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户组id',
 -- AUTO_INCREMENT for table `ta_auth_rule`
 --
 ALTER TABLE `ta_auth_rule`
-MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=89;
+MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=90;
 --
 -- AUTO_INCREMENT for table `ta_category`
 --
@@ -797,12 +788,12 @@ MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户ID',AUTO_INC
 -- AUTO_INCREMENT for table `ta_menu`
 --
 ALTER TABLE `ta_menu`
-MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=52;
+MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=51;
 --
 -- AUTO_INCREMENT for table `ta_module`
 --
 ALTER TABLE `ta_module`
-MODIFY `id` tinyint(3) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=6;
+MODIFY `id` tinyint(3) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `ta_page`
 --

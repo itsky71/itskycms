@@ -127,4 +127,8 @@ $field_common = array(
     'ARTICLE_DGR' => '额哥哥',
     'ARTICLE_TIPS_DGR' => '哥哥特意看',
     'ARTICLE_ERRORMSG_DGR' => '',
+    'ARTICLE_EDITOR' => '編輯器',
+    'ARTICLE_ERRORMSG_EDITOR' => '',
+    'ARTICLE_CONTENT' => '編輯器',
+    'ARTICLE_ERRORMSG_CONTENT' => '',
 );

@@ -73,4 +73,5 @@ $menu_common = array(
     'M_QQQ_INDEX' => 'qqq',
     'M_RRR_INDEX' => 'rrr',
     'M_AAA_INDEX' => 'aaa',
+    'M_SFGEW_INDEX' => '德國德國',
 );

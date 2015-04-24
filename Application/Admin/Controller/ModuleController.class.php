@@ -412,8 +412,8 @@ class ModuleController extends AdminController{
         M('Menu')->where('model=\''.ucfirst($modata['name']).'\'')->delete();
         M('Field')->where('mid='.$modata['id'])->delete();
         M('Content')->where('mid='.$modata['id'])->delete();
-        $map['name'] = array('like',ucfirst($modata['name']).'%');
-        M('AuthRule')->where($map)->select();
+        $map['name'] = array('like',ucfirst($modata['name']).'/'.'%');
+        M('AuthRule')->where($map)->delete();
         $this->success(L('DEL_OK'),U('Module/index','type='.$modata['type'].'&'.$this->vl));
     }
 }

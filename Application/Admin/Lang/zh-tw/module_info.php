@@ -52,4 +52,6 @@ $module_info = array(
     'RRR_DESCRIPTION' => 'rrr',
     'AAA_TITLE' => 'aaa',
     'AAA_DESCRIPTION' => 'aaa',
+    'SFGEW_TITLE' => '德國德國',
+    'SFGEW_DESCRIPTION' => '',
 );

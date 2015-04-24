@@ -22,7 +22,7 @@ return array(
     'CLE_ICON'      =>  '清除圖標',
     'SAVE_OK'       =>  '保存成功！',
     'SAVE_ERROR'    =>  '保存失敗！',
-    'ISOS_ERROR'    =>  '該欄目或其子欄目包含系統欄目，無法刪除！',
+    'ISOS_ERROR'    =>  '該欄目或其子欄目為系統欄目，無法刪除！',
     'ORDER'         =>  '排序',
     'NUMBER'        =>  '編號',
     'MANOPE'        =>  '管理操作'
