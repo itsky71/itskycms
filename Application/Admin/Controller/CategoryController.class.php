@@ -27,6 +27,7 @@ class CategoryController extends AdminController{
         }else{
             $Module = M('Module');
             $modules = $Module->where('status=1 AND type=1')->select();
+            $this->assign('modules', $modules);
             $this->display('edit');
         }
     }

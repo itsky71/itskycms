@@ -9,28 +9,22 @@
 // | Author: itsky <itsky71@foxmail.com>
 // +----------------------------------------------------------------------
 namespace Admin\Controller;
-use Think\Controller;
 /**
- * Description of EmptyController
- * 后台空控制器
+ * Description of ContentController
+ * 
  * @author itsky
  */
-class EmptyController extends Controller{
+class ContentController extends AdminController {
     protected function _initialize() {
-        if(in_array(CONTROLLER_NAME, F('modules'))){
-            R('Content/'.ACTION_NAME);
-            exit();
-        }
+        parent::_initialize();
     }
 
-    public function _empty(){
-        echo CONTROLLER_NAME.'/'.ACTION_NAME.'----empty';
+    public function index(){
+        if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
+        $this->display('Content:index');
     }
 
-    public function index() {
-        echo CONTROLLER_NAME.'/'.ACTION_NAME;
-//        $e['message'] = C('ERROR_MESSAGE');
-//        $this->assign('e', $e);
-//        $this->display('Empty:index');
+    public function add(){
+        $this->display('Content:edit');
     }
 }

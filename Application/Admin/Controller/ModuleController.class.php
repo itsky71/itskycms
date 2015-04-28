@@ -69,6 +69,7 @@ class ModuleController extends AdminController{
                                 'pattern' => 'digits',
                                 'type' => 'catid',
                                 'setup' => '',
+                                'listorder' => 0,
                                 'status' => 1,
                                 'issystem' => 1
                             ),
@@ -87,6 +88,7 @@ class ModuleController extends AdminController{
                                                                 'numbertype' => 1,
                                                                 'default' => ''
                                                             )),
+                                'listorder' => 0,
                                 'status' => 1,
                                 'issystem' => 1
                             ),
@@ -100,6 +102,7 @@ class ModuleController extends AdminController{
                                 'pattern' => 'cn_username',
                                 'type' => 'title',
                                 'setup' => '',
+                                'listorder' => 0,
                                 'status' => 1,
                                 'issystem' => 1
                             ),
@@ -116,6 +119,7 @@ class ModuleController extends AdminController{
                                                                 'fieldtype' => 'varchar',
                                                                 'default' => ''
                                                             )),
+                                'listorder' => 0,
                                 'status' => 1,
                                 'issystem' => 1
                             ),
@@ -129,6 +133,7 @@ class ModuleController extends AdminController{
                                 'pattern' => '',
                                 'type' => 'textarea',
                                 'setup' => '',
+                                'listorder' => 0,
                                 'status' => 1,
                                 'issystem' => 1
                             ),
@@ -145,6 +150,7 @@ class ModuleController extends AdminController{
                                                                 'dateformat' => 'yyyy-mm-dd hh:ii:ss',
                                                                 'default' => ''
                                                             )),
+                                'listorder' => 99,
                                 'status' => 1,
                                 'issystem' => 1
                             ),
@@ -163,6 +169,7 @@ class ModuleController extends AdminController{
                                                                 'numbertype' => '1',
                                                                 'default' => '1'
                                                             )),
+                                'listorder' => 99,
                                 'status' => 1,
                                 'issystem' => 1
                             ),
@@ -180,6 +187,7 @@ class ModuleController extends AdminController{
                                                                 'decimaldigits' => '0',
                                                                 'default' => '0'
                                                             )),
+                                'listorder' => 99,
                                 'status' => 1,
                                 'issystem' => 1
                             ),
@@ -193,6 +201,7 @@ class ModuleController extends AdminController{
                                 'pattern' => '',
                                 'type' => 'posid',
                                 'setup' => '',
+                                'listorder' => 99,
                                 'status' => 1,
                                 'issystem' => 1
                             ),
@@ -206,6 +215,7 @@ class ModuleController extends AdminController{
                                 'pattern' => 'en_num',
                                 'type' => 'template',
                                 'setup' => '',
+                                'listorder' => 99,
                                 'status' => 1,
                                 'issystem' => 1
                             ),
@@ -224,6 +234,7 @@ class ModuleController extends AdminController{
                                                                 'numbertype' => '1',
                                                                 'default' => '1'
                                                             )),
+                                'listorder' => 99,
                                 'status' => 1,
                                 'issystem' => 1
                             )
@@ -258,6 +269,7 @@ class ModuleController extends AdminController{
                                                                 'dateformat' => 'yyyy-mm-dd hh:ii:ss',
                                                                 'default' => ''
                                                             )),
+                                'listorder' => 99,
                                 'status' => 1,
                                 'issystem' => 1
                             ),
@@ -276,6 +288,7 @@ class ModuleController extends AdminController{
                                                                 'numbertype' => '1',
                                                                 'default' => '1'
                                                             )),
+                                'listorder' => 99,
                                 'status' => 1,
                                 'issystem' => 1
                             )
@@ -306,6 +319,9 @@ class ModuleController extends AdminController{
                         if($Rule->add($ruledata)){
                             $rulelang = array($ruledata['title']=>$arrlang[$data['title']]);
                             write_lang($rulelang,'rule_title');
+                            $modules = F('modules');
+                            array_push($modules,$menudata['model']);
+                            F('modules',$modules);
                             $this->success(L('ADD_OK_'.$data['type']),U('Module/index','type='.$data['type'].'&'.$this->vl));
                         }else{
                             $this->error(L('RULE_ADD_ERROR'));
@@ -368,8 +384,12 @@ class ModuleController extends AdminController{
                     if($ruleedit === FALSE) $this->error(L('RULE_EDIT_ERROR'));
                     $rulelang = array($ruledata['title']=>$arrlang[$data['title']]);
                     write_lang($rulelang,'rule_title');
+                    $modules = F('modules');
+                    $res = array_unique($modules);
+                    $key = array_search($befor['name'],$res);
+                    if($key !== FALSE) $res[$key] = $data['name'];
+                    F('modules',$res);
                 }else{
-                    
                     write_lang(array('M_'.strtoupper($data['name']).'_INDEX'=>$arrlang[$data['title']]),'menu_common');
                     write_lang(array('R_'.strtoupper($data['name']).'_INDEX'=>$arrlang[$data['title']]),'rule_title');
                 }
@@ -414,6 +434,11 @@ class ModuleController extends AdminController{
         M('Content')->where('mid='.$modata['id'])->delete();
         $map['name'] = array('like',ucfirst($modata['name']).'/'.'%');
         M('AuthRule')->where($map)->delete();
+        $modules = F('modules');
+        $res = array_unique($modules);
+        $key = array_search(ucfirst($modata['name']),$res);
+        if($key !== FALSE) unset($res[$key]);
+        F('modules',$res);
         $this->success(L('DEL_OK'),U('Module/index','type='.$modata['type'].'&'.$this->vl));
     }
 }

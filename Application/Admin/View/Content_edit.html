@@ -1,0 +1,17 @@
+<div class="col-lg-12">
+    <a class="btn btn-primary btn-xs ml10 mb10" href="{:U(CONTROLLER_NAME.'/add',$vl)}" onclick="load(event,this)">
+        <span class="glyphicon glyphicon-plus"></span>{:L('ADD')}
+    </a>
+</div>
+<script type="text/javascript">
+    var pan = '<li><a onclick="load(event,this)" href="{:U(CONTROLLER_NAME.'/'.ACTION_NAME,$vl)}">{:L('M_'.$Think.CONTROLLER_NAME.'_INDEX')}</a></li>\n\
+<li class="active">{:L($Think.ACTION_NAME)}</li>';
+    $('#breadcrumbs .breadcrumb li:gt(0)').remove();
+    $('#breadcrumbs .breadcrumb').append(pan);
+    $('#sidebar .nav-list li.active').removeClass('active');
+    $('#sidebar .nav-list li.open .submenu').hide();
+    $('#sidebar .nav-list li.open').removeClass('open');
+    $('a[href="{:U(CONTROLLER_NAME.'/index',$vl)}"]').parent().addClass('active').parent().show().parent().addClass('open active');
+    $('.page-header h1').empty();
+    $('.page-header h1').append('{:L('M_'.$Think.CONTROLLER_NAME.'_INDEX')}<small class="glyphicon glyphicon-menu-right"> {:L($Think.ACTION_NAME)}</small>');
+</script>

@@ -110,4 +110,5 @@ $rule_title = array(
     'R_RRR_INDEX' => 'rrr',
     'R_AAA_INDEX' => 'aaa',
     'R_SFGEW_INDEX' => '德國德國',
+    'R_ARTICLE_ADD' => '添加',
 );
