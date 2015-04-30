@@ -19,7 +19,7 @@
                         <label class="col-lg-2 control-label no-padding-right">{:L('SELETE_MODULE')}:</label>
                         <div class="col-lg-5">
                             <div class="input-group col-lg-8 select-click">
-                            <input id="field_type" class="hide" type="text" name="type" value=""/>
+                            <input class="hide" type="text" name="type" value=""/>
                             <div class="form-control select-input cude"></div>
                             <span class="input-group-addon cude">
                                 <i class="glyphicon glyphicon-menu-down"></i>
@@ -41,7 +41,7 @@
                         <label class="col-lg-2 control-label no-padding-right">{:L('PRE_CAT')}:</label>
                         <div class="col-lg-5">
                             <div class="input-group col-lg-8 select-click">
-                            <input id="field_type" class="hide" type="text" name="pid" value=""/>
+                            <input class="hide" type="text" name="pid" value=""/>
                             <div class="form-control select-input cude"></div>
                             <span class="input-group-addon cude">
                                 <i class="glyphicon glyphicon-menu-down"></i>
@@ -59,7 +59,7 @@
                     <div class="form-group">
                         <label class="col-lg-2 control-label no-padding-right">{:L('CAT_NAME')}:</label>
                         <div class="col-lg-10">
-                            <input class="col-lg-4" type="text" name="name"/>
+                            <input class="col-lg-4" type="text" name="name" placeholder="{$Think.LANG_SET}"/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -81,7 +81,8 @@
                         <label class="col-lg-2 control-label no-padding-right">{:L('IS_NAV')}:</label>
                         <div class="col-lg-10">
                             <label>
-                                <input class="ace ace-switch ace-switch-7" type="checkbox" name="isnav" value="1" checked="checked"/>
+                                <input class="ace ace-switch ace-switch-7" type="checkbox" name="isnav"
+                                       value="1" checked="checked"/>
                                 <span class="lbl"></span>
                             </label>
                         </div>
@@ -98,46 +99,64 @@
                     <div class="form-group">
                         <label class="col-lg-2 control-label no-padding-right">{:L('PAGE_ITEM')}:</label>
                         <div class="col-lg-10">
-                            <input class="col-lg-2" type="text" name="pagesize"/>
+                            <input class="col-lg-2" type="text" name="pagesize" maxlength="3"/>
                             <span class="red pull-left mt5 pl5"> {:L('PAGE_ITEM_TIP')}</span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-2 control-label no-padding-right">{:L('LIST_TPL')}:</label>
-                        <div class="col-lg-5">
-                            <div class="input-group col-lg-8 select-click">
-                            <input id="field_type" class="hide" type="text" name="listtpl" value=""/>
-                            <div class="form-control select-input cude"></div>
-                            <span class="input-group-addon cude">
-                                <i class="glyphicon glyphicon-menu-down"></i>
-                            </span>
-                        </div>
-                        <div class="col-lg-8">
-                            <div class="select-choices">
-                                <ul class="list-unstyled select-option" data-name="listtpl">
-                                    <li data-val="">{:L('SELETE')}</li>
-                                </ul>
+                        <div class="col-lg-3">
+                            <div class="input-group col-lg-12 select-click">
+                                <input class="hide" type="text" name="listtpl" value=""/>
+                                <div class="form-control select-input cude"></div>
+                                <span class="input-group-addon cude">
+                                    <i class="glyphicon glyphicon-menu-down"></i>
+                                </span>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="select-choices">
+                                    <ul class="list-unstyled select-option" data-name="listtpl">
+                                        <li data-val="">{:L('SELETE')}</li>
+                                        <foreach name="modules" item="v">
+                                        <if condition="$v.name eq 'Page'">
+                                        <li class="hide" data-val="{$v.name}_index">{$v.name}_index.html</li>
+                                        <else/>
+                                        <li class="hide" data-val="{$v.name}_list">{$v.name}_list.html</li>
+                                        </if>
+                                        </foreach>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                        </div>
+                        <label class="mt5">
+                            <input class="ace" type="checkbox" name="listtype" value="1"/>
+                            <span class="lbl"> {:L('IS_COVER_CAT')}</span>
+                        </label>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-2 control-label no-padding-right">{:L('CONTENT_TPL')}:</label>
-                        <div class="col-lg-5">
-                            <div class="input-group col-lg-8 select-click">
-                            <input id="field_type" class="hide" type="text" name="contenttpl" value=""/>
-                            <div class="form-control select-input cude"></div>
-                            <span class="input-group-addon cude">
-                                <i class="glyphicon glyphicon-menu-down"></i>
-                            </span>
-                        </div>
-                        <div class="col-lg-8">
-                            <div class="select-choices">
-                                <ul class="list-unstyled select-option" data-name="contenttpl">
-                                    <li data-val="">{:L('SELETE')}</li>
-                                </ul>
+                        <div class="col-lg-3">
+                            <div class="input-group col-lg-12 select-click">
+                                <input class="hide" type="text" name="contenttpl" value=""/>
+                                <div class="form-control select-input cude"></div>
+                                <span class="input-group-addon cude">
+                                    <i class="glyphicon glyphicon-menu-down"></i>
+                                </span>
                             </div>
-                        </div>
+                            <div class="col-lg-12">
+                                <div class="select-choices">
+                                    <ul class="list-unstyled select-option" data-name="contenttpl">
+                                        <li data-val="">{:L('SELETE')}</li>
+                                        <foreach name="modules" item="v">
+                                        <if condition="$v.name eq 'Page'">
+                                        <li class="hide" data-val="{$v.name}_index">{$v.name}_index.html</li>
+                                        <else/>
+                                        <li class="hide" data-val="{$v.name}_show">{$v.name}_show.html</li>
+                                        </if>
+                                        </foreach>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -183,4 +202,30 @@
     $('#breadcrumbs .breadcrumb').append(pan);
     $('.page-header h1').empty();
     $('.page-header h1').append('{:L('M_'.$Think.CONTROLLER_NAME.'_INDEX')}<small class="glyphicon glyphicon-menu-right"> {:L($Think.ACTION_NAME)}</small>');
+    var modarr = new Array();
+    <foreach name="modules" item="v">
+    modarr[{$v.id}] = '{$v.name}';
+    </foreach>
+    $('ul[data-name="type"] li').click(function(){
+        var mid = $(this).attr('data-val');
+        $('ul[data-name="listtpl"] li:gt(0)').addClass('hide');
+        $('ul[data-name="contenttpl"] li:gt(0)').addClass('hide');
+        var deflist = $('ul[data-name="listtpl"] li:eq(0)').text();
+        var defshow = $('ul[data-name="contenttpl"] li:eq(0)').text();
+        $('input[name="listtpl"]').val('').nextAll('.select-input').text(deflist);
+        $('input[name="contenttpl"]').val('').nextAll('.select-input').text(defshow);
+        $('li[data-val^="'+modarr[mid]+'_"]').removeClass('hide');
+    });
+    $('form[role="form"]').validator({
+        valid:function(form){
+            $.ajax({
+                type: 'POST',
+                url: '{:U('Category/'.ACTION_NAME,$vl)}',
+                data:$(form).serialize(),
+                success: function(data){
+                    show_msg(data);
+                }
+            });
+        }
+    });
 </script>

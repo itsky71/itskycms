@@ -22,7 +22,13 @@ $cat = array(
     'PAGE_ITEM'         =>  '分頁條數',
     'PAGE_ITEM_TIP'     =>  '為空時默認值為系統設置的值',
     'LIST_TPL'          =>  '列表頁模板',
+    'IS_COVER_CAT'      =>  '是否為封面欄目',
     'CONTENT_TPL'       =>  '內容頁模板',
+    'TYPER'             =>  '請選擇模型！',
+    'NAMEL'             =>  '欄目名稱長度必須為2到20個字符！',
+    'DIRL'              =>  '欄目目錄長度必須為3到20個字符！',
+    'DIRR'              =>  '欄目目錄包含非法字符！',
+    'PAGESIZEN'         =>  '分頁條數必須為數字！',
     
     'SEO_TITLE'         =>  'SEO欄目標題',
     'SEO_KEYWORDS'      =>  'SEO欄目關鍵詞',

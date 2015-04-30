@@ -23,7 +23,12 @@ class CategoryController extends AdminController{
     public function add(){
         if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
         if(IS_POST){
-            print_r(I('post.'));
+            $Cat = D('Category');
+            if($Cat->create(I('post.','','trim'))){
+                print_r(I('post.'));
+            }else{
+                $this->error($Cat->getError());
+            }
         }else{
             $Module = M('Module');
             $modules = $Module->where('status=1 AND type=1')->select();
