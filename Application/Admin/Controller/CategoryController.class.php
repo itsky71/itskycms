@@ -24,15 +24,21 @@ class CategoryController extends AdminController{
         if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
         if(IS_POST){
             $Cat = D('Category');
-            if($Cat->create(I('post.','','trim'))){
-                print_r(I('post.'));
+            $post = I('post.','','trim');
+            $data = $Cat->create($post);
+            if($data){
+                print_r($data);
+                print_r($post);
             }else{
                 $this->error($Cat->getError());
             }
         }else{
             $Module = M('Module');
             $modules = $Module->where('status=1 AND type=1')->select();
+            $Urlrule = M('Urlrule');
+            $rules = $Urlrule->where('ishtml=1')->order('listorder asc')->select();
             $this->assign('modules', $modules);
+            $this->assign('urlrules', $rules);
             $this->display('edit');
         }
     }

@@ -19,6 +19,7 @@ $cat = array(
     'CAT_DIRS_INFO'     =>  '將以下設置應用到所有子欄目',
     'IS_NAV'            =>  '是否為導航',
     'IS_HTML'           =>  '是否生成html',
+    'URL_RULE'          =>  'URL規則',
     'PAGE_ITEM'         =>  '分頁條數',
     'PAGE_ITEM_TIP'     =>  '為空時默認值為系統設置的值',
     'LIST_TPL'          =>  '列表頁模板',
@@ -29,7 +30,6 @@ $cat = array(
     'DIRL'              =>  '欄目目錄長度必須為3到20個字符！',
     'DIRR'              =>  '欄目目錄包含非法字符！',
     'PAGESIZEN'         =>  '分頁條數必須為數字！',
-    
     'SEO_TITLE'         =>  'SEO欄目標題',
     'SEO_KEYWORDS'      =>  'SEO欄目關鍵詞',
     'SEO_DESCRIPTION'   =>  'SEO欄目簡介'

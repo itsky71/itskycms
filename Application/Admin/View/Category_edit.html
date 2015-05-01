@@ -41,7 +41,7 @@
                         <label class="col-lg-2 control-label no-padding-right">{:L('PRE_CAT')}:</label>
                         <div class="col-lg-5">
                             <div class="input-group col-lg-8 select-click">
-                            <input class="hide" type="text" name="pid" value=""/>
+                            <input class="hide" type="text" name="pid" value="0"/>
                             <div class="form-control select-input cude"></div>
                             <span class="input-group-addon cude">
                                 <i class="glyphicon glyphicon-menu-down"></i>
@@ -50,7 +50,7 @@
                         <div class="col-lg-8">
                             <div class="select-choices">
                                 <ul class="list-unstyled select-option" data-name="pid">
-                                    <li data-val="">{:L('TOP_CAT')}</li>
+                                    <li data-val="0">{:L('TOP_CAT')}</li>
                                 </ul>
                             </div>
                         </div>
@@ -94,6 +94,28 @@
                                 <input class="ace ace-switch ace-switch-7" type="checkbox" name="ishtml" value="1"/>
                                 <span class="lbl"></span>
                             </label>
+                        </div>
+                    </div>
+                    <div id="urlrule" class="form-group hide">
+                        <label class="col-lg-2 control-label no-padding-right">{:L('URL_RULE')}:</label>
+                        <div class="col-lg-4">
+                            <div class="input-group col-lg-12 select-click">
+                                <input class="hide" type="text" name="urlruleid" value="0"/>
+                                <div class="form-control select-input cude"></div>
+                                <span class="input-group-addon cude">
+                                    <i class="glyphicon glyphicon-menu-down"></i>
+                                </span>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="select-choices">
+                                    <ul class="list-unstyled select-option" data-name="urlruleid">
+                                        <li data-val="0">{:L('SELETE')}</li>
+                                        <foreach name="urlrules" item="v">
+                                        <li data-val="{$v.id}">{$v.listexample}</li>
+                                        </foreach>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -202,6 +224,9 @@
     $('#breadcrumbs .breadcrumb').append(pan);
     $('.page-header h1').empty();
     $('.page-header h1').append('{:L('M_'.$Think.CONTROLLER_NAME.'_INDEX')}<small class="glyphicon glyphicon-menu-right"> {:L($Think.ACTION_NAME)}</small>');
+    $('input[name="ishtml"]').click(function(){
+        $('#urlrule').toggleClass('hide');
+    });
     var modarr = new Array();
     <foreach name="modules" item="v">
     modarr[{$v.id}] = '{$v.name}';
