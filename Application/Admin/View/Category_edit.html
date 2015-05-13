@@ -19,7 +19,7 @@
                         <label class="col-lg-2 control-label no-padding-right">{:L('SELETE_MODULE')}:</label>
                         <div class="col-lg-5">
                             <div class="input-group col-lg-8 select-click">
-                            <input class="hide" type="text" name="type" value=""/>
+                            <input class="hide" type="text" name="mid" value=""/>
                             <div class="form-control select-input cude"></div>
                             <span class="input-group-addon cude">
                                 <i class="glyphicon glyphicon-menu-down"></i>
@@ -27,11 +27,12 @@
                         </div>
                         <div class="col-lg-8">
                             <div class="select-choices">
-                                <ul class="list-unstyled select-option" data-name="type">
+                                <ul class="list-unstyled select-option" data-name="mid">
                                     <li data-val="">{:L('SELETE')}</li>
                                     <foreach name="modules" item="v">
                                     <li data-val="{$v.id}">{:L($v['title'])}</li>
                                     </foreach>
+                                    <li data-val="0">{:L('OURL')}</li>
                                 </ul>
                             </div>
                         </div>
@@ -51,6 +52,7 @@
                             <div class="select-choices">
                                 <ul class="list-unstyled select-option" data-name="pid">
                                     <li data-val="0">{:L('TOP_CAT')}</li>
+                                    {$cats}
                                 </ul>
                             </div>
                         </div>
@@ -66,6 +68,12 @@
                         <label class="col-lg-2 control-label no-padding-right">{:L('CAT_DIR')}:</label>
                         <div class="col-lg-10">
                             <input class="col-lg-4" type="text" name="dir"/>
+                        </div>
+                    </div>
+                    <div id="url" class="form-group hide">
+                        <label class="col-lg-2 control-label no-padding-right">{:L('URL')}:</label>
+                        <div class="col-lg-10">
+                            <input class="col-lg-6" type="text" name="url"/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -231,8 +239,13 @@
     <foreach name="modules" item="v">
     modarr[{$v.id}] = '{$v.name}';
     </foreach>
-    $('ul[data-name="type"] li').click(function(){
+    $('ul[data-name="mid"] li').click(function(){
         var mid = $(this).attr('data-val');
+        if(mid === '0'){
+            $('#url').removeClass('hide');
+        }else{
+            $('#url').addClass('hide');
+        }
         $('ul[data-name="listtpl"] li:gt(0)').addClass('hide');
         $('ul[data-name="contenttpl"] li:gt(0)').addClass('hide');
         var deflist = $('ul[data-name="listtpl"] li:eq(0)').text();

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2015-04-24 11:27:51
+-- Generation Time: 2015-05-13 16:03:10
 -- 服务器版本： 5.6.20
 -- PHP Version: 5.5.15
 
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `ta_auth_group` (
 
 INSERT INTO `ta_auth_group` (`id`, `title`, `remark`, `status`, `rules`) VALUES
 (1, 'A_G_T_1', 'A_G_R_1', 1, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75'),
-(2, 'A_G_T_2', 'A_G_R_2', 1, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,82,83,84,85,86,87,88'),
+(2, 'A_G_T_2', 'A_G_R_2', 1, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,82,83,84,85,86,87,88,89,90'),
 (3, 'A_G_T_3', 'A_G_R_3', 1, '');
 
 -- --------------------------------------------------------
@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `ta_auth_rule` (
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '状态：为1正常，为0禁用',
   `listorder` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
   `condition` char(100) NOT NULL DEFAULT '' COMMENT '规则表达式，为空表示存在就验证，不为空表示按照条件验证'
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='规则表' AUTO_INCREMENT=90 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='规则表' AUTO_INCREMENT=91 ;
 
 --
 -- 转存表中的数据 `ta_auth_rule`
@@ -183,7 +183,8 @@ INSERT INTO `ta_auth_rule` (`id`, `tid`, `name`, `title`, `type`, `status`, `lis
 (86, 3, 'Field/add', 'R_FIELD_ADD', 1, 1, 0, ''),
 (87, 3, 'Field/del', 'R_FIELD_DEL', 1, 1, 0, ''),
 (88, 3, 'Field/edit', 'R_FIELD_EDIT', 1, 1, 0, ''),
-(89, 3, 'Article/index', 'R_ARTICLE_INDEX', 1, 1, 0, '');
+(89, 3, 'Article/index', 'R_ARTICLE_INDEX', 1, 1, 0, ''),
+(90, 3, 'Article/add', 'R_ARTICLE_ADD', 1, 1, 0, '');
 
 -- --------------------------------------------------------
 
@@ -207,7 +208,7 @@ CREATE TABLE IF NOT EXISTS `ta_category` (
   `description` varchar(255) NOT NULL DEFAULT '' COMMENT '描述',
   `listorder` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
   `ishtml` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否生成html',
-  `ismenu` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '是否为导航',
+  `isnav` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '是否为导航',
   `hits` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '点击量',
   `image` varchar(100) NOT NULL DEFAULT '' COMMENT '缩略图',
   `child` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否有子级',
@@ -218,8 +219,18 @@ CREATE TABLE IF NOT EXISTS `ta_category` (
   `readgroup` varchar(100) NOT NULL DEFAULT '' COMMENT '访问权限',
   `listtype` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否为封面栏目',
   `lang` varchar(10) NOT NULL DEFAULT '' COMMENT '语言',
-  `urlruleid` tinyint(2) unsigned NOT NULL DEFAULT '0' COMMENT 'URL规则'
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='栏目' AUTO_INCREMENT=2 ;
+  `urlruleid` tinyint(2) unsigned NOT NULL DEFAULT '0' COMMENT 'URL规则',
+  `status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '状态'
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='栏目' AUTO_INCREMENT=5 ;
+
+--
+-- 转存表中的数据 `ta_category`
+--
+
+INSERT INTO `ta_category` (`id`, `name`, `dir`, `pdir`, `pid`, `mid`, `module`, `apid`, `acid`, `type`, `title`, `keywords`, `description`, `listorder`, `ishtml`, `isnav`, `hits`, `image`, `child`, `url`, `template_list`, `template_show`, `pagesize`, `readgroup`, `listtype`, `lang`, `urlruleid`, `status`) VALUES
+(2, '新闻', 'Article', '', 0, 2, 'Article', '', '', 0, '', '', '', 0, 0, 1, 0, '', 0, '', 'Article_list', 'Article_show', 0, '', 0, 'zh-tw', 0, 1),
+(3, '关于我们', 'Page', '', 0, 1, 'Page', '', '', 0, '', '', '', 0, 0, 1, 0, '', 0, '', 'Page_index', 'Page_index', 0, '', 1, 'zh-tw', 0, 1),
+(4, '国际新闻', 'Article', '', 2, 2, 'Article', '', '', 0, '', '', '', 0, 0, 1, 0, '', 0, '', 'Article_list', 'Article_show', 0, '', 0, 'zh-tw', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -365,7 +376,7 @@ CREATE TABLE IF NOT EXISTS `ta_member` (
 
 INSERT INTO `ta_member` (`id`, `password`, `username`, `realname`, `email`, `question`, `answer`, `status`, `regtime`, `login_ip`, `last_login_time`, `login_count`) VALUES
 (1, '30bc103d85df152c8c703bcbbcc7fd4d', 'admin', '你买单我就来', 'itsky71@foxmail.com', '我还会回来的...', '灰太狼？呵呵。。。', 1, 1419068912, '127.0.0.1', 1429340117, 35),
-(2, '30bc103d85df152c8c703bcbbcc7fd4d', 'itsky', '你地盘我做主', 'zmh0515005@163.com', '你是谁?', '呵呵...', 1, 1419587881, '127.0.0.1', 1429845517, 211),
+(2, '30bc103d85df152c8c703bcbbcc7fd4d', 'itsky', '你地盘我做主', 'zmh0515005@163.com', '你是谁?', '呵呵...', 1, 1419587881, '127.0.0.1', 1431478130, 220),
 (6, '30bc103d85df152c8c703bcbbcc7fd4d', 'yourphp', '111111', 'zmh0515005@163.me', '', '', 0, 1424952659, '', 0, 0);
 
 -- --------------------------------------------------------
@@ -478,7 +489,14 @@ CREATE TABLE IF NOT EXISTS `ta_page` (
   `createtime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `updatetime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
   `lang` varchar(10) NOT NULL DEFAULT '' COMMENT '语言'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='單頁模型' AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='單頁模型' AUTO_INCREMENT=4 ;
+
+--
+-- 转存表中的数据 `ta_page`
+--
+
+INSERT INTO `ta_page` (`id`, `status`, `userid`, `url`, `listorder`, `createtime`, `updatetime`, `lang`) VALUES
+(3, 0, 0, '', 0, 0, 0, 'zh-tw');
 
 -- --------------------------------------------------------
 
@@ -753,12 +771,12 @@ MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户组id',
 -- AUTO_INCREMENT for table `ta_auth_rule`
 --
 ALTER TABLE `ta_auth_rule`
-MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=90;
+MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=91;
 --
 -- AUTO_INCREMENT for table `ta_category`
 --
 ALTER TABLE `ta_category`
-MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=2;
+MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `ta_content`
 --
@@ -798,7 +816,7 @@ MODIFY `id` tinyint(3) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_IN
 -- AUTO_INCREMENT for table `ta_page`
 --
 ALTER TABLE `ta_page`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键';
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `ta_posid`
 --

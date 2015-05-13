@@ -26,12 +26,19 @@ $cat = array(
     'IS_COVER_CAT'      =>  '是否為封面欄目',
     'CONTENT_TPL'       =>  '內容頁模板',
     'TYPER'             =>  '請選擇模型！',
+    'OURL'              =>  '外部鏈接',
+    'URL'               =>  '外部鏈接地址',
     'NAMEL'             =>  '欄目名稱長度必須為2到20個字符！',
     'DIRL'              =>  '欄目目錄長度必須為3到20個字符！',
     'DIRR'              =>  '欄目目錄包含非法字符！',
+    'URLR'              =>  '鏈接地址不能為空！',
+    'URLU'              =>  '鏈接地址格式不正確！',
+    'URLRULEIDC'        =>  '請選擇URL規則！',
     'PAGESIZEN'         =>  '分頁條數必須為數字！',
     'SEO_TITLE'         =>  'SEO欄目標題',
     'SEO_KEYWORDS'      =>  'SEO欄目關鍵詞',
-    'SEO_DESCRIPTION'   =>  'SEO欄目簡介'
+    'SEO_DESCRIPTION'   =>  'SEO欄目簡介',
+    'ADD_ERROR'         =>  '欄目添加失敗！',
+    'ADD_OK'            =>  '欄目添加成功！'
 );
 return array_merge($cat, $module_info);
