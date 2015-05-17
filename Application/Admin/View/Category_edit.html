@@ -13,6 +13,7 @@
             </li>
         </ul>
         <form class="form-horizontal" role="form" autocomplete="off">
+            <input type="hidden" id="type" name="type" value="0">
             <div class="tab-content">
                 <div id="home" class="tab-pane in active">
                     <div class="form-group">
@@ -243,7 +244,9 @@
         var mid = $(this).attr('data-val');
         if(mid === '0'){
             $('#url').removeClass('hide');
+            $('#type').val('1');
         }else{
+            $('#type').val('0');
             $('#url').addClass('hide');
         }
         $('ul[data-name="listtpl"] li:gt(0)').addClass('hide');

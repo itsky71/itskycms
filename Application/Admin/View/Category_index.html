@@ -2,6 +2,26 @@
     <a class="btn btn-primary btn-xs ml10 mb10" href="{:U('Category/add',$vl)}" onclick="load(event,this)">
         <span class="glyphicon glyphicon-plus"></span>{:L('ADD')}
     </a>
+    <div class="table-responsive">
+        <form autocomplete="off" role="form">
+            <table id="menu-tree" class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th class="center w60">{:L('ORDER')}</th>
+                        <th class="center w60">{:L('NUMBER')}</th>
+                        <th>{:L('NAME')}</th>
+                        <th class="center">{:L('MODEL')}</th>
+                        <th class="center">{:L('NAV')}</th>
+                        <th class="center">{:L('VISIT')}</th>
+                        <th class="center">{:L('MANOPE')}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {$cats}
+                </tbody>
+            </table>
+        </form>
+    </div>
 </div>
 <script type="text/javascript">
     var pan = '<li><a onclick="load(event,this)" href="{:U(CONTROLLER_NAME.'/'.ACTION_NAME,$vl)}">{:L('M_'.$Think.CONTROLLER_NAME.'_'.$Think.ACTION_NAME)}</a></li>\n\

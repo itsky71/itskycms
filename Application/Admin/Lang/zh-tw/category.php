@@ -6,6 +6,15 @@ if(file_exists($mopath)){
     $module_info = array();
 }
 $cat = array(
+    'ORDER'             =>  '排序',
+    'NUMBER'            =>  '編號',
+    'NAME'              =>  '欄目名稱',
+    'MODEL'             =>  '所屬模型',
+    'NAV'               =>  '導航',
+    'VISIT'             =>  '訪問',
+    'MANOPE'            =>  '管理操作',
+    'SHOW'              =>  '顯示',
+    'NO_SHOW'           =>  '不顯示',
     'ADD'               =>  '添加欄目',
     'BASE_SET'          =>  '基本設置',
     'SEO_SET'           =>  'SEO設置',
