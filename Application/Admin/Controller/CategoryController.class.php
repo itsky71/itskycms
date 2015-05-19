@@ -26,13 +26,30 @@ class CategoryController extends AdminController{
             $value['show'] = $value['isnav'] ? $show : $no_show;
             $url = $value['type'] == 1 ? $value['url'] : U('/'.$value['module'].'/index','id='.$value['id']);
             $value['visit'] = '<a href="'.$url.'" target="_blank">'.L('VISIT').'</a>';
-            $value['monope'] = '<a class="btn btn-info btn-minier" href="">';
-            $value['monope'] .= '<span class="glyphicon glyphicon-plus"></span></a> ';
-            $value['monope'] .= '<a class="btn btn-primary btn-minier" href="">';
+            if($value['module'] == 'Page'){
+                $value['monope'] = '<a class="btn btn-info btn-minier" ';
+                $value['monope'] .= 'href="'.U($value['module'].'/edit',$this->vl.'&id='.$value['id']).'" ';
+                $value['monope'] .= 'title="'.L('EDIT_CONTENT').'" onclick="load(event,this)">';
+                $value['monope'] .= '<span class="glyphicon glyphicon-pencil"></span></a> ';
+            }elseif($value['type'] == 1){
+                $value['monope'] = '';
+            }else{
+                $value['monope'] = '<a class="btn btn-info btn-minier" ';
+                $value['monope'] .= 'href="'.U($value['module'].'/add',$this->vl.'&id='.$value['id']).'" ';
+                $value['monope'] .= 'title="'.L('ADD_CONTENT').'" onclick="load(event,this)">';
+                $value['monope'] .= '<span class="glyphicon glyphicon-plus"></span></a> ';
+            }
+            $value['monope'] .= '<a class="btn btn-primary btn-minier" ';
+            $value['monope'] .= 'href="'.U('Category/add',$this->vl.'&pid='.$value['id'].'&type='.$value['type']).'"';
+            $value['monope'] .= ' title="'.L('ADD_CHILDREN').'" onclick="load(event,this)">';
             $value['monope'] .= '<span class="glyphicon glyphicon-plus-sign"></span></a> ';
-            $value['monope'] .= '<a class="btn btn-success btn-minier" href="">';
+            $value['monope'] .= '<a class="btn btn-success btn-minier" ';
+            $value['monope'] .= 'href="'.U('Category/edit',$this->vl.'&id='.$value['id'].'&type='.$value['type']).'"';
+            $value['monope'] .= ' title="'.L('EDIT').'" onclick="load(event,this)">';
             $value['monope'] .= '<span class="glyphicon glyphicon-edit"></span></a> ';
-            $value['monope'] .= '<a class="btn btn-danger btn-minier" href="">';
+            $value['monope'] .= '<a class="btn btn-danger btn-minier" ';
+            $value['monope'] .= 'href="'.U('Category/del',$this->vl.'&id='.$value['id']).'" ';
+            $value['monope'] .= 'title="'.L('DELETE').'" onclick="del(event,this,\'p\')">';
             $value['monope'] .= '<span class="glyphicon glyphicon-trash"></span></a>';
             $narr[] = $value;
         }
@@ -117,6 +134,40 @@ class CategoryController extends AdminController{
             $this->assign('modules', $modules);
             $this->assign('urlrules', $rules);
             $this->display('edit');
+        }
+    }
+
+    public function edit(){
+        if(!IS_AJAX) $this->error(L('_ERROR_ACTION_'));
+        $Cat = D('Category');
+        if(IS_POST){
+            print_r(I('post.'));
+        }else{
+            if(I('get.lang')){
+                $l = I('get.lang');
+            }elseif($this->clang){
+                $l = $this->clang;
+            }else{
+                $l = LANG_SET;
+            }
+            $cats = $Cat->where('status=1 AND lang=\''.$l.'\'')->order('listorder')->select();
+            $tree = new \Common\Lib\Tree($cats);
+            $tree->icon = array(
+                '<span class="text-muted">&ensp;│</span>',
+                '<span class="text-muted">&ensp;├─</span>',
+                '<span class="text-muted">&ensp;└─</span>'
+            );
+            $str  = "<li data-val='\$id'>\$spacer\$name</li>";
+            $Module = M('Module');
+            $modules = $Module->where('status=1 AND type=1')->select();
+            $vo = $Cat->where('id='.I('get.id'))->find();
+            $Urlrule = M('Urlrule');
+            $rules = $Urlrule->where('ishtml=1')->order('listorder asc')->select();
+            $this->assign('modules', $modules);
+            $this->assign('cats', $tree->get_tree(0, $str));
+            $this->assign('urlrules', $rules);
+            $this->assign('vo', $vo);
+            $this->display();
         }
     }
 

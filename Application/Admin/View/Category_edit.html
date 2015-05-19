@@ -43,20 +43,21 @@
                         <label class="col-lg-2 control-label no-padding-right">{:L('PRE_CAT')}:</label>
                         <div class="col-lg-5">
                             <div class="input-group col-lg-8 select-click">
-                            <input class="hide" type="text" name="pid" value="0"/>
-                            <div class="form-control select-input cude"></div>
-                            <span class="input-group-addon cude">
-                                <i class="glyphicon glyphicon-menu-down"></i>
-                            </span>
-                        </div>
-                        <div class="col-lg-8">
-                            <div class="select-choices">
-                                <ul class="list-unstyled select-option" data-name="pid">
-                                    <li data-val="0">{:L('TOP_CAT')}</li>
-                                    {$cats}
-                                </ul>
+                                <sky:assign name="pid" value=":($Think.get.pid||$vo.pid)"/>
+                                <input class="hide" type="text" name="pid" value="{$pid|default=0}"/>
+                                <div class="form-control select-input cude"></div>
+                                <span class="input-group-addon cude">
+                                    <i class="glyphicon glyphicon-menu-down"></i>
+                                </span>
                             </div>
-                        </div>
+                            <div class="col-lg-8">
+                                <div class="select-choices">
+                                    <ul class="list-unstyled select-option" data-name="pid">
+                                        <li data-val="0">{:L('TOP_CAT')}</li>
+                                        {$cats}
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
